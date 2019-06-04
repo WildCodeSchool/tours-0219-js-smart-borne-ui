@@ -1,0 +1,103 @@
+<div class="container-fluid mb-5">
+
+  <div class="row">
+    <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4 pt-3 pr-3 pl-3">
+        <p>
+          <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">
+            Formulaire ajouter un client
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card mb-3 card-body">
+            <form (ngSubmit)="onSubmit()" [formGroup]="clientForm">
+                <input [ngClass]="clientForm.get('siret').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="siret" name="siret" type="text" formControlName="siret">
+
+                <input [ngClass]="clientForm.get('raisonSocial').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="raisonSocial" name="raisonSocial" type="text" formControlName="raisonSocial">
+
+                <input [ngClass]="clientForm.get('name').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="name" name="name" type="text" formControlName="name">
+
+              <input [ngClass]="clientForm.get('ville').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="ville" name="ville" type="text" formControlName="ville">
+
+                <input [ngClass]="clientForm.get('debutContrat').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="debutContrat" name="debutContrat" type="text" formControlName="debutContrat">
+
+                <input [ngClass]="clientForm.get('finContrat').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="finContrat" name="finContrat" type="text" formControlName="finContrat">
+
+                <input [ngClass]="clientForm.get('address').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="address" name="address" type="text" formControlName="address">
+
+                <input [ngClass]="clientForm.get('emailSiege').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="emailSiege" name="emailSiege" type="text" formControlName="emailSiege">
+
+                <input [ngClass]="clientForm.get('emailGerant').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="emailGerant" name="emailGerant" type="text" formControlName="emailGerant">
+
+                <input [ngClass]="clientForm.get('telephoneSiege').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="telephoneSiege" name="telephoneSiege" type="text" formControlName="telephoneSiege">
+
+                <input [ngClass]="clientForm.get('telephoneGerrant').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="telephoneGerrant" name="telephoneGerrant" type="text" formControlName="telephoneGerrant">
+
+                <input [ngClass]="clientForm.get('nombreTotalCouponImprimes').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="nombreTotalCouponImprimes" name="nombreTotalCouponImprimes" type="text" formControlName="nombreTotalCouponImprimes">
+
+              <button class="btn btn-success btn-block mt-3 mb-1" type="submit" [disabled]="!clientForm.valid">Save
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4 p-3">
+        <div class="row">
+          <ng-container *ngFor="let client of client">
+            <div class="col-md-6 col-xl-3 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title text-center">{{client.name}}</h5>
+                  <p class="card-text text-center">{{client.ville}}</p>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
