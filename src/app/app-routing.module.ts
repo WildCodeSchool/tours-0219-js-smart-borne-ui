@@ -1,7 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ListBorneComponent } from './features/borne/list-borne/list-borne.component';
+import { DetailBorneComponent } from './features/borne/detail-borne/detail-borne.component';
+import { EditBorneComponent } from './features/borne/edit-borne/edit-borne.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: ListBorneComponent },
+  { path: 'bornes', component: ListBorneComponent },
+  { path: 'borne/:id', component: DetailBorneComponent },
+  { path: 'borne/:id/edit', component: EditBorneComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
