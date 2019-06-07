@@ -25,7 +25,7 @@
                   </div>
               </div>
 
-                <!-- <input [ngClass]="clientForm.get('raisonSocial').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                <input [ngClass]="clientForm.get('raisonSocial').errors ? 'is-invalid' : 'is-valid'" class="form-control"
                 placeholder="raisonSocial" name="raisonSocial" type="text" formControlName="raisonSocial">
                 <div class="valid-feedback">
                   <div *ngIf="clientForm.get('raisonSolcial')">
@@ -34,7 +34,7 @@
               </div>
               <div class="invalid-feedback">
                   <div *ngIf="clientForm.get('raisonSocial').errors">
-                      <span *ngIf="clientForm.get('RaisonSocial').errors.required">Raison social dois etre remplie</span>
+                      <span *ngIf="clientForm.get('raisonSocial').errors.required">Raison social dois etre remplie</span>
                   </div>
               </div>
 
@@ -49,7 +49,7 @@
                   <div *ngIf="clientForm.get('name').errors">
                       <span *ngIf="clientForm.get('name').errors.required">le nom dois etre remplie</span>
                   </div>
-              </div> -->
+              </div>
               <div formGroupName="address">
               <input [ngClass]="clientForm.get('address').get('numero').errors ? 'is-invalid' : 'is-valid'" class="form-control"
                 placeholder="numero" name="numero" type="text" formControlName="numero">

@@ -5,9 +5,10 @@ import { ListClientComponent } from './client/list-client/list-client.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { CreateClientComponent } from './client/create-client/create-client.component';
 
 @NgModule({
-  declarations: [ListClientComponent],
+  declarations: [ListClientComponent, CreateClientComponent],
   imports: [
     CommonModule,
     SharedModule,
