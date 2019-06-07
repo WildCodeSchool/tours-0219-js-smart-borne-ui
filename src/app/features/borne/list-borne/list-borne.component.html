@@ -1,96 +1,49 @@
 <div class="container-fluid mb-5">
 
-    <div class="row">
-        <div class="col-xl-12 col-lg-12">
-            <div class="card shadow mb-4 pt-3 pr-3 pl-3">
-                <p>
-                    <button class="btn btn-primary btn-block" type="button" data-toggle="collapse"
-                            data-target="#collapseExample" aria-expanded="false"
-                            aria-controls="collapseExample">
-                        Formulaire ajouter une borne
-                    </button>
-                </p>
-                <div class="collapse" id="collapseExample">
-                    <div class="card mb-3 card-body">
-                        <form (ngSubmit)="onSubmit()" [formGroup]="borneForm">
-
-                            <h1 class="text-center mb-4">Formulaire creation borne</h1>
-
-                            <div class="row">
-                                <div class="col">
-                                    <input [ngClass]="borneForm.get('ville').errors ? 'is-invalid' : 'is-valid'"
-                                           class="form-control" placeholder="ville"
-                                           name="ville" type="text" formControlName="ville">
-                                </div>
-                                <div class="col">
-                                    <input [ngClass]="borneForm.get('numerodeSerie').errors ? 'is-invalid' : 'is-valid'"
-                                           class="form-control" placeholder="numerodeSerie"
-                                           name="numerodeSerie" type="text" formControlName="numerodeSerie">
-                                </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col">
-                                    <input [ngClass]="borneForm.get('raisonSociale').errors ? 'is-invalid' : 'is-valid'"
-                                           class="form-control" placeholder="raisonSociale"
-                                           name="raisonSociale" type="text" formControlName="raisonSociale">
-                                </div>
-                                <div class="col">
-                                    <input [ngClass]="borneForm.get('numeroEtNomDeRue').errors ? 'is-invalid' : 'is-valid'"
-                                           class="form-control" placeholder="numeroEtNomDeRue"
-                                           name="numeroEtNomDeRue" type="text" formControlName="numeroEtNomDeRue">
-                                </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col">
-                                    <input [ngClass]="borneForm.get('dateInstallation').errors ? 'is-invalid' : 'is-valid'"
-                                           class="form-control" placeholder="dateInstallation"
-                                           name="dateInstallation" type="text" formControlName="dateInstallation">
-                                </div>
-                                <div class="col">
-                                    <input [ngClass]="borneForm.get('styliseeClient').errors ? 'is-invalid' : 'is-valid'"
-                                           class="form-control" placeholder="styliseeClient"
-                                           name="styliseeClient" type="text" formControlName="styliseeClient">
-                                </div>
-                            </div>
-
-
-
-                            <textarea [ngClass]="borneForm.get('details').errors ? 'is-invalid' : 'is-valid'"
-                                   class="form-control mt-3" placeholder="details complementaire"
-                                      name="details" type="text" formControlName="details">
-
-                            </textarea>
-
-
-                            <button class="btn btn-success btn-block mt-4 mb-1" type="submit"
-                                    [disabled]="!borneForm.valid">Save
-                            </button>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <app-create-borne></app-create-borne>
 
     <div class="row">
 
         <div class="col-xl-12 col-lg-12">
-            <div class="card shadow mb-4 p-3">
+            <div class="mb-4 p-3">
                 <div class="row">
-                    <ng-container *ngFor="let borne of borne">
-                        <div class="col-md-6 col-xl-3 mb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center"><a
-                                            [routerLink]="['/borne', borne._id ]">{{borne._id}}</a></h5>
-                                    <p class="card-text text-center">{{borne.ville}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-container>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ville</th>
+                                <th scope="col">Bac 1</th>
+                                <th scope="col">Bac 2</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Problème</th>
+                                <th scope="col">Detail</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ng-container *ngFor="let borne of bornes">
+                                <tr>
+                                    <th scope="row">{{borne.numeroSerie}}</th>
+                                    <td>{{borne.address.ville}}</td>
+                                    <td>{{borne.taux.bacUn}}</td>
+                                    <td>{{borne.taux.bacDeux}}</td>
+                                    <td>{{borne.total.recycle}}</td>
+                                    <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
+                                            class="fas fa-check colorValidate"></i></td>
+                                    <ng-template #elseBlock>
+                                        <td><i class="fas fa-times colorError"></i></td>
+                                    </ng-template>
+                                    <td>
+                                        <button type="button" [routerLink]="['/borne', borne._id ]"
+                                                class="btn btn-outline-primary">Detail
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>

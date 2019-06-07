@@ -17,14 +17,14 @@ export class DetailBorneComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
-      this.getCard();
+      this.getBorne();
     });
   }
 
-  getCard() {
+  getBorne() {
     this.borneService.getBorneById(this.id).subscribe(
-        (param: Borne) => {
-          this.borne = param;
+        (borne: Borne) => {
+          this.borne = borne;
         },
     );
   }

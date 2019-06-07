@@ -9,12 +9,15 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { EditBorneComponent } from './borne/edit-borne/edit-borne.component';
+import { CreateBorneComponent } from './borne/create-borne/create-borne.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
     ListBorneComponent,
     DetailBorneComponent,
     EditBorneComponent,
+    CreateBorneComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { EditBorneComponent } from './borne/edit-borne/edit-borne.component';
       closeButton: true,
       progressBar: true,
     }),
+    NgbModule,
   ],
 })
 export class FeaturesModule { }

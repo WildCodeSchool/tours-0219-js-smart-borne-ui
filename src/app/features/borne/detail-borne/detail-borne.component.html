@@ -1,18 +1,87 @@
 <div *ngIf="borne" class="container mt-3 mb-4">
 
-  <h1>Borne detail {{borne.ville}}</h1>
+    <h1 class="text-center">Borne  {{borne.numeroSerie}}</h1>
 
-  <div class="row">
+    <div class="row">
 
-    <div class="col-md-6 col-xl-3 mt-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title text-center">{{borne.ville}}</h5>
-          <button class="btn btn-info btn-block" [routerLink]="['/borne', borne._id, 'edit']">Editer</button>
+        <div class="col-md-12 col-xl-12 mt-4">
+            <div class="">
+
+
+                <div class="row">
+                    <div class="col-md-4 col-xl-4 mt-4">
+                        <div class="card">
+                            <button type="button" class="btn btn-outline-primary">Jour</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4 mt-4">
+                        <div class="card">
+                            <button type="button" class="btn btn-outline-primary">Semaine</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4 mt-4">
+                        <div class="card">
+                            <button type="button" class="btn btn-outline-primary">Mois</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3 col-xl-3 mt-4">
+                        <div class="card">
+                            <p class="text-center p-3">78 %</p>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-xl-9 mt-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title text-center">{{borne.address.ville}}</h2>
+                                <p>{{borne.dateInstallation| date:'d/M/y'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-4">
+                    <div class="col-md-6 col-xl-6">
+                        <div class="card">
+                            <p class="text-center p-3">Coupon</p>
+                            <div class=" ml-3 mr-3 mb-3">
+                                <p>
+                                    <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                    </ngb-progressbar>
+                                </p>
+                                <p>
+                                    <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                    </ngb-progressbar>
+                                </p>
+                                <p>
+                                    <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                    </ngb-progressbar>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-6">
+                        <div class="card">
+                            <p class="text-center p-3">Rouleau</p>
+                            <div class=" ml-3 mr-3 mb-3">
+                                <p>
+                                    <ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                    </ngb-progressbar>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-info btn-block mt-4" [routerLink]="['/borne', borne._id, 'edit']">Modifier la borne</button>
+
+            </div>
         </div>
-      </div>
+
+
     </div>
-
-
-  </div>
 </div>
