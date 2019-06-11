@@ -1,0 +1,210 @@
+<div class="container-fluid mb-5">
+  <div class="row">
+    <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4 pt-3 pr-3 pl-3">
+        <p>
+          <button
+            class="btn btn-primary btn-block"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Formulaire ajouter une offre
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card mb-3 card-body">
+            <form (ngSubmit)="onSubmit()" [formGroup]="offerForm">
+              <input
+                [ngClass]="
+                  offerForm.get('name').errors ? 'is-invalid' : 'is-valid'
+                "
+                class="form-control"
+                placeholder="name"
+                name="name"
+                type="text"
+                formControlName="name"
+              />
+              <div class="valid-feedback">
+                <div *ngIf="offerForm.get('name')">
+                  <span *ngIf="offerForm.get('name')"
+                    >Le champ "nom" est valide</span
+                  >
+                </div>
+              </div>
+              <div class="invalid-feedback">
+                <div *ngIf="offerForm.get('name').errors">
+                  <span *ngIf="offerForm.get('name').errors.required"
+                    >Le champ "nom" doit être rempli</span
+                  >
+                </div>
+              </div>
+
+              <input
+                [ngClass]="
+                  offerForm.get('id').errors ? 'is-invalid' : 'is-valid'
+                "
+                class="form-control"
+                placeholder="id"
+                name="id"
+                type="text"
+                formControlName="id"
+              />
+              <div class="valid-feedback">
+                <div *ngIf="offerForm.get('id')">
+                  <span *ngIf="offerForm.get('id')"
+                    >Le champ "id" est valide</span
+                  >
+                </div>
+              </div>
+              <div class="invalid-feedback">
+                <div *ngIf="offerForm.get('id').errors">
+                  <span *ngIf="offerForm.get('id').errors.required"
+                    >Le champ "id" doit être rempli</span
+                  >
+                </div>
+              </div>
+
+              <input
+                [ngClass]="
+                  offerForm.get('client').errors ? 'is-invalid' : 'is-valid'
+                "
+                class="form-control"
+                placeholder="client"
+                name="client"
+                type="text"
+                formControlName="client"
+              />
+              <div class="valid-feedback">
+                <div *ngIf="offerForm.get('client')">
+                  <span *ngIf="offerForm.get('client')"
+                    >Le champ "client" est valide</span
+                  >
+                </div>
+              </div>
+              <div class="invalid-feedback">
+                <div *ngIf="offerForm.get('client').errors">
+                  <span *ngIf="offerForm.get('client').errors.required"
+                    >Le champ "client" doit être rempli</span
+                  >
+                </div>
+              </div>
+
+              <input
+                [ngClass]="
+                  offerForm.get('remise').errors ? 'is-invalid' : 'is-valid'
+                "
+                class="form-control"
+                placeholder="remise"
+                name="remise"
+                type="text"
+                formControlName="remise"
+              />
+              <div class="valid-feedback">
+                <div *ngIf="offerForm.get('remise')">
+                  <span *ngIf="offerForm.get('remise')"
+                    >Le champ "remise" est valide</span
+                  >
+                </div>
+              </div>
+              <div class="invalid-feedback">
+                <div *ngIf="offerForm.get('remise').errors">
+                  <span *ngIf="offerForm.get('remise').errors.required"
+                    >Le champ "remise" doit être rempli</span
+                  >
+                </div>
+              </div>
+
+              <input
+                [ngClass]="
+                  offerForm.get('details').errors ? 'is-invalid' : 'is-valid'
+                "
+                class="form-control"
+                placeholder="details"
+                name="details"
+                type="text"
+                formControlName="details"
+              />
+              <div class="valid-feedback">
+                <div *ngIf="offerForm.get('details')">
+                  <span *ngIf="offerForm.get('details')"
+                    >Le champ "détails" est valide</span
+                  >
+                </div>
+              </div>
+              <div class="invalid-feedback">
+                <div *ngIf="offerForm.get('details').errors">
+                  <span *ngIf="offerForm.get('details').errors.required"
+                    >Le champ "détails" doit être rempli</span
+                  >
+                </div>
+              </div>
+
+              <input
+                [ngClass]="
+                  offerForm.get('debutOffre').errors ? 'is-invalid' : 'is-valid'
+                "
+                class="form-control"
+                placeholder="debutOffre"
+                name="debutOffre"
+                type="date"
+                formControlName="debutOffre"
+              />
+              <div class="valid-feedback">
+                <div *ngIf="offerForm.get('debutOffre')">
+                  <span *ngIf="offerForm.get('debutOffre')"
+                    >Le champ "début d'offre" est valide</span
+                  >
+                </div>
+              </div>
+              <div class="invalid-feedback">
+                <div *ngIf="offerForm.get('debutOffre').errors">
+                  <span *ngIf="offerForm.get('debutOffre').errors.required"
+                    >Le champ "début d'offre" doit être rempli</span
+                  >
+                </div>
+              </div>
+
+              <input
+                [ngClass]="
+                  offerForm.get('couponsRestants').errors
+                    ? 'is-invalid'
+                    : 'is-valid'
+                "
+                class="form-control"
+                placeholder="couponsRestants"
+                name="couponsRestants"
+                type="number"
+                formControlName="couponsRestants"
+              />
+              <div class="valid-feedback">
+                <div *ngIf="offerForm.get('couponsRestants')">
+                  <span *ngIf="offerForm.get('couponsRestants')"
+                    >Le champ "coupons restants" est valide</span
+                  >
+                </div>
+              </div>
+              <div class="invalid-feedback">
+                <div *ngIf="offerForm.get('couponsRestants').errors">
+                  <span *ngIf="offerForm.get('couponsRestants').errors.required"
+                    >Le champ "coupons restants" doit être rempli</span
+                  >
+                </div>
+              </div>
+
+              <button
+                class="btn btn-success btn-block mt-3 mb-1"
+                type="submit"
+                [disabled]="!offerForm.valid"
+              >
+                Save
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
