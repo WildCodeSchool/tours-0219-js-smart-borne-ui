@@ -1,0 +1,57 @@
+<div class="container-fluid mb-5">
+
+    <app-create-borne></app-create-borne>
+
+    <div class="row">
+
+        <div class="col-xl-12 col-lg-12">
+            <div class="mb-4 p-3">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ville</th>
+                                <th scope="col">Bac 1</th>
+                                <th scope="col">Bac 2</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Problème</th>
+                                <th scope="col">Detail</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <ng-container *ngFor="let borne of bornes">
+                                <tr>
+                                    <th scope="row">{{borne.numeroSerie}}</th>
+                                    <td>{{borne.address.ville}}</td>
+                                    <td>{{borne.taux.bacUn}}</td>
+                                    <td>{{borne.taux.bacDeux}}</td>
+                                    <td>{{borne.total.recycle}}</td>
+                                    <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
+                                            class="fas fa-check colorValidate"></i></td>
+                                    <ng-template #elseBlock>
+                                        <td><i class="fas fa-times colorError"></i></td>
+                                    </ng-template>
+                                    <td>
+                                        <button type="button" [routerLink]="['/borne', borne._id ]"
+                                                class="btn btn-outline-primary">Detail
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+

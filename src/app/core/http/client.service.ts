@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ClientService {
 
-  configUrl = `${environment.api}/client`;
+  configUrl = `${environment.apiUrl}/client`;
 
   constructor(private http: HttpClient) {
   }
