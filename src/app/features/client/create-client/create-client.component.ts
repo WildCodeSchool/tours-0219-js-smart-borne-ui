@@ -54,13 +54,9 @@ export class CreateClientComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.getListClient();
+ 
   }
-  getListClient() {
-    this.clientService.getListClient().subscribe((client: Client[]) => {
-      this.clients = client;
-    });
-  }
+  
   onSubmit() {
     this.clientService.postClient(this.clientForm.value).subscribe(
       (client: Client) => {
