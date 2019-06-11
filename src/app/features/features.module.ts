@@ -6,14 +6,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { CreateClientComponent } from './client/create-client/create-client.component';
-
+import { HomeComponent } from './home/home.component';
+import { DetailClientComponent } from './client/detail-client/detail-client.component';
+import { ChartsModule } from 'ng2-charts';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
-  declarations: [ListClientComponent, CreateClientComponent],
+  declarations: [ListClientComponent, CreateClientComponent, HomeComponent, DetailClientComponent],
   imports: [
     CommonModule,
     SharedModule,
     BrowserAnimationsModule,
+    ChartsModule,
     ReactiveFormsModule,
+    NgbModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',

@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { FeaturesModule } from './features/features.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
     CoreModule,
     BrowserAnimationsModule,
     FeaturesModule,
+    ChartsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],

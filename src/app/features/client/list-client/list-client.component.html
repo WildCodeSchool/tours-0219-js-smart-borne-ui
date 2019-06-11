@@ -1,293 +1,45 @@
 <div class="container-fluid mb-5">
 
-  <div class="row">
-    <div class="col-xl-12 col-lg-12">
-      <div class="card shadow mb-4 pt-3 pr-3 pl-3">
-        <p>
-          <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseExample"
-            aria-expanded="false" aria-controls="collapseExample">
-            Formulaire ajouter un client
-          </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-          <div class="card mb-3 card-body">
-            <form (ngSubmit)="onSubmit()" [formGroup]="clientForm">
-                <input [ngClass]="clientForm.get('siret').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="siret" name="siret" type="text" formControlName="siret">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('siret')">
-                      <span *ngIf="clientForm.get('siret')">Le siret est bon</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('siret').errors">
-                      <span *ngIf="clientForm.get('siret').errors.required">Le siret dois etre remplie</span>
-                  </div>
-              </div>
+    <app-create-client></app-create-client>
 
-                <input [ngClass]="clientForm.get('raisonSocial').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="raisonSocial" name="raisonSocial" type="text" formControlName="raisonSocial">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('raisonSolcial')">
-                      <span *ngIf="clientForm.get('raisonSocial')">La raison social est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('raisonSocial').errors">
-                      <span *ngIf="clientForm.get('raisonSocial').errors.required">Raison social dois etre remplie</span>
-                  </div>
-              </div>
+    <div class="row">
 
-                <input [ngClass]="clientForm.get('name').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="name" name="name" type="text" formControlName="name">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('name')">
-                      <span *ngIf="clientForm.get('name')">Le nom est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('name').errors">
-                      <span *ngIf="clientForm.get('name').errors.required">le nom dois etre remplie</span>
-                  </div>
-              </div>
-              <div formGroupName="address">
-              <input [ngClass]="clientForm.get('address').get('numero').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="numero" name="numero" type="text" formControlName="numero">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('address').get('numero')">
-                      <span *ngIf="clientForm.get('address').get('numero')">Le numero est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('address').get('numero').errors">
-                      <span *ngIf="clientForm.get('address').get('numero').errors.required">le numero dois etre remplie</span>
-                  </div>
-              </div>
+        <div class="col-xl-12 col-lg-12">
+            <div class="mb-4 p-3">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Raison social</th>
+                                    <th scope="col">Coupon</th>
+                                    <th scope="col">Borne</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let client of clients">
+                                    <tr>
+                                        <th scope="row">{{client._id}}</th>
+                                        <td>{{client.name}}</td>
+                                        <td>{{client.raisonSocial}}</td>
+                                        <td>{{client.coupon.total}}</td>
+                                        <td>Borne</td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-primary">Detail
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
 
-              <input [ngClass]="clientForm.get('address').get('nomRue').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="nomRue" name="nomRue" type="text" formControlName="nomRue">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('address').get('nomRue')">
-                      <span *ngIf="clientForm.get('address').get('nomRue')">Le nomRue est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('address').get('nomRue').errors">
-                      <span *ngIf="clientForm.get('address').get('nomRue').errors.required">le nomRue dois etre remplie</span>
-                  </div>
-              </div>
-              
-              <input [ngClass]="clientForm.get('address').get('departement').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="departement" name="departement" type="text" formControlName="departement">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('address').get('departement')">
-                      <span *ngIf="clientForm.get('address').get('departement')">Le departement est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('address').get('departement').errors">
-                      <span *ngIf="clientForm.get('address').get('departement').errors.required">le departement dois etre remplie</span>
-                  </div>
-              </div>
-
-              <input [ngClass]="clientForm.get('address').get('ville').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="ville" name="ville" type="text" formControlName="ville">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('address').get('ville')">
-                      <span *ngIf="clientForm.get('address').get('ville')">Le ville est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('address').get('ville').errors">
-                      <span *ngIf="clientForm.get('address').get('ville').errors.required">le ville dois etre remplie</span>
-                  </div>
-              </div>
-              </div>
-              <div formGroupName="contrat">
-              <input [ngClass]="clientForm.get('contrat').get('debut').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="debut" name="debut" type="text" formControlName="debut">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('contrat').get('debut')">
-                      <span *ngIf="clientForm.get('contrat').get('debut')">Le debut est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('contrat').get('debut').errors">
-                      <span *ngIf="clientForm.get('contrat').get('debut').errors.required">le debut dois etre remplie</span>
-                  </div>
-              </div>
-
-              <input [ngClass]="clientForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="fin" name="fin" type="text" formControlName="fin">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('contrat').get('fin')">
-                      <span *ngIf="clientForm.get('contrat').get('fin')">Le fin est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('contrat').get('fin').errors">
-                      <span *ngIf="clientForm.get('contrat').get('fin').errors.required">le fin dois etre remplie</span>
-                  </div>
-              </div>
-              </div>
-              <div formGroupName="siege">
-              <input [ngClass]="clientForm.get('siege').get('email').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="email" name="email" type="text" formControlName="email">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('siege').get('email')">
-                      <span *ngIf="clientForm.get('siege').get('email')">Le email est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('siege').get('email').errors">
-                      <span *ngIf="clientForm.get('siege').get('email').errors.required">le debut dois etre remplie</span>
-                  </div>
-              </div>
-
-              <input [ngClass]="clientForm.get('siege').get('telephone').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="telephone" name="telephone" type="text" formControlName="telephone">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('siege').get('telephone')">
-                      <span *ngIf="clientForm.get('siege').get('telephone')">Le telephone est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('siege').get('telephone').errors">
-                      <span *ngIf="clientForm.get('siege').get('telephone').errors.required">le debut dois etre remplie</span>
-                  </div>
-              </div>
-              </div>
-              <div formGroupName="gerant">
-              <input [ngClass]="clientForm.get('gerant').get('name').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="name" name="name" type="text" formControlName="name">
-                <div class="valid-feedback">
-                  <div *ngIf="clientForm.get('gerant').get('name')">
-                      <span *ngIf="clientForm.get('gerant').get('name')">Le name est validée</span>
-                  </div>
-              </div>
-              <div class="invalid-feedback">
-                  <div *ngIf="clientForm.get('gerant').get('name').errors">
-                      <span *ngIf="clientForm.get('gerant').get('name').errors.required">le debut dois etre remplie</span>
-                  </div>
-              </div>
-
-              <input [ngClass]="clientForm.get('gerant').get('email').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-              placeholder='email' name='email' type="email" formControlName='email'>
-              <div class="valid-feedback">
-                <div *ngIf="clientForm.get('gerant').get('email')">
-                    <span *ngIf="clientForm.get('gerant').get('email')">Le name est validée</span>
                 </div>
             </div>
-            <div class="invalid-feedback">
-                <div *ngIf="clientForm.get('gerant').get('email').errors">
-                    <span *ngIf="clientForm.get('gerant').get('email').errors.required">le debut dois etre remplie</span>
-                </div>
-            </div>
-
-            <input [ngClass]="clientForm.get('gerant').get('telephone').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-              placeholder="telephone" name="telephone" type="text" formControlName="telephone">
-              <div class="valid-feedback">
-                <div *ngIf="clientForm.get('gerant').get('telephone')">
-                    <span *ngIf="clientForm.get('gerant').get('telephone')">Le name est validée</span>
-                </div>
-            </div>
-            <div class="invalid-feedback">
-                <div *ngIf="clientForm.get('gerant').get('telephone').errors">
-                    <span *ngIf="clientForm.get('gerant').get('telephone').errors.required">le debut dois etre remplie</span>
-                </div>
-            </div>
-            </div>
-            <div formGroupName="coupon">
-              
-            <input [ngClass]="clientForm.get('coupon').get('total').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-              placeholder="total" name="total" type="text" formControlName="total">
-              <div class="valid-feedback">
-                <div *ngIf="clientForm.get('coupon').get('total')">
-                    <span *ngIf="clientForm.get('coupon').get('total')">Le name est validée</span>
-                </div>
-            </div>
-            <div class="invalid-feedback">
-                <div *ngIf="clientForm.get('coupon').get('total').errors">
-                    <span *ngIf="clientForm.get('coupon').get('total').errors.required">le debut dois etre remplie</span>
-                </div>
-            </div>
-
-            <input [ngClass]="clientForm.get('coupon').get('imprimer').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-              placeholder="imprimer" name="imprimer" type="text" formControlName="imprimer">
-              <div class="valid-feedback">
-                <div *ngIf="clientForm.get('coupon').get('imprimer')">
-                    <span *ngIf="clientForm.get('coupon').get('imprimer')">Le name est validée</span>
-                </div>
-            </div>
-            <div class="invalid-feedback">
-                <div *ngIf="clientForm.get('coupon').get('imprimer').errors">
-                    <span *ngIf="clientForm.get('coupon').get('imprimer').errors.required">le debut dois etre remplie</span>
-                </div>
-            </div>
-
-            <input [ngClass]="clientForm.get('coupon').get('restant').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-              placeholder="restant" name="restant" type="text" formControlName="restant">
-              <div class="valid-feedback">
-                <div *ngIf="clientForm.get('coupon').get('restant')">
-                    <span *ngIf="clientForm.get('coupon').get('restant')">Le name est validée</span>
-                </div>
-            </div>
-            <div class="invalid-feedback">
-                <div *ngIf="clientForm.get('coupon').get('restant').errors">
-                    <span *ngIf="clientForm.get('coupon').get('restant').errors.required">le debut dois etre remplie</span>
-                </div>
-            </div> 
-            </div>
-            <button class="btn btn-success btn-block mt-3 mb-1" type="submit" [disabled]="!clientForm.valid">Save
-            </button>
-            </form>
-          </div>
         </div>
-      </div>
+
     </div>
-  </div>
-
-  <div class="row">
-
-    <div class="col-xl-12 col-lg-12">
-      <div class="card shadow mb-4 p-3">
-        <div class="row">
-          <ng-container *ngFor="let client of client">
-            <div class="col-md-6 col-xl-3 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title text-center">{{client.siret}}</h5>
-                  <p class="card-text text-center">{{client.address.ville}}</p>
-                </div>
-              </div>
-            </div>
-          </ng-container>
-        </div>
-      </div>
-    </div>
-
-  </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
