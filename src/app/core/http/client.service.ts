@@ -3,13 +3,14 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Client } from '../../shared/models/client-model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientService {
 
-  configUrl = 'http://localhost:3000/api/client';
+  configUrl = `${environment.api}/client`;
 
   constructor(private http: HttpClient) {
   }
