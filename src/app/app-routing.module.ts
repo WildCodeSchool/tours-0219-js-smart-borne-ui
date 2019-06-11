@@ -4,8 +4,8 @@ import { ListClientComponent } from './features/client/list-client/list-client.c
 import { HomeComponent } from './features/home/home.component';
 
 const routes: Routes = [
-  { path:'', component: ListClientComponent },
-  { path:'home', component: HomeComponent },
+  { path: '', component: ListClientComponent },
+  { path: 'home', component: HomeComponent },
 ];
 
 @NgModule({
