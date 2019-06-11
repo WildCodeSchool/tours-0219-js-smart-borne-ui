@@ -1,12 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
-
+import { ListClientComponent } from './client/list-client/list-client.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { CreateClientComponent } from './client/create-client/create-client.component';
+import { HomeComponent } from './home/home.component';
+import { DetailClientComponent } from './client/detail-client/detail-client.component';
+import { ChartsModule } from 'ng2-charts';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
-  declarations: [],
+  declarations: [ListClientComponent, CreateClientComponent, HomeComponent, DetailClientComponent],
   imports: [
     CommonModule,
     SharedModule,
+    BrowserAnimationsModule,
+    ChartsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      closeButton: true,
+      progressBar: true,
+    }),
   ],
 })
 export class FeaturesModule { }

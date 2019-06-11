@@ -1,0 +1,45 @@
+<div class="container-fluid mb-5">
+
+    <app-create-client></app-create-client>
+
+    <div class="row">
+
+        <div class="col-xl-12 col-lg-12">
+            <div class="mb-4 p-3">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Raison social</th>
+                                    <th scope="col">Coupon</th>
+                                    <th scope="col">Borne</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let client of clients">
+                                    <tr>
+                                        <th scope="row">{{client._id}}</th>
+                                        <td>{{client.name}}</td>
+                                        <td>{{client.raisonSocial}}</td>
+                                        <td>0</td>
+                                        <td>Borne</td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-primary">Detail
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
