@@ -1,6 +1,5 @@
 export class Offer {
   constructor(
-    // tslint:disable-next-line:variable-name
     public name: string,
     public id: string,
     public client: string,
