@@ -23,7 +23,7 @@ export class CreateOfferComponent implements OnInit {
     client: ['', [Validators.required]],
     remise: ['', [Validators.required]],
     details: ['', [Validators.maxLength(300)]],
-    débutOffre: ['', [Validators.required]],
+    debutOffre: ['', [Validators.required]],
     couponsRestants: ['', [Validators.required]],
   });
 
@@ -37,8 +37,7 @@ export class CreateOfferComponent implements OnInit {
           this.toastr.success('success', 'Offer Created');
           this.router.navigateByUrl('/');
         },
-        // tslint:disable-next-line: ter-arrow-parens
-        error => {
+        (error) => {
           this.toastr.clear();
           this.toastr.error(`Error ${error}`);
         },
