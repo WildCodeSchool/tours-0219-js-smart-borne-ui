@@ -9,7 +9,7 @@ import { Offer } from '../../../shared/models/offres.models';
 })
 export class ListOffersComponent implements OnInit {
   public offers: Offer[];
-  constructor(public offersService: OffersService) {}
+  constructor(public offersService: OffersService) { }
 
   ngOnInit() {
     this.getListoffers();

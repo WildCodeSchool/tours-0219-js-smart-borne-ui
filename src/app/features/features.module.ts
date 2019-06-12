@@ -60,4 +60,4 @@ import { CreateBorneComponent } from './borne/create-borne/create-borne.componen
     }),
   ],
 })
-export class FeaturesModule {}
+export class FeaturesModule { }

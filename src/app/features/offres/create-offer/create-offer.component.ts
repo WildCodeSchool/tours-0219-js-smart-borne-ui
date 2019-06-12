@@ -15,7 +15,7 @@ export class CreateOfferComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
-  ) {}
+  ) { }
 
   offerForm = this.fb.group({
     name: [''],
@@ -31,16 +31,16 @@ export class CreateOfferComponent implements OnInit {
 
   onSubmit() {
     this.offersService.postOffer(this.offerForm.value).subscribe(
-        (offer: Offer) => {
-          this.offerForm.patchValue(offer);
-          this.toastr.clear();
-          this.toastr.success('success', 'Offer Created');
-          this.router.navigateByUrl('/');
-        },
-        (error) => {
-          this.toastr.clear();
-          this.toastr.error(`Error ${error}`);
-        },
-      );
+      (offer: Offer) => {
+        this.offerForm.patchValue(offer);
+        this.toastr.clear();
+        this.toastr.success('success', 'Offer Created');
+        this.router.navigateByUrl('/');
+      },
+      (error) => {
+        this.toastr.clear();
+        this.toastr.error(`Error ${error}`);
+      },
+    );
   }
 }

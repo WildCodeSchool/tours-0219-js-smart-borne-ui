@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 export class OffersService {
   configUrl = `${environment.apiUrl}/offres`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public getListOffers(): Observable<Offer[]> {
     return this.http.get<Offer[]>(`${this.configUrl}`);

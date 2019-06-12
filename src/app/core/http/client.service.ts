@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class ClientService {
   configUrl = `${environment.apiUrl}/client`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public getListClient(): Observable<Client[]> {
     return this.http.get<Client[]>(`${this.configUrl}`);

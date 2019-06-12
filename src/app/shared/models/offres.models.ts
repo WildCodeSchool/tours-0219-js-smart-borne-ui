@@ -12,5 +12,5 @@ export class Offer {
     public bornes: string,
     public totalRemise: string,
     public details: string,
-  ) {}
+  ) { }
 }
