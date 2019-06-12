@@ -7,7 +7,7 @@ import { DetailClientComponent } from './features/client/detail-client/detail-cl
 const routes: Routes = [
   { path: '', component: ListClientComponent },
   { path: 'home', component: DashboardComponent },
-  { path: 'detailClient', component: DetailClientComponent },
+  { path: 'clients/detail', component: DetailClientComponent },
 ];
 
 @NgModule({
