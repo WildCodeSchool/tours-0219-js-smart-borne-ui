@@ -3,8 +3,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListOffersComponent } from './features/list-offers/list-offers.component';
 import { CardOfferComponent } from './shared/components/card-offer/card-offer.component';
 import { CreateOfferComponent } from './features/create-offer/create-offer.component';
+import { ListClientComponent } from './features/client/list-client/list-client.component';
+import { HomeComponent } from './features/home/home.component';
+import { ListBorneComponent } from './features/borne/list-borne/list-borne.component';
+import { DetailBorneComponent } from './features/borne/detail-borne/detail-borne.component';
+import { EditBorneComponent } from './features/borne/edit-borne/edit-borne.component';
+
 const routes: Routes = [
-  { path: '', component: ListOffersComponent },
+  { path: '', component: ListClientComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'bornes', component: ListBorneComponent },
+  { path: 'borne/:id', component: DetailBorneComponent },
+  { path: 'borne/:id/edit', component: EditBorneComponent },
+  { path: 'offers', component: ListOffersComponent },
   { path: 'cards', component: CardOfferComponent },
   { path: 'create', component: CreateOfferComponent },
 ];
