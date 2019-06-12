@@ -7,14 +7,14 @@
             class="btn btn-primary btn-block"
             type="button"
             data-toggle="collapse"
-            data-target="#collapse"
+            data-target="#collapseForm"
             aria-expanded="false"
-            aria-controls="collapse"
+            aria-controls="collapseForm"
           >
             Formulaire ajouter une offre
           </button>
         </p>
-        <div class="collapse" id="collapse">
+        <div class="collapse" id="collapseForm">
           <div class="card mb-3 card-body">
             <form (ngSubmit)="onSubmit()" [formGroup]="offerForm">
               <input
@@ -38,13 +38,6 @@
                 type="text"
                 formControlName="id"
               />
-              <div class="valid-feedback">
-                <div *ngIf="offerForm.get('id')">
-                  <span *ngIf="offerForm.get('id')"
-                    >Le champ "id" est valide</span
-                  >
-                </div>
-              </div>
               <div class="invalid-feedback">
                 <div *ngIf="offerForm.get('id').errors">
                   <span *ngIf="offerForm.get('id').errors.required"
@@ -63,13 +56,6 @@
                 type="text"
                 formControlName="client"
               />
-              <div class="valid-feedback">
-                <div *ngIf="offerForm.get('client')">
-                  <span *ngIf="offerForm.get('client')"
-                    >Le champ "client" est valide</span
-                  >
-                </div>
-              </div>
               <div class="invalid-feedback">
                 <div *ngIf="offerForm.get('client').errors">
                   <span *ngIf="offerForm.get('client').errors.required"
@@ -88,13 +74,6 @@
                 type="text"
                 formControlName="remise"
               />
-              <div class="valid-feedback">
-                <div *ngIf="offerForm.get('remise')">
-                  <span *ngIf="offerForm.get('remise')"
-                    >Le champ "remise" est valide</span
-                  >
-                </div>
-              </div>
               <div class="invalid-feedback">
                 <div *ngIf="offerForm.get('remise').errors">
                   <span *ngIf="offerForm.get('remise').errors.required"
@@ -113,13 +92,6 @@
                 type="text"
                 formControlName="details"
               />
-              <div class="valid-feedback">
-                <div *ngIf="offerForm.get('details')">
-                  <span *ngIf="offerForm.get('details')"
-                    >Le champ "détails" est valide</span
-                  >
-                </div>
-              </div>
               <div class="invalid-feedback">
                 <div *ngIf="offerForm.get('details').errors">
                   <span *ngIf="offerForm.get('details').errors.maxLength"
@@ -138,13 +110,6 @@
                 type="date"
                 formControlName="debutOffre"
               />
-              <div class="valid-feedback">
-                <div *ngIf="offerForm.get('debutOffre')">
-                  <span *ngIf="offerForm.get('debutOffre')"
-                    >Le champ "début d'offre" est valide</span
-                  >
-                </div>
-              </div>
               <div class="invalid-feedback">
                 <div *ngIf="offerForm.get('debutOffre').errors">
                   <span *ngIf="offerForm.get('debutOffre').errors.required"
@@ -165,13 +130,6 @@
                 type="number"
                 formControlName="couponsRestants"
               />
-              <div class="valid-feedback">
-                <div *ngIf="offerForm.get('couponsRestants')">
-                  <span *ngIf="offerForm.get('couponsRestants')"
-                    >Le champ "coupons restants" est valide</span
-                  >
-                </div>
-              </div>
               <div class="invalid-feedback">
                 <div *ngIf="offerForm.get('couponsRestants').errors">
                   <span *ngIf="offerForm.get('couponsRestants').errors.required"

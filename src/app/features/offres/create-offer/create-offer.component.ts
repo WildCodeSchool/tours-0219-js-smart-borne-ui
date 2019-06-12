@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OffersService } from '../../core/http/offers.service';
-import { Offer } from '../../shared/models/offres.models';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { OffersService } from '../../../core/http/offers.service';
+import { Offer } from '../../../shared/models/offres.models';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 @Component({

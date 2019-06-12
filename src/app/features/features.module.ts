@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
-import { CreateOfferComponent } from './create-offer/create-offer.component';
-import { DetailOfferComponent } from './detail-offer/detail-offer.component';
-import { EditOfferComponent } from './edit-offer/edit-offer.component';
-import { ListOffersComponent } from './list-offers/list-offers.component';
+import { CreateOfferComponent } from './offres/create-offer/create-offer.component';
+import { DetailOfferComponent } from './offres/detail-offer/detail-offer.component';
+import { EditOfferComponent } from './offres/edit-offer/edit-offer.component';
+import { ListOffersComponent } from './offres/list-offers/list-offers.component';
 import { CardOfferComponent } from '../shared/components/card-offer/card-offer.component';
 import { HttpModule } from '@angular/http';
 import { ListClientComponent } from './client/list-client/list-client.component';

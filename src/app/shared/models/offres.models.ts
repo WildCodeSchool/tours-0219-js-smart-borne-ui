@@ -4,13 +4,13 @@ export class Offer {
     public id: string,
     public client: string,
     public remise: string,
-    public débutOffre: string,
+    public debutOffre: string,
     public coupons: {
       restants: number;
       imprimés: number;
     },
-    public borne: string,
-    public totalRemisé: string,
+    public bornes: string,
+    public totalRemise: string,
     public details: string,
   ) {}
 }

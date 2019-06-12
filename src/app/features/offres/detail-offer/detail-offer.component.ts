@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OffersService } from '../../core/http/offers.service';
+import { OffersService } from '../../../core/http/offers.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Offer } from '../../shared/models/offres.models';
+import { Offer } from '../../../shared/models/offres.models';
 
 @Component({
   selector: 'app-detail-offer',
