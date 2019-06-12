@@ -62,8 +62,8 @@ export class CreateClientComponent implements OnInit {
         this.toastr.success('success', 'Client Ajoute');
         this.router.navigateByUrl('/');
       },
-// tslint:disable-next-line: ter-arrow-parens
-      error => {
+
+      (error) => {
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
       },

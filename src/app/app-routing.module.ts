@@ -7,7 +7,7 @@ import { DetailBorneComponent } from './features/borne/detail-borne/detail-borne
 import { EditBorneComponent } from './features/borne/edit-borne/edit-borne.component';
 
 const routes: Routes = [
-  { path: '', component: ListClientComponent },
+  { path: 'client', component: ListClientComponent },
   { path: 'home', component: HomeComponent },
   { path: 'bornes', component: ListBorneComponent },
   { path: 'borne/:id', component: DetailBorneComponent },

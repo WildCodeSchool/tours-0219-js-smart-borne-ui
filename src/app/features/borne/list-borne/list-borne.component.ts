@@ -11,7 +11,7 @@ export class ListBorneComponent implements OnInit {
   public bornes: Borne[];
   constructor(public borneService: BorneService) {
   }
-
+  
   ngOnInit() {
     this.getListBorne();
   }
