@@ -5,11 +5,11 @@ import { Offer } from '../../models/offres.models';
 @Component({
   selector: 'app-card-offer',
   templateUrl: './card-offer.component.html',
-  styleUrls: ['./card-offer.component.scss']
+  styleUrls: ['./card-offer.component.scss'],
 })
 export class CardOfferComponent implements OnInit {
   public offers: Offer[];
-  constructor(public offersService: OffersService) { }
+  constructor(public offersService: OffersService) {}
 
   ngOnInit() {
     this.getListoffers();

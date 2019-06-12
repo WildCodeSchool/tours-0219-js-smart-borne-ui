@@ -8,11 +8,9 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class BorneService {
-
   configUrl = `${environment.apiUrl}/bornes`;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   public getListBorne(): Observable<Borne[]> {
     return this.http.get<Borne[]>(`${this.configUrl}`);
@@ -29,5 +27,4 @@ export class BorneService {
   public putBorn(id: string, borne: Borne): Observable<Borne> {
     return this.http.put<Borne>(`${this.configUrl}/${id}`, borne);
   }
-
 }

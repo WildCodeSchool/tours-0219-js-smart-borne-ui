@@ -1,5 +1,7 @@
 # Features module
-Le module `features` contient les components propre à l'application 
+
+Le module `features` contient les components propre à l'application
+
 ```
 |-- features
        |-- home
