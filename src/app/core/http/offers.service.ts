@@ -16,7 +16,7 @@ export class OffersService {
     return this.http.get<Offer[]>(`${this.configUrl}`);
   }
 
-  public getOfferById(id: string): Observable<Offer> {
+  public getOffer(id: string): Observable<Offer> {
     return this.http.get<Offer>(`${this.configUrl}/${id}`);
   }
 
@@ -26,5 +26,9 @@ export class OffersService {
 
   public putOffer(id: string, offer: Offer): Observable<Offer> {
     return this.http.put<Offer>(`${this.configUrl}/${id}`, offer);
+  }
+
+  public deleteOffer(id: string): Observable<Offer> {
+    return this.http.delete<Offer>(`${this.configUrl}/${id}`);
   }
 }

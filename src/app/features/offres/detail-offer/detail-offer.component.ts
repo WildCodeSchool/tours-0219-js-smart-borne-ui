@@ -22,7 +22,7 @@ export class DetailOfferComponent implements OnInit {
   }
 
   getOffer() {
-    this.offerService.getOfferById(this.id).subscribe(
+    this.offerService.getOffer(this.id).subscribe(
       (offer: Offer) => {
         this.offer = offer;
       },

@@ -43,7 +43,6 @@ import { CreateBorneComponent } from './borne/create-borne/create-borne.componen
     CommonModule,
     SharedModule,
     HttpClientModule,
-    HttpModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,

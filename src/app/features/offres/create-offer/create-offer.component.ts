@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OffersService } from '../../../core/http/offers.service';
 import { Offer } from '../../../shared/models/offres.models';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-create-offer',
@@ -10,10 +10,13 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./create-offer.component.scss'],
 })
 export class CreateOfferComponent implements OnInit {
+  public id;
+  public offer;
   constructor(
-    public offersService: OffersService,
+    public service: OffersService,
     private fb: FormBuilder,
     private router: Router,
+    public activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
   ) { }
 
@@ -27,10 +30,31 @@ export class CreateOfferComponent implements OnInit {
     couponsRestants: ['', [Validators.required]],
   });
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+      const id = params.get('id');
+      this.id = id;
+      if (id) {
+        this.service.getOffer(id).subscribe(
+          (offer: Offer) => {
+            this.offer = offer;
+            this.offerForm.patchValue(offer);
+            // tslint:disable-next-line: brace-style
+          });
+      } else {
+        const offerId = params.get('offerId');
+        this.service.getOffer(offerId).subscribe(
+          (offer: Offer) => {
+            this.offer = offer;
+            this.offerForm.patchValue(offer);
+          });
+      }
+    },
+    );
+  }
 
   onSubmit() {
-    this.offersService.postOffer(this.offerForm.value).subscribe(
+    this.service.postOffer(this.offerForm.value).subscribe(
       (offer: Offer) => {
         this.offerForm.patchValue(offer);
         this.toastr.clear();
