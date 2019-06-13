@@ -8,12 +8,12 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { DetailClientComponent } from './features/client/detail-client/detail-client.component';
 
 const routes: Routes = [
-  { path: 'client', component: ListClientComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'clients', component: ListClientComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'bornes', component: ListBorneComponent },
   { path: 'borne/:id', component: DetailBorneComponent },
   { path: 'borne/:id/edit', component: EditBorneComponent },
-  { path: 'clients/detail', component: DetailClientComponent },
+  { path: 'client/:id', component: DetailClientComponent },
 ];
 
 @NgModule({
