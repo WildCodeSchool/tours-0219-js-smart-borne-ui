@@ -22,7 +22,6 @@ Le dossier `authentication` gère le cycle de vie de l'authentification de l'uti
 ```
 ## Header et Footer folder
 Les dossiers `footer` et `header` contiennent les components globaux, utilisé à travers l'application entière. Ces fichers sont présents sur chaque page de l'application.
-
 ```
 |-- header
      |-- header.component.ts|html|scss
@@ -49,7 +48,7 @@ Le dossier `guards` contients les `guard` Angular utilisés pour sécuriser les 
 |-- guards
      |-- auth.guard.ts
      |-- no-auth-guard.ts
-     |-- admin-guard.ts
+     |-- admin-guard.ts 
 ```
 ## Services folder
 Contiens tous les autres services **singleton** qui ne sont pas consommateur de l'API.
