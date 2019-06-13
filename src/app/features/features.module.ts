@@ -15,7 +15,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { EditBorneComponent } from './borne/edit-borne/edit-borne.component';
 import { CreateBorneComponent } from './borne/create-borne/create-borne.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ListUserComponent } from './user/list-user/list-user.component';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DetailBorneComponent,
     EditBorneComponent,
     CreateBorneComponent,
+    LoginComponent,
+    RegisterComponent,
+    DashboardComponent,
+    ListUserComponent,
+    EditUserComponent,
   ],
   imports: [
     CommonModule,
@@ -48,4 +57,5 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     }),
   ],
 })
-export class FeaturesModule { }
+export class FeaturesModule {
+}

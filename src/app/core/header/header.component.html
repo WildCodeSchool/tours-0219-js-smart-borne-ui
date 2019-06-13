@@ -1,13 +1,16 @@
 <div class="wrapper">
 
     <nav class="sidebar" [ngbCollapse]="isCollapsed">
-        <div class="sidebar-header">
-            <h3>SMART BORNE</h3>
+        <div class="sidebar-header text-center">
+            <h3 class="sizeTitleHeader">{{profile?.role}}</h3>
         </div>
 
         <ul class="list-unstyled components text-center">
             <li>
-                <a class="asidebar" [routerLink]="['/']">Borne</a>
+                <a class="asidebar" [routerLink]="['/dashboard']">Dashboard</a>
+            </li>
+            <li>
+                <a class="asidebar" [routerLink]="['/bornes']">Borne</a>
             </li>
             <li>
                 <a class="asidebar" href="#">Client</a>
@@ -24,30 +27,24 @@
         <nav class="navbar navbar-expand-lg navbar-color">
             <div class="container-fluid">
 
-                <button type="button" id="sidebarCollapse" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSidebar" class="btn btn-info">
+                <button type="button" id="sidebarCollapse" (click)="isCollapsed = !isCollapsed"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSidebar" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
                     <span> Réduire menu</span>
                 </button>
 
-                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupport" aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-align-justify"></i>
-                </button>
+                <h4 class="title-center-smartborne">SMART BORNE</h4>
 
-                <div class="collapse navbar-collapse" id="navbarSupport">
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                        </li>
-                        <li class="nav-item">
-                            <div ngbDropdown class="d-inline-block">
-                                <button class="btn btn-primary" id="dropdownnavabar" ngbDropdownToggle>Profile User testUser</button>
-                                <div ngbDropdownMenu aria-labelledby="dropdownnavabar">
-                                    <button ngbDropdownItem>Action - 1</button>
-                                    <button ngbDropdownItem>Another Action</button>
-                                    <button ngbDropdownItem>Something else is here</button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                <div ngbDropdown class="right d-inline-block">
+                    <button class="btn btn-outline-primary" id="dropdown" ngbDropdownToggle>
+                        {{profile?.username}}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdown">
+                        <button ngbDropdownItem [routerLink]="[]">Parametre</button>
+                        <button ngbDropdownItem [routerLink]="['/dashboard/user']">Gérer les utilisateurs</button>
+                        <div class="dropdown-divider"></div>
+                        <button ngbDropdownItem [routerLink]="[]" (click)="logout()">Logout</button>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -56,3 +53,4 @@
 
     </div>
 </div>
+
