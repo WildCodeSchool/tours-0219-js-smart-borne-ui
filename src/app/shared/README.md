@@ -1,7 +1,5 @@
 # Shared Module
-
 Le module `SharedModule` contient les components, pipes/filters and services should go réutiliser plusieurs fois à travers l'application web. Le module peut être importé par n'importe quel autre module dans le but d'être réutilisé. Ce module ne doit pas avoir de dépendance vers d'autre module de l'application.
-
 ```
 |-- shared
      |-- [+] components
@@ -9,11 +7,8 @@ Le module `SharedModule` contient les components, pipes/filters and services sho
      |-- [+] pipes
      |-- [+] models
 ```
-
 ## Components folder
-
 Le dossier `components` doit contenir tous les `component` partagé dans l'application. Comme par example des loaders, buttons etc.
-
 ```
 |-- components
      |-- loader
@@ -24,11 +19,8 @@ Le dossier `components` doit contenir tous les `component` partagé dans l'appli
           |-- collapse-button
                |-- collapse-button.component.ts|html|scss
 ```
-
 ## Directives, Pipes, Models folder
-
 Les dossiers `directives` , `pipes` and `models` contiennent les directives, pipes and models utilisé à travers l'application.
-
 ```
 |-- directives
       |-- auth.directive.ts

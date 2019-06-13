@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { FeaturesModule } from './features/features.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -18,8 +16,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     BrowserModule,
     AppRoutingModule,
-    HttpModule,
-    HttpClientModule,
     CoreModule,
     BrowserAnimationsModule,
     FeaturesModule,
