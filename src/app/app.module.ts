@@ -9,6 +9,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { JwtModule } from '@auth0/angular-jwt';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorInterceptor } from './core/interceptors/error-interceptor';
+
+export function tokenGetter() {
+  return localStorage.getItem('accessToken');
+}
 
 @NgModule({
   declarations: [
@@ -23,8 +30,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FeaturesModule,
     ChartsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: (tokenGetter),
+        whitelistedDomains: ['localhost:3000'],
+      },
+    }),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

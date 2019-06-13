@@ -1,5 +1,18 @@
+.right {
+  .dropdown-menu {
+    right: 0;
+    left: unset;
+  }
+}
 .navbar-color {
-  background-color: #498146
+  background-color: #5b8158
+}
+
+.title-center-smartborne {
+  color: #5b8158;
+  font-weight: bold;
+  font-size: 25px;
+  letter-spacing: 3px;
 }
 
 .navbar {
@@ -27,7 +40,7 @@
 .sidebar {
   min-width: 250px;
   max-width: 250px;
-  background: #38813a;
+  background: #5b8158;
   color: #fff;
   transition: all 0.3s;
 }
@@ -38,7 +51,12 @@
 
 .sidebar .sidebar-header {
   padding: 20px;
-  background: #38813a;
+  background: #5b8158;
+}
+
+.sizeTitleHeader {
+  font-size: 22px;
+  letter-spacing: 2px;
 }
 
 .sidebar ul.components {

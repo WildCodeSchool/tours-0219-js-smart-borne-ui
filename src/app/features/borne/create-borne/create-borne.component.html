@@ -2,8 +2,15 @@
 
     <div class="col-xl-12 col-lg-12">
         <p>
+<<<<<<< HEAD
             <button class="btn btn-outline-success float-right" type="button" data-toggle="collapse"
                 data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+=======
+            <button *ngIf="user?.role == 'USER'" class="btn btn-outline-success float-right" type="button"
+                    data-toggle="collapse"
+                    data-target="#collapseForm" aria-expanded="false"
+                    aria-controls="collapseForm">
+>>>>>>> dev
                 Formulaire ajouté une borne
             </button>
         </p>
@@ -132,14 +139,14 @@
 
                             <div class="col">
                                 <div class="form-group">
-                                    <textarea [ngClass]="borneForm.get('details').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="Detail supplémentaire" name="details"
-                                        type="text" formControlName="details"></textarea>
+                                        <textarea
+                                                [ngClass]="borneForm.get('details').errors ? 'is-invalid' : 'is-valid'"
+                                                class="form-control" placeholder="Detail supplémentaire" maxlength="300"
+                                                name="details" type="text" formControlName="details"></textarea>
                                     <small class="float-right">300 caractères maximun</small>
                                     <div class="invalid-feedback">
                                         <div *ngIf="borneForm.get('details').errors">
-                                            <span *ngIf="borneForm.get('details').errors.maxLength">Detail
-                                                supplémentaire peut ne contenir que 300 caractères</span>
+                                            <span *ngIf="borneForm.get('details').errors.maxlength">Detail supplémentaire peut ne contenir que 300 caractères</span>
                                         </div>
                                     </div>
                                 </div>
