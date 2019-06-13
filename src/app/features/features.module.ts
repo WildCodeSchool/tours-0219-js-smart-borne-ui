@@ -11,7 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { EditBorneComponent } from './borne/edit-borne/edit-borne.component';
 import { CreateBorneComponent } from './borne/create-borne/create-borne.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListUserComponent } from './user/list-user/list-user.component';
@@ -23,7 +23,7 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
     DetailBorneComponent,
     EditBorneComponent,
     CreateBorneComponent,
-    AuthComponent,
+    LoginComponent,
     RegisterComponent,
     DashboardComponent,
     ListUserComponent,

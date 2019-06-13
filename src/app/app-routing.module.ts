@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListBorneComponent } from './features/borne/list-borne/list-borne.component';
 import { DetailBorneComponent } from './features/borne/detail-borne/detail-borne.component';
 import { EditBorneComponent } from './features/borne/edit-borne/edit-borne.component';
-import { AuthComponent } from './features/auth/auth.component';
+import { LoginComponent } from './features/login/login.component';
 import { RegisterComponent } from './features/register/register.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
@@ -12,7 +12,7 @@ import { ListUserComponent } from './features/user/list-user/list-user.component
 import { EditUserComponent } from './features/user/edit-user/edit-user.component';
 
 const routes: Routes = [
-  { path: '', component: AuthComponent },
+  { path: '', component: LoginComponent },
   { path:  '',
     component:  HeaderComponent,
     canActivate: [AuthGuard],
