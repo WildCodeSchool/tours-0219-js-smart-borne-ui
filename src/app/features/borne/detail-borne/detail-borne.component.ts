@@ -14,7 +14,8 @@ export class DetailBorneComponent implements OnInit {
   public borne: Borne;
   public id: string;
 
-  constructor(private route: ActivatedRoute, 
+  constructor(
+    private route: ActivatedRoute,
     public borneService: BorneService,
     private toastr: ToastrService,
     private router: Router) { }
@@ -40,9 +41,9 @@ export class DetailBorneComponent implements OnInit {
     );
   }
   deleteBorne(id) {
-    const r = confirm('Etes VOUS sur')
-    if(r){
-      this.borneService.deleteBorne(id).subscribe()
+    const r = confirm('Etes VOUS sur');
+    if (r) {
+      this.borneService.deleteBorne(id).subscribe();
       this.toastr.error('Suppression', 'borne detroy');
       this.router.navigateByUrl(`bornes`);
 

@@ -30,4 +30,7 @@ export class ClientService {
   public putClient(id: string, clients: Client): Observable<Client> {
     return this.http.put<Client>(`${this.configUrl}/${id}`, clients);
   }
+  public deleteClient(id: string): Observable<Client> {
+    return this.http.delete<Client>(`${this.configUrl}/${id}`);
+  }
 }

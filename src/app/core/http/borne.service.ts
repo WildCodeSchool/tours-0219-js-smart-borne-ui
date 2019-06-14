@@ -29,9 +29,9 @@ export class BorneService {
   public putBorn(id: string, borne: Borne): Observable<Borne> {
     return this.http.put<Borne>(`${this.configUrl}/${id}`, borne);
   }
-  
+
   public deleteBorne(id: string): Observable<Borne> {
-    return this.http.delete<Borne>(`${this.configUrl}/${id}`)
+    return this.http.delete<Borne>(`${this.configUrl}/${id}`);
   }
 
 }

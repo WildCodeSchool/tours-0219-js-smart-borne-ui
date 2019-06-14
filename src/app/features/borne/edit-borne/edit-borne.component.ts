@@ -13,7 +13,8 @@ export class EditBorneComponent implements OnInit {
   public id: string;
   public borne: Borne;
 
-  constructor(public borneService: BorneService,
+  constructor(
+    public borneService: BorneService,
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
@@ -49,22 +50,21 @@ export class EditBorneComponent implements OnInit {
     problemesTechniques: ['0'],
   });
 
-
   ngOnInit() {
     this.route.paramMap.subscribe((id: ParamMap) => {
       this.id = id.get('id');
-      if(this.id) {
+      if (this.id) {
         this.borneService.getBorneById(this.id).subscribe(
-          (borne:Borne) => {
+          (borne: Borne) => {
             this.borne = borne;
             this.borneForm.patchValue(borne);
-          }
-        )
+          },
+        );
       }
-    })
+    });
   }
-    onSubmit() {
-      this.borneService.putBorn(this.id,this.borneForm.value).subscribe(
+  onSubmit() {
+    this.borneService.putBorn(this.id, this.borneForm.value).subscribe(
           (borne: Borne) => {
             this.borneForm.patchValue(borne);
             this.toastr.clear();
@@ -75,6 +75,6 @@ export class EditBorneComponent implements OnInit {
             this.toastr.clear();
             this.toastr.error(`Error ${error}`);
           });
-    }
+  }
 
 }
