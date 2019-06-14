@@ -4,6 +4,9 @@ import { Borne } from '../../../shared/models/borne';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../../../shared/models/user';
+import { ProfileService } from '../../../core/http/profile.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-borne',
@@ -11,12 +14,13 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./create-borne.component.scss'],
 })
 export class CreateBorneComponent implements OnInit {
+  public user: User;
 
-  constructor(
-    public borneService: BorneService,
-    private fb: FormBuilder,
-    private router: Router,
-    private toastr: ToastrService) {
+  constructor(public borneService: BorneService,
+              private fb: FormBuilder,
+              private router: Router,
+              private toastr: ToastrService,
+              private profileService: ProfileService) {
   }
 
   borneForm = this.fb.group({
@@ -48,6 +52,9 @@ export class CreateBorneComponent implements OnInit {
   });
 
   ngOnInit() {
+    this.profileService.getProfile().pipe(first()).subscribe((users) => {
+      this.user = users;
+    });
   }
 
   onSubmit() {
