@@ -12,10 +12,10 @@ export class ListOffersComponent implements OnInit {
   constructor(public offersService: OffersService) { }
 
   ngOnInit() {
-    this.getListoffers();
+    this.getListOffers();
   }
 
-  getListoffers() {
+  getListOffers() {
     this.offersService.getListOffers().subscribe((offers: Offer[]) => {
       this.offers = offers;
     });

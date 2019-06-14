@@ -21,15 +21,15 @@
               <tbody>
                 <ng-container *ngFor="let offer of offers">
                   <tr>
-                    <th scope="row">{{ offer.id }}</th>
+                    <th scope="row">{{ offer._id }}</th>
                     <td>{{ offer.name }}</td>
                     <td>{{ offer.client }}</td>
                     <td>{{ offer.borne }}</td>
-                    <td>{{ offer.coupons.restants }}</td>
+                    <td>{{ offer.couponsRestants }}</td>
                     <td>{{ offer.debutOffre }}</td>
                     <td>{{ offer.totalRemise }}</td>
                     <td>
-                      <button type="button" [routerLink]="['/offre', offer.id]" class="btn btn-outline-primary">
+                      <button type="button" [routerLink]="['/offre', offer._id]" class="btn btn-outline-primary">
                         Detail
                       </button>
                     </td>
