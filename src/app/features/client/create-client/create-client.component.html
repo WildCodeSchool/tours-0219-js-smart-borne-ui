@@ -3,25 +3,23 @@
     <div class="row">
 
         <div class="col-xl-12 col-lg-12">
-            <button class="btn btn-outline-success float-right" type="button"
-                    data-toggle="collapse"
-                    data-target="#collapseForm" aria-expanded="false"
-                    aria-controls="collapseForm">
-                Formulaire ajouté un client
-            </button>
-        </div>
-
-        <div class="col-xl-12 col-lg-12 pr-3 pl-3">
-
-            <div class="collapse" id="collapseForm">
-                <div class="mb-3 card-body">
-                    <form (ngSubmit)="onSubmit()" [formGroup]="clientForm">
-                        <input [ngClass]="clientForm.get('siret').errors ? 'is-invalid' : 'is-valid'"
-                               class="form-control" placeholder="siret" name="siret" type="text"
-                               formControlName="siret">
-                        <div class="valid-feedback">
-                            <div *ngIf="clientForm.get('siret')">
-                                <span *ngIf="clientForm.get('siret')">Le siret est bon</span>
+            <div class="card shadow mb-4 pt-3 pr-3 pl-3">
+                <p>
+                    <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-primary btn-block" type="button" data-toggle="collapse"
+                        data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Formulaire ajouter un client
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card mb-3 card-body">
+                        <form (ngSubmit)="onSubmit()" [formGroup]="clientForm">
+                            <input [ngClass]="clientForm.get('siret').errors ? 'is-invalid' : 'is-valid'"
+                                class="form-control" placeholder="siret" name="siret" type="text"
+                                formControlName="siret">
+                            <div class="valid-feedback">
+                                <div *ngIf="clientForm.get('siret')">
+                                    <span *ngIf="clientForm.get('siret')">Le siret est bon</span>
+                                </div>
                             </div>
                         </div>
                         <div class="invalid-feedback">
@@ -300,6 +298,4 @@
                 </div>
             </div>
         </div>
-
     </div>
-</div>

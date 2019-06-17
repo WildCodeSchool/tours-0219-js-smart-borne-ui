@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../shared/models/client-model';
 import {
   FormGroup,
-  FormControl,
   Validators,
   FormBuilder,
 } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ClientService } from '../../../core/http/client.service';
 import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs/operators';
+import { ProfileService } from '../../../core/http/profile.service';
+import { User } from '../../../shared/models/user';
 @Component({
   selector: 'app-create-client',
   templateUrl: './create-client.component.html',
@@ -17,11 +19,13 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateClientComponent implements OnInit {
   public clients: Client[];
   public clientForm: FormGroup;
+  public user: User;
   constructor(
     private fb: FormBuilder,
     public clientService: ClientService,
     private router: Router,
     private toastr: ToastrService,
+    private profileService: ProfileService,
   ) {
     this.clientForm = this.fb.group({
       siret: ['', [Validators.required]],
@@ -53,7 +57,12 @@ export class CreateClientComponent implements OnInit {
       }),
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.profileService.getProfile().pipe(first()).subscribe((users) => {
+      this.user = users;
+    });
+  }
+
   onSubmit() {
     this.clientService.postClient(this.clientForm.value).subscribe(
       (client: Client) => {
