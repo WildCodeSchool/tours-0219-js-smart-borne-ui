@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-
   public plastiqueData = [50];
   public plastiqueLabels = ['Plastique'];
   public plastiqueType = 'doughnut';
@@ -14,6 +13,7 @@ export class DashboardComponent implements OnInit {
   public cannetteData = [50];
   public cannetteLabels = ['Canette'];
   public cannetteType = 'doughnut';
+
   constructor() { }
 
   ngOnInit() {
