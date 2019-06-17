@@ -5,11 +5,11 @@
     <div class="row">
             <div class="col-6">
                 <h3 class="text-center">Plastique</h3>
-                <canvas baseChart [data]="plastiqueData" [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
+                <canvas baseChart [data]="[borne.plastique.total, borne.plastique.utilise]" [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
             </div>
             <div class="col-6">
                 <h3 class="text-center">Cannette</h3>
-                <canvas baseChart [data]="cannetteData" [labels]="cannetteLabels" [chartType]="cannetteType"></canvas>
+                <canvas baseChart [data]="[borne.cannette.total, borne.cannette.utilise]" [labels]="cannetteLabels" [chartType]="cannetteType"></canvas>
             </div>
         </div>
     <div class="row">
@@ -38,12 +38,7 @@
 
 
                 <div class="row">
-                    <div class="col-md-3 col-xl-3 mt-4">
-                        <div class="card">
-                            <p class="text-center p-3">78 %</p>
-                        </div>
-                    </div>
-                    <div class="col-md-9 col-xl-9 mt-4">
+                    <div class="col-md-12 col-xl-12 mt-4">
                         <div class="card">
                             <div class="card-body">
                                 <h2 class="card-title text-center">{{borne.address.ville}}</h2>
@@ -106,15 +101,11 @@
                             <p class="text-center p-3">Coupon</p>
                             <div class=" ml-3 mr-3 mb-3">
                                 <p>
-                                    <ngb-progressbar type="success" [value]=[({{borne.coupons.restant}})] [striped]="true" [animated]="true"><i> {{borne.coupons.restant}}% </i>
+                                    <ngb-progressbar type="success" [value]=[borne.coupons.restant] [striped]="true" [animated]="true"><i> {{borne.coupons.restant}}% </i>
                                     </ngb-progressbar>
                                 </p>
                                 <p>
-                                    <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>25%</i>
-                                    </ngb-progressbar>
-                                </p>
-                                <p>
-                                    <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                    <ngb-progressbar type="success" [value]=[borne.coupons.imprimer] [striped]="true" [animated]="true"><i> {{borne.coupons.imprimer}} </i>
                                     </ngb-progressbar>
                                 </p>
                             </div>

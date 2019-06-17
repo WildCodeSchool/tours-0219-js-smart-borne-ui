@@ -14,8 +14,8 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Ville</th>
-                                <th scope="col">Bac 1</th>
-                                <th scope="col">Bac 2</th>
+                                <th scope="col">Cannette</th>
+                                <th scope="col">Plastique</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">Date Instalation</th>
                                 <th scope="col">Problème</th>
@@ -28,15 +28,15 @@
                                     <th scope="row">{{borne.numeroSerie}}</th>
                                     <td>{{borne.address.ville}}</td>
                                     <td>
-                                        <ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true"><i>25%</i>
+                                        <ngb-progressbar type="success" [value]="[borne.cannette.utilise]" [striped]="true" [animated]="true"><i> {{borne.cannette.utilise}}% </i>
                                     </ngb-progressbar>
                                     </td>
                                     <td>
-                                            <ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true"><i>25%</i>
+                                            <ngb-progressbar type="success" [value]="[borne.plastique.utilise]" [striped]="true" [animated]="true"><i> {{borne.plastique.utilise}} %</i>
                                             </ngb-progressbar>
                                     </td>
                                     <td>
-                                            <ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true"><i>25%</i>
+                                            <ngb-progressbar type="success" [value]="[borne.coupon.restant]" [striped]="true" [animated]="true"><i> {{borne.coupon.restant}} %</i>
                                             </ngb-progressbar>
                                     </td>
                                     <td>

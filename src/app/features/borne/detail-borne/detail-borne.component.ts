@@ -19,11 +19,11 @@ export class DetailBorneComponent implements OnInit {
     public borneService: BorneService,
     private toastr: ToastrService,
     private router: Router) { }
-  public plastiqueData = [50];
+
   public plastiqueLabels = ['Plastique'];
   public plastiqueType = 'doughnut';
 
-  public cannetteData = [50];
+
   public cannetteLabels = ['Canette'];
   public cannetteType = 'doughnut';
   ngOnInit() {

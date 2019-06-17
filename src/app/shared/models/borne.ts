@@ -14,15 +14,22 @@ export class Borne {
       bacDeux: number,
     },
     public dateInstallation: string,
-    public coupons: {
+    public coupon: {
       restant: number,
       imprimer: number,
+    },
+    public plastique: {
+      utilise: number,
+      total: number
+    },
+    public cannette: {
+      utilise: number,
+      total: number,
     },
     public total: {
       recycle: number,
       remise: number,
       cannettes: number,
-      plastique: number,
     },
     public problemesTechniques: string,
     public styliseeClient: string,

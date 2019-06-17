@@ -38,15 +38,22 @@ export class CreateBorneComponent implements OnInit {
       bacUn: [0],
       bacDeux: [0],
     }),
-    coupons: this.fb.group({
+    coupon: this.fb.group({
       restant: [0],
       imprimer: [0],
+    }),
+    plastique: this.fb.group({
+      utilise: [0],
+      total: [0],
+    }),
+    cannette: this.fb.group({
+      utilise: [0],
+      total: [0],
     }),
     total: this.fb.group({
       recycle: [0],
       remise: [0],
       cannettes: [0],
-      plastique: [0],
     }),
     problemesTechniques: ['0'],
   });
