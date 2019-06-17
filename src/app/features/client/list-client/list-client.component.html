@@ -13,7 +13,8 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Raison social</th>
+                                    <th scope="col">Gerant</th>
+                                    <th scope='col'>telephone</th>
                                     <th scope="col">Coupon</th>
                                     <th scope="col">Borne</th>
                                 </tr>
@@ -23,11 +24,15 @@
                                     <tr>
                                         <th scope="row">{{client._id}}</th>
                                         <td>{{client.name}}</td>
-                                        <td>{{client.raisonSocial}}</td>
-                                        <td>0</td>
+                                        <td> </td>
+                                        <td></td>
+                                        <td>
+                                                <ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true"><i>25%</i>
+                                                </ngb-progressbar>
+                                        </td>
                                         <td>Borne</td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-primary">Detail
+                                            <button type="button" class="btn btn-outline-primary" [routerLink]="['/client', client._id]">Detail
                                             </button>
                                         </td>
                                     </tr>

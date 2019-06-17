@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BorneService } from '../../../core/http/borne.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Borne } from '../../../shared/models/borne';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detail-borne',
@@ -9,11 +10,22 @@ import { Borne } from '../../../shared/models/borne';
   styleUrls: ['./detail-borne.component.scss'],
 })
 export class DetailBorneComponent implements OnInit {
+  public bornes: Borne[];
   public borne: Borne;
-  public id;
+  public id: string;
 
-  constructor(private route: ActivatedRoute, public borneService: BorneService) { }
+  constructor(
+    private route: ActivatedRoute,
+    public borneService: BorneService,
+    private toastr: ToastrService,
+    private router: Router) { }
+  public plastiqueData = [50];
+  public plastiqueLabels = ['Plastique'];
+  public plastiqueType = 'doughnut';
 
+  public cannetteData = [50];
+  public cannetteLabels = ['Canette'];
+  public cannetteType = 'doughnut';
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
@@ -27,6 +39,16 @@ export class DetailBorneComponent implements OnInit {
           this.borne = borne;
         },
     );
+  }
+  deleteBorne(id) {
+    const r = confirm('Etes VOUS sur');
+    if (r) {
+      this.borneService.deleteBorne(id).subscribe();
+      this.toastr.error('Suppression', 'borne detroy');
+      this.router.navigateByUrl(`bornes`);
+
+    }
+
   }
 
 }

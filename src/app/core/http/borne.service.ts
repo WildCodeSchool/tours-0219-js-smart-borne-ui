@@ -30,4 +30,8 @@ export class BorneService {
     return this.http.put<Borne>(`${this.configUrl}/${id}`, borne);
   }
 
+  public deleteBorne(id: string): Observable<Borne> {
+    return this.http.delete<Borne>(`${this.configUrl}/${id}`);
+  }
+
 }

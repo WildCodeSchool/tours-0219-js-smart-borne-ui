@@ -12,6 +12,7 @@ import { HeaderComponent } from './core/header/header.component';
 import { ListUserComponent } from './features/user/list-user/list-user.component';
 import { EditUserComponent } from './features/user/edit-user/edit-user.component';
 import { DetailClientComponent } from './features/client/detail-client/detail-client.component';
+import { EditClientComponent } from './features/client/edit-client/edit-client.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
       { path: 'dashboard/user', component: ListUserComponent },
       { path: 'dashboard/user/:id/edit', component: EditUserComponent },
       { path: 'clients', component: ListClientComponent },
-      { path: 'clients/detail', component: DetailClientComponent },
+      { path: 'client/:id', component: DetailClientComponent },
+      { path: 'client/:id/edit', component: EditClientComponent },
     ]},
   { path: '**', redirectTo: '' },
 ];

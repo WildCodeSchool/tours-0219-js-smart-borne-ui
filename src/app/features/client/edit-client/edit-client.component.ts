@@ -9,19 +9,22 @@ import {
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ClientService } from '../../../core/http/client.service';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
-  selector: 'app-create-client',
-  templateUrl: './create-client.component.html',
-  styleUrls: ['./create-client.component.scss'],
+  selector: 'app-edit-client',
+  templateUrl: './edit-client.component.html',
+  styleUrls: ['./edit-client.component.scss'],
 })
-export class CreateClientComponent implements OnInit {
-  public clients: Client[];
+export class EditClientComponent implements OnInit {
+  public id: string;
+  public client: Client;
   public clientForm: FormGroup;
   constructor(
     private fb: FormBuilder,
     public clientService: ClientService,
     private router: Router,
     private toastr: ToastrService,
+    private route: ActivatedRoute,
   ) {
     this.clientForm = this.fb.group({
       siret: ['', [Validators.required]],
@@ -53,20 +56,31 @@ export class CreateClientComponent implements OnInit {
       }),
     });
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.paramMap.subscribe((id: ParamMap) => {
+      this.id = id.get('id');
+      if (this.id) {
+        this.clientService.getClientById(this.id).subscribe(
+          (client: Client) => {
+            this.client = client;
+            this.clientForm.patchValue(client);
+          },
+        );
+      }
+    });
+  }
   onSubmit() {
-    this.clientService.postClient(this.clientForm.value).subscribe(
+    this.clientService.putClient(this.id, this.clientForm.value).subscribe(
       (client: Client) => {
         this.clientForm.patchValue(client);
         this.toastr.clear();
-        this.toastr.success('success', 'Client Ajoute');
-        this.router.navigateByUrl('/');
+        this.toastr.success('success', 'Client modifiè');
+        this.router.navigateByUrl(`client/${this.id}`);
       },
-
       (error) => {
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
-      },
-    );
+      });
   }
+
 }

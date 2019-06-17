@@ -20,6 +20,7 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListUserComponent } from './user/list-user/list-user.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
+import { EditClientComponent } from './client/edit-client/edit-client.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
     DashboardComponent,
     ListUserComponent,
     EditUserComponent,
+    EditClientComponent,
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@
 
     <app-create-borne></app-create-borne>
 
+    
     <div class="row">
 
         <div class="col-xl-12 col-lg-12">
@@ -16,6 +17,7 @@
                                 <th scope="col">Bac 1</th>
                                 <th scope="col">Bac 2</th>
                                 <th scope="col">Total</th>
+                                <th scope="col">Date Instalation</th>
                                 <th scope="col">Problème</th>
                                 <th scope="col">Detail</th>
                             </tr>
@@ -25,9 +27,21 @@
                                 <tr>
                                     <th scope="row">{{borne.numeroSerie}}</th>
                                     <td>{{borne.address.ville}}</td>
-                                    <td>{{borne.taux.bacUn}}</td>
-                                    <td>{{borne.taux.bacDeux}}</td>
-                                    <td>{{borne.total.recycle}}</td>
+                                    <td>
+                                        <ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true"><i>25%</i>
+                                    </ngb-progressbar>
+                                    </td>
+                                    <td>
+                                            <ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true"><i>25%</i>
+                                            </ngb-progressbar>
+                                    </td>
+                                    <td>
+                                            <ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true"><i>25%</i>
+                                            </ngb-progressbar>
+                                    </td>
+                                    <td>
+                                            {{borne.dateInstallation| date:'d/M/y'}}
+                                    </td>
                                     <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
                                             class="fas fa-check colorValidate"></i></td>
                                     <ng-template #elseBlock>
