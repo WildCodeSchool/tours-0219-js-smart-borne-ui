@@ -10,7 +10,7 @@ import { Offer } from '../../../shared/models/offres.models';
 })
 export class DetailOfferComponent implements OnInit {
   public offer: Offer;
-  public id;
+  public id: string;
   public couponsData = [50];
   public couponsLabels = ['Coupons imprimés'];
   public couponsType = 'doughnut';
