@@ -20,7 +20,6 @@ export class RoleGuard implements CanActivate {
     const expectedRole = route.data.expectedRole;
     const token = localStorage.getItem('accessToken');
     const tokenPayload = jwtDecode(token);
-    console.log(tokenPayload);
 
     if (
       !this.auth.isAuthenticated() ||

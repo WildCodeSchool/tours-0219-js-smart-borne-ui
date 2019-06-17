@@ -3,6 +3,9 @@ import { BorneService } from '../../../core/http/borne.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Borne } from '../../../shared/models/borne';
 import { ToastrService } from 'ngx-toastr';
+import {first} from "rxjs/operators";
+import {ProfileService} from "../../../core/http/profile.service";
+import {User} from "../../../shared/models/user";
 
 @Component({
   selector: 'app-detail-borne',
@@ -12,17 +15,18 @@ import { ToastrService } from 'ngx-toastr';
 export class DetailBorneComponent implements OnInit {
   public bornes: Borne[];
   public borne: Borne;
+  public user: User;
   public id: string;
 
   constructor(
     private route: ActivatedRoute,
     public borneService: BorneService,
     private toastr: ToastrService,
-    private router: Router) { }
+    private router: Router,
+    private profileService: ProfileService) { }
 
   public plastiqueLabels = ['Plastique'];
   public plastiqueType = 'doughnut';
-
 
   public cannetteLabels = ['Canette'];
   public cannetteType = 'doughnut';
@@ -30,6 +34,9 @@ export class DetailBorneComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
       this.getBorne();
+    });
+    this.profileService.getProfile().pipe(first()).subscribe((users) => {
+      this.user = users;
     });
   }
 

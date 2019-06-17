@@ -1,7 +1,7 @@
 <div class="container mt-3 mb-4">
 
 
-    <h1 class="text-center">Offre {{ offre._id }}</h1>
+    <h1 class="text-center">Offre {{ offer._id }}</h1>
     <div class="row">
         <div class="col-8 offset-2">
             <h3 class="text-center">Coupons imprimés :</h3>
@@ -11,8 +11,6 @@
     <div class="row">
 
         <div class="col-md-12 col-xl-12 mt-4">
-
-
 
 
             <div class="row">
@@ -37,8 +35,8 @@
             <div class="row">
                 <div class="col-md-4 col-xl-4 mt-4">
                     <div class="card">
-                        <p class="text-center p-3">Début de l'offre : {{offre.debutOffre}}</p>
-                        <p class="text-center p-3">Total remisé : {{ offre.totalRemise }}
+                        <p class="text-center p-3">Début de l'offre : {{offer.debutOffre}}</p>
+                        <p class="text-center p-3">Total remisé : {{ offer.totalRemise }}
                         </p>
                     </div>
                 </div>
@@ -46,29 +44,20 @@
                     <div class="card">
                         <div class="card-body">
                             <h2 class="card-title text-center"></h2>
-                            <p>Remise : {{offre.remise}} </p>
-                            <p>Proposée par client : {{offre.client}} </p>
-                            <p>Présente sur les bornes : {{offre.bornes}} </p>
-                            <p>Détails : {{offre.details}}</p>
+                            <p>Remise : {{offer.remise}} </p>
+                            <p>Proposée par client : {{offer.client}} </p>
+                            <p>Présente sur les bornes : {{offer.bornes}} </p>
+                            <p>Détails : {{offer.details}}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-            <div class="row mt-4">
-                <div class="col-md-12 col-xl-12">
-                    <div class="card">
-                        <div class=" ml-3 mr-3 mb-3">
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <button class="btn btn-info btn-block mt-4" [routerLink]="['/offre', offre._id, 'edit']">Modifier
-                l'offre</button>
+            <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
+                <button class="btn btn-info btn-block mt-4" [routerLink]="['/offre', offer._id, 'edit']">Modifier
+                    l'offre
+                </button>
+            </ng-container>
 
         </div>
     </div>

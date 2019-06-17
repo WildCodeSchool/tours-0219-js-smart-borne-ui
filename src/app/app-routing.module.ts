@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListOffersComponent } from './features/offres/list-offers/list-offers.component';
-import { CardOfferComponent } from './shared/components/card-offer/card-offer.component';
-import { CreateOfferComponent } from './features/offres/create-offer/create-offer.component';
 import { ListClientComponent } from './features/client/list-client/list-client.component';
 import { ListBorneComponent } from './features/borne/list-borne/list-borne.component';
 import { DetailBorneComponent } from './features/borne/detail-borne/detail-borne.component';
@@ -22,43 +20,57 @@ import { EditOfferComponent } from './features/offres/edit-offer/edit-offer.comp
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path:  '',
-    component:  HeaderComponent,
+  {
+    path: '',
+    component: HeaderComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'register', component: RegisterComponent, canActivate: [RoleGuard],
+      {
+        path: 'register', component: RegisterComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        } },
+        },
+      },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'bornes', component: ListBorneComponent },
       { path: 'borne/:id', component: DetailBorneComponent },
-      { path: 'borne/:id/edit', component: EditBorneComponent, canActivate: [RoleGuard],
+      {
+        path: 'borne/:id/edit', component: EditBorneComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        }  },
-      { path: 'dashboard/user', component: ListUserComponent,  canActivate: [RoleGuard],
+        },
+      },
+      {
+        path: 'dashboard/user', component: ListUserComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        }  },
-      { path: 'dashboard/user/:id/edit', component: EditUserComponent, canActivate: [RoleGuard],
+        },
+      },
+      {
+        path: 'dashboard/user/:id/edit', component: EditUserComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        }  },
+        },
+      },
       { path: 'clients', component: ListClientComponent },
       { path: 'client/:id', component: DetailClientComponent },
-      { path: 'client/:id/edit', component: EditClientComponent, canActivate: [RoleGuard],
+      {
+        path: 'client/:id/edit', component: EditClientComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        }  },
-        { path: 'offers', component: ListOffersComponent },
+        },
+      },
+      { path: 'offers', component: ListOffersComponent },
       { path: 'offer/:id', component: DetailOfferComponent },
-      { path: 'offer/:id/edit', component: EditOfferComponent, canActivate: [RoleGuard],
+      {
+        path: 'offer/:id/edit', component: EditOfferComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        }  },
+        },
+      },
 
-    ]},
+    ],
+  },
   { path: '**', redirectTo: '' },
 ];
 
@@ -66,4 +78,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
