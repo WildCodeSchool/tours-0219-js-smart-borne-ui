@@ -1,8 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../shared/models/client-model';
 import { ClientService } from '../../../core/http/client.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs/operators';
+import { ProfileService } from '../../../core/http/profile.service';
+import { User } from '../../../shared/models/user';
 @Component({
   selector: 'app-detail-client',
   templateUrl: './detail-client.component.html',
@@ -11,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class DetailClientComponent implements OnInit {
   public clients: Client[];
   public client: Client;
+  public user: User;
   public id: string;
   public plastiqueData = [50];
   public plastiqueLabels = ['Plastique'];
@@ -23,12 +27,16 @@ export class DetailClientComponent implements OnInit {
     private route: ActivatedRoute,
     public clientService: ClientService,
     private toastr: ToastrService,
-    private router: Router) { }
+    private router: Router,
+    private profileService: ProfileService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
       this.getClient();
+    });
+    this.profileService.getProfile().pipe(first()).subscribe((users) => {
+      this.user = users;
     });
   }
   getClient() {
