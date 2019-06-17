@@ -9,6 +9,12 @@ import { Borne } from '../../../shared/models/borne';
 })
 export class ListBorneComponent implements OnInit {
   public bornes: Borne[];
+  public filterNumeroSerie: string;
+  public filterVille: string;
+  public filterBac1: string;
+  public filterBac2: string;
+  public filterTotal: string;
+
   constructor(public borneService: BorneService) {
   }
   ngOnInit() {

@@ -2,7 +2,13 @@
 
     <app-create-borne></app-create-borne>
 
-    
+    <div class="col-12 m-3">
+        <div class="alert alert-danger m-4 text-center"
+             *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal).length === 0">
+            <span *ngIf="filterNumeroSerie || filterVille || filterBac1 || filterBac2 || filterTotal">Il n y a pas de Borne</span>
+        </div>
+    </div>
+
     <div class="row">
 
         <div class="col-xl-12 col-lg-12">
@@ -12,18 +18,42 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Numero de Serie</th>
                                 <th scope="col">Ville</th>
                                 <th scope="col">Cannette</th>
                                 <th scope="col">Plastique</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">Date Instalation</th>
                                 <th scope="col">Problème</th>
-                                <th scope="col">Detail</th>
+                                <th scope="col"></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <ng-container *ngFor="let borne of bornes">
+                            <tr>
+                                <th>
+                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Numero serie"
+                                           [(ngModel)]='filterNumeroSerie'>
+                                </th>
+                                <th>
+                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Ville"
+                                           [(ngModel)]='filterVille'>
+                                </th>
+                                <th>
+                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Bac 1"
+                                           [(ngModel)]='filterBac1'>
+                                </th>
+                                <th>
+                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Bac 2"
+                                           [(ngModel)]='filterBac2'>
+                                </th>
+                                <th>
+                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Total recycle"
+                                           [(ngModel)]='filterTotal'>
+                                </th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <ng-container *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal ">
                                 <tr>
                                     <th scope="row">{{borne.numeroSerie}}</th>
                                     <td>{{borne.address.ville}}</td>

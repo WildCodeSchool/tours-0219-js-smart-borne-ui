@@ -9,6 +9,11 @@ import { UserService } from '../../../core/http/user.service';
 })
 export class ListUserComponent implements OnInit {
   public users: User[];
+  public filterId: string;
+  public filterLastname: string;
+  public filterEmail: string;
+  public filterRole: string;
+
   constructor(public userService: UserService) {
   }
 

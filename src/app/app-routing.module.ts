@@ -16,8 +16,7 @@ import { ListUserComponent } from './features/user/list-user/list-user.component
 import { EditUserComponent } from './features/user/edit-user/edit-user.component';
 import { DetailClientComponent } from './features/client/detail-client/detail-client.component';
 import { EditClientComponent } from './features/client/edit-client/edit-client.component';
-import { DetailOfferComponent } from './features/offres/detail-offer/detail-offer.component';
-import { EditOfferComponent } from './features/offres/edit-offer/edit-offer.component';
+import { RoleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -25,22 +24,31 @@ const routes: Routes = [
     component:  HeaderComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'register', component: RegisterComponent },
+      { path: 'register', component: RegisterComponent, canActivate: [RoleGuard],
+        data: {
+          expectedRole: 'ADMINISTRATEUR',
+        } },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'bornes', component: ListBorneComponent },
       { path: 'borne/:id', component: DetailBorneComponent },
-      { path: 'borne/:id/edit', component: EditBorneComponent },
-      { path: 'dashboard/user', component: ListUserComponent },
-      { path: 'dashboard/user/:id/edit', component: EditUserComponent },
+      { path: 'borne/:id/edit', component: EditBorneComponent, canActivate: [RoleGuard],
+        data: {
+          expectedRole: 'ADMINISTRATEUR',
+        }  },
+      { path: 'dashboard/user', component: ListUserComponent,  canActivate: [RoleGuard],
+        data: {
+          expectedRole: 'ADMINISTRATEUR',
+        }  },
+      { path: 'dashboard/user/:id/edit', component: EditUserComponent, canActivate: [RoleGuard],
+        data: {
+          expectedRole: 'ADMINISTRATEUR',
+        }  },
       { path: 'clients', component: ListClientComponent },
       { path: 'client/:id', component: DetailClientComponent },
-      { path: 'client/:id/edit', component: EditClientComponent },
-      { path: 'clients/detail', component: DetailClientComponent },
-      { path: 'offres', component: ListOffersComponent },
-      { path: 'cards', component: CardOfferComponent },
-      { path: 'offres/create', component: CreateOfferComponent },
-      { path: 'offre/:id', component: DetailOfferComponent },
-      { path: 'offre/:id/edit', component: EditOfferComponent },
+      { path: 'client/:id/edit', component: EditClientComponent, canActivate: [RoleGuard],
+        data: {
+          expectedRole: 'ADMINISTRATEUR',
+        }  },
     ]},
   { path: '**', redirectTo: '' },
 ];
