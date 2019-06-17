@@ -21,7 +21,6 @@ export class CreateOfferComponent implements OnInit {
 
   offerForm = this.fb.group({
     name: [''],
-    id: ['', [Validators.required]],
     client: ['', [Validators.required]],
     remise: ['', [Validators.required]],
     details: ['', [Validators.maxLength(300)]],
@@ -37,7 +36,7 @@ export class CreateOfferComponent implements OnInit {
         this.offerForm.patchValue(offer);
         this.toastr.clear();
         this.toastr.success('success', 'Offer Created');
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/offres');
       },
       (error) => {
         this.toastr.clear();

@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path:  '',
     component:  HeaderComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: 'register', component: RegisterComponent },
       { path: 'dashboard', component: DashboardComponent },
@@ -42,7 +42,7 @@ const routes: Routes = [
       { path: 'offre/:id', component: DetailOfferComponent },
       { path: 'offre/:id/edit', component: EditOfferComponent },
     ]},
-  // { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
