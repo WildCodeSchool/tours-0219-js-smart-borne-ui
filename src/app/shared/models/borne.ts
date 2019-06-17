@@ -20,7 +20,7 @@ export class Borne {
     },
     public plastique: {
       utilise: number,
-      total: number
+      total: number,
     },
     public cannette: {
       utilise: number,

@@ -20,13 +20,13 @@ export class FilterBornePipe implements PipeTransform {
         if (filterVille && item.address.ville.toLowerCase().indexOf(filterVille.toLowerCase()) === -1) {
           return false;
         }
-        if (filterBac1 && item.taux.bacUn.toString().indexOf(filterBac1.toString()) === -1) {
+        if (filterBac1 && item.cannette.utilise.toString().indexOf(filterBac1.toString()) === -1) {
           return false;
         }
-        if (filterBac2 && item.taux.bacDeux.toString().indexOf(filterBac2.toString()) === -1) {
+        if (filterBac2 && item.plastique.utilise.toString().indexOf(filterBac2.toString()) === -1) {
           return false;
         }
-        if (filterTotal && item.total.recycle.toString().indexOf(filterTotal.toString()) === -1) {
+        if (filterTotal && item.coupon.restant.toString().indexOf(filterTotal.toString()) === -1) {
           return false;
         }
         return true;

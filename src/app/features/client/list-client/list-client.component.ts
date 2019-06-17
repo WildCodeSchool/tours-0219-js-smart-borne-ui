@@ -12,6 +12,7 @@ export class ListClientComponent implements OnInit {
   public filterId: string;
   public filterName: string;
   public filterRaisonSocial: string;
+  public filterCoupon: string;
 
   constructor(public clientService: ClientService) {
   }

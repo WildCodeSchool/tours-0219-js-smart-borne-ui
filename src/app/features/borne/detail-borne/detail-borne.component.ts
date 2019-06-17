@@ -3,9 +3,9 @@ import { BorneService } from '../../../core/http/borne.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Borne } from '../../../shared/models/borne';
 import { ToastrService } from 'ngx-toastr';
-import {first} from "rxjs/operators";
-import {ProfileService} from "../../../core/http/profile.service";
-import {User} from "../../../shared/models/user";
+import { first } from 'rxjs/operators';
+import { ProfileService } from '../../../core/http/profile.service';
+import { User } from '../../../shared/models/user';
 
 @Component({
   selector: 'app-detail-borne',

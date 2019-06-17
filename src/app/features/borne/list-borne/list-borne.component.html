@@ -18,12 +18,12 @@
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
-                                <tr>
+                                <tr class="text-center">
                                     <th scope="col">Numero de Serie</th>
                                     <th scope="col">Ville</th>
                                     <th scope="col">Cannette</th>
                                     <th scope="col">Plastique</th>
-                                    <th scope="col">Total</th>
+                                    <th scope="col">Coupon restant</th>
                                     <th scope="col">Date Instalation</th>
                                     <th scope="col">Problème</th>
                                     <th scope="col"></th>
@@ -41,15 +41,15 @@
                                     </th>
                                     <th>
                                         <input class="mb-3 py-2 form-control float-left" type="search"
-                                            placeholder="Bac 1" [(ngModel)]='filterBac1'>
+                                            placeholder="Cannette" [(ngModel)]='filterBac1'>
                                     </th>
                                     <th>
                                         <input class="mb-3 py-2 form-control float-left" type="search"
-                                            placeholder="Bac 2" [(ngModel)]='filterBac2'>
+                                            placeholder="Plastique" [(ngModel)]='filterBac2'>
                                     </th>
                                     <th>
                                         <input class="mb-3 py-2 form-control float-left" type="search"
-                                            placeholder="Total recycle" [(ngModel)]='filterTotal'>
+                                            placeholder="Coupon restant" [(ngModel)]='filterTotal'>
                                     </th>
                                     <th></th>
                                     <th></th>

@@ -36,7 +36,7 @@ export class CreateOfferComponent implements OnInit {
   ngOnInit() {
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
-    })
+    });
   }
 
   onSubmit() {

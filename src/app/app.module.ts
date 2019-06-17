@@ -36,7 +36,7 @@ export function tokenGetter() {
     }),
   ],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
