@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import { CreateOfferComponent } from './offres/create-offer/create-offer.component';
+import { DetailOfferComponent } from './offres/detail-offer/detail-offer.component';
+import { EditOfferComponent } from './offres/edit-offer/edit-offer.component';
+import { ListOffersComponent } from './offres/list-offers/list-offers.component';
+import { CardOfferComponent } from '../shared/components/card-offer/card-offer.component';
+import { HttpModule } from '@angular/http';
 import { ListClientComponent } from './client/list-client/list-client.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +30,11 @@ import { EditClientComponent } from './client/edit-client/edit-client.component'
 
 @NgModule({
   declarations: [
+    CreateOfferComponent,
+    DetailOfferComponent,
+    EditOfferComponent,
+    ListOffersComponent,
+    CardOfferComponent,
     ListClientComponent,
     DashboardComponent,
     CreateClientComponent,
@@ -43,8 +54,8 @@ import { EditClientComponent } from './client/edit-client/edit-client.component'
     CommonModule,
     SharedModule,
     HttpClientModule,
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule,
     BrowserAnimationsModule,
     ChartsModule,

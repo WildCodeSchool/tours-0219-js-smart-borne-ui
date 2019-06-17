@@ -1,0 +1,77 @@
+<div class="container mt-3 mb-4">
+
+
+    <h1 class="text-center">Offre {{ offre._id }}</h1>
+    <div class="row">
+        <div class="col-8 offset-2">
+            <h3 class="text-center">Coupons imprimés :</h3>
+            <canvas baseChart [data]="couponsData" [labels]="couponsLabels" [chartType]="couponsType"></canvas>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-12 col-xl-12 mt-4">
+
+
+
+
+            <div class="row">
+                <div class="col-md-4 col-xl-4 mt-4">
+                    <div class="card">
+                        <button type="button" class="btn btn-outline-primary">Jour</button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-4 mt-4">
+                    <div class="card">
+                        <button type="button" class="btn btn-outline-primary">Semaine</button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xl-4 mt-4">
+                    <div class="card">
+                        <button type="button" class="btn btn-outline-primary">Mois</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4 col-xl-4 mt-4">
+                    <div class="card">
+                        <p class="text-center p-3">Début de l'offre : {{offre.debutOffre}}</p>
+                        <p class="text-center p-3">Total remisé : {{ offre.totalRemise }}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-8 col-xl-8 mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title text-center"></h2>
+                            <p>Remise : {{offre.remise}} </p>
+                            <p>Proposée par client : {{offre.client}} </p>
+                            <p>Présente sur les bornes : {{offre.bornes}} </p>
+                            <p>Détails : {{offre.details}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-4">
+                <div class="col-md-12 col-xl-12">
+                    <div class="card">
+                        <div class=" ml-3 mr-3 mb-3">
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn btn-info btn-block mt-4" [routerLink]="['/offre', offre._id, 'edit']">Modifier
+                l'offre</button>
+
+        </div>
+    </div>
+
+
+</div>

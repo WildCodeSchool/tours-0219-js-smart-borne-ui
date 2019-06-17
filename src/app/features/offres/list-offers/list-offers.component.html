@@ -1,0 +1,45 @@
+<div class="container-fluid mb-5">
+  <app-create-offer></app-create-offer>
+
+  <div class="row">
+    <div class="col-xl-12 col-lg-12">
+      <div class="mb-4 p-3">
+        <div class="row">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Client</th>
+                  <th scope="col">Bornes</th>
+                  <th scope="col">Coupons restants</th>
+                  <th scope="col">Début de l'offre</th>
+                  <th scope="col">Total remisé</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let offer of offers">
+                  <tr>
+                    <th scope="row">{{ offer._id }}</th>
+                    <td>{{ offer.name }}</td>
+                    <td>{{ offer.client }}</td>
+                    <td>{{ offer.borne }}</td>
+                    <td>{{ offer.couponsRestants }}</td>
+                    <td>{{ offer.debutOffre }}</td>
+                    <td>{{ offer.totalRemise }}</td>
+                    <td>
+                      <button type="button" [routerLink]="['/offre', offer._id]" class="btn btn-outline-primary">
+                        Detail
+                      </button>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
