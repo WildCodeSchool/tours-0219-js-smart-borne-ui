@@ -9,6 +9,10 @@ import { ClientService } from '../../../core/http/client.service';
 })
 export class ListClientComponent implements OnInit {
   public clients: Client[];
+  public filterId: string;
+  public filterName: string;
+  public filterRaisonSocial: string;
+
   constructor(public clientService: ClientService) {
   }
   ngOnInit() {
