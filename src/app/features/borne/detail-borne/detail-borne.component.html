@@ -60,6 +60,10 @@
                         <div class="card-body">
                             <h5 class="card-title">Chocapic</h5>
                             <p class="card-text">Chocapic désigne une variété de céréales de petit-déjeuner chocolatées à base de blé complet, distribuées par Nestlé dès 1984.</p>
+                            <div class=" ml-3 mr-3 mb-3">
+                                <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                </ngb-progressbar>
+                            </div>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
@@ -71,6 +75,10 @@
                         <div class="card-body">
                             <h5 class="card-title">Haribo</h5>
                             <p class="card-text">Haribo est une marque de confiserie allemande et le nom d'une multinationale fondée en 1920 par le confiseur allemand Hans Riegel.</p>
+                            <div class=" ml-3 mr-3 mb-3">
+                                <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                </ngb-progressbar>
+                            </div>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
@@ -82,6 +90,10 @@
                         <div class="card-body">
                             <h5 class="card-title">Square Enix</h5>
                             <p class="card-text">Square Enix Co., Ltd est une société japonaise qui développe et édite des jeux vidéo et des mangas..</p>
+                            <div class=" ml-3 mr-3 mb-3">
+                                <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                </ngb-progressbar>
+                            </div>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
@@ -94,11 +106,11 @@
                             <p class="text-center p-3">Coupon</p>
                             <div class=" ml-3 mr-3 mb-3">
                                 <p>
-                                    <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                    <ngb-progressbar type="success" [value]=[({{borne.coupons.restant}})] [striped]="true" [animated]="true"><i> {{borne.coupons.restant}}% </i>
                                     </ngb-progressbar>
                                 </p>
                                 <p>
-                                    <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                    <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true"><i>25%</i>
                                     </ngb-progressbar>
                                 </p>
                                 <p>
