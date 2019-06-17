@@ -4,6 +4,9 @@ import { Offer } from '../../../shared/models/offres.models';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/shared/models/user';
+import { ProfileService } from 'src/app/core/http/profile.service';
+import { first } from 'rxjs/operators';
 @Component({
   selector: 'app-create-offer',
   templateUrl: './create-offer.component.html',
@@ -12,11 +15,13 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateOfferComponent implements OnInit {
   public id;
   public offer;
+  public user: User;
   constructor(
     public service: OffersService,
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
+    private profileService: ProfileService,
   ) { }
 
   offerForm = this.fb.group({
@@ -28,7 +33,11 @@ export class CreateOfferComponent implements OnInit {
     couponsRestants: ['', [Validators.required]],
   });
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.profileService.getProfile().pipe(first()).subscribe((users) => {
+      this.user = users;
+    })
+  }
 
   onSubmit() {
     this.service.postOffer(this.offerForm.value).subscribe(

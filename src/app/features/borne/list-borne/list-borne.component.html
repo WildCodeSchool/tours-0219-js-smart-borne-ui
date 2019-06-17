@@ -4,8 +4,9 @@
 
     <div class="col-12 m-3">
         <div class="alert alert-danger m-4 text-center"
-             *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal).length === 0">
-            <span *ngIf="filterNumeroSerie || filterVille || filterBac1 || filterBac2 || filterTotal">Il n y a pas de Borne</span>
+            *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal).length === 0">
+            <span *ngIf="filterNumeroSerie || filterVille || filterBac1 || filterBac2 || filterTotal">Il n y a pas de
+                Borne</span>
         </div>
     </div>
 
@@ -17,73 +18,78 @@
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
-                            <tr>
-                                <th scope="col">Numero de Serie</th>
-                                <th scope="col">Ville</th>
-                                <th scope="col">Cannette</th>
-                                <th scope="col">Plastique</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Date Instalation</th>
-                                <th scope="col">Problème</th>
-                                <th scope="col"></th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">Numero de Serie</th>
+                                    <th scope="col">Ville</th>
+                                    <th scope="col">Cannette</th>
+                                    <th scope="col">Plastique</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Date Instalation</th>
+                                    <th scope="col">Problème</th>
+                                    <th scope="col"></th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Numero serie"
-                                           [(ngModel)]='filterNumeroSerie'>
-                                </th>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Ville"
-                                           [(ngModel)]='filterVille'>
-                                </th>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Bac 1"
-                                           [(ngModel)]='filterBac1'>
-                                </th>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Bac 2"
-                                           [(ngModel)]='filterBac2'>
-                                </th>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Total recycle"
-                                           [(ngModel)]='filterTotal'>
-                                </th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                            <ng-container *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal ">
                                 <tr>
-                                    <th scope="row">{{borne.numeroSerie}}</th>
-                                    <td>{{borne.address.ville}}</td>
-                                    <td>
-                                        <ngb-progressbar type="success" [value]="[borne.cannette.utilise]" [striped]="true" [animated]="true"><i> {{borne.cannette.utilise}}% </i>
-                                    </ngb-progressbar>
-                                    </td>
-                                    <td>
-                                            <ngb-progressbar type="success" [value]="[borne.plastique.utilise]" [striped]="true" [animated]="true"><i> {{borne.plastique.utilise}} %</i>
-                                            </ngb-progressbar>
-                                    </td>
-                                    <td>
-                                            <ngb-progressbar type="success" [value]="[borne.coupon.restant]" [striped]="true" [animated]="true"><i> {{borne.coupon.restant}} %</i>
-                                            </ngb-progressbar>
-                                    </td>
-                                    <td>
-                                            {{borne.dateInstallation| date:'d/M/y'}}
-                                    </td>
-                                    <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
-                                            class="fas fa-check colorValidate"></i></td>
-                                    <ng-template #elseBlock>
-                                        <td><i class="fas fa-times colorError"></i></td>
-                                    </ng-template>
-                                    <td>
-                                        <button type="button" [routerLink]="['/borne', borne._id ]"
-                                                class="btn btn-outline-primary">Detail
-                                        </button>
-                                    </td>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search"
+                                            placeholder="Numero serie" [(ngModel)]='filterNumeroSerie'>
+                                    </th>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search"
+                                            placeholder="Ville" [(ngModel)]='filterVille'>
+                                    </th>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search"
+                                            placeholder="Bac 1" [(ngModel)]='filterBac1'>
+                                    </th>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search"
+                                            placeholder="Bac 2" [(ngModel)]='filterBac2'>
+                                    </th>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search"
+                                            placeholder="Total recycle" [(ngModel)]='filterTotal'>
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
-                            </ng-container>
+                                <ng-container
+                                    *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal ">
+                                    <tr>
+                                        <th scope="row">{{borne.numeroSerie}}</th>
+                                        <td>{{borne.address.ville}}</td>
+                                        <td>
+                                            <ngb-progressbar type="success" [value]="[borne.cannette.utilise]"
+                                                [striped]="true" [animated]="true"><i> {{borne.cannette.utilise}}% </i>
+                                            </ngb-progressbar>
+                                        </td>
+                                        <td>
+                                            <ngb-progressbar type="success" [value]="[borne.plastique.utilise]"
+                                                [striped]="true" [animated]="true"><i> {{borne.plastique.utilise}} %</i>
+                                            </ngb-progressbar>
+                                        </td>
+                                        <td>
+                                            <ngb-progressbar type="success" [value]="[borne.coupon.restant]"
+                                                [striped]="true" [animated]="true"><i> {{borne.coupon.restant}} %</i>
+                                            </ngb-progressbar>
+                                        </td>
+                                        <td>
+                                            {{borne.dateInstallation| date:'d/M/y'}}
+                                        </td>
+                                        <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
+                                                class="fas fa-check colorValidate"></i></td>
+                                        <ng-template #elseBlock>
+                                            <td><i class="fas fa-times colorError"></i></td>
+                                        </ng-template>
+                                        <td>
+                                            <button type="button" [routerLink]="['/borne', borne._id ]"
+                                                class="btn btn-outline-primary">Detail
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
                             </tbody>
                         </table>
                     </div>
@@ -95,7 +101,3 @@
     </div>
 
 </div>
-
-
-
-

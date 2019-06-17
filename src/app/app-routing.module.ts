@@ -17,6 +17,8 @@ import { EditUserComponent } from './features/user/edit-user/edit-user.component
 import { DetailClientComponent } from './features/client/detail-client/detail-client.component';
 import { EditClientComponent } from './features/client/edit-client/edit-client.component';
 import { RoleGuard } from './core/guards/role.guard';
+import { DetailOfferComponent } from './features/offres/detail-offer/detail-offer.component';
+import { EditOfferComponent } from './features/offres/edit-offer/edit-offer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -49,6 +51,13 @@ const routes: Routes = [
         data: {
           expectedRole: 'ADMINISTRATEUR',
         }  },
+        { path: 'offers', component: ListOffersComponent },
+      { path: 'offer/:id', component: DetailOfferComponent },
+      { path: 'offer/:id/edit', component: EditOfferComponent, canActivate: [RoleGuard],
+        data: {
+          expectedRole: 'ADMINISTRATEUR',
+        }  },
+
     ]},
   { path: '**', redirectTo: '' },
 ];
