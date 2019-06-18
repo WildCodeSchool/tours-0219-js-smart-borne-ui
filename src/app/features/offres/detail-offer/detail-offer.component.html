@@ -1,4 +1,4 @@
-<div class="container mt-3 mb-4">
+<div *ngIf="offer" class="container mt-3 mb-4">
 
 
     <h1 class="text-center">Offre {{ offer._id }}</h1>
@@ -54,8 +54,11 @@
             </div>
 
             <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
-                <button class="btn btn-info btn-block mt-4" [routerLink]="['/offre', offer._id, 'edit']">Modifier
+                <button class="btn btn-info btn-block mt-4" [routerLink]="['/offer', offer._id, 'edit']">Modifier
                     l'offre
+                </button>
+                <button class="btn btn-danger btn-block mt-4" (click)="deleteOffer(offer._id)">Suppression du
+                    Client
                 </button>
             </ng-container>
 

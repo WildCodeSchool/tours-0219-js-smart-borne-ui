@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { OffersService } from '../../../core/http/offers.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Offer } from '../../../shared/models/offres.models';
 import { first } from 'rxjs/operators';
 import { ProfileService } from '../../../core/http/profile.service';
 import { User } from '../../../shared/models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detail-offer',
@@ -21,7 +22,9 @@ export class DetailOfferComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               public offerService: OffersService,
-              private profileService: ProfileService) { }
+              private profileService: ProfileService,
+              private router: Router,
+              private toastr: ToastrService,) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -40,5 +43,14 @@ export class DetailOfferComponent implements OnInit {
       },
     );
   }
+  deleteOffer(id) {
+    const r = confirm('Etes VOUS sur');
+    if (r) {
+      this.offerService.deleteOffer(id).subscribe();
+      this.toastr.error('Suppression', 'Offre detroy');
+      this.router.navigateByUrl(`offer`);
 
+    }
+
+  }
 }
