@@ -39,6 +39,22 @@ export class Borne {
       couponTotal: number,
       couponUtilise: number
     },
+    public semaine: {
+      cannetteTotal: number,
+      cannetteUtilise: number,
+      plastiqueTotal: number,
+      plastiqueUtilise: number,
+      couponTotal: number,
+      couponUtilise: number
+    },
+    public mois: {
+      cannetteTotal: number,
+      cannetteUtilise: number,
+      plastiqueTotal: number,
+      plastiqueUtilise: number,
+      couponTotal: number,
+      couponUtilise: number
+    },
     public problemesTechniques: string,
     public styliseeClient: string,
     public details: string,

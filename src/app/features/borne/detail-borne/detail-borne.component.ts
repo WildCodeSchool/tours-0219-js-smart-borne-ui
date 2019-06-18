@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { ProfileService } from '../../../core/http/profile.service';
 import { User } from '../../../shared/models/user';
+import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-detail-borne',
@@ -17,13 +18,24 @@ export class DetailBorneComponent implements OnInit {
   public borne: Borne;
   public user: User;
   public id: string;
+  public jourLabels = ['Plastique, Cannette, Coupon'];
+  public jourType = 'doughnut';
+  public semaineLabels = ['Plastique, Cannette, Coupon'];
+  public semaineType = 'doughnut';
+  public moisLabels = ['Plastique, Cannette, Coupon'];
+  public moisType = 'doughnut';
 
   constructor(
+    config: NgbTabsetConfig,
     private route: ActivatedRoute,
     public borneService: BorneService,
     private toastr: ToastrService,
     private router: Router,
-    private profileService: ProfileService) { }
+    private profileService: ProfileService
+  ) {
+    config.justify = 'center';
+    config.type = 'pills';
+  }
 
   public plastiqueLabels = ['Plastique'];
   public plastiqueType = 'doughnut';
@@ -42,9 +54,9 @@ export class DetailBorneComponent implements OnInit {
 
   getBorne() {
     this.borneService.getBorneById(this.id).subscribe(
-        (borne: Borne) => {
-          this.borne = borne;
-        },
+      (borne: Borne) => {
+        this.borne = borne;
+      },
     );
   }
   deleteBorne(id) {

@@ -63,6 +63,22 @@ export class CreateBorneComponent implements OnInit {
       couponTotal: [0],
       couponUtilise: [0]
     }),
+    semaine: this.fb.group({
+      cannetteTotal: [0],
+      cannetteUtilise: [0],
+      plastiqueTotal: [0],
+      plastiqueUtilise: [0],
+      couponTotal: [0],
+      couponUtilise: [0]
+    }),
+    mois: this.fb.group({
+      cannetteTotal: [0],
+      cannetteUtilise: [0],
+      plastiqueTotal: [0],
+      plastiqueUtilise: [0],
+      couponTotal: [0],
+      couponUtilise: [0]
+    }),
     problemesTechniques: ['0'],
   });
 
