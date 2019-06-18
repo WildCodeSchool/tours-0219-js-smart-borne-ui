@@ -33,8 +33,8 @@ export class CreateOfferComponent implements OnInit {
     }),
     coupon: this.fb.group({
       total: [''],
-      imprime: [''],
-    })
+      imprime: [0],
+    }),
   });
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class CreateOfferComponent implements OnInit {
         this.offerForm.patchValue(offer);
         this.toastr.clear();
         this.toastr.success('success', 'Offer Created');
-        this.router.navigateByUrl('/offer');
+        this.router.navigateByUrl('/offers');
       },
       (error) => {
         this.toastr.clear();

@@ -14,6 +14,7 @@ import { FilterOfferPipe } from './pipes/filter-offer.pipe';
     FilterUserPipe,
     FilterBornePipe,
     FilterClientPipe,
+    FilterOfferPipe,
   ],
 })
 export class SharedModule { }

@@ -9,24 +9,24 @@ export class FilterOfferPipe implements PipeTransform {
   transform(items: Array<any>,
             filterId: string,
             filterClient: string,
-            filterCouponImprimer: string,
-            filterCouponTotal: string,
-            filterDebutOffre: string) {
+            filterRemise: string,
+            filterDebut: string,
+            filterFin: string) {
     if (items && items.length) {
       return items.filter((item) => {
-        if (filterId && item.id.toLowerCase().indexOf(filterId.toLowerCase()) === -1) {
+        if (filterId && item._id.toLowerCase().indexOf(filterId.toLowerCase()) === -1) {
           return false;
         }
-        if (filterClient && item.coupon.toLowerCase().indexOf(filterClient.toLowerCase()) === -1) {
+        if (filterClient && item.client.toLowerCase().indexOf(filterClient.toLowerCase()) === -1) {
           return false;
         }
-        if (filterCouponImprimer && item.cannette.utilise.toString().indexOf(filterCouponImprimer.toString()) === -1) {
+        if (filterRemise && item.remise.toString().indexOf(filterRemise.toString()) === -1) {
           return false;
         }
-        if (filterCouponTotal && item.plastique.utilise.toString().indexOf(filterCouponTotal.toString()) === -1) {
+        if (filterDebut && item.contrat.debut.toLowerCase().indexOf(filterDebut.toLowerCase()) === -1) {
           return false;
         }
-        if (filterDebutOffre && item.coupon.restant.toString().indexOf(filterDebutOffre.toString()) === -1) {
+        if (filterFin && item.contrat.fin.toLowerCase().indexOf(filterFin.toLowerCase()) === -1) {
           return false;
         }
         return true;
