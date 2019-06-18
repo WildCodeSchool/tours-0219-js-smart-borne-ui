@@ -25,8 +25,6 @@
                                     <th scope="col">Nom</th>
                                     <th scope="col">Raison social</th>
                                     <th scope="col">Coupon Restant</th>
-                                    <th scope="col">Borne</th>
-                                    <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -49,8 +47,6 @@
                                                placeholder="Coupon Restant" [(ngModel)]='filterCoupon'>
                                     </th>
                                     <th></th>
-                                    <th></th>
-                                    <th></th>
                                 </tr>
                                 <ng-container
                                     *ngFor="let client of clients | filterClient: filterId:filterName:filterRaisonSocial:filterCoupon">
@@ -59,11 +55,10 @@
                                         <td>{{client.name}}</td>
                                         <td>{{client.raisonSocial}}</td>
                                         <td>
-                                            <ngb-progressbar type="success" [value]="25" [striped]="true"
-                                                [animated]="true"><i>25%</i>
+                                            <ngb-progressbar type="success" [value]="[client.coupon.restant]" [striped]="true"
+                                                [animated]="true"><i>{{client.coupon.restant}}</i>
                                             </ngb-progressbar>
                                         </td>
-                                        <td>Borne</td>
                                         <td>
                                             <button type="button" class="btn btn-outline-primary"
                                                 [routerLink]="['/client', client._id]">Detail

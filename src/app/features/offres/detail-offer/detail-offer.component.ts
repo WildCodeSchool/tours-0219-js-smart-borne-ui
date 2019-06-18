@@ -24,7 +24,7 @@ export class DetailOfferComponent implements OnInit {
               public offerService: OffersService,
               private profileService: ProfileService,
               private router: Router,
-              private toastr: ToastrService,) { }
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {

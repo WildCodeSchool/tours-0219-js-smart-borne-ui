@@ -28,11 +28,11 @@ export class CreateOfferComponent implements OnInit {
     client: ['', [Validators.required]],
     remise: ['', [Validators.required]],
     contrat: this.fb.group({
-      debut: [''],
-      fin: [''],
+      debut: ['', [Validators.required]],
+      fin: ['', [Validators.required]],
     }),
     coupon: this.fb.group({
-      total: [''],
+      total: ['', [Validators.required]],
       imprime: [0],
     }),
   });
@@ -49,7 +49,7 @@ export class CreateOfferComponent implements OnInit {
         this.offerForm.patchValue(offer);
         this.toastr.clear();
         this.toastr.success('success', 'Offer Created');
-        this.router.navigateByUrl('/offers');
+        this.router.navigateByUrl('/dashboard');
       },
       (error) => {
         this.toastr.clear();
