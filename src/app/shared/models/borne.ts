@@ -31,6 +31,14 @@ export class Borne {
       remise: number,
       cannettes: number,
     },
+    public jour: {
+      cannetteTotal: number,
+      cannetteUtilise: number,
+      plastiqueTotal: number,
+      plastiqueUtilise: number,
+      couponTotal: number,
+      couponUtilise: number
+    },
     public problemesTechniques: string,
     public styliseeClient: string,
     public details: string,
