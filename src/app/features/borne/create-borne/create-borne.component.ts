@@ -55,6 +55,14 @@ export class CreateBorneComponent implements OnInit {
       remise: [0],
       cannettes: [0],
     }),
+    jour: this.fb.group({
+      cannetteTotal: [0],
+      cannetteUtilise: [0],
+      plastiqueTotal: [0],
+      plastiqueUtilise: [0],
+      couponTotal: [0],
+      couponUtilise: [0]
+    }),
     problemesTechniques: ['0'],
   });
 
