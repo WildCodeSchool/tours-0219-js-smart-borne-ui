@@ -23,7 +23,7 @@ export class FilterClientPipe implements PipeTransform {
         if (filterRaisonSocial && item.raisonSocial.toLowerCase().indexOf(filterRaisonSocial.toLowerCase()) === -1) {
           return false;
         }
-        if (filterCoupon && item.coupon.restant.toString().indexOf(filterCoupon.toString()) === -1) {
+        if (filterCoupon && item.coupon.imprimer.toString().indexOf(filterCoupon.toString()) === -1) {
           return false;
         }
         return true;

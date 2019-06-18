@@ -24,7 +24,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Nom</th>
                                     <th scope="col">Raison social</th>
-                                    <th scope="col">Coupon Restant</th>
+                                    <th scope="col">Coupon Imprimer / Total</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -55,8 +55,8 @@
                                         <td>{{client.name}}</td>
                                         <td>{{client.raisonSocial}}</td>
                                         <td>
-                                            <ngb-progressbar type="success" [value]="[client.coupon.restant]" [striped]="true"
-                                                [animated]="true"><i>{{client.coupon.restant}}</i>
+                                            <ngb-progressbar type="success" [value]="[calculePourcentage(client.coupon.imprimer, client.coupon.total)]" [striped]="true"
+                                                [animated]="true"><i> {{client.coupon.imprimer}} / {{client.coupon.total}} </i>
                                             </ngb-progressbar>
                                         </td>
                                         <td>

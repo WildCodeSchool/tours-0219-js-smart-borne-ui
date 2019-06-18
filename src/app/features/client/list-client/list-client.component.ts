@@ -19,11 +19,16 @@ export class ListClientComponent implements OnInit {
   ngOnInit() {
     this.getListClient();
   }
+
   getListClient() {
     this.clientService.getListClient().subscribe(
       (clients: Client[]) => {
         this.clients = clients;
       },
     );
+  }
+
+  calculePourcentage(a, b) {
+    return Math.round(a / b * 100) ;
   }
 }

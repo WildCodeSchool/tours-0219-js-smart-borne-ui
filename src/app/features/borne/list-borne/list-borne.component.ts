@@ -29,4 +29,8 @@ export class ListBorneComponent implements OnInit {
     );
   }
 
+  calculePourcentage(a, b) {
+    return Math.round(a / b * 100) ;
+  }
+
 }
