@@ -30,6 +30,15 @@
               </div>
             </div>
 
+            <input [ngClass]="
+                  offerForm.get('details').errors ? 'is-invalid' : 'is-valid'
+                " class="form-control mt-2" placeholder="details" name="details" type="text"
+              formControlName="details" />
+            <div class="invalid-feedback">
+              <div *ngIf="offerForm.get('details').errors">
+                <span *ngIf="offerForm.get('details').errors.maxLength">Le champ "détails" doit être rempli</span>
+              </div>
+            </div>
 
             <input [ngClass]="
                   offerForm.get('debutOffre').errors ? 'is-invalid' : 'is-valid'
