@@ -1,5 +1,6 @@
 export class Offer {
   constructor(
+    // tslint:disable-next-line:variable-name
     public _id: string,
     public client: string,
     public remise: string,
@@ -8,7 +9,7 @@ export class Offer {
       fin: string,
     },
     public coupon: {
-      imprime: number,
+      imprimes: string,
       total: string,
     },
   ) { }

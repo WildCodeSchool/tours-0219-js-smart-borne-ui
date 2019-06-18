@@ -9,6 +9,11 @@ import { Offer } from '../../../shared/models/offres.models';
 })
 export class ListOffersComponent implements OnInit {
   public offers: Offer[];
+  public filterId: string;
+  public filterClient: string;
+  public filterRemise: string;
+  public filterDebut: string;
+  public filterFin: string;
   constructor(public offersService: OffersService) { }
 
   ngOnInit() {

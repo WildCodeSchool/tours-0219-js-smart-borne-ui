@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
-        data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+              data-toggle="collapse" data-target="#collapseForm" aria-expanded="false"
+              aria-controls="collapseForm">
         Formulaire ajouté une borne
       </button>
     </div>
@@ -12,18 +13,16 @@
         <div class="mb-3 card-body">
           <form (ngSubmit)="onSubmit()" [formGroup]="offerForm">
 
-            <input [ngClass]="
-                  offerForm.get('client').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control mt-2" placeholder="client" name="client" type="text" formControlName="client" />
+            <input [ngClass]="offerForm.get('client').errors ? 'is-invalid' : 'is-valid'
+                " class="form-control mt-2" placeholder="client" name="client" type="text" formControlName="client"/>
             <div class="invalid-feedback">
               <div *ngIf="offerForm.get('client').errors">
                 <span *ngIf="offerForm.get('client').errors.required">Le champ "client" doit être rempli</span>
               </div>
             </div>
 
-            <input [ngClass]="
-                  offerForm.get('remise').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control mt-2" placeholder="remise" name="remise" type="text" formControlName="remise" />
+            <input [ngClass]="offerForm.get('remise').errors ? 'is-invalid' : 'is-valid'
+                " class="form-control mt-2" placeholder="remise" name="remise" type="text" formControlName="remise"/>
             <div class="invalid-feedback">
               <div *ngIf="offerForm.get('remise').errors">
                 <span *ngIf="offerForm.get('remise').errors.required">Le champ "remise" doit être rempli</span>
@@ -31,41 +30,51 @@
             </div>
 
             <div formGroupName="contrat">
+
               <input [ngClass]="
                   offerForm.get('contrat').get('debut').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control mt-2" placeholder="debut" name="debut" type="text" formControlName="debut" />
+                " class="form-control mt-2" placeholder="Debut Offre" name="debut" type="date"
+                     formControlName="debut"/>
               <div class="invalid-feedback">
                 <div *ngIf="offerForm.get('contrat').get('debut').errors">
-                  <span *ngIf="offerForm.get('contrat').get('debut').errors.required">Le champ "remise" doit être
-                    rempli</span>
+                <span *ngIf="offerForm.get('contrat').get('debut').errors.required">Le champ "début d'offre" doit être
+                  rempli</span>
                 </div>
               </div>
+
               <input [ngClass]="
-            offerForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'
-          " class="form-control mt-2" placeholder="fin" name="fin" type="text" formControlName="fin" />
+                  offerForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'
+                " class="form-control mt-2" placeholder="Fin Offre" name="fin" type="date"
+                     formControlName="fin"/>
               <div class="invalid-feedback">
                 <div *ngIf="offerForm.get('contrat').get('fin').errors">
-                  <span *ngIf="offerForm.get('contrat').get('fin').errors.required">Le champ "remise" doit être
-                    rempli</span>
+                <span *ngIf="offerForm.get('contrat').get('fin').errors.required">Le champ Fin d'offre" doit être
+                  rempli</span>
                 </div>
               </div>
 
             </div>
+
             <div formGroupName="coupon">
+
               <input [ngClass]="
-            offerForm.get('coupon').get('total').errors ? 'is-invalid' : 'is-valid'
-          " class="form-control mt-2" placeholder="total" name="total" type="text" formControlName="total" />
+                  offerForm.get('coupon').get('total').errors
+                    ? 'is-invalid'
+                    : 'is-valid'
+                " class="form-control mt-2" placeholder="coupons totals" name="total" type="number"
+                     formControlName="total"/>
               <div class="invalid-feedback">
                 <div *ngIf="offerForm.get('coupon').get('total').errors">
-                  <span *ngIf="offerForm.get('coupon').get('total').errors.required">Le champ "remise" doit être
-                    rempli</span>
+                <span *ngIf="offerForm.get('coupon').get('total').errors.required">Le champ "coupons total" doit être
+                  rempli</span>
                 </div>
               </div>
+
             </div>
 
-            <button class="btn btn-success btn-block mt-3 mb-1" type="submit" [disabled]="!offerForm.valid">
-              Save
-            </button>
+              <button class="btn btn-success btn-block mt-3 mb-1" type="submit" [disabled]="!offerForm.valid">
+                Save
+              </button>
           </form>
         </div>
       </div>
