@@ -17,6 +17,7 @@ import { EditClientComponent } from './features/client/edit-client/edit-client.c
 import { RoleGuard } from './core/guards/role.guard';
 import { DetailOfferComponent } from './features/offres/detail-offer/detail-offer.component';
 import { EditOfferComponent } from './features/offres/edit-offer/edit-offer.component';
+import {MaintenanceComponent} from "./features/maintenance/maintenance.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
         },
       },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'maintenance', component: MaintenanceComponent },
       { path: 'bornes', component: ListBorneComponent },
       { path: 'borne/:id', component: DetailBorneComponent },
       {

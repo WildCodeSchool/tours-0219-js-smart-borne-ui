@@ -27,6 +27,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListUserComponent } from './user/list-user/list-user.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { EditClientComponent } from './client/edit-client/edit-client.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { EditClientComponent } from './client/edit-client/edit-client.component'
     ListUserComponent,
     EditUserComponent,
     EditClientComponent,
+    MaintenanceComponent,
   ],
   imports: [
     CommonModule,
