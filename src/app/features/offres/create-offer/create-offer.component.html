@@ -30,37 +30,36 @@
               </div>
             </div>
 
-            <input [ngClass]="
-                  offerForm.get('details').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control mt-2" placeholder="details" name="details" type="text"
-              formControlName="details" />
-            <div class="invalid-feedback">
-              <div *ngIf="offerForm.get('details').errors">
-                <span *ngIf="offerForm.get('details').errors.maxLength">Le champ "détails" doit être rempli</span>
+            <div formGroupName="contrat">
+              <input [ngClass]="
+                  offerForm.get('contrat').get('debut').errors ? 'is-invalid' : 'is-valid'
+                " class="form-control mt-2" placeholder="debut" name="debut" type="text" formControlName="debut" />
+              <div class="invalid-feedback">
+                <div *ngIf="offerForm.get('contrat').get('debut').errors">
+                  <span *ngIf="offerForm.get('contrat').get('debut').errors.required">Le champ "remise" doit être
+                    rempli</span>
+                </div>
               </div>
-            </div>
-
-            <input [ngClass]="
-                  offerForm.get('debutOffre').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control mt-2" placeholder="debutOffre" name="debutOffre" type="date"
-              formControlName="debutOffre" />
-            <div class="invalid-feedback">
-              <div *ngIf="offerForm.get('debutOffre').errors">
-                <span *ngIf="offerForm.get('debutOffre').errors.required">Le champ "début d'offre" doit être
-                  rempli</span>
+              <input [ngClass]="
+            offerForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'
+          " class="form-control mt-2" placeholder="fin" name="fin" type="text" formControlName="fin" />
+              <div class="invalid-feedback">
+                <div *ngIf="offerForm.get('contrat').get('fin').errors">
+                  <span *ngIf="offerForm.get('contrat').get('fin').errors.required">Le champ "remise" doit être
+                    rempli</span>
+                </div>
               </div>
-            </div>
 
-            <input [ngClass]="
-                  offerForm.get('couponsRestants').errors
-                    ? 'is-invalid'
-                    : 'is-valid'
-                " class="form-control mt-2" placeholder="couponsRestants" name="couponsRestants" type="number"
-              formControlName="couponsRestants" />
-            <div class="invalid-feedback">
-              <div *ngIf="offerForm.get('couponsRestants').errors">
-                <span *ngIf="offerForm.get('couponsRestants').errors.required">Le champ "coupons restants" doit être
-                  rempli</span>
+            </div>
+            <div formGroupName="coupon">
+              <input [ngClass]="
+            offerForm.get('coupon').get('total').errors ? 'is-invalid' : 'is-valid'
+          " class="form-control mt-2" placeholder="total" name="total" type="text" formControlName="total" />
+              <div class="invalid-feedback">
+                <div *ngIf="offerForm.get('coupon').get('total').errors">
+                  <span *ngIf="offerForm.get('coupon').get('total').errors.required">Le champ "remise" doit être
+                    rempli</span>
+                </div>
               </div>
             </div>
 
