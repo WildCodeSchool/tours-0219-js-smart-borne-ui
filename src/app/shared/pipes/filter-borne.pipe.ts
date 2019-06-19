@@ -11,7 +11,8 @@ export class FilterBornePipe implements PipeTransform {
             filterVille: string,
             filterBac1: string,
             filterBac2: string,
-            filterTotal: string) {
+            filterTotal: string,
+            filterDate: string) {
     if (items && items.length) {
       return items.filter((item) => {
         if (filterNumeroSerie && item.numeroSerie.toLowerCase().indexOf(filterNumeroSerie.toLowerCase()) === -1) {
@@ -27,6 +28,9 @@ export class FilterBornePipe implements PipeTransform {
           return false;
         }
         if (filterTotal && item.coupon.restant.toString().indexOf(filterTotal.toString()) === -1) {
+          return false;
+        }
+        if (filterDate && item.dateInstallation.toLowerCase().indexOf(filterDate.toLowerCase()) === -1) {
           return false;
         }
         return true;

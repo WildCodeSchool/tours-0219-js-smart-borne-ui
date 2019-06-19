@@ -7,6 +7,9 @@ import { first } from 'rxjs/operators';
 import { ProfileService } from '../../../core/http/profile.service';
 import { User } from '../../../shared/models/user';
 import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ClientService } from '../../../core/http/client.service';
+import { Client } from '../../../shared/models/client-model';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-detail-borne',
@@ -17,6 +20,7 @@ export class DetailBorneComponent implements OnInit {
   public bornes: Borne[];
   public borne: Borne;
   public user: User;
+  public client: Client[];
   public id: string;
   public jourLabels = ['Plastique, Cannette, Coupon'];
   public jourType = 'doughnut';
@@ -24,24 +28,29 @@ export class DetailBorneComponent implements OnInit {
   public semaineType = 'doughnut';
   public moisLabels = ['Plastique, Cannette, Coupon'];
   public moisType = 'doughnut';
+  public plastiqueLabels = ['Plastique'];
+  public plastiqueType = 'doughnut';
+  public cannetteLabels = ['Canette'];
+  public cannetteType = 'doughnut';
 
   constructor(
     config: NgbTabsetConfig,
     private route: ActivatedRoute,
     public borneService: BorneService,
+    public clientService: ClientService,
     private toastr: ToastrService,
     private router: Router,
-    private profileService: ProfileService
+    private fb: FormBuilder,
+    private profileService: ProfileService,
   ) {
     config.justify = 'center';
     config.type = 'pills';
   }
 
-  public plastiqueLabels = ['Plastique'];
-  public plastiqueType = 'doughnut';
+  Form = this.fb.group({
+    client: [''],
+  });
 
-  public cannetteLabels = ['Canette'];
-  public cannetteType = 'doughnut';
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
@@ -50,6 +59,10 @@ export class DetailBorneComponent implements OnInit {
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
     });
+    this.clientService.getListClient().pipe(first()).subscribe((client) => {
+      this.client = client;
+    });
+
   }
 
   getBorne() {
@@ -59,6 +72,7 @@ export class DetailBorneComponent implements OnInit {
       },
     );
   }
+
   deleteBorne(id) {
     const r = confirm('Etes VOUS sur');
     if (r) {
@@ -67,7 +81,19 @@ export class DetailBorneComponent implements OnInit {
       this.router.navigateByUrl(`bornes`);
 
     }
+  }
 
+  onSubmit() {
+    this.borneService.associateBorne(this.Form.value.client, this.borne._id).subscribe(
+      () => {
+        this.toastr.clear();
+        this.toastr.success('success', 'Borne associer');
+        this.router.navigateByUrl('bornes');
+      },
+      (error) => {
+        this.toastr.clear();
+        this.toastr.error(`Error ${error}`);
+      });
   }
 
 }
