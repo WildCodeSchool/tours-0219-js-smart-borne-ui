@@ -37,7 +37,7 @@ export class Borne {
       plastiqueTotal: number,
       plastiqueUtilise: number,
       couponTotal: number,
-      couponUtilise: number
+      couponUtilise: number,
     },
     public semaine: {
       cannetteTotal: number,
@@ -45,7 +45,7 @@ export class Borne {
       plastiqueTotal: number,
       plastiqueUtilise: number,
       couponTotal: number,
-      couponUtilise: number
+      couponUtilise: number,
     },
     public mois: {
       cannetteTotal: number,
@@ -53,7 +53,7 @@ export class Borne {
       plastiqueTotal: number,
       plastiqueUtilise: number,
       couponTotal: number,
-      couponUtilise: number
+      couponUtilise: number,
     },
     public problemesTechniques: string,
     public styliseeClient: string,

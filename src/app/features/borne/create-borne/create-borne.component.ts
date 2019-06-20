@@ -61,7 +61,7 @@ export class CreateBorneComponent implements OnInit {
       plastiqueTotal: [0],
       plastiqueUtilise: [0],
       couponTotal: [0],
-      couponUtilise: [0]
+      couponUtilise: [0],
     }),
     semaine: this.fb.group({
       cannetteTotal: [0],
@@ -69,7 +69,7 @@ export class CreateBorneComponent implements OnInit {
       plastiqueTotal: [0],
       plastiqueUtilise: [0],
       couponTotal: [0],
-      couponUtilise: [0]
+      couponUtilise: [0],
     }),
     mois: this.fb.group({
       cannetteTotal: [0],
@@ -77,7 +77,7 @@ export class CreateBorneComponent implements OnInit {
       plastiqueTotal: [0],
       plastiqueUtilise: [0],
       couponTotal: [0],
-      couponUtilise: [0]
+      couponUtilise: [0],
     }),
     problemesTechniques: ['0'],
   });

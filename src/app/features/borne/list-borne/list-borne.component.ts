@@ -14,6 +14,7 @@ export class ListBorneComponent implements OnInit {
   public filterBac1: string;
   public filterBac2: string;
   public filterTotal: string;
+  public filterDate: string;
 
   constructor(public borneService: BorneService) {
   }
@@ -29,7 +30,7 @@ export class ListBorneComponent implements OnInit {
     );
   }
 
-  calculePourcentage(a, b) {
+  calculatePercentage(a, b) {
     return Math.round(a / b * 100) ;
   }
 

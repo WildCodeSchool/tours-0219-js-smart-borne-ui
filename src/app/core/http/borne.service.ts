@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Borne } from '../../shared/models/borne';
 import { environment } from '../../../environments/environment';
+import { Client } from '../../shared/models/client-model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,10 @@ export class BorneService {
 
   public deleteBorne(id: string): Observable<Borne> {
     return this.http.delete<Borne>(`${this.configUrl}/${id}`);
+  }
+
+  public associateBorne(idClient: string, idBorne: string): Observable<Client> {
+    return this.http.put<Client>(`http://localhost:3000/api/client/${idClient}/bornes/${idBorne}`, {});
   }
 
 }

@@ -39,10 +39,12 @@ export class DetailClientComponent implements OnInit {
       this.user = users;
     });
   }
+
   getClient() {
     this.clientService.getClientById(this.id).subscribe(
       (client: Client) => {
         this.client = client;
+        console.log(client);
       },
     );
   }
@@ -53,9 +55,7 @@ export class DetailClientComponent implements OnInit {
       this.clientService.deleteClient(id).subscribe();
       this.toastr.error('Suppression', 'client detroy');
       this.router.navigateByUrl(`clients`);
-
     }
-
   }
 
 }
