@@ -6,6 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { ProfileService } from '../../../core/http/profile.service';
 import { User } from '../../../shared/models/user';
+import { OffersService } from '../../../core/http/offers.service';
+import { Offer } from '../../../shared/models/offres.models';
+import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-detail-client',
   templateUrl: './detail-client.component.html',
@@ -15,6 +18,7 @@ export class DetailClientComponent implements OnInit {
   public clients: Client[];
   public client: Client;
   public user: User;
+  public offer: Offer[];
   public id: string;
   public plastiqueData = [50];
   public plastiqueLabels = ['Plastique'];
@@ -26,9 +30,15 @@ export class DetailClientComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public clientService: ClientService,
+    public offerService: OffersService,
+    private fb: FormBuilder,
     private toastr: ToastrService,
     private router: Router,
     private profileService: ProfileService) { }
+
+    assoOfferForm = this.fb.group({
+      offer: [''],
+    });
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -37,6 +47,9 @@ export class DetailClientComponent implements OnInit {
     });
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
+    });
+    this.offerService.getListOffers().pipe(first()).subscribe((offer) => {
+      this.offer = offer;
     });
   }
 
@@ -56,6 +69,20 @@ export class DetailClientComponent implements OnInit {
       this.toastr.error('Suppression', 'client detroy');
       this.router.navigateByUrl(`clients`);
     }
+  }
+
+  onSubmit() {
+    this.clientService.associateOffer(this.client._id, this.assoOfferForm.value.offer).subscribe(
+      () => {
+        console.log(this.assoOfferForm.value.client)
+        this.toastr.clear();
+        this.toastr.success('success', 'Offer associer');
+        this.router.navigateByUrl('offer');
+      },
+      (error) => {
+        this.toastr.clear();
+        this.toastr.error(`Error ${error}`);
+      });
   }
 
 }

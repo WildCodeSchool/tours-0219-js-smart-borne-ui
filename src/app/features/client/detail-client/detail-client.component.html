@@ -1,7 +1,6 @@
 <div *ngIf="client" class="container mt-3 mb-4">
 
     <h1 class="text-center">Client</h1>
-
     <div class="row">
         <div class="col-6">
             <h3 class="text-center">Plastique</h3>
@@ -11,6 +10,27 @@
             <h3 class="text-center">Cannette</h3>
             <canvas baseChart [data]="cannetteData" [labels]="cannetteLabels" [chartType]="cannetteType"></canvas>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
+                data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
+                aria-controls="collapseAssoOfferForm">
+                Formulaire associer une offre
+            </button>
+        </div>
+    </div>
+
+    <div class="collapse mt-3" id="collapseAssoOfferForm">
+        <form (ngSubmit)="onSubmit()" [formGroup]="assoOfferForm">
+            <div class="form-group">
+                <select formControlName="offer" class="form-control">
+                    <option *ngFor="let offer of offer" name="offer" value="{{offer._id}}">{{offer.client}}</option>
+                </select>
+                <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
+                </button>
+            </div>
+        </form>
     </div>
     <div class="row">
 
@@ -42,22 +62,22 @@
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Ville</th>
-                                    <th scope="col">Coupon</th>
-                                    <th scope="col">Utilise</th>
-                                    <th scope="col">Restant</th>
-                                </tr>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Ville</th>
+                                        <th scope="col">Coupon</th>
+                                        <th scope="col">Utilise</th>
+                                        <th scope="col">Restant</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                  <th scope="row">super</th>
-                                  <td>gdfgf</td>
-                                  <td>1500</td>
-                                  <td>500</td>
-                                  <td>1000</td>
-                                </tr>
+                                    <tr>
+                                        <th scope="row">super</th>
+                                        <td>gdfgf</td>
+                                        <td>1500</td>
+                                        <td>500</td>
+                                        <td>1000</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -70,7 +90,7 @@
                 <div class="col-md-4 col-xl-4 mt-4">
                     <div class="card" style="width: 18rem;">
                         <img src="https://www.nestle-cereals.com/fr/sites/g/files/qirczx246/f/styles/mobile_320x180/public/brand_logo/fr_chocapic_752x525px_logo_01.png?itok=ZpKlRten"
-                             class="card-img-top" alt="chocapic">
+                            class="card-img-top" alt="chocapic">
                         <div class="card-body">
                             <h5 class="card-title">Chocapic</h5>
                             <p class="card-text">Chocapic désigne une variété de céréales de petit-déjeuner chocolatées
@@ -95,7 +115,7 @@
                 <div class="col-md-4 col-xl-4 mt-4">
                     <div class="card" style="width: 18rem;">
                         <img src="http://image.jeuxvideo.com/medias-md/155603/1556033066-9969-card.jpg"
-                             class="card-img-top" alt="square enix">
+                            class="card-img-top" alt="square enix">
                         <div class="card-body">
                             <h5 class="card-title">Square Enix</h5>
                             <p class="card-text">Square Enix Co., Ltd est une société japonaise qui développe et édite
