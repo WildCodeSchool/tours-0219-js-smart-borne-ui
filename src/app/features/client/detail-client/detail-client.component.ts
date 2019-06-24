@@ -57,7 +57,6 @@ export class DetailClientComponent implements OnInit {
     this.clientService.getClientById(this.id).subscribe(
       (client: Client) => {
         this.client = client;
-        console.log(client);
       },
     );
   }
@@ -74,7 +73,6 @@ export class DetailClientComponent implements OnInit {
   onSubmit() {
     this.clientService.associateOffer(this.client._id, this.assoOfferForm.value.offer).subscribe(
       () => {
-        console.log(this.assoOfferForm.value.client)
         this.toastr.clear();
         this.toastr.success('success', 'Offer associer');
         this.router.navigateByUrl('offer');

@@ -5,13 +5,14 @@
     <div class="col-12 m-3">
         <div class="alert alert-danger m-4 text-center"
             *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate).length === 0">
-            <span *ngIf="filterNumeroSerie || filterVille || filterBac1 || filterBac2 || filterTotal || filterDate">Il n y a pas de
+            <span *ngIf="filterNumeroSerie || filterVille || filterBac1 || filterBac2 || filterTotal || filterDate">Il n
+                y a pas de
                 Borne</span>
         </div>
     </div>
     <div class="col-12">
-            <h1 class="text-center">Listes de Bornes</h1>
-        </div>
+        <h1 class="text-center">Listes de Bornes</h1>
+    </div>
 
     <div class="row">
 
@@ -55,30 +56,38 @@
                                             placeholder="Coupon restant" [(ngModel)]='filterTotal'>
                                     </th>
                                     <th>
-                                      <input class="mb-3 py-2 form-control float-left" type="search"
-                                             placeholder="Date" [(ngModel)]='filterDate'>
+                                        <input class="mb-3 py-2 form-control float-left" type="search"
+                                            placeholder="Date" [(ngModel)]='filterDate'>
                                     </th>
                                     <th></th>
                                     <th></th>
                                 </tr>
                                 <ng-container
-                                    *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate ">
+                                    *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate">
                                     <tr>
                                         <th scope="row">{{borne.numeroSerie}}</th>
                                         <td>{{borne.address.ville}}</td>
                                         <td>
-                                            <ngb-progressbar type="success" [value]="[calculatePercentage(borne.cannette.utilise, borne.cannette.total)]"
-                                                [striped]="true" [animated]="true"><i> {{calculatePercentage(borne.cannette.utilise, borne.cannette.total)}} % </i>
+                                            <ngb-progressbar type="success"
+                                                [value]="[calculatePercentage(borne.cannette.utilise, borne.cannette.total)]"
+                                                [striped]="true" [animated]="true"><i>
+                                                    {{calculatePercentage(borne.cannette.utilise, borne.cannette.total)}}
+                                                    % </i>
                                             </ngb-progressbar>
                                         </td>
                                         <td>
-                                            <ngb-progressbar type="success" [value]="[calculatePercentage(borne.plastique.utilise, borne.plastique.total)]"
-                                                [striped]="true" [animated]="true"><i> {{calculatePercentage(borne.plastique.utilise, borne.plastique.total)}} %</i>
+                                            <ngb-progressbar type="success"
+                                                [value]="[calculatePercentage(borne.plastique.utilise, borne.plastique.total)]"
+                                                [striped]="true" [animated]="true"><i>
+                                                    {{calculatePercentage(borne.plastique.utilise, borne.plastique.total)}}
+                                                    %</i>
                                             </ngb-progressbar>
                                         </td>
                                         <td>
-                                            <ngb-progressbar type="success" [value]="calculatePercentage(borne.coupon.imprimer, borne.coupon.restant)"
-                                                [striped]="true" [animated]="true"><i> {{borne.coupon.imprimer}} / {{borne.coupon.restant}}</i>
+                                            <ngb-progressbar type="success"
+                                                [value]="calculatePercentage(borne.coupon.imprimer, borne.coupon.restant)"
+                                                [striped]="true" [animated]="true"><i> {{borne.coupon.imprimer}} /
+                                                    {{borne.coupon.restant}}</i>
                                             </ngb-progressbar>
                                         </td>
                                         <td>
@@ -96,8 +105,13 @@
                                         </td>
                                     </tr>
                                 </ng-container>
+            
                             </tbody>
                         </table>
+                        <app-card-offer *ngFor="let borne of bornes" >
+                            <div class="title">{{borne.numeroSerie}}</div>
+                            <div class="p">{{borne.address.ville}}</div>
+                        </app-card-offer>
                     </div>
 
                 </div>
