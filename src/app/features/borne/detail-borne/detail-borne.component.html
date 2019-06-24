@@ -7,6 +7,7 @@
                 Formulaire associer une borne
             </button>
         </div>
+        
     </div>
 
     <div class="collapse mt-3" id="collapseForm">
@@ -23,33 +24,20 @@
 
     <h1 class="text-center">Borne {{borne.numeroSerie}}</h1>
 
-    <!-- <div class="row">
-        <div class="col-6">
-            <h3 class="text-center">Plastique</h3>
-            <canvas baseChart [data]="[borne.plastique.total, borne.plastique.utilise]" [labels]="plastiqueLabels"
-                [chartType]="plastiqueType"></canvas>
-        </div>
-        <div class="col-6">
-            <h3 class="text-center">Cannette</h3>
-            <canvas baseChart [data]="[borne.cannette.total, borne.cannette.utilise]" [labels]="cannetteLabels"
-                [chartType]="cannetteType"></canvas>
-        </div>
-    </div> -->
-
 
     <div class="col-md-12 col-xl-12 mt-4">
         <div class="row">
-        <div class="col-6">
-            <h3 class="text-center">Plastique</h3>
-            <canvas baseChart [data]="[borne.plastique.total, borne.plastique.utilise]" [labels]="plastiqueLabels"
-                [chartType]="plastiqueType"></canvas>
+            <div class="col-6">
+                <h3 class="text-center">Plastique</h3>
+                <canvas baseChart [data]="[borne.plastique.total, borne.plastique.utilise]" [labels]="plastiqueLabels"
+                    [chartType]="plastiqueType"></canvas>
+            </div>
+            <div class="col-6">
+                <h3 class="text-center">Cannette</h3>
+                <canvas baseChart [data]="[borne.cannette.total, borne.cannette.utilise]" [labels]="cannetteLabels"
+                    [chartType]="cannetteType"></canvas>
+            </div>
         </div>
-        <div class="col-6">
-            <h3 class="text-center">Cannette</h3>
-            <canvas baseChart [data]="[borne.cannette.total, borne.cannette.utilise]" [labels]="cannetteLabels"
-                [chartType]="cannetteType"></canvas>
-        </div>
-    </div>
 
         <div class="row">
             <div class="col-md-12 col-xl-12 mt-4">
@@ -60,6 +48,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <h1 class="text-center mb-3 mt-3">Tableaux</h1>
+        <div style="display: block">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
         <div class="row">
             <div class="col-xl-12 col-lg-12">
@@ -75,69 +68,24 @@
             <form (ngSubmit)="assoOffer()" [formGroup]="assoOfferForm">
                 <div class="form-group">
                     <select formControlName="offer" class="form-control">
-                        <option *ngFor="let offer of offers" name="offer" value="{{offer._id}}">{{offer.client}}</option>
+                        <option *ngFor="let offer of offers" name="offer" value="{{offer._id}}">{{offer.client}}
+                        </option>
                     </select>
                     <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
                     </button>
                 </div>
             </form>
         </div>
-        <h1 class="text-center">Offre</h1>
-        <div class="row">
-            <div class="col-md-4 col-xl-4 mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://www.nestle-cereals.com/fr/sites/g/files/qirczx246/f/styles/mobile_320x180/public/brand_logo/fr_chocapic_752x525px_logo_01.png?itok=ZpKlRten"
-                        class="card-img-top" alt="chocapic">
-                    <div class="card-body">
-                        <h5 class="card-title">Chocapic</h5>
-                        <p class="card-text">Chocapic désigne une variété de céréales de petit-déjeuner
-                            chocolatées à base de blé complet, distribuées par Nestlé dès 1984.</p>
-                        <div class=" ml-3 mr-3 mb-3">
-                            <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true">
-                                <i>50%</i>
-                            </ngb-progressbar>
-                        </div>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-xl-4 mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="http://thomasthink.com/img/le-gars-de-haribo.jpg" class="card-img-top" alt="Haribo">
-                    <div class="card-body">
-                        <h5 class="card-title">Haribo</h5>
-                        <p class="card-text">Haribo est une marque de confiserie allemande et le nom d'une
-                            multinationale fondée en 1920 par le confiseur allemand Hans Riegel.</p>
-                        <div class=" ml-3 mr-3 mb-3">
-                            <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true">
-                                <i>50%</i>
-                            </ngb-progressbar>
-                        </div>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-xl-4 mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="http://image.jeuxvideo.com/medias-md/155603/1556033066-9969-card.jpg" class="card-img-top"
-                        alt="square enix">
-                    <div class="card-body">
-                        <h5 class="card-title">Square Enix</h5>
-                        <p class="card-text">Square Enix Co., Ltd est une société japonaise qui développe et
-                            édite des jeux vidéo et des mangas..</p>
-                        <div class=" ml-3 mr-3 mb-3">
-                            <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true">
-                                <i>50%</i>
-                            </ngb-progressbar>
-                        </div>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
+        <div *ngFor="let offer of bornes">
+            <p>{{offer.numeroSerie}</p>
         </div>
 
+        <h1 class="text-center">Offre</h1>
+        <app-card-offer *ngFor="let offre of borne.offers" >
+            <div class="title">{{offre.client}}</div>
+            <div class="p"></div>
+        </app-card-offer>
+        {{borne | json}}
         <div class="row mt-4">
             <div class="col-md-6 col-xl-6">
                 <div class="card">
@@ -186,4 +134,4 @@
 
 
     </div>
-</div>
+</div> 
