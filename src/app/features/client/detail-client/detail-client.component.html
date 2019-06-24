@@ -1,22 +1,12 @@
 <div *ngIf="client" class="container mt-3 mb-4">
+    <div class="row">
+        <h1 class="text-center">Client</h1>
 
-    <h1 class="text-center">Client</h1>
-    <div class="row">
-        <div class="col-6">
-            <h3 class="text-center">Plastique</h3>
-            <canvas baseChart [data]="plastiqueData" [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
-        </div>
-        <div class="col-6">
-            <h3 class="text-center">Cannette</h3>
-            <canvas baseChart [data]="cannetteData" [labels]="cannetteLabels" [chartType]="cannetteType"></canvas>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-xl-12 col-lg-12">
             <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
                 data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
                 aria-controls="collapseAssoOfferForm">
-                Formulaire associer une offre
+                Associer une offre
             </button>
         </div>
     </div>
@@ -33,11 +23,19 @@
         </form>
     </div>
     <div class="row">
+        <div class="col-6">
+            <h3 class="text-center">Plastique</h3>
+            <canvas baseChart [data]="plastiqueData" [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
+        </div>
+        <div class="col-6">
+            <h3 class="text-center">Cannette</h3>
+            <canvas baseChart [data]="cannetteData" [labels]="cannetteLabels" [chartType]="cannetteType"></canvas>
+        </div>
+    </div>
 
+    <div class="row">
         <div class="col-md-12 col-xl-12 mt-4">
             <div id="myChart">
-
-
                 <div class="row">
                     <div class="col-md-4 col-xl-4 mt-4">
                         <div class="card">
@@ -65,15 +63,15 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Ville</th>
-                                        <th scope="col">Coupon</th>
-                                        <th scope="col">Utilise</th>
-                                        <th scope="col">Restant</th>
+                                        <th scope="col">Coupons</th>
+                                        <th scope="col">Utilisés</th>
+                                        <th scope="col">Restants</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th scope="row">super</th>
-                                        <td>gdfgf</td>
+                                        <th scope="row">{{client.bornes.numeroSerie}}</th>
+                                        <td>{{client.bornes.address.ville}}</td>
                                         <td>1500</td>
                                         <td>500</td>
                                         <td>1000</td>
@@ -85,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <h1 class="text-center">Offre</h1>
+            <h1 class="text-center">Offres</h1>
             <div class="row">
                 <div class="col-md-4 col-xl-4 mt-4">
                     <div class="card" style="width: 18rem;">
@@ -130,7 +128,7 @@
                         le client
                     </button>
                     <button class="btn btn-danger btn-block mt-4" (click)="deleteClient(client._id)">Suppression du
-                        Client
+                        client
                     </button>
                 </ng-container>
 

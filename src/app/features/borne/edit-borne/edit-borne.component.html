@@ -1,133 +1,99 @@
-<div class="row">
+<div class="container-fluid mb-5">
 
+  <div class="row">
 
-  <div class="col-xl-12 col-lg-12">
+    <div class="col-xl-12 col-lg-12">
+      <button class="btn btn-outline-success float-right" type="button"
+        data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+        Ajouter une borne
+      </button>
+    </div>
 
-    <div class="pt-3 pr-3 pl-3">
-      <div class=" mb-3 card-body">
-        <form (ngSubmit)="onSubmit()" [formGroup]="borneForm">
+    <div class="col-xl-12 col-lg-12">
 
-          <div class="row">
+      <div>
+        <div class="collapse" id="collapseForm">
+          <div class="mb-3 card-body">
+            <form (ngSubmit)="onSubmit()" [formGroup]="borneForm">
 
-            <div class="col">
-              <div class="form-group">
-                <input [ngClass]="borneForm.get('numeroSerie').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                  placeholder="Numero de serie" name="numeroSerie" type="text" formControlName="numeroSerie">
-                <div class="invalid-feedback">
-                  <div *ngIf="borneForm.get('numeroSerie').errors">
-                    <span *ngIf="borneForm.get('numeroSerie').errors.required">Numéro de série doit être remplie</span>
+              <div class="row">
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <input [ngClass]="borneForm.get('numeroSerie').errors ? 'is-invalid' : 'is-valid'"
+                      class="form-control" placeholder="Numéro de série" name="numeroSerie" type="text"
+                      formControlName="numeroSerie">
+
                   </div>
                 </div>
-              </div>
-            </div>
 
+              </div>
+
+              <div class="row" formGroupName="address">
+                <div class="form-group col-2">
+                  <input [ngClass]="borneForm.get('address').get('numero').errors ? 'is-invalid' : 'is-valid'"
+                    class="form-control" placeholder="Numéro de rue" name="numero" type="text" formControlName="numero">
+                </div>
+                <div class="form-group col-4">
+                  <input [ngClass]="borneForm.get('address').get('rue').errors ? 'is-invalid' : 'is-valid'"
+                    class="form-control" placeholder="Nom de rue" name="rue" type="text" formControlName="rue">
+                </div>
+                <div class="form-group col-2">
+                  <input [ngClass]="borneForm.get('address').get('codePostal').errors ? 'is-invalid' : 'is-valid'"
+                    class="form-control" placeholder="Code postal" name="codePostal" type="text"
+                    formControlName="codePostal">
+                </div>
+                <div class="form-group col-4">
+                  <input [ngClass]="borneForm.get('address').get('ville').errors ? 'is-invalid' : 'is-valid'"
+                    class="form-control" placeholder="Ville" name="ville" type="text" formControlName="ville">
+                </div>
+
+              </div>
+              <div class="row">
+
+                <div class="col">
+                  <div class="form-group">
+                    <input [ngClass]="borneForm.get('dateInstallation').errors ? 'is-invalid' : 'is-valid'"
+                      class="form-control" placeholder="Date installation" name="dateInstallation" type="date"
+                      formControlName="dateInstallation">
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="form-group">
+                    <input [ngClass]="borneForm.get('styliseeClient').errors ? 'is-invalid' : 'is-valid'"
+                      class="form-control" placeholder="Stylisée par client" name="styliseeClient" type="text"
+                      formControlName="styliseeClient">
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="row">
+
+                <div class="col">
+                  <div class="form-group">
+                    <textarea [ngClass]="borneForm.get('details').errors ? 'is-invalid' : 'is-valid'"
+                      class="form-control" placeholder="Détails supplémentaires" maxlength="300" name="details"
+                      type="text" formControlName="details"></textarea>
+                    <small class="float-right">300 caractères maximun</small>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <button class="btn btn-success btn-block mt-4 mb-1" type="submit"
+                [disabled]="!borneForm.valid">Sauvegarder
+              </button>
+
+            </form>
           </div>
-
-
-          <div formGroupName="address">
-            <div class="form-group">
-              <input [ngClass]="borneForm.get('address').get('rue').errors ? 'is-invalid' : 'is-valid'"
-                class="form-control" placeholder="Rue" name="rue" type="text" formControlName="rue">
-              <div class="invalid-feedback">
-                <div *ngIf="borneForm.get('address').get('rue').errors">
-                  <span *ngIf="borneForm.get('address').get('rue').errors.required">Rue doit être remplie</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-8">
-                <input [ngClass]="borneForm.get('address').get('ville').errors ? 'is-invalid' : 'is-valid'"
-                  class="form-control" placeholder="Ville" name="ville" type="text" formControlName="ville">
-                <div class="invalid-feedback">
-                  <div *ngIf="borneForm.get('address').get('ville').errors">
-                    <span *ngIf="borneForm.get('address').get('ville').errors.required">Ville doit être remplie</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group col-md-2">
-                <input [ngClass]="borneForm.get('address').get('codePostal').errors ? 'is-invalid' : 'is-valid'"
-                  class="form-control" placeholder="Code postal" name="codePostal" type="text"
-                  formControlName="codePostal">
-                <div class="invalid-feedback">
-                  <div *ngIf="borneForm.get('address').get('codePostal').errors">
-                    <span *ngIf="borneForm.get('address').get('codePostal').errors.required">Code postal doit être
-                      remplie</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group col-md-2">
-                <input [ngClass]="borneForm.get('address').get('numero').errors ? 'is-invalid' : 'is-valid'"
-                  class="form-control" placeholder="Numéro" name="numero" type="text" formControlName="numero">
-                <div class="invalid-feedback">
-                  <div *ngIf="borneForm.get('address').get('numero').errors">
-                    <span *ngIf="borneForm.get('address').get('numero').errors.required">Numero doit être remplie</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-
-          <div class="row">
-
-            <div class="col">
-              <div class="form-group">
-                <input [ngClass]="borneForm.get('dateInstallation').errors ? 'is-invalid' : 'is-valid'"
-                  class="form-control" placeholder="Date installation" name="dateInstallation" type="date"
-                  formControlName="dateInstallation">
-                <div class="invalid-feedback">
-                  <div *ngIf="borneForm.get('dateInstallation').errors">
-                    <span *ngIf="borneForm.get('dateInstallation').errors.required">Date d'installation doit être
-                      remplie</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="form-group">
-                <input [ngClass]="borneForm.get('styliseeClient').errors ? 'is-invalid' : 'is-valid'"
-                  class="form-control" placeholder="Style client" name="styliseeClient" type="text"
-                  formControlName="styliseeClient">
-                <div class="invalid-feedback">
-                  <div *ngIf="borneForm.get('styliseeClient').errors">
-                    <span *ngIf="borneForm.get('styliseeClient').errors.required">Style doit être remplie</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-
-          <div class="row">
-
-            <div class="col">
-              <div class="form-group">
-                <textarea [ngClass]="borneForm.get('details').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                  placeholder="Detail supplémentaire" name="details" type="text" formControlName="details"></textarea>
-                <small class="float-right">300 caractères maximun</small>
-                <div class="invalid-feedback">
-                  <div *ngIf="borneForm.get('details').errors">
-                    <span *ngIf="borneForm.get('details').errors.maxLength">Detail supplémentaire peut ne contenir que
-                      300 caractères</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-
-          <button class="btn btn-success btn-block mt-4 mb-1" type="submit" [disabled]="!borneForm.valid">Sauvegarder
-          </button>
-
-        </form>
+        </div>
       </div>
+
+
     </div>
   </div>
 </div>

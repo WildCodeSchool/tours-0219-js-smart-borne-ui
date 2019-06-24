@@ -6,39 +6,15 @@
 
       <div class="col">
         <div class="form-group">
-          <input [ngClass]="userForm.get('username').errors ? 'is-invalid' : 'is-valid'"
-                 class="form-control" placeholder="username" minlength="4"
-                 name="username" type="text" formControlName="username">
-          <div class="valid-feedback">
-            <div *ngIf="userForm.get('username')">
-              <span *ngIf="userForm.get('username')">Username is valid</span>
-            </div>
-          </div>
-          <div class="invalid-feedback">
-            <div *ngIf="userForm.get('username').errors">
-              <span *ngIf="userForm.get('username').errors.required">Username is required</span>
-              <span *ngIf="userForm.get('username').errors.minlength">username 4 caractère minimum</span>
-            </div>
-          </div>
+          <input [ngClass]="userForm.get('username').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+            placeholder="Nom d'utilisateur" minlength="4" name="username" type="text" formControlName="username">
         </div>
       </div>
 
       <div class="col">
         <div class="form-group">
-          <input [ngClass]="userForm.get('email').errors ? 'is-invalid' : 'is-valid'"
-                 class="form-control" placeholder="email"
-                 name="email" type="email" formControlName="email">
-          <div class="valid-feedback">
-            <div *ngIf="userForm.get('email')">
-              <span *ngIf="userForm.get('email')">Email is valid</span>
-            </div>
-          </div>
-          <div class="invalid-feedback">
-            <div *ngIf="userForm.get('email').errors">
-              <span *ngIf="userForm.get('email').errors.required">Email is required</span>
-              <span *ngIf="userForm.get('email').errors.email">Entrer une adresse email valide</span>
-            </div>
-          </div>
+          <input [ngClass]="userForm.get('email').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+            placeholder="E-mail" name="email" type="email" formControlName="email">
         </div>
       </div>
 
@@ -49,8 +25,8 @@
 
       <div class="col">
         <div class="form-group">
-          <select [ngClass]="userForm.get('role').errors ? 'is-invalid' : 'is-valid'"
-                  class="form-control custom-select" name="role" id="role" formControlName="role">
+          <select [ngClass]="userForm.get('role').errors ? 'is-invalid' : 'is-valid'" class="form-control custom-select"
+            name="role" id="role" formControlName="role">
             <option *ngFor="let userRole of roles">
               {{ userRole.name }}
             </option>
@@ -61,11 +37,10 @@
 
     </div>
 
-    <button class="btn btn-success btn-block mt-4 mb-5" type="submit" [disabled]="!userForm.valid">Save
+    <button class="btn btn-success btn-block mt-4 mb-5" type="submit" [disabled]="!userForm.valid">Sauvegarder
 
     </button>
 
   </form>
 
 </div>
-

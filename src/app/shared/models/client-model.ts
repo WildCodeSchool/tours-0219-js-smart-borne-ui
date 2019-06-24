@@ -1,3 +1,4 @@
+import { Borne } from '../models/borne';
 export class Client {
   constructor(
     public _id: string,
@@ -28,5 +29,8 @@ export class Client {
       imprimer: number;
       restant: number;
     },
+    public cannetteTotal: number,
+    public plastiqueTotal: number,
+    public bornes: Borne[],
   ) {}
 }
