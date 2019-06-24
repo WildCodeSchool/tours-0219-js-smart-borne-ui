@@ -29,8 +29,17 @@ export class DetailBorneComponent implements OnInit {
   public cannetteType = 'doughnut';
   public plastiqueLabels = ['Plastique'];
   public plastiqueType = 'doughnut';
-  
-
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+  };
+  public barChartLabels = ["janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"];
+  public barChartType = "bar";
+  public barChartLegend = true;
+  public barChartData = [
+    {data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: "Serie A"},
+    {data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: "Serie B"},
+  ]
   constructor(
     config: NgbTabsetConfig,
     private route: ActivatedRoute,
@@ -51,7 +60,7 @@ export class DetailBorneComponent implements OnInit {
   });
   assoOfferForm = this.fb.group({
     offer: [''],
-  })
+  });
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
@@ -66,7 +75,6 @@ export class DetailBorneComponent implements OnInit {
     this.offerService.getListOffers().pipe(first()).subscribe((offer) => {
       this.offers = offer;
     });
-
 
   }
 

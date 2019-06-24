@@ -5,7 +5,6 @@ import { CreateOfferComponent } from './offres/create-offer/create-offer.compone
 import { DetailOfferComponent } from './offres/detail-offer/detail-offer.component';
 import { EditOfferComponent } from './offres/edit-offer/edit-offer.component';
 import { ListOffersComponent } from './offres/list-offers/list-offers.component';
-import { CardOfferComponent } from '../shared/components/card-offer/card-offer.component';
 import { HttpModule } from '@angular/http';
 import { ListClientComponent } from './client/list-client/list-client.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,7 +34,6 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
     DetailOfferComponent,
     EditOfferComponent,
     ListOffersComponent,
-    CardOfferComponent,
     ListClientComponent,
     DashboardComponent,
     CreateClientComponent,
