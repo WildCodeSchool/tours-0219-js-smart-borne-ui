@@ -63,7 +63,7 @@
                                     <th></th>
                                 </tr>
                                 <ng-container
-                                    *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate ">
+                                    *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate">
                                     <tr>
                                         <th scope="row">{{borne.numeroSerie}}</th>
                                         <td>{{borne.address.ville}}</td>

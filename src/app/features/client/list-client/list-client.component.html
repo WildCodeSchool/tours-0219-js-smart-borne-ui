@@ -55,10 +55,8 @@
                                         <td>{{client.name}}</td>
                                         <td>{{client.raisonSocial}}</td>
                                         <td>
-                                            <ngb-progressbar type="success"
-                                                [value]="[calculePourcentage(client.coupon.imprimer, client.coupon.total)]"
-                                                [striped]="true" [animated]="true"><i> {{client.coupon.imprimer}} /
-                                                    {{client.coupon.total}} </i>
+                                            <ngb-progressbar type="success" [value]="[calculatePercentage(client.coupon.imprimer, client.coupon.total)]" [striped]="true"
+                                                [animated]="true"><i> {{client.coupon.imprimer}} / {{client.coupon.total}} </i>
                                             </ngb-progressbar>
                                         </td>
                                         <td>
