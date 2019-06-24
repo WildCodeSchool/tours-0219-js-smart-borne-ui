@@ -28,7 +28,11 @@ export class ListClientComponent implements OnInit {
     );
   }
 
-  calculePourcentage(a, b) {
-    return Math.round(a / b * 100) ;
+  calculatePercentage(a, b) {
+    const result = Math.round(a / b * 100) ;
+    if (isNaN(result)) {
+      return 0;
+    }
+    return result;
   }
 }

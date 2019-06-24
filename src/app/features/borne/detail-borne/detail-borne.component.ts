@@ -10,6 +10,8 @@ import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ClientService } from '../../../core/http/client.service';
 import { Client } from '../../../shared/models/client-model';
 import { FormBuilder } from '@angular/forms';
+import { OffersService } from '../../../core/http/offers.service';
+import { Offer } from '../../../shared/models/offres.models';
 
 @Component({
   selector: 'app-detail-borne',
@@ -21,17 +23,13 @@ export class DetailBorneComponent implements OnInit {
   public borne: Borne;
   public user: User;
   public client: Client[];
+  public offers: Offer[];
   public id: string;
-  public jourLabels = ['Plastique, Cannette, Coupon'];
-  public jourType = 'doughnut';
-  public semaineLabels = ['Plastique, Cannette, Coupon'];
-  public semaineType = 'doughnut';
-  public moisLabels = ['Plastique, Cannette, Coupon'];
-  public moisType = 'doughnut';
+  public cannetteLabels = ['Cannette'];
+  public cannetteType = 'doughnut';
   public plastiqueLabels = ['Plastique'];
   public plastiqueType = 'doughnut';
-  public cannetteLabels = ['Canette'];
-  public cannetteType = 'doughnut';
+  
 
   constructor(
     config: NgbTabsetConfig,
@@ -42,6 +40,7 @@ export class DetailBorneComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private profileService: ProfileService,
+    private offerService: OffersService,
   ) {
     config.justify = 'center';
     config.type = 'pills';
@@ -50,7 +49,9 @@ export class DetailBorneComponent implements OnInit {
   Form = this.fb.group({
     client: [''],
   });
-
+  assoOfferForm = this.fb.group({
+    offer: [''],
+  })
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
@@ -62,6 +63,10 @@ export class DetailBorneComponent implements OnInit {
     this.clientService.getListClient().pipe(first()).subscribe((client) => {
       this.client = client;
     });
+    this.offerService.getListOffers().pipe(first()).subscribe((offer) => {
+      this.offers = offer;
+    });
+
 
   }
 
@@ -88,6 +93,19 @@ export class DetailBorneComponent implements OnInit {
       () => {
         this.toastr.clear();
         this.toastr.success('success', 'Borne associer');
+        this.router.navigateByUrl('bornes');
+      },
+      (error) => {
+        this.toastr.clear();
+        this.toastr.error(`Error ${error}`);
+      });
+  }
+
+  assoOffer() {
+    this.borneService.associateOffer(this.borne._id, this.assoOfferForm.value.offer).subscribe(
+      () => {
+        this.toastr.clear();
+        this.toastr.success('success', 'Offre associer');
         this.router.navigateByUrl('bornes');
       },
       (error) => {
