@@ -31,7 +31,11 @@ export class ListBorneComponent implements OnInit {
   }
 
   calculatePercentage(a, b) {
-    return Math.round(a / b * 100) ;
+    const result = Math.round(a / b * 100) ;
+    if (isNaN(result)) {
+      return 0;
+    }
+    return result;
   }
 
 }
