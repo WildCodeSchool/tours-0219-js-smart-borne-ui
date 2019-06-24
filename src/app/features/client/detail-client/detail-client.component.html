@@ -128,14 +128,16 @@
           </div>
         </div>
 
-        <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
-          <button class="btn btn-info btn-block mt-4" [routerLink]="['/client', client._id, 'edit']">Modifier
-            le client
-          </button>
-          <button class="btn btn-danger btn-block mt-4" (click)="deleteClient(client._id)">Suppression du
-            client
-          </button>
-        </ng-container>
+        <div class="col-md-12 col-xl-12 mt-4">
+          <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
+            <button class="btn btn-info btn-block mt-4" [routerLink]="['/client', client._id, 'edit']">Modifier
+              le client
+            </button>
+            <button class="btn btn-danger btn-block mt-4" (click)="deleteClient(client._id)">Suppression du
+              client
+            </button>
+          </ng-container>
+        </div>
 
       </div>
     </div>
