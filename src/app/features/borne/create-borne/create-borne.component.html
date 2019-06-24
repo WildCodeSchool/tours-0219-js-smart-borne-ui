@@ -36,24 +36,26 @@
 
 
               <div formGroupName="address">
+
                 <div class="form-group">
-                  <input [ngClass]="borneForm.get('address').get('rue').errors ? 'is-invalid' : 'is-valid'"
-                    class="form-control" placeholder="Rue" name="rue" type="text" formControlName="rue">
+                  <input [ngClass]="borneForm.get('address').get('ville').errors ? 'is-invalid' : 'is-valid'"
+                         class="form-control" placeholder="Ville" name="ville" type="text" formControlName="ville">
                   <div class="invalid-feedback">
-                    <div *ngIf="borneForm.get('address').get('rue').errors">
-                      <span *ngIf="borneForm.get('address').get('rue').errors.required">Rue doit être remplie</span>
+                    <div *ngIf="borneForm.get('address').get('ville').errors">
+                        <span *ngIf="borneForm.get('address').get('ville').errors.required">Ville doit être
+                          remplie</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="form-row">
+
                   <div class="form-group col-md-8">
-                    <input [ngClass]="borneForm.get('address').get('ville').errors ? 'is-invalid' : 'is-valid'"
-                      class="form-control" placeholder="Ville" name="ville" type="text" formControlName="ville">
+                    <input [ngClass]="borneForm.get('address').get('rue').errors ? 'is-invalid' : 'is-valid'"
+                           class="form-control" placeholder="Rue" name="rue" type="text" formControlName="rue">
                     <div class="invalid-feedback">
-                      <div *ngIf="borneForm.get('address').get('ville').errors">
-                        <span *ngIf="borneForm.get('address').get('ville').errors.required">Ville doit être
-                          remplie</span>
+                      <div *ngIf="borneForm.get('address').get('rue').errors">
+                        <span *ngIf="borneForm.get('address').get('rue').errors.required">Rue doit être remplie</span>
                       </div>
                     </div>
                   </div>
