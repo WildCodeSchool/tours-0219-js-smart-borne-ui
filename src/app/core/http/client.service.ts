@@ -34,4 +34,7 @@ export class ClientService {
   public associateOffer(idClient: string, idOffer: string,): Observable<Client> {
     return this.http.put<Client>(`http://localhost:3000/api/client/${idClient}/offer/${idOffer}`, {});
   }
+  public associateUser(idClient: string, idUser: string): Observable<Client> {
+    return this.http.put<Client>(`http://localhost:3000/api/users/${idClient}/user/${idUser}`, {});
+  }
 }
