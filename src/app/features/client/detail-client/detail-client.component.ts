@@ -26,7 +26,17 @@ export class DetailClientComponent implements OnInit {
   public cannetteData = [50];
   public cannetteLabels = ['Canette'];
   public cannetteType = 'doughnut';
-
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+  };
+  public barChartLabels = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+  public barChartType = 'bar';
+  public barChartLegend = true;
+  public barChartData = [
+    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie A' },
+    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie B' },
+  ];
   constructor(
     private route: ActivatedRoute,
     public clientService: ClientService,

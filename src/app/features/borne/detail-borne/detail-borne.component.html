@@ -7,14 +7,15 @@
                 Associer un client
             </button>
         </div>
-        
+
     </div>
 
     <div class="collapse mt-3" id="collapseForm">
         <form (ngSubmit)="onSubmit()" [formGroup]="Form">
             <div class="form-group">
                 <select formControlName="client" class="form-control">
-                    <option *ngFor="let client of client" name="client" data-value="{{client.name}}" value="{{client._id}}">{{client.name}}</option>
+                    <option *ngFor="let client of client" name="client" data-value="{{client.name}}"
+                        value="{{client._id}}">{{client.name}}</option>
                 </select>
                 <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
                 </button>
@@ -81,57 +82,63 @@
         </div>
 
         <h1 class="text-center">Offre</h1>
-        <app-card-offer *ngFor="let offre of borne.offers" >
-            <div class="title">{{offre.client}}</div>
-            <div class="p"></div>
+        <div class="row">
+                        <app-card-offer *ngFor="let offre of borne.offers" >
+                                <div class="title">{{offre.client}}
+        </div>
+        <div class="p"></div>
         </app-card-offer>
-        <div class="row mt-4">
-            <div class="col-md-6 col-xl-6">
-                <div class="card">
-                    <p class="text-center p-3">Coupons</p>
-                    <div class=" ml-3 mr-3 mb-3">
-                        <p>
-                            <ngb-progressbar type="success" [value]=[borne.coupon.restant] [striped]="true"
-                                [animated]="true"><i> {{borne.coupon.restant}}% </i>
-                            </ngb-progressbar>
-                        </p>
-                        <p>
-                            <ngb-progressbar type="success" [value]=[borne.coupon.imprimer] [striped]="true"
-                                [animated]="true"><i> {{borne.coupon.imprimer}} </i>
-                            </ngb-progressbar>
-                        </p>
-                    </div>
+
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6 col-xl-6">
+            <div class="card">
+                <p class="text-center p-3">Coupons</p>
+                <div class=" ml-3 mr-3 mb-3">
+                    <p>
+                        <ngb-progressbar type="success" [value]=[borne.coupon.restant] [striped]="true"
+                            [animated]="true">
+                            <i> {{borne.coupon.restant}}% </i>
+                        </ngb-progressbar>
+                    </p>
+                    <p>
+                        <ngb-progressbar type="success" [value]=[borne.coupon.imprimer] [striped]="true"
+                            [animated]="true">
+                            <i> {{borne.coupon.imprimer}} </i>
+                        </ngb-progressbar>
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-6 col-xl-6">
-                <div class="card">
-                    <p class="text-center p-3">Rouleau</p>
-                    <div class=" ml-3 mr-3 mb-3">
-                        <p>
-                            <ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true">
-                                <i>50%</i>
-                            </ngb-progressbar>
-                        </p>
-                    </div>
+        <div class="col-md-6 col-xl-6">
+            <div class="card">
+                <p class="text-center p-3">Rouleau</p>
+                <div class=" ml-3 mr-3 mb-3">
+                    <p>
+                        <ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true">
+                            <i>50%</i>
+                        </ngb-progressbar>
+                    </p>
                 </div>
             </div>
-
-
-            <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
-                <button class="btn btn-info btn-block mt-4" [routerLink]="['/borne', borne._id, 'edit']">Modifier la
-                    borne
-                </button>
-                <button class="btn btn-danger btn-block mt-4" (click)="deleteBorne(borne._id)">Suppression de la
-                    Borne
-                </button>
-            </ng-container>
-
-
         </div>
 
 
+        <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
+            <button class="btn btn-info btn-block mt-4" [routerLink]="['/borne', borne._id, 'edit']">Modifier la
+                borne
+            </button>
+            <button class="btn btn-danger btn-block mt-4" (click)="deleteBorne(borne._id)">Suppression de la
+                Borne
+            </button>
+        </ng-container>
 
 
     </div>
-</div> 
+
+
+
+
+</div>
+</div>

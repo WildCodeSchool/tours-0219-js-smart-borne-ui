@@ -15,9 +15,9 @@ export class HeaderComponent implements OnInit {
   public profile: User;
 
   constructor(private router: Router,
-              private authenticationService: AuthService,
-              public  profileService: ProfileService,
-              private toastr: ToastrService) {
+    private authenticationService: AuthService,
+    public profileService: ProfileService,
+    private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -28,10 +28,11 @@ export class HeaderComponent implements OnInit {
 
   getProfile() {
     this.profileService.getProfile().subscribe(
-        (user: User) => {
-          this.profile = user;
-        },
-      );
+      (user: User) => {
+        this.profile = user;
+
+      },
+    );
   }
 
   logout() {
