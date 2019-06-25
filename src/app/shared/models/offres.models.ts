@@ -13,7 +13,7 @@ export class Offer {
       total: string,
     },
     public offers: {
-      client: string
-    }
+      client: string,
+    },
   ) { }
 }

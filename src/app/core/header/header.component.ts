@@ -15,9 +15,9 @@ export class HeaderComponent implements OnInit {
   public profile: User;
 
   constructor(private router: Router,
-    private authenticationService: AuthService,
-    public profileService: ProfileService,
-    private toastr: ToastrService) {
+              private authenticationService: AuthService,
+              public profileService: ProfileService,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {

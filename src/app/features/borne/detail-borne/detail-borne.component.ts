@@ -34,7 +34,8 @@ export class DetailBorneComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true,
   };
-  public barChartLabels = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+  public barChartLabels = ['janvier', 'fevrier', 'mars', 'avril', 'mai',
+    'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
   public barChartType = 'bar';
   public barChartLegend = true;
   public barChartData = [
@@ -97,7 +98,7 @@ export class DetailBorneComponent implements OnInit {
   }
 
   onSubmit() {
-    
+
     this.clientService.associateBorne(this.Form.value.client, this.borne._id).subscribe(
       () => {
         this.toastr.clear();
@@ -124,7 +125,3 @@ export class DetailBorneComponent implements OnInit {
   }
 
 }
-
-
-
-

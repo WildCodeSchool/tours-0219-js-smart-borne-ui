@@ -22,7 +22,6 @@ export class ListBorneComponent implements OnInit {
   public filterBac2: string;
   public filterTotal: string;
   public filterDate: string;
-  
 
   constructor(
     private profileService: ProfileService,
@@ -37,7 +36,7 @@ export class ListBorneComponent implements OnInit {
     });
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
-      console.log(this.user)
+      console.log(this.user);
     });
   }
 
