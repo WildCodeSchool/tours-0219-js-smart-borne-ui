@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BorneService } from '../../../core/http/borne.service';
 import { Borne } from '../../../shared/models/borne';
-
+import { first } from 'rxjs/operators';
+import { ClientService } from 'src/app/core/http/client.service';
+import { Client } from '../../../shared/models/client-model';
 @Component({
   selector: 'app-list-borne',
   templateUrl: './list-borne.component.html',
@@ -9,17 +11,25 @@ import { Borne } from '../../../shared/models/borne';
 })
 export class ListBorneComponent implements OnInit {
   public bornes: Borne[];
+  public clients: Client[];
   public filterNumeroSerie: string;
   public filterVille: string;
   public filterBac1: string;
   public filterBac2: string;
   public filterTotal: string;
   public filterDate: string;
+  
 
-  constructor(public borneService: BorneService) {
+  constructor(
+    public borneService: BorneService,
+    public clientService: ClientService,
+    ) {
   }
   ngOnInit() {
     this.getListBorne();
+    this.clientService.getListClient().pipe(first()).subscribe((clients) => {
+      this.clients = clients;
+    });
   }
 
   getListBorne() {

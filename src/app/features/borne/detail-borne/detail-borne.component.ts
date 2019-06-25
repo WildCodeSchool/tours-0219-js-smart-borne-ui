@@ -22,6 +22,7 @@ export class DetailBorneComponent implements OnInit {
   public bornes: Borne[];
   public borne: Borne;
   public user: User;
+  public check: any;
   public client: Client[];
   public offers: Offer[];
   public id: string;
@@ -33,13 +34,13 @@ export class DetailBorneComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true,
   };
-  public barChartLabels = ["janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"];
-  public barChartType = "bar";
+  public barChartLabels = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+  public barChartType = 'bar';
   public barChartLegend = true;
   public barChartData = [
-    {data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: "Serie A"},
-    {data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: "Serie B"},
-  ]
+    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie A' },
+    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie B' },
+  ];
   constructor(
     config: NgbTabsetConfig,
     private route: ActivatedRoute,
@@ -75,7 +76,6 @@ export class DetailBorneComponent implements OnInit {
     this.offerService.getListOffers().pipe(first()).subscribe((offer) => {
       this.offers = offer;
     });
-
   }
 
   getBorne() {
@@ -97,7 +97,8 @@ export class DetailBorneComponent implements OnInit {
   }
 
   onSubmit() {
-    this.borneService.associateBorne(this.Form.value.client, this.borne._id).subscribe(
+    
+    this.clientService.associateBorne(this.Form.value.client, this.borne._id).subscribe(
       () => {
         this.toastr.clear();
         this.toastr.success('success', 'Borne associer');
@@ -114,7 +115,7 @@ export class DetailBorneComponent implements OnInit {
       () => {
         this.toastr.clear();
         this.toastr.success('success', 'Offre associer');
-        this.router.navigateByUrl('bornes');
+        // this.router.navigateByUrl('bornes');
       },
       (error) => {
         this.toastr.clear();
@@ -123,3 +124,7 @@ export class DetailBorneComponent implements OnInit {
   }
 
 }
+
+
+
+

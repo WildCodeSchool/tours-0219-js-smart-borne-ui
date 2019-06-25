@@ -32,6 +32,9 @@ export class ClientService {
     return this.http.delete<Client>(`${this.configUrl}/${id}`);
   }
   public associateOffer(idClient: string, idOffer: string,): Observable<Client> {
-    return this.http.put<Client>(`http://localhost:3000/api/client/${idClient}/offer/${idOffer}`, {});
+    return this.http.put<Client>(`${this.configUrl}/${idClient}/offer/${idOffer}`, {});
+  }
+  public associateBorne(idClient: string, idBorne: string): Observable<Client> {
+    return this.http.put<Client>(`${this.configUrl}/${idClient}/bornes/${idBorne}`, {});
   }
 }

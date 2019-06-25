@@ -1,3 +1,4 @@
+import {Borne} from './borne';
 export class Client {
   constructor(
     public _id: string,
@@ -28,5 +29,7 @@ export class Client {
       imprimer: number;
       restant: number;
     },
+    public bornes: Borne[],
+
   ) {}
 }

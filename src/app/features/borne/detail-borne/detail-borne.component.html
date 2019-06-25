@@ -14,7 +14,7 @@
         <form (ngSubmit)="onSubmit()" [formGroup]="Form">
             <div class="form-group">
                 <select formControlName="client" class="form-control">
-                    <option *ngFor="let client of client" name="client" value="{{client._id}}">{{client.name}}</option>
+                    <option *ngFor="let client of client" name="client" data-value="{{client.name}}" value="{{client._id}}">{{client.name}}</option>
                 </select>
                 <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
                 </button>
@@ -85,7 +85,6 @@
             <div class="title">{{offre.client}}</div>
             <div class="p"></div>
         </app-card-offer>
-        {{borne | json}}
         <div class="row mt-4">
             <div class="col-md-6 col-xl-6">
                 <div class="card">
