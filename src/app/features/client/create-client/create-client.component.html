@@ -5,7 +5,7 @@
         <div class="col-xl-12 col-lg-12">
             <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
                 data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-                Formulaire ajouté un client
+                Ajouter un client
             </button>
         </div>
 
@@ -16,129 +16,44 @@
                         <div class="row">
                             <div class="col-6">
                                 <input [ngClass]="clientForm.get('siret').errors ? 'is-invalid' : 'is-valid'"
-                                    class="form-control" placeholder="siret" name="siret" type="text"
+                                    class="form-control" placeholder="Numéro siret" name="siret" type="text"
                                     formControlName="siret">
-                                <div class="valid-feedback">
-                                    <div *ngIf="clientForm.get('siret')">
-                                        <span *ngIf="clientForm.get('siret')">Le siret est bon</span>
-                                    </div>
-                                </div>
-                                <div class="invalid-feedback">
-                                    <div *ngIf="clientForm.get('siret').errors">
-                                        <span *ngIf="clientForm.get('siret').errors.required">Le siret dois etre
-                                            remplie</span>
-                                    </div>
-                                </div>
                             </div>
                             <div class="col-6">
                                 <input [ngClass]="clientForm.get('raisonSocial').errors ? 'is-invalid' : 'is-valid'"
-                                    class="form-control" placeholder="raisonSocial" name="raisonSocial" type="text"
+                                    class="form-control" placeholder="Raison sociale" name="raisonSocial" type="text"
                                     formControlName="raisonSocial">
-                                <div class="valid-feedback">
-                                    <div *ngIf="clientForm.get('raisonSolcial')">
-                                        <span *ngIf="clientForm.get('raisonSocial')">La raison social est validée</span>
-                                    </div>
-                                </div>
-                                <div class="invalid-feedback">
-                                    <div *ngIf="clientForm.get('raisonSocial').errors">
-                                        <span *ngIf="clientForm.get('raisonSocial').errors.required">Raison social dois
-                                            etre
-                                            remplie</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <input [ngClass]="clientForm.get('name').errors ? 'is-invalid' : 'is-valid'"
-                            class="form-control" placeholder="name" name="name" type="text" formControlName="name">
-                        <div class="valid-feedback">
-                            <div *ngIf="clientForm.get('name')">
-                                <span *ngIf="clientForm.get('name')">Le nom est validée</span>
-                            </div>
+                        <div class="col-8 offset-2">
+                            <input [ngClass]="clientForm.get('name').errors ? 'is-invalid' : 'is-valid'"
+                                class="form-control" placeholder="Nom" name="name" type="text" formControlName="name">
                         </div>
-                        <div class="invalid-feedback">
-                            <div *ngIf="clientForm.get('name').errors">
-                                <span *ngIf="clientForm.get('name').errors.required">le nom dois etre remplie</span>
-                            </div>
-                        </div>
-
                         <div formGroupName="address">
                             <div class="row">
-                                <div class="col-1">
+                                <div class="col-2">
                                     <input
                                         [ngClass]="clientForm.get('address').get('numero').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="numero" name="numero" type="text"
+                                        class="form-control" placeholder="Numéro de rue" name="numero" type="text"
                                         formControlName="numero">
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('address').get('numero')">
-                                            <span *ngIf="clientForm.get('address').get('numero')">Le numero est
-                                                validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('address').get('numero').errors">
-                                            <span *ngIf="clientForm.get('address').get('numero').errors.required">le
-                                                numero
-                                                dois etre remplie</span>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-4">
                                     <input
                                         [ngClass]="clientForm.get('address').get('nomRue').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="nomRue" name="nomRue" type="text"
+                                        class="form-control" placeholder="Nom de rue" name="nomRue" type="text"
                                         formControlName="nomRue">
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('address').get('nomRue')">
-                                            <span *ngIf="clientForm.get('address').get('nomRue')">Le nomRue est
-                                                validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('address').get('nomRue').errors">
-                                            <span *ngIf="clientForm.get('address').get('nomRue').errors.required">le
-                                                nomRue
-                                                dois etre remplie</span>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-2">
                                     <input
                                         [ngClass]="clientForm.get('address').get('departement').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="departement" name="departement" type="text"
+                                        class="form-control" placeholder="Code postal" name="departement" type="text"
                                         formControlName="departement">
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('address').get('departement')">
-                                            <span *ngIf="clientForm.get('address').get('departement')">Le departement
-                                                est
-                                                validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('address').get('departement').errors">
-                                            <span
-                                                *ngIf="clientForm.get('address').get('departement').errors.required">le
-                                                departement dois etre remplie</span>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-4">
                                     <input
                                         [ngClass]="clientForm.get('address').get('ville').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="ville" name="ville" type="text"
+                                        class="form-control" placeholder="Ville" name="ville" type="text"
                                         formControlName="ville">
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('address').get('ville')">
-                                            <span *ngIf="clientForm.get('address').get('ville')">Le ville est
-                                                validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('address').get('ville').errors">
-                                            <span *ngIf="clientForm.get('address').get('ville').errors.required">le
-                                                ville
-                                                dois etre remplie</span>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -147,39 +62,14 @@
                                 <div class="col-6">
                                     <input
                                         [ngClass]="clientForm.get('contrat').get('debut').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="debut" name="debut" type="text"
+                                        class="form-control" placeholder="Début du contrat" name="debut" type="text"
                                         formControlName="debut">
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('contrat').get('debut')">
-                                            <span *ngIf="clientForm.get('contrat').get('debut')">Le debut est
-                                                validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('contrat').get('debut').errors">
-                                            <span *ngIf="clientForm.get('contrat').get('debut').errors.required">le
-                                                debut
-                                                dois etre remplie</span>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-6">
                                     <input
                                         [ngClass]="clientForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="fin" name="fin" type="text"
+                                        class="form-control" placeholder="Fin du contrat" name="fin" type="text"
                                         formControlName="fin">
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('contrat').get('fin')">
-                                            <span *ngIf="clientForm.get('contrat').get('fin')">Le fin est validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('contrat').get('fin').errors">
-                                            <span *ngIf="clientForm.get('contrat').get('fin').errors.required">le fin
-                                                dois
-                                                etre remplie</span>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -188,40 +78,14 @@
                                 <div class="col-6">
                                     <input
                                         [ngClass]="clientForm.get('siege').get('email').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="email" name="email" type="text"
-                                        formControlName="email">
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('siege').get('email')">
-                                            <span *ngIf="clientForm.get('siege').get('email')">Le email est
-                                                validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('siege').get('email').errors">
-                                            <span *ngIf="clientForm.get('siege').get('email').errors.required">le debut
-                                                dois
-                                                etre remplie</span>
-                                        </div>
-                                    </div>
+                                        class="form-control" placeholder="E-mail de l'entreprise" name="email"
+                                        type="text" formControlName="email">
                                 </div>
                                 <div class="col-6">
                                     <input
                                         [ngClass]="clientForm.get('siege').get('telephone').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="telephone" name="telephone" type="text"
-                                        formControlName="telephone">
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('siege').get('telephone')">
-                                            <span *ngIf="clientForm.get('siege').get('telephone')">Le telephone est
-                                                validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('siege').get('telephone').errors">
-                                            <span *ngIf="clientForm.get('siege').get('telephone').errors.required">le
-                                                debut
-                                                dois etre remplie</span>
-                                        </div>
-                                    </div>
+                                        class="form-control" placeholder="Téléphone de l'entreprise" name="telephone"
+                                        type="text" formControlName="telephone">
                                 </div>
                             </div>
                         </div>
@@ -230,63 +94,25 @@
                                 <div class="col-4">
                                     <input
                                         [ngClass]="clientForm.get('gerant').get('name').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="name" name="name" type="text"
+                                        class="form-control" placeholder="Nom du gérant" name="name" type="text"
                                         formControlName="name">
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('gerant').get('name')">
-                                            <span *ngIf="clientForm.get('gerant').get('name')">Le name est
-                                                validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('gerant').get('name').errors">
-                                            <span *ngIf="clientForm.get('gerant').get('name').errors.required">le debut
-                                                dois
-                                                etre remplie</span>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-4">
                                     <input
                                         [ngClass]="clientForm.get('gerant').get('email').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder='email' name='email' type="email"
+                                        class="form-control" placeholder='E-mail du gérant' name='email' type="email"
                                         formControlName='email'>
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('gerant').get('email')">
-                                            <span *ngIf="clientForm.get('gerant').get('email')">Le name est
-                                                validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('gerant').get('email').errors">
-                                            <span *ngIf="clientForm.get('gerant').get('email').errors.required">le debut
-                                                dois etre remplie</span>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-4">
                                     <input
                                         [ngClass]="clientForm.get('gerant').get('telephone').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="telephone" name="telephone" type="text"
-                                        formControlName="telephone">
-                                    <div class="valid-feedback">
-                                        <div *ngIf="clientForm.get('gerant').get('telephone')">
-                                            <span *ngIf="clientForm.get('gerant').get('telephone')">Le name est
-                                                validée</span>
-                                        </div>
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        <div *ngIf="clientForm.get('gerant').get('telephone').errors">
-                                            <span *ngIf="clientForm.get('gerant').get('telephone').errors.required">le
-                                                debut
-                                                dois etre remplie</span>
-                                        </div>
-                                    </div>
+                                        class="form-control" placeholder="Téléphone du gérant" name="telephone"
+                                        type="text" formControlName="telephone">
                                 </div>
                             </div>
                         </div>
                         <button class="btn btn-success btn-block mt-3 mb-1" type="submit"
-                            [disabled]="!clientForm.valid">Save
+                            [disabled]="!clientForm.valid">Sauvegarder
                         </button>
                     </form>
                 </div>

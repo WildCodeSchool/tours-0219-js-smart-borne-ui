@@ -4,7 +4,7 @@
         <div class="col-xl-12 col-lg-12">
             <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
                 data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-                Formulaire associer une borne
+                Associer un client
             </button>
         </div>
         
@@ -59,7 +59,7 @@
                 <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right mt-4"
                     type="button" data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
                     aria-controls="collapseAssoOfferForm">
-                    Formulaire associer une offre
+                    Associer une offre
                 </button>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <div class="row mt-4">
             <div class="col-md-6 col-xl-6">
                 <div class="card">
-                    <p class="text-center p-3">Coupon</p>
+                    <p class="text-center p-3">Coupons</p>
                     <div class=" ml-3 mr-3 mb-3">
                         <p>
                             <ngb-progressbar type="success" [value]=[borne.coupon.restant] [striped]="true"
@@ -103,6 +103,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6 col-xl-6">
                 <div class="card">
                     <p class="text-center p-3">Rouleau</p>

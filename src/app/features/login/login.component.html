@@ -1,4 +1,4 @@
-<div class="container-fluid " style="background-color: #38813a; min-height: 750px">
+<div class="container-fluid " style="background-color: #38813a; min-height: 980px">
     <div class="row">
 
         <div class="col-lg-8 col-md-8 offset-md-2 login-box mb-5">
@@ -9,13 +9,13 @@
             <div class="col-lg-12 login-form">
                 <div class="col-lg-12 login-form">
                     <form (ngSubmit)="loginForm.valid && onSubmit()" [formGroup]='loginForm'>
-                        <label class="form-control-label" for="email">Email</label>
+                        <label class="form-control-label text-center" for="email">Email :</label>
                         <div class="form-group">
                             <input [ngClass]="loginForm.get('email').errors ? 'is-invalid' : 'is-valid'"
                                    class="form-control" placeholder="" id="email"
                                    name="email" type="email" formControlName="email">
                         </div>
-                        <label class="form-control-label" for="password">Password</label>
+                        <label class="form-control-label" for="password">Mot de passe :</label>
                         <div class="form-group">
                             <input [ngClass]="loginForm.get('password').errors ? 'is-invalid' : 'is-valid'"
                                    class="form-control" placeholder="" id="password" autocomplete=""

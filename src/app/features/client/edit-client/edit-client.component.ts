@@ -30,7 +30,7 @@ export class EditClientComponent implements OnInit {
       siret: ['', [Validators.required]],
       raisonSocial: ['', [Validators.required]],
       name: ['', [Validators.required]],
-      address : this.fb.group({
+      address: this.fb.group({
         numero: ['', [Validators.required]],
         nomRue: ['', [Validators.required]],
         departement: ['', [Validators.required]],
@@ -49,11 +49,7 @@ export class EditClientComponent implements OnInit {
         email: ['', [Validators.required]],
         telephone: ['', [Validators.required]],
       }),
-      coupon: this.fb.group({
-        total: ['', [Validators.required]],
-        imprimer: ['', [Validators.required]],
-        restant: ['', [Validators.required]],
-      }),
+      coupon: [0]
     });
   }
   ngOnInit() {
