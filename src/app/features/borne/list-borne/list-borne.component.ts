@@ -36,7 +36,6 @@ export class ListBorneComponent implements OnInit {
     });
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
-      console.log(this.user);
     });
   }
 

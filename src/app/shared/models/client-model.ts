@@ -31,6 +31,7 @@ export class Client {
     },
     public cannetteTotal: number,
     public plastiqueTotal: number,
+    public offer: any,
     public bornes: Borne[],
   ) {}
 }

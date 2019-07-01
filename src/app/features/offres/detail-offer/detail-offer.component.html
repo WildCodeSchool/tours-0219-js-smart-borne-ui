@@ -39,9 +39,29 @@
                 <button class="btn btn-info btn-block mt-4" [routerLink]="['/offer', offer._id, 'edit']">Modifier
                     l'offre
                 </button>
-                <button class="btn btn-danger btn-block mt-4" (click)="deleteOffer(offer._id)">Suppression du
-                    Client
-                </button>
+
+              <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h3 class="modal-title" id="modal-basic-title">Suprimer l'offre</h3>
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h6 class="text-danger mt-2 mb-4">{{offer._id}}</h6>
+
+                  <form (ngSubmit)="deleteOfferModal(); modal.close()" [formGroup]="FormDelete">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input formControlName="offer" class="form-control input-danger" placeholder="Id de l'offre" name="offer">
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-block" >Suprimer</button>
+                  </form>
+                </div>
+              </ng-template>
+
+              <button class="btn btn-block btn-danger" (click)="open(content)">Suprimer l'offre</button>
             </ng-container>
 
         </div>

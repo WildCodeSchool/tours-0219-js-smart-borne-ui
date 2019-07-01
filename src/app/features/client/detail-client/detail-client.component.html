@@ -2,17 +2,6 @@
 
   <h1 class="text-center">Client</h1>
 
-  <div class="collapse mt-3" id="collapseAssoOfferForm">
-    <form (ngSubmit)="onSubmit()" [formGroup]="assoOfferForm">
-      <div class="form-group">
-        <select formControlName="offer" class="form-control">
-          <option *ngFor="let offer of offer" name="offer" value="{{offer._id}}">{{offer.client}}</option>
-        </select>
-        <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
-        </button>
-      </div>
-    </form>
-  </div>
   <div class="row">
     <div class="col-6">
       <h3 class="text-center">Plastique</h3>
@@ -71,6 +60,21 @@
           </button>
         </div>
       </div>
+
+
+      <div class="collapse mt-3" id="collapseAssoOfferForm">
+        <form (ngSubmit)="onSubmit()" [formGroup]="assoOfferForm">
+          <div class="form-group">
+            <select formControlName="offer" class="form-control">
+              <option *ngFor="let offer of offer" name="offer" value="{{offer._id}}">{{offer.client}}</option>
+            </select>
+            <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
+            </button>
+          </div>
+        </form>
+      </div>
+
+
       <h1 class="text-center mb-3 mt-3">Tableaux</h1>
       <div style="display: block">
         <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
@@ -94,18 +98,32 @@
           <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
             <button class="btn btn-info btn-block mt-4" data-toggle="modal" data-target=".bd-example-modal-lg"
               [routerLink]="['/client', client._id, 'edit']">Modifier
-              le client</button>
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  ...
-                </div>
-              </div>
-            </div>
-            <button class="btn btn-danger btn-block mt-4" (click)="deleteClient(client._id)">Suppression du
-              client
+              le client
             </button>
+
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h3 class="modal-title" id="modal-basic-title">Suprimer le client</h3>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h6 class="text-danger mt-2 mb-4">{{client._id}}</h6>
+
+                <form (ngSubmit)="deleteClientModal(); modal.close()" [formGroup]="FormDelete">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input formControlName="client" class="form-control input-danger" placeholder="Id du client" name="client">
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-danger btn-block" >Suprimer</button>
+                </form>
+              </div>
+            </ng-template>
+
+            <button class="btn btn-block btn-danger" (click)="open(content)">Suprimer le client</button>
+
           </ng-container>
         </div>
 
