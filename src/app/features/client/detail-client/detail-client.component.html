@@ -38,6 +38,7 @@
                     <th scope="col">Ville</th>
                     <th scope="col">Utilisés</th>
                     <th scope="col">Restants</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -47,6 +48,7 @@
                       <td>{{client.address.ville}}</td>
                       <td>{{client.coupon.imprimer}}</td>
                       <td>{{client.coupon.restant}}</td>
+                      <td><button class="btn btn-info" [routerLink]="['/borne', client._id]">Detail</button></td>
                     </tr>
                   </ng-container>
                 </tbody>
@@ -78,7 +80,9 @@
       <h1 class="text-center">Offre</h1>
       <div class="row">
         <app-card-offer *ngFor="let offre of client.offer">
-          <div class="title">{{offre.client}}
+          <div class="title">{{offre.client}}</div>
+          <div class="cardBtn">
+            <button class="btn btn-info" [routerLink]="['/offer', offre._id]">Detail</button>
           </div>
           <div class="p"></div>
         </app-card-offer>
