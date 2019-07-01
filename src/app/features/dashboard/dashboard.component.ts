@@ -31,8 +31,6 @@ export class DashboardComponent implements OnInit {
   public cannetteLabels = ['Cannette'];
   public cannetteType = 'doughnut';
 
-  constructor(public borneService: BorneService,
-              public offersService: OffersService) { }
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
@@ -42,9 +40,13 @@ export class DashboardComponent implements OnInit {
   public barChartType = 'bar';
   public barChartLegend = true;
   public barChartData = [
-    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie A' },
-    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie B' },
+    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Plastique' },
+    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Cannettes' },
   ];
+
+  constructor(public borneService: BorneService,
+    public offersService: OffersService) { }
+
 
   ngOnInit() {
     this.getListBornes();
@@ -53,29 +55,29 @@ export class DashboardComponent implements OnInit {
 
   getListBornes() {
     this.borneService.getListBorne().subscribe(
-            (bornes: Borne[]) => {
-              this.topBornesBacUn = [...bornes.sort((a, b) => b.taux.bacUn - a.taux.bacUn)];
-              this.topBornesBacDeux = [...bornes.sort((a, b) => b.taux.bacDeux - a.taux.bacDeux)];
-              this.topBornesRouleaux = [...bornes.sort((a, b) => a.coupon.restant - b.coupon.restant)];
+      (bornes: Borne[]) => {
+        this.topBornesBacUn = [...bornes.sort((a, b) => b.taux.bacUn - a.taux.bacUn)];
+        this.topBornesBacDeux = [...bornes.sort((a, b) => b.taux.bacDeux - a.taux.bacDeux)];
+        this.topBornesRouleaux = [...bornes.sort((a, b) => a.coupon.restant - b.coupon.restant)];
 
-              this.rouleauxTauxUn = Math.round((350 - this.topBornesRouleaux[0].coupon.restant) / 3.5);
-              this.rouleauxTauxDeux = Math.round((350 - this.topBornesRouleaux[1].coupon.restant) / 3.5);
-              this.rouleauxTauxTrois = Math.round((350 - this.topBornesRouleaux[2].coupon.restant) / 3.5);
-              console.log(this.rouleauxTauxDeux);
-            },
-        );
+        this.rouleauxTauxUn = Math.round((350 - this.topBornesRouleaux[0].coupon.restant) / 3.5);
+        this.rouleauxTauxDeux = Math.round((350 - this.topBornesRouleaux[1].coupon.restant) / 3.5);
+        this.rouleauxTauxTrois = Math.round((350 - this.topBornesRouleaux[2].coupon.restant) / 3.5);
+        console.log(this.rouleauxTauxDeux);
+      },
+    );
   }
 
   getListOffers() {
     this.offersService.getListOffers().subscribe(
-            (offers: Offer[]) => {
-              this.topOffres = [...offers.sort((a, b) => b.coupon.imprime - a.coupon.imprime)];
+      (offers: Offer[]) => {
+        this.topOffres = [...offers.sort((a, b) => b.coupon.imprime - a.coupon.imprime)];
 
-              this.firstOffreTaux = Math.round(this.topOffres[0].coupon.imprime / this.topOffres[0].coupon.total * 100);
-              this.secondOffreTaux = Math.round(this.topOffres[1].coupon.imprime / this.topOffres[1].coupon.total * 100);
-              this.thirdOffreTaux = Math.round(this.topOffres[2].coupon.imprime / this.topOffres[2].coupon.total * 100);
-            },
-        );
+        this.firstOffreTaux = Math.round(this.topOffres[0].coupon.imprime / this.topOffres[0].coupon.total * 100);
+        this.secondOffreTaux = Math.round(this.topOffres[1].coupon.imprime / this.topOffres[1].coupon.total * 100);
+        this.thirdOffreTaux = Math.round(this.topOffres[2].coupon.imprime / this.topOffres[2].coupon.total * 100);
+      },
+    );
   }
 
 }
