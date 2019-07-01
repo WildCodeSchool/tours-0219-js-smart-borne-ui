@@ -21,23 +21,51 @@
                 [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
             <div class="row mt-4">
-                <div class="col-md-12 col-xl-12">
+                <div class="col-6 col-6">
                     <div class="card">
-                        <p class="text-center p-3">Borne</p>
-                        <div class=" ml-3 mr-3 mb-3">
+                        <p class="text-center p-3">Remplissage bac 1 :</p>
+                        <div class=" ml-3 mr-3 mb-3" *ngIf="topBornesBacUn">
                             <p>
-                                <ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true">
-                                    <i>25%</i>
+                                <ngb-progressbar type="success" [value]="topBornesBacUn[0].taux.bacUn" [striped]="true"
+                                    [animated]="true">
+                                    <i>{{topBornesBacUn[0]._id}} - {{topBornesBacUn[0].taux.bacUn}}%</i>
                                 </ngb-progressbar>
                             </p>
                             <p>
-                                <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true">
-                                    <i>50%</i>
+                                <ngb-progressbar type="success" [value]="topBornesBacUn[1].taux.bacUn" [striped]="true"
+                                    [animated]="true">
+                                    <i>{{topBornesBacUn[1]._id}} - {{topBornesBacUn[1].taux.bacUn}}%</i>
                                 </ngb-progressbar>
                             </p>
                             <p>
-                                <ngb-progressbar type="success" [value]="75" [striped]="true" [animated]="true">
-                                    <i>75%</i>
+                                <ngb-progressbar type="success" [value]="topBornesBacUn[2].taux.bacUn" [striped]="true"
+                                    [animated]="true">
+                                    <i>{{topBornesBacUn[2]._id}} - {{topBornesBacUn[2].taux.bacUn}}%</i>
+                                </ngb-progressbar>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-6">
+                    <div class="card">
+                        <p class="text-center p-3">Remplissage bac 2 :</p>
+                        <div class=" ml-3 mr-3 mb-3" *ngIf="topBornesBacDeux">
+                            <p>
+                                <ngb-progressbar type="success" [value]="topBornesBacDeux[0].taux.bacDeux"
+                                    [striped]="true" [animated]="true">
+                                    <i>{{topBornesBacDeux[0]._id}} - {{topBornesBacDeux[0].taux.bacDeux}}%</i>
+                                </ngb-progressbar>
+                            </p>
+                            <p>
+                                <ngb-progressbar type="success" [value]="topBornesBacDeux[1].taux.bacDeux"
+                                    [striped]="true" [animated]="true">
+                                    <i>{{topBornesBacDeux[1]._id}} - {{topBornesBacDeux[1].taux.bacDeux}}%</i>
+                                </ngb-progressbar>
+                            </p>
+                            <p>
+                                <ngb-progressbar type="success" [value]="topBornesBacDeux[2].taux.bacDeux"
+                                    [striped]="true" [animated]="true">
+                                    <i>{{topBornesBacDeux[2]._id}} - {{topBornesBacDeux[2].taux.bacDeux}}%</i>
                                 </ngb-progressbar>
                             </p>
                         </div>
@@ -47,32 +75,49 @@
             <div class="row mt-4">
                 <div class="col-md-6 col-xl-6">
                     <div class="card">
-                        <p class="text-center p-3">Coupons</p>
-                        <div class=" ml-3 mr-3 mb-3">
+                        <p class="text-center p-3">Offres proche de l'expiration :</p>
+                        <div class=" ml-3 mr-3 mb-3" *ngIf="topOffres">
                             <p>
-                                <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true">
-                                    <i>50%</i>
+                                <ngb-progressbar type="success" [value]="firstOffreTaux" [striped]="true"
+                                    [animated]="true">
+                                    <i>{{topOffres[0]._id}} - {{firstOffreTaux}}%</i>
                                 </ngb-progressbar>
                             </p>
                             <p>
-                                <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true">
-                                    <i>50%</i>
+                                <ngb-progressbar type="success" [value]="secondOffreTaux" [striped]="true"
+                                    [animated]="true">
+                                    <i>{{topOffres[1]._id}} - {{secondOffreTaux}}%</i>
                                 </ngb-progressbar>
                             </p>
                             <p>
-                                <ngb-progressbar type="success" [value]="50" [striped]="true" [animated]="true">
-                                    <i>50%</i>
+                                <ngb-progressbar type="success" [value]="thirdOffreTaux" [striped]="true"
+                                    [animated]="true">
+                                    <i>{{topOffres[2]._id}} - {{thirdOffreTaux}}%</i>
                                 </ngb-progressbar>
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-xl-6">
+                <div class="col-md-6 col-xl-6 mt-4">
                     <div class="card">
-                        <p class="text-center p-3">Rouleaux</p>
-                        <div class=" ml-3 mr-3 mb-3">
+                        <p class="text-center p-3">Rouleaux d'impression vides :</p>
+                        <div class=" ml-3 mr-3 mb-3" *ngIf="topBornesRouleaux">
                             <p>
-                                <ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true"><i>50%</i>
+                                <ngb-progressbar type="info" [value]="rouleauxTauxUn"
+                                    [striped]="true" [animated]="true"><i>{{topBornesRouleaux[0]._id}} -
+                                        {{rouleauxTauxUn}}%</i>
+                                </ngb-progressbar>
+                            </p>
+                            <p>
+                                <ngb-progressbar type="info" [value]="rouleauxTauxDeux"
+                                    [striped]="true" [animated]="true"><i>{{topBornesRouleaux[1]._id}}-
+                                        {{rouleauxTauxDeux}}%</i>
+                                </ngb-progressbar>
+                            </p>
+                            <p>
+                                <ngb-progressbar type="info" [value]="rouleauxTauxTrois"
+                                    [striped]="true" [animated]="true"><i>{{topBornesRouleaux[2]._id}} -
+                                        {{rouleauxTauxTrois}}%</i>
                                 </ngb-progressbar>
                             </p>
                         </div>
@@ -80,5 +125,5 @@
                 </div>
             </div>
         </div>
-
-
+    </div>
+</div>

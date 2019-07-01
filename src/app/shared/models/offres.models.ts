@@ -9,7 +9,7 @@ export class Offer {
       fin: string,
     },
     public coupon: {
-      imprime: string,
+      imprimes: string,
       total: string,
     },
     public offers: {
