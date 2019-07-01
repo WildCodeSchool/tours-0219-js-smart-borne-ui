@@ -4,6 +4,9 @@ import { UserService } from '../../../core/http/user.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs/operators';
+import { ClientService } from '../../../core/http/client.service';
+import { Client } from '../../../shared/models/client-model';
 
 @Component({
   selector: 'app-edit-user',
@@ -13,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class EditUserComponent implements OnInit {
   public user: User;
   public id: string;
+  public client: Client[];
   public roles = [
     { name: 'ADMINISTRATEUR' },
     { name: 'CLIENT' },
@@ -22,16 +26,22 @@ export class EditUserComponent implements OnInit {
               private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              public clientService: ClientService) {
   }
 
   userForm = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required, Validators.email]],
     role: ['', [Validators.required]],
+    client: [''],
   });
 
   ngOnInit() {
+    this.clientService.getListClient().pipe(first()).subscribe((client) => {
+      this.client = client;
+    });
+
     this.route.paramMap.subscribe((id: ParamMap) => {
       this.id = id.get('id');
       if (this.id) {
@@ -50,6 +60,7 @@ export class EditUserComponent implements OnInit {
     this.userService.putUser(
       this.id, this.userForm.value).subscribe(
       (user: User) => {
+        this.clientService.associateUser(this.userForm.value.client, this.user._id).subscribe();
         this.userForm.patchValue(user);
         this.toastr.clear();
         this.toastr.success('success', 'User Updater');

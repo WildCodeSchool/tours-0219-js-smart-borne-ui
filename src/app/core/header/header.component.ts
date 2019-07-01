@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router,
               private authenticationService: AuthService,
-              public  profileService: ProfileService,
+              public profileService: ProfileService,
               private toastr: ToastrService) {
   }
 
@@ -28,10 +28,10 @@ export class HeaderComponent implements OnInit {
 
   getProfile() {
     this.profileService.getProfile().subscribe(
-        (user: User) => {
-          this.profile = user;
-        },
-      );
+      (user: User) => {
+        this.profile = user;
+      },
+    );
   }
 
   logout() {

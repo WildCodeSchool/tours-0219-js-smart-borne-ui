@@ -4,10 +4,13 @@
 
     <div class="col-12 m-3">
         <div class="alert alert-danger m-4 text-center"
-             *ngIf="clients &&(clients | filterClient: filterId:filterName:filterRaisonSocial).length === 0">
-            <span *ngIf="filterId || filterName || filterRaisonSocial">Il n y a pas de client</span>
+            *ngIf="clients &&(clients | filterClient: filterId:filterName:filterRaisonSocial:filterCoupon).length === 0">
+            <span *ngIf="filterId || filterName || filterRaisonSocial || filterCoupon">Il n y a pas de client</span>
         </div>
     </div>
+    <div class="col-12">
+            <h1 class="text-center">Liste des clients</h1>
+        </div>
 
     <div class="row">
 
@@ -20,43 +23,45 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nom</th>
-                                    <th scope="col">Raison social</th>
-                                    <th scope="col">Coupon</th>
-                                    <th scope="col">Borne</th>
+                                    <th scope="col">Raison sociale</th>
+                                    <th scope="col">Coupon Imprimés / Total</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Id"
-                                           [(ngModel)]='filterId'>
-                                </th>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Nom"
-                                           [(ngModel)]='filterName'>
-                                </th>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Raison social"
-                                           [(ngModel)]='filterRaisonSocial'>
-                                </th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                                <ng-container *ngFor="let client of clients | filterClient: filterId:filterName:filterRaisonSocial">
+                                <tr>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Id"
+                                            [(ngModel)]='filterId'>
+                                    </th>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Nom"
+                                            [(ngModel)]='filterName'>
+                                    </th>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search"
+                                            placeholder="Raison social" [(ngModel)]='filterRaisonSocial'>
+                                    </th>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search"
+                                            placeholder="Coupon Restant" [(ngModel)]='filterCoupon'>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                <ng-container
+                                    *ngFor="let client of clients | filterClient: filterId:filterName:filterRaisonSocial:filterCoupon">
                                     <tr>
                                         <th scope="row">{{client._id}}</th>
                                         <td>{{client.name}}</td>
-                                        <td> </td>
-                                        <td></td>
+                                        <td>{{client.raisonSocial}}</td>
                                         <td>
-                                                <ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true"><i>25%</i>
-                                                </ngb-progressbar>
+                                            <ngb-progressbar type="success" [value]="[calculatePercentage(client.coupon.imprimer, client.coupon.total)]" [striped]="true"
+                                                [animated]="true"><i> {{client.coupon.imprimer}} / {{client.coupon.total}} </i>
+                                            </ngb-progressbar>
                                         </td>
-                                        <td>Borne</td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-primary" [routerLink]="['/client', client._id]">Detail
+                                            <button type="button" class="btn btn-outline-primary"
+                                                [routerLink]="['/client', client._id]">Détails
                                             </button>
                                         </td>
                                     </tr>

@@ -5,7 +5,6 @@ import { CreateOfferComponent } from './offres/create-offer/create-offer.compone
 import { DetailOfferComponent } from './offres/detail-offer/detail-offer.component';
 import { EditOfferComponent } from './offres/edit-offer/edit-offer.component';
 import { ListOffersComponent } from './offres/list-offers/list-offers.component';
-import { CardOfferComponent } from '../shared/components/card-offer/card-offer.component';
 import { HttpModule } from '@angular/http';
 import { ListClientComponent } from './client/list-client/list-client.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +26,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListUserComponent } from './user/list-user/list-user.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { EditClientComponent } from './client/edit-client/edit-client.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import { EditClientComponent } from './client/edit-client/edit-client.component'
     DetailOfferComponent,
     EditOfferComponent,
     ListOffersComponent,
-    CardOfferComponent,
     ListClientComponent,
     DashboardComponent,
     CreateClientComponent,
@@ -49,6 +48,7 @@ import { EditClientComponent } from './client/edit-client/edit-client.component'
     ListUserComponent,
     EditUserComponent,
     EditClientComponent,
+    MaintenanceComponent,
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,10 @@
 <div class="container-fluid mb-5">
 
-    <div class="row">
+  <div class="row">
 
         <div class="col-xl-12 col-lg-12">
             <button [routerLink]="['/register']" class="btn btn-outline-success float-right" type="button">
-                Crée un utilisateur
+                Créer un utilisateur
             </button>
         </div>
 
@@ -12,7 +12,7 @@
         <div class="col-12 m-3">
             <div class="alert alert-danger m-4 text-center"
                  *ngIf="users &&(users | filterUser: filterId:filterLastname:filterEmail:filterRole).length === 0">
-                <span *ngIf="filterId || filterLastname || filterEmail || filterRole">Il n y a pas d'utilisateur</span>
+                <span *ngIf="filterId || filterLastname || filterEmail || filterRole">Il n y a pas d'utilisateurs</span>
             </div>
         </div>
 
@@ -26,8 +26,8 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nom</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Role</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Rôle</th>
                                 <th scope="col"></th>
                             </tr>
                             </thead>
@@ -59,7 +59,7 @@
                                     <td>{{user.role}}</td>
                                     <td>
                                         <button type="button" [routerLink]="['/dashboard/user', user._id , 'edit' ]"
-                                                class="btn btn-outline-primary">Edit
+                                                class="btn btn-outline-primary">Editer
                                         </button>
                                     </td>
                                 </tr>
@@ -68,10 +68,10 @@
                         </table>
                     </div>
 
-                </div>
-            </div>
         </div>
-
+      </div>
     </div>
+
+  </div>
 
 </div>

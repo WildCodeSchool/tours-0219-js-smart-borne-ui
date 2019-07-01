@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+
+        <ng-container *ngFor="let borne of bornes">
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{borne._id}}</h5>
+                        <p class="card-text">{{borne.dateInstallation}}</p>
+                        <a href="#" class="btn btn-primary btn-block">Voir la borne</a>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+
+    </div>
+</div>
+

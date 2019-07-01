@@ -31,12 +31,12 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: (tokenGetter),
-        whitelistedDomains: ['localhost:3000'],
+        whitelistedDomains: ['192.168.155.74:3000'],
       },
     }),
   ],
   providers: [
-    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

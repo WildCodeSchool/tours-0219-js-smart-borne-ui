@@ -15,6 +15,7 @@ import { first } from 'rxjs/operators';
 })
 export class CreateBorneComponent implements OnInit {
   public user: User;
+  public bornes: Borne[];
 
   constructor(public borneService: BorneService,
               private fb: FormBuilder,
@@ -38,15 +39,46 @@ export class CreateBorneComponent implements OnInit {
       bacUn: [0],
       bacDeux: [0],
     }),
-    coupons: this.fb.group({
+    coupon: this.fb.group({
       restant: [0],
       imprimer: [0],
+    }),
+    plastique: this.fb.group({
+      utilise: [0],
+      total: [0],
+    }),
+    cannette: this.fb.group({
+      utilise: [0],
+      total: [0],
     }),
     total: this.fb.group({
       recycle: [0],
       remise: [0],
       cannettes: [0],
-      plastique: [0],
+    }),
+    jour: this.fb.group({
+      cannetteTotal: [0],
+      cannetteUtilise: [0],
+      plastiqueTotal: [0],
+      plastiqueUtilise: [0],
+      couponTotal: [0],
+      couponUtilise: [0],
+    }),
+    semaine: this.fb.group({
+      cannetteTotal: [0],
+      cannetteUtilise: [0],
+      plastiqueTotal: [0],
+      plastiqueUtilise: [0],
+      couponTotal: [0],
+      couponUtilise: [0],
+    }),
+    mois: this.fb.group({
+      cannetteTotal: [0],
+      cannetteUtilise: [0],
+      plastiqueTotal: [0],
+      plastiqueUtilise: [0],
+      couponTotal: [0],
+      couponUtilise: [0],
     }),
     problemesTechniques: ['0'],
   });
@@ -61,6 +93,7 @@ export class CreateBorneComponent implements OnInit {
     this.borneService.postBorne(
       this.borneForm.value).subscribe(
         (borne: Borne) => {
+          this.bornes.push(borne);
           this.borneForm.patchValue(borne);
           this.toastr.clear();
           this.toastr.success('success', 'Borne Created');
