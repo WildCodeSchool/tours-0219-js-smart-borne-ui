@@ -20,37 +20,49 @@ import { RoleGuard } from './core/guards/role.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path:  '',
-    component:  HeaderComponent,
-    // canActivate: [AuthGuard],
+  {
+    path: '',
+    component: HeaderComponent,
+    canActivate: [AuthGuard],
     children: [
-      { path: 'register', component: RegisterComponent, canActivate: [RoleGuard],
+      {
+        path: 'register', component: RegisterComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        } },
+        },
+      },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'bornes', component: ListBorneComponent },
       { path: 'borne/:id', component: DetailBorneComponent },
-      { path: 'borne/:id/edit', component: EditBorneComponent, canActivate: [RoleGuard],
+      {
+        path: 'borne/:id/edit', component: EditBorneComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        }  },
-      { path: 'dashboard/user', component: ListUserComponent,  canActivate: [RoleGuard],
+        },
+      },
+      {
+        path: 'dashboard/user', component: ListUserComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        }  },
-      { path: 'dashboard/user/:id/edit', component: EditUserComponent, canActivate: [RoleGuard],
+        },
+      },
+      {
+        path: 'dashboard/user/:id/edit', component: EditUserComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        }  },
+        },
+      },
       { path: 'clients', component: ListClientComponent },
       { path: 'client/:id', component: DetailClientComponent },
-      { path: 'client/:id/edit', component: EditClientComponent, canActivate: [RoleGuard],
+      {
+        path: 'client/:id/edit', component: EditClientComponent, canActivate: [RoleGuard],
         data: {
           expectedRole: 'ADMINISTRATEUR',
-        }  },
-    ]},
-  // { path: '**', redirectTo: '' },
+        },
+      },
+    ],
+  },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
