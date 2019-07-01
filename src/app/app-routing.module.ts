@@ -70,7 +70,6 @@ const routes: Routes = [
           expectedRole: 'ADMINISTRATEUR',
         },
       },
-
     ],
   },
   { path: '**', redirectTo: '' },
