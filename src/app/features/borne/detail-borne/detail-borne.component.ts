@@ -3,6 +3,15 @@ import { BorneService } from '../../../core/http/borne.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Borne } from '../../../shared/models/borne';
 import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs/operators';
+import { ProfileService } from '../../../core/http/profile.service';
+import { User } from '../../../shared/models/user';
+import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ClientService } from '../../../core/http/client.service';
+import { Client } from '../../../shared/models/client-model';
+import { FormBuilder } from '@angular/forms';
+import { OffersService } from '../../../core/http/offers.service';
+import { Offer } from '../../../shared/models/offres.models';
 
 @Component({
   selector: 'app-detail-borne',
@@ -12,34 +21,72 @@ import { ToastrService } from 'ngx-toastr';
 export class DetailBorneComponent implements OnInit {
   public bornes: Borne[];
   public borne: Borne;
+  public user: User;
+  public check: any;
+  public client: Client[];
+  public offers: Offer[];
   public id: string;
-
-  constructor(
-    private route: ActivatedRoute,
-    public borneService: BorneService,
-    private toastr: ToastrService,
-    private router: Router) { }
-  public plastiqueData = [50];
+  public cannetteLabels = ['Cannette'];
+  public cannetteType = 'doughnut';
   public plastiqueLabels = ['Plastique'];
   public plastiqueType = 'doughnut';
+  public barChartOptions = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+  };
+  public barChartLabels = ['janvier', 'fevrier', 'mars', 'avril', 'mai',
+    'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+  public barChartType = 'bar';
+  public barChartLegend = true;
+  public barChartData = [
+    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie A' },
+    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie B' },
+  ];
+  constructor(
+    config: NgbTabsetConfig,
+    private route: ActivatedRoute,
+    public borneService: BorneService,
+    public clientService: ClientService,
+    private toastr: ToastrService,
+    private router: Router,
+    private fb: FormBuilder,
+    private profileService: ProfileService,
+    private offerService: OffersService,
+  ) {
+    config.justify = 'center';
+    config.type = 'pills';
+  }
 
-  public cannetteData = [50];
-  public cannetteLabels = ['Canette'];
-  public cannetteType = 'doughnut';
+  Form = this.fb.group({
+    client: [''],
+  });
+  assoOfferForm = this.fb.group({
+    offer: [''],
+  });
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
       this.getBorne();
     });
+    this.profileService.getProfile().pipe(first()).subscribe((users) => {
+      this.user = users;
+    });
+    this.clientService.getListClient().pipe(first()).subscribe((client) => {
+      this.client = client;
+    });
+    this.offerService.getListOffers().pipe(first()).subscribe((offer) => {
+      this.offers = offer;
+    });
   }
 
   getBorne() {
     this.borneService.getBorneById(this.id).subscribe(
-        (borne: Borne) => {
-          this.borne = borne;
-        },
+      (borne: Borne) => {
+        this.borne = borne;
+      },
     );
   }
+
   deleteBorne(id) {
     const r = confirm('Etes VOUS sur');
     if (r) {
@@ -48,7 +95,33 @@ export class DetailBorneComponent implements OnInit {
       this.router.navigateByUrl(`bornes`);
 
     }
+  }
 
+  onSubmit() {
+
+    this.clientService.associateBorne(this.Form.value.client, this.borne._id).subscribe(
+      () => {
+        this.toastr.clear();
+        this.toastr.success('success', 'Borne associer');
+        this.router.navigateByUrl('bornes');
+      },
+      (error) => {
+        this.toastr.clear();
+        this.toastr.error(`Error ${error}`);
+      });
+  }
+
+  assoOffer() {
+    this.borneService.associateOffer(this.borne._id, this.assoOfferForm.value.offer).subscribe(
+      () => {
+        this.toastr.clear();
+        this.toastr.success('success', 'Offre associer');
+        // this.router.navigateByUrl('bornes');
+      },
+      (error) => {
+        this.toastr.clear();
+        this.toastr.error(`Error ${error}`);
+      });
   }
 
 }

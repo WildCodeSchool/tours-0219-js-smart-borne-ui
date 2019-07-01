@@ -4,6 +4,9 @@ import { Offer } from '../../../shared/models/offres.models';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/shared/models/user';
+import { ProfileService } from 'src/app/core/http/profile.service';
+import { first } from 'rxjs/operators';
 @Component({
   selector: 'app-create-offer',
   templateUrl: './create-offer.component.html',
@@ -12,24 +15,33 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateOfferComponent implements OnInit {
   public id;
   public offer;
+  public user: User;
   constructor(
     public service: OffersService,
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
+    private profileService: ProfileService,
   ) { }
 
   offerForm = this.fb.group({
-    name: [''],
-    id: ['', [Validators.required]],
     client: ['', [Validators.required]],
     remise: ['', [Validators.required]],
-    details: ['', [Validators.maxLength(300)]],
-    debutOffre: ['', [Validators.required]],
-    couponsRestants: ['', [Validators.required]],
+    contrat: this.fb.group({
+      debut: ['', [Validators.required]],
+      fin: ['', [Validators.required]],
+    }),
+    coupon: this.fb.group({
+      total: ['', [Validators.required]],
+      imprime: [0],
+    }),
   });
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.profileService.getProfile().pipe(first()).subscribe((users) => {
+      this.user = users;
+    });
+  }
 
   onSubmit() {
     this.service.postOffer(this.offerForm.value).subscribe(
@@ -37,7 +49,7 @@ export class CreateOfferComponent implements OnInit {
         this.offerForm.patchValue(offer);
         this.toastr.clear();
         this.toastr.success('success', 'Offer Created');
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/dashboard');
       },
       (error) => {
         this.toastr.clear();

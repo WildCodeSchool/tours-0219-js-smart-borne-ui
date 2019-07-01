@@ -9,7 +9,9 @@ export class FilterClientPipe implements PipeTransform {
   transform(items: Array<any>,
             filterId: string,
             filterName: string,
-            filterRaisonSocial: string) {
+            filterRaisonSocial: string,
+            filterCoupon: string,
+  ) {
     if (items && items.length) {
       return items.filter((item) => {
         if (filterId && item._id.toLowerCase().indexOf(filterId.toLowerCase()) === -1) {
@@ -19,6 +21,9 @@ export class FilterClientPipe implements PipeTransform {
           return false;
         }
         if (filterRaisonSocial && item.raisonSocial.toLowerCase().indexOf(filterRaisonSocial.toLowerCase()) === -1) {
+          return false;
+        }
+        if (filterCoupon && item.coupon.imprimer.toString().indexOf(filterCoupon.toString()) === -1) {
           return false;
         }
         return true;

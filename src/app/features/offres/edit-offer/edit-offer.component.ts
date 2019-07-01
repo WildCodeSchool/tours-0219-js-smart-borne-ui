@@ -24,12 +24,15 @@ export class EditOfferComponent implements OnInit {
   ) { }
 
   offerForm = this.fb.group({
-    name: [''],
     client: ['', [Validators.required]],
     remise: ['', [Validators.required]],
-    details: ['', [Validators.maxLength(300)]],
-    debutOffre: ['', [Validators.required]],
-    couponsRestants: ['', [Validators.required]],
+    contrat: this.fb.group({
+      debut: [''],
+      fin: [''],
+    }),
+    coupon: this.fb.group({
+      total: [''],
+    }),
   });
 
   ngOnInit() {
@@ -52,7 +55,7 @@ export class EditOfferComponent implements OnInit {
         this.offerForm.patchValue(offer);
         this.toastr.clear();
         this.toastr.success('success', 'Offer updated');
-        this.router.navigateByUrl(`offre/${this.id}`);
+        this.router.navigateByUrl(`offer/${this.id}`);
       },
       (error) => {
         this.toastr.clear();

@@ -50,11 +50,7 @@ export class CreateClientComponent implements OnInit {
         email: ['', [Validators.required]],
         telephone: ['', [Validators.required]],
       }),
-      coupon: this.fb.group({
-        total: ['', [Validators.required]],
-        imprimer: ['', [Validators.required]],
-        restant: ['', [Validators.required]],
-      }),
+      coupon: [0],
     });
   }
   ngOnInit() {
