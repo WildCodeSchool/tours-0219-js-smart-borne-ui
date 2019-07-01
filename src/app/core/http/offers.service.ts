@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Offer } from '../../shared/models/offres.models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Client } from '../../shared/models/client-model';;
+import { Client } from '../../shared/models/client-model';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,7 +31,4 @@ export class OffersService {
   public deleteOffer(id: string): Observable<Offer> {
     return this.http.delete<Offer>(`${this.configUrl}/${id}`);
   }
-  // public associateOffer(idOffer: string, idClient: string): Observable<Client> {
-  //   return this.http.put<Client>(`http://localhost:3000/api/client/${idClient}/offer/${idOffer}`, {});
-  // }
 }

@@ -5,6 +5,7 @@
             <h3 class="sizeTitleHeader">{{profile?.role}}</h3>
         </div>
 
+      <ng-container *ngIf="profile?.role == 'ADMINISTRATEUR'">
         <ul class="list-unstyled components text-center">
             <li>
                 <a class="asidebar" [routerLink]="['/dashboard']">Dashboard</a>
@@ -22,6 +23,7 @@
                 <a class="asidebar" [routerLink]="['/maintenance']">Maintenance</a>
             </li>
         </ul>
+      </ng-container>
 
     </nav>
 

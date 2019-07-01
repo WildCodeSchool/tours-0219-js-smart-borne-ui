@@ -15,27 +15,11 @@
     <div class="row">
 
         <div class="col-md-12 col-xl-12 mt-4">
-            <div id="myChart">
-
-
-                <div class="row">
-                    <div class="col-md-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <button type="button" class="btn btn-outline-primary">Jour</button>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <button type="button" class="btn btn-outline-primary">Semaine</button>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <button type="button" class="btn btn-outline-primary">Mois</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h1 class="text-center mb-3 mt-3">Tableaux</h1>
+        <div style="display: block">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+        </div>
             <div class="row mt-4">
                 <div class="col-6 col-6">
                     <div class="card">

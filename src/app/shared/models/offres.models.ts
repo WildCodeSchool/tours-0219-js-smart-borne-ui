@@ -12,5 +12,8 @@ export class Offer {
       imprime: number,
       total: number,
     },
+    public offers: {
+      client: string,
+    },
   ) { }
 }

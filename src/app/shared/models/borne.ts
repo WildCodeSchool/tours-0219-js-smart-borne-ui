@@ -1,3 +1,4 @@
+import { Offer } from './offres.models';
 export class Borne {
   constructor(
       // tslint:disable-next-line:variable-name
@@ -58,6 +59,7 @@ export class Borne {
     public problemesTechniques: string,
     public styliseeClient: string,
     public details: string,
+    public offers: Offer[],
   ) {
   }
 }

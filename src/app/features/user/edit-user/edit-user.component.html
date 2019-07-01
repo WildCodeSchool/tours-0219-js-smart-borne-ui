@@ -36,7 +36,8 @@
 
       <div class="col-md-12">
         <div class="form-group">
-          <select formControlName="client" class="form-control">
+          <label for="client">Associer un client</label>
+          <select formControlName="client" id="client" class="form-control">
             <option *ngFor="let client of client" name="client" value="{{client._id}}">{{client.name}}</option>
           </select>
         </div>
