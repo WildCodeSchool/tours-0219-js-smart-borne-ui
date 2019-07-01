@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="col-12">
-        <h1 class="text-center">Listes de Bornes</h1>
+        <h1 class="text-center">Liste de Bornes</h1>
     </div>
 
     <div class="row">
@@ -105,10 +105,10 @@
                                         </td>
                                     </tr>
                                 </ng-container>
-            
+
                             </tbody>
                         </table>
-                        <app-card-offer *ngFor="let borne of bornes" >
+                        <app-card-offer *ngFor="let borne of bornes">
                             <div class="title">{{borne.numeroSerie}}</div>
                             <div class="p">{{borne.address.ville}}</div>
                         </app-card-offer>

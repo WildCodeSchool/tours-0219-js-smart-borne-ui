@@ -9,8 +9,8 @@ export class Offer {
       fin: string,
     },
     public coupon: {
-      imprimes: string,
-      total: string,
+      imprime: number,
+      total: number,
     },
   ) { }
 }
