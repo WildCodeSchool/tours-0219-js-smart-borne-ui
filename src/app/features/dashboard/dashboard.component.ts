@@ -37,8 +37,8 @@ export class DashboardComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true,
   };
-  public barChartLabels = ['janvier', 'fevrier', 'mars', 'avril', 'mai',
-    'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+  public barChartLabels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai',
+    'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
   public barChartType = 'bar';
   public barChartLegend = true;
   public barChartData = [
