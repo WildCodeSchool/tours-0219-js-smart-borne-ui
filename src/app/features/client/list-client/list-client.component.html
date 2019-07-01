@@ -1,0 +1,74 @@
+<div class="container-fluid mb-5">
+
+    <app-create-client></app-create-client>
+
+    <div class="col-12 m-3">
+        <div class="alert alert-danger m-4 text-center"
+             *ngIf="clients &&(clients | filterClient: filterId:filterName:filterRaisonSocial).length === 0">
+            <span *ngIf="filterId || filterName || filterRaisonSocial">Il n y a pas de client</span>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xl-12 col-lg-12">
+            <div class="mb-4 p-3">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Raison social</th>
+                                    <th scope="col">Coupon</th>
+                                    <th scope="col">Borne</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>
+                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Id"
+                                           [(ngModel)]='filterId'>
+                                </th>
+                                <th>
+                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Nom"
+                                           [(ngModel)]='filterName'>
+                                </th>
+                                <th>
+                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Raison social"
+                                           [(ngModel)]='filterRaisonSocial'>
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                                <ng-container *ngFor="let client of clients | filterClient: filterId:filterName:filterRaisonSocial">
+                                    <tr>
+                                        <th scope="row">{{client._id}}</th>
+                                        <td>{{client.name}}</td>
+                                        <td> </td>
+                                        <td></td>
+                                        <td>
+                                                <ngb-progressbar type="success" [value]="25" [striped]="true" [animated]="true"><i>25%</i>
+                                                </ngb-progressbar>
+                                        </td>
+                                        <td>Borne</td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-primary" [routerLink]="['/client', client._id]">Detail
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

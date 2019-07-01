@@ -1,0 +1,58 @@
+<div class="wrapper">
+
+    <nav class="sidebar" [ngbCollapse]="isCollapsed">
+        <div class="sidebar-header text-center">
+            <h3 class="sizeTitleHeader">{{profile?.role}}</h3>
+        </div>
+
+        <ul class="list-unstyled components text-center">
+            <li>
+                <a class="asidebar" [routerLink]="['/dashboard']">Dashboard</a>
+            </li>
+            <li>
+                <a class="asidebar" [routerLink]="['/bornes']">Borne</a>
+            </li>
+            <li>
+                <a class="asidebar" [routerLink]="['/clients']">Client</a>
+            </li>
+            <li>
+                <a class="asidebar" href="#">Offre</a>
+            </li>
+        </ul>
+
+    </nav>
+
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-color">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" (click)="isCollapsed = !isCollapsed"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSidebar" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span> Réduire menu</span>
+                </button>
+
+                <h4 class="title-center-smartborne">SMART BORNE</h4>
+
+                <div ngbDropdown class="right d-inline-block">
+                    <button class="btn btn-outline-primary" id="dropdown" ngbDropdownToggle>
+                        {{profile?.username}}
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdown">
+                        <ng-container *ngIf="profile?.role == 'ADMINISTRATEUR'">
+                            <button ngbDropdownItem [routerLink]="[]">Parametre</button>
+                            <button ngbDropdownItem [routerLink]="['/dashboard/user']">Gérer les utilisateurs</button>
+                            <div class="dropdown-divider"></div>
+                        </ng-container>
+                        <button ngbDropdownItem [routerLink]="[]" (click)="logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <router-outlet></router-outlet>
+
+    </div>
+</div>
+
