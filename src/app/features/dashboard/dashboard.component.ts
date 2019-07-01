@@ -18,10 +18,14 @@ export class DashboardComponent implements OnInit {
   public rouleauxTauxUn = 0;
   public rouleauxTauxDeux = 0;
   public rouleauxTauxTrois = 0;
+  public rouleauxTauxQuatre = 0;
+  public rouleauxTauxCinq = 0;
 
   public firstOffreTaux = 0;
   public secondOffreTaux = 0;
   public thirdOffreTaux = 0;
+  public fourthOffreTaux = 0;
+  public fifthOffreTaux = 0;
 
   public plastiqueData = [50];
   public plastiqueLabels = ['Plastique'];
@@ -45,8 +49,7 @@ export class DashboardComponent implements OnInit {
   ];
 
   constructor(public borneService: BorneService,
-    public offersService: OffersService) { }
-
+              public offersService: OffersService) { }
 
   ngOnInit() {
     this.getListBornes();
@@ -63,7 +66,8 @@ export class DashboardComponent implements OnInit {
         this.rouleauxTauxUn = Math.round((350 - this.topBornesRouleaux[0].coupon.restant) / 3.5);
         this.rouleauxTauxDeux = Math.round((350 - this.topBornesRouleaux[1].coupon.restant) / 3.5);
         this.rouleauxTauxTrois = Math.round((350 - this.topBornesRouleaux[2].coupon.restant) / 3.5);
-        console.log(this.rouleauxTauxDeux);
+        this.rouleauxTauxQuatre = Math.round((350 - this.topBornesRouleaux[3].coupon.restant) / 3.5);
+        this.rouleauxTauxCinq = Math.round((350 - this.topBornesRouleaux[4].coupon.restant) / 3.5);
       },
     );
   }
@@ -76,8 +80,19 @@ export class DashboardComponent implements OnInit {
         this.firstOffreTaux = Math.round(this.topOffres[0].coupon.imprime / this.topOffres[0].coupon.total * 100);
         this.secondOffreTaux = Math.round(this.topOffres[1].coupon.imprime / this.topOffres[1].coupon.total * 100);
         this.thirdOffreTaux = Math.round(this.topOffres[2].coupon.imprime / this.topOffres[2].coupon.total * 100);
+        this.fourthOffreTaux = Math.round(this.topOffres[3].coupon.imprime / this.topOffres[3].coupon.total * 100);
+        this.fifthOffreTaux = Math.round(this.topOffres[4].coupon.imprime / this.topOffres[4].coupon.total * 100);
       },
     );
   }
 
+  color(a: number) {
+    if (a >= 90) {
+      return 'danger';
+    }   if (a >= 65) {
+      return 'warning';
+    }
+    return 'success';
+
+  }
 }
