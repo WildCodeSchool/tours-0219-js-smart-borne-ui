@@ -1,13 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <button class="btn btn-outline-success float-right" type="button" data-toggle="collapse"
-        data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-        Modifier l'offre
-      </button>
     </div>
     <div class="col-12">
-      <div class="collapse" id="collapseForm">
         <div class="mb-3 card-body">
           <form (ngSubmit)="onSubmit()" [formGroup]="offerForm">
             <div class="form-row">
@@ -49,7 +44,6 @@
             </button>
           </form>
         </div>
-      </div>
     </div>
   </div>
 </div>
