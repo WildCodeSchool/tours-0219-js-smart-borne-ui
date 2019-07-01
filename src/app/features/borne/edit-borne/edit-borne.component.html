@@ -2,17 +2,11 @@
 
   <div class="row">
 
-    <div class="col-xl-12 col-lg-12">
-      <button class="btn btn-outline-success float-right" type="button"
-        data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
-        Ajouter une borne
-      </button>
-    </div>
 
     <div class="col-xl-12 col-lg-12">
 
       <div>
-        <div class="collapse" id="collapseForm">
+
           <div class="mb-3 card-body">
             <form (ngSubmit)="onSubmit()" [formGroup]="borneForm">
 
@@ -90,7 +84,6 @@
 
             </form>
           </div>
-        </div>
       </div>
 
 
