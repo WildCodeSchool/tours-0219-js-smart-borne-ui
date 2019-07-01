@@ -14,7 +14,7 @@
         <form (ngSubmit)="onSubmit()" [formGroup]="Form">
             <div class="form-group">
                 <select formControlName="client" class="form-control">
-                    <option *ngFor="let client of client" name="client" data-value="{{client.name}}"
+                    <option *ngFor="let client of client" name="client" 
                         value="{{client._id}}">{{client.name}}</option>
                 </select>
                 <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
