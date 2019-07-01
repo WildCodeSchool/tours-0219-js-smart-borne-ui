@@ -81,6 +81,8 @@
       <div class="row">
         <app-card-offer *ngFor="let offre of client.offer">
           <div class="title">{{offre.client}}</div>
+          <div class="nb-coupon">{{offre.coupon.total}}</div>
+          <div class="coupon-edit">{{offre.coupon.imprime}}</div>
           <div class="cardBtn">
             <button class="btn btn-info" [routerLink]="['/offer', offre._id]">Detail</button>
           </div>

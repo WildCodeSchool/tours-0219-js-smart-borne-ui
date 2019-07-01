@@ -2,8 +2,22 @@
   <div class="col-md-4 col-xl-4 mt-4 p-4">
     <div class="card" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="card-title"><ng-content select=".title"></ng-content></h5>
-        <div class="card-btn"><ng-content select=".cardBtn"></ng-content></div>
+        <h5 class="card-title text-center">
+          <ng-content select=".title"></ng-content>
+        </h5>
+
+        <div class="row">
+        <div class="col-md-6">
+          <ng-content select=".nb-coupon"></ng-content>
+        </div>
+        <div class="col-md-6">
+          <ng-content select=".coupon-edit"></ng-content>
+        </div>
+        </div>
+
+        <div class="card-btn float-right">
+          <ng-content select=".cardBtn"></ng-content>
+        </div>
         <p class="card-text">
           <ng-content select=".p"></ng-content>
         </p>
