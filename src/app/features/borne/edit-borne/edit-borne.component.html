@@ -48,7 +48,7 @@
                 <div class="col">
                   <div class="form-group">
                     <input [ngClass]="borneForm.get('dateInstallation').errors ? 'is-invalid' : 'is-valid'"
-                      class="form-control" placeholder="Date installation" name="dateInstallation" type="date"
+                      class="form-control" placeholder="Date d'installation" name="dateInstallation" type="date"
                       formControlName="dateInstallation">
                   </div>
                 </div>
@@ -71,7 +71,7 @@
                     <textarea [ngClass]="borneForm.get('details').errors ? 'is-invalid' : 'is-valid'"
                       class="form-control" placeholder="Détails supplémentaires" maxlength="300" name="details"
                       type="text" formControlName="details"></textarea>
-                    <small class="float-right">300 caractères maximun</small>
+                    <small class="float-right">300 caractères maximum</small>
                   </div>
                 </div>
 

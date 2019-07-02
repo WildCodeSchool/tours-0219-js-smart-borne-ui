@@ -81,7 +81,7 @@
       <p>{{offer.numeroSerie}</p>
     </div>
 
-    <h1 class="text-center">Offre</h1>
+    <h1 class="text-center">Offres</h1>
     <div class="row">
       <app-card-offer *ngFor="let offre of borne.offers">
         <div class="title">{{offre.client}}</div>
@@ -117,7 +117,7 @@
 
       <div class="col-md-6 col-xl-6">
         <div class="card">
-          <p class="text-center p-3">Rouleau</p>
+          <p class="text-center p-3">Rouleau d'impression</p>
           <div class=" ml-3 mr-3 mb-3">
             <p>
               <ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true">
@@ -136,7 +136,7 @@
 
         <ng-template #content let-modal>
           <div class="modal-header">
-            <h3 class="modal-title" id="modal-basic-title">Suprimer la borne</h3>
+            <h3 class="modal-title" id="modal-basic-title">Supprimer la borne</h3>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -150,12 +150,12 @@
                   <input formControlName="borne" class="form-control input-danger" placeholder="Id de la borne" name="borne">
                 </div>
               </div>
-              <button type="submit" class="btn btn-danger btn-block" >Suprimer</button>
+              <button type="submit" class="btn btn-danger btn-block" >Supprimer</button>
             </form>
           </div>
         </ng-template>
 
-        <button class="btn btn-block btn-danger" (click)="open(content)">Suprimer la borne</button>
+        <button class="btn btn-block btn-danger" (click)="open(content)">Supprimer la borne</button>
 
       </ng-container>
 
