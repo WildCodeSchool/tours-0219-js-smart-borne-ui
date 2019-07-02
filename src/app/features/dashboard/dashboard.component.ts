@@ -15,6 +15,9 @@ export class DashboardComponent implements OnInit {
   public topBornesRouleaux: Borne[];
   public topOffres: Offer[];
 
+  public totalCannettes = 0;
+  public totalPlastique = 0;
+
   public rouleauxTauxUn = 0;
   public rouleauxTauxDeux = 0;
   public rouleauxTauxTrois = 0;
@@ -27,13 +30,9 @@ export class DashboardComponent implements OnInit {
   public fourthOffreTaux = 0;
   public fifthOffreTaux = 0;
 
-  public plastiqueData = [50];
-  public plastiqueLabels = ['Plastique'];
-  public plastiqueType = 'doughnut';
-
-  public cannetteData = [50];
-  public cannetteLabels = ['Cannette'];
-  public cannetteType = 'doughnut';
+  public data = [];
+  public labels = ['Cannettes', 'Plastique'];
+  public type = 'doughnut';
 
   public barChartOptions = {
     scaleShowVerticalLines: false,
@@ -68,6 +67,15 @@ export class DashboardComponent implements OnInit {
         this.rouleauxTauxTrois = Math.round((350 - this.topBornesRouleaux[2].coupon.restant) / 3.5);
         this.rouleauxTauxQuatre = Math.round((350 - this.topBornesRouleaux[3].coupon.restant) / 3.5);
         this.rouleauxTauxCinq = Math.round((350 - this.topBornesRouleaux[4].coupon.restant) / 3.5);
+
+        // tslint:disable-next-line: no-increment-decrement
+        for (let i = 0; i > bornes.length; i++) {
+          this.totalPlastique += bornes[i].plastique.total;
+          this.totalCannettes += bornes[i].cannette.total;
+        }
+
+        this.data.push(this.totalCannettes);
+        this.data.push(this.totalPlastique);
       },
     );
   }
@@ -75,8 +83,8 @@ export class DashboardComponent implements OnInit {
   getListOffers() {
     this.offersService.getListOffers().subscribe(
       (offers: Offer[]) => {
-// tslint:disable-next-line: max-line-length
-        this.topOffres = [...offers.sort((a, b) => (Math.round(b.coupon.imprime / b.coupon.total * 100)) - (Math.round(a.coupon.imprime / a.coupon.total * 100))];
+        // tslint:disable-next-line: max-line-length
+        this.topOffres = [...offers.sort((a, b) => (Math.round(b.coupon.imprime / b.coupon.total * 100)) - (Math.round(a.coupon.imprime / a.coupon.total * 100)))];
 
         this.firstOffreTaux = Math.round(this.topOffres[0].coupon.imprime / this.topOffres[0].coupon.total * 100);
         this.secondOffreTaux = Math.round(this.topOffres[1].coupon.imprime / this.topOffres[1].coupon.total * 100);
@@ -91,7 +99,7 @@ export class DashboardComponent implements OnInit {
   color(a: number) {
     if (a >= 90) {
       return 'danger';
-    }   if (a >= 65) {
+    } if (a >= 65) {
       return 'warning';
     }
     return 'success';
