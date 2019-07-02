@@ -35,4 +35,14 @@ export class ListClientComponent implements OnInit {
     }
     return result;
   }
+
+  color(a: number) {
+    if (a >= 90) {
+      return 'danger';
+    } if (a >= 65) {
+      return 'warning';
+    }
+    return 'success';
+
+  }
 }

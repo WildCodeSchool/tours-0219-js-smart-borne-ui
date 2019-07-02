@@ -4,7 +4,7 @@
   <div class="col-12 m-3">
     <div class="alert alert-danger m-4 text-center"
          *ngIf="offers &&(offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin).length === 0">
-            <span *ngIf="filterId || filterClient || filterRemise || filterDebut || filterFin">Il n y a pas d'offre</span>
+            <span *ngIf="filterId || filterClient || filterRemise || filterDebut || filterFin">Il n y a pas d'offres</span>
     </div>
   </div>
 
@@ -63,7 +63,7 @@
                     <td>{{ offer.contrat.fin | date:'d/M/y' }}</td>
                     <td>
                       <button type="button" [routerLink]="['/offer', offer._id]" class="btn btn-outline-primary">
-                        Detail
+                        Détails
                       </button>
                     </td>
                   </tr>

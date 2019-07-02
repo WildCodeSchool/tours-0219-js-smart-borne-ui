@@ -5,7 +5,7 @@
     <div class="col-12 m-3">
         <div class="alert alert-danger m-4 text-center"
             *ngIf="clients &&(clients | filterClient: filterId:filterName:filterRaisonSocial:filterCoupon).length === 0">
-            <span *ngIf="filterId || filterName || filterRaisonSocial || filterCoupon">Il n y a pas de client</span>
+            <span *ngIf="filterId || filterName || filterRaisonSocial || filterCoupon">Il n y a pas de clients</span>
         </div>
     </div>
     <div class="col-12">
@@ -24,7 +24,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Nom</th>
                                     <th scope="col">Raison sociale</th>
-                                    <th scope="col">Coupon Imprimés / Total</th>
+                                    <th scope="col">Coupon Imprimés</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -55,8 +55,8 @@
                                         <td>{{client.name}}</td>
                                         <td>{{client.raisonSocial}}</td>
                                         <td>
-                                            <ngb-progressbar type="success" [value]="[calculatePercentage(client.coupon.imprimer, client.coupon.total)]" [striped]="true"
-                                                [animated]="true"><i> {{client.coupon.imprimer}} / {{client.coupon.total}} </i>
+                                            <ngb-progressbar [type]="color(calculatePercentage(client.coupon.imprimer, client.coupon.total))" [value]="[calculatePercentage(client.coupon.imprimer, client.coupon.total)]" [striped]="true"
+                                                [animated]="true" showValue=true>
                                             </ngb-progressbar>
                                         </td>
                                         <td>

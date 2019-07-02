@@ -75,13 +75,15 @@ export class DashboardComponent implements OnInit {
   getListOffers() {
     this.offersService.getListOffers().subscribe(
       (offers: Offer[]) => {
-        this.topOffres = [...offers.sort((a, b) => b.coupon.imprime - a.coupon.imprime)];
+// tslint:disable-next-line: max-line-length
+        this.topOffres = [...offers.sort((a, b) => (Math.round(b.coupon.imprime / b.coupon.total * 100)) - (Math.round(a.coupon.imprime / a.coupon.total * 100))];
 
         this.firstOffreTaux = Math.round(this.topOffres[0].coupon.imprime / this.topOffres[0].coupon.total * 100);
         this.secondOffreTaux = Math.round(this.topOffres[1].coupon.imprime / this.topOffres[1].coupon.total * 100);
         this.thirdOffreTaux = Math.round(this.topOffres[2].coupon.imprime / this.topOffres[2].coupon.total * 100);
         this.fourthOffreTaux = Math.round(this.topOffres[3].coupon.imprime / this.topOffres[3].coupon.total * 100);
         this.fifthOffreTaux = Math.round(this.topOffres[4].coupon.imprime / this.topOffres[4].coupon.total * 100);
+        console.log(this.topOffres);
       },
     );
   }
