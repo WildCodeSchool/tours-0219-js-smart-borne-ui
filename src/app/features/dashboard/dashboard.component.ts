@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   public topBornesBacUn: Borne[];
   public topBornesBacDeux: Borne[];
-  public topBornesRouleaux: Borne[];
+  public topBornesRouleaux: any;
   public topOffres: Offer[];
 
   public rouleauxTauxUn = 0;
@@ -62,12 +62,10 @@ export class DashboardComponent implements OnInit {
         this.topBornesBacUn = [...bornes.sort((a, b) => b.taux.bacUn - a.taux.bacUn)];
         this.topBornesBacDeux = [...bornes.sort((a, b) => b.taux.bacDeux - a.taux.bacDeux)];
         this.topBornesRouleaux = [...bornes.sort((a, b) => a.coupon.restant - b.coupon.restant)];
-
         this.rouleauxTauxUn = Math.round((350 - this.topBornesRouleaux[0].coupon.restant) / 3.5);
         this.rouleauxTauxDeux = Math.round((350 - this.topBornesRouleaux[1].coupon.restant) / 3.5);
         this.rouleauxTauxTrois = Math.round((350 - this.topBornesRouleaux[2].coupon.restant) / 3.5);
         this.rouleauxTauxQuatre = Math.round((350 - this.topBornesRouleaux[3].coupon.restant) / 3.5);
-        this.rouleauxTauxCinq = Math.round((350 - this.topBornesRouleaux[4].coupon.restant) / 3.5);
       },
     );
   }
@@ -76,12 +74,10 @@ export class DashboardComponent implements OnInit {
     this.offersService.getListOffers().subscribe(
       (offers: Offer[]) => {
         this.topOffres = [...offers.sort((a, b) => b.coupon.imprime - a.coupon.imprime)];
-
         this.firstOffreTaux = Math.round(this.topOffres[0].coupon.imprime / this.topOffres[0].coupon.total * 100);
         this.secondOffreTaux = Math.round(this.topOffres[1].coupon.imprime / this.topOffres[1].coupon.total * 100);
         this.thirdOffreTaux = Math.round(this.topOffres[2].coupon.imprime / this.topOffres[2].coupon.total * 100);
         this.fourthOffreTaux = Math.round(this.topOffres[3].coupon.imprime / this.topOffres[3].coupon.total * 100);
-        this.fifthOffreTaux = Math.round(this.topOffres[4].coupon.imprime / this.topOffres[4].coupon.total * 100);
       },
     );
   }

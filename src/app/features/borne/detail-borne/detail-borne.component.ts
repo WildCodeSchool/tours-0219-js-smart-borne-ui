@@ -162,11 +162,7 @@ export class DetailBorneComponent implements OnInit {
     });
   }
 
-  getDismissReason(reason
-                     :
-                     any,
-  ):
-    string {
+  getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     }
