@@ -40,4 +40,7 @@ export class ClientService {
   public associateUser(idClient: string, idUser: string): Observable<Client> {
     return this.http.put<Client>(`http://localhost:3000/api/users/${idClient}/user/${idUser}`, {});
   }
+  public desacosierBorne(idClient: string, idBorne: string): Observable<Client> {
+    return this.http.delete<Client>(`${this.configUrl}/${idClient}/bornes/${idBorne}`, {});
+  }
 }

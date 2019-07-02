@@ -42,5 +42,8 @@ export class BorneService {
 
     return this.http.put<Borne>(`${this.configUrl}/${idBorne}/offer/${idOffer}`, {});
   }
+  public desacosierBorne(idClient: string, idBorne: string): Observable<Client> {
+    return this.http.delete<Client>(`${this.configUrl}/${idClient}/bornes/${idBorne}`, {});
+  }
 
 }

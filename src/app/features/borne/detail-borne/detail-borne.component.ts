@@ -63,6 +63,9 @@ export class DetailBorneComponent implements OnInit {
   assoOfferForm = this.fb.group({
     offer: [''],
   });
+  desaBorneClient = this.fb.group({
+    client: ['']
+  })
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
@@ -110,7 +113,6 @@ export class DetailBorneComponent implements OnInit {
         this.toastr.error(`Error ${error}`);
       });
   }
-
   assoOffer() {
     this.borneService.associateOffer(this.borne._id, this.assoOfferForm.value.offer).subscribe(
       () => {
@@ -122,6 +124,19 @@ export class DetailBorneComponent implements OnInit {
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
       });
+  }
+  desasoBorne() {
+    this.borneService.desacosierBorne(this.borne._id, this.desaBorneClient.value.client).subscribe(
+      () => {
+        this.toastr.clear();
+        this.toastr.success('success', 'Offre desassocier');
+        // this.router.navigateByUrl('bornes');
+      },
+      (error) => {
+        this.toastr.clear();
+        this.toastr.error(`Error ${error}`);
+      }
+    )
   }
 
 }

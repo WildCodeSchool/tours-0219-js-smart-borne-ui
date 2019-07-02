@@ -39,6 +39,7 @@
                     <th scope="col">Utilisés</th>
                     <th scope="col">Restants</th>
                     <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -49,6 +50,8 @@
                       <td>{{client.coupon.imprimer}}</td>
                       <td>{{client.coupon.restant}}</td>
                       <td><button class="btn btn-info" [routerLink]="['/borne', client._id]">Detail</button></td>
+                      <td><button class="btn btn-danger" (click)="desasoBorne()">desasocier borne
+                        </button></td>
                     </tr>
                   </ng-container>
                 </tbody>

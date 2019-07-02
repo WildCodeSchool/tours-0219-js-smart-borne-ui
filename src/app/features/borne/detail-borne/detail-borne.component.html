@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
-              data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+        data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
         Associer un client
       </button>
     </div>
@@ -14,14 +14,33 @@
     <form (ngSubmit)="onSubmit()" [formGroup]="Form">
       <div class="form-group">
         <select formControlName="client" class="form-control">
-          <option *ngFor="let client of client" name="client"
-                  value="{{client._id}}">{{client.name}}</option>
+          <option *ngFor="let client of client" name="client" value="{{client._id}}">{{client.name}}</option>
         </select>
         <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
         </button>
       </div>
     </form>
   </div>
+  <div class="row">
+      <div class="col-xl-12 col-lg-12">
+        <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
+          data-toggle="collapse" data-target="#collapseForm1" aria-expanded="false" aria-controls="collapseForm1">
+          DesAssocier un client
+        </button>
+      </div>
+  
+    </div>
+  <div class="collapse mt-3" id="collapseForm1">
+      <form (ngSubmit)="desasoBorne()" [formGroup]="desaBorneClient">
+        <div class="form-group">
+          <select formControlName="client" class="form-control">
+            <option *ngFor="let client of client" name="client" value="{{client._id}}">{{client.name}}</option>
+          </select>
+          <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Desassocier
+          </button>
+        </div>
+      </form>
+    </div>
 
   <h1 class="text-center">Borne {{borne.numeroSerie}}</h1>
 
@@ -31,12 +50,12 @@
       <div class="col-6">
         <h3 class="text-center">Plastique</h3>
         <canvas baseChart [data]="[borne.plastique.total, borne.plastique.utilise]" [labels]="plastiqueLabels"
-                [chartType]="plastiqueType"></canvas>
+          [chartType]="plastiqueType"></canvas>
       </div>
       <div class="col-6">
         <h3 class="text-center">Cannette</h3>
         <canvas baseChart [data]="[borne.cannette.total, borne.cannette.utilise]" [labels]="cannetteLabels"
-                [chartType]="cannetteType"></canvas>
+          [chartType]="cannetteType"></canvas>
       </div>
     </div>
 
@@ -53,13 +72,13 @@
     <h1 class="text-center mb-3 mt-3">Tableaux</h1>
     <div style="display: block">
       <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-              [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+        [legend]="barChartLegend" [chartType]="barChartType"></canvas>
     </div>
     <div class="row">
       <div class="col-xl-12 col-lg-12">
-        <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right mt-4"
-                type="button" data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
-                aria-controls="collapseAssoOfferForm">
+        <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right mt-4" type="button"
+          data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
+          aria-controls="collapseAssoOfferForm">
           Associer une offre
         </button>
       </div>
@@ -84,63 +103,62 @@
     <h1 class="text-center">Offre</h1>
     <div class="row">
       <app-card-offer *ngFor="let offre of borne.offers">
-        <div class="title">{{offre.client}}</div>
-        <div class="nb-coupon">{{offre.coupon.total}}</div>
-        <div class="coupon-edit">{{offre.coupon.imprime}}</div>
-        <div class="cardBtn">
-          <button class="btn btn-info" [routerLink]="['/offer', offre._id]">Voir</button>
-        </div>
-        <div class="p"></div>
-      </app-card-offer>
-
+        <div class="title">{{offre.client}}
     </div>
-    <div class="row mt-4">
-      <div class="col-md-6 col-xl-6">
-        <div class="card">
-          <p class="text-center p-3">Coupons</p>
-          <div class=" ml-3 mr-3 mb-3">
-            <p>
-              <ngb-progressbar type="success" [value]=[borne.coupon.restant] [striped]="true"
-                               [animated]="true">
-                <i> {{borne.coupon.restant}}% </i>
-              </ngb-progressbar>
-            </p>
-            <p>
-              <ngb-progressbar type="success" [value]=[borne.coupon.imprimer] [striped]="true"
-                               [animated]="true">
-                <i> {{borne.coupon.imprimer}} </i>
-              </ngb-progressbar>
-            </p>
-          </div>
+    <div class="nb-coupon">{{offre.coupon.total}}</div>
+    <div class="coupon-edit">{{offre.coupon.imprime}}</div>
+    <div class="cardBtn">
+      <button class="btn btn-info" [routerLink]="['/offer', offre._id]">Voir</button>
+    </div>
+    <div class="p"></div>
+    </app-card-offer>
+
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-6 col-xl-6">
+      <div class="card">
+        <p class="text-center p-3">Coupons</p>
+        <div class=" ml-3 mr-3 mb-3">
+          <p>
+            <ngb-progressbar type="success" [value]=[borne.coupon.restant] [striped]="true" [animated]="true">
+              <i> {{borne.coupon.restant}}% </i>
+            </ngb-progressbar>
+          </p>
+          <p>
+            <ngb-progressbar type="success" [value]=[borne.coupon.imprimer] [striped]="true" [animated]="true">
+              <i> {{borne.coupon.imprimer}} </i>
+            </ngb-progressbar>
+          </p>
         </div>
       </div>
+    </div>
 
-      <div class="col-md-6 col-xl-6">
-        <div class="card">
-          <p class="text-center p-3">Rouleau</p>
-          <div class=" ml-3 mr-3 mb-3">
-            <p>
-              <ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true">
-                <i>50%</i>
-              </ngb-progressbar>
-            </p>
-          </div>
+    <div class="col-md-6 col-xl-6">
+      <div class="card">
+        <p class="text-center p-3">Rouleau</p>
+        <div class=" ml-3 mr-3 mb-3">
+          <p>
+            <ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true">
+              <i>50%</i>
+            </ngb-progressbar>
+          </p>
         </div>
       </div>
-
-
-      <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
-        <button class="btn btn-info btn-block mt-4" [routerLink]="['/borne', borne._id, 'edit']">Modifier la
-          borne
-        </button>
-        <button class="btn btn-danger btn-block mt-4" (click)="deleteBorne(borne._id)">Suppression de la
-          Borne
-        </button>
-      </ng-container>
-
-
     </div>
+
+
+    <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
+      <button class="btn btn-info btn-block mt-4" [routerLink]="['/borne', borne._id, 'edit']">Modifier la
+        borne
+      </button>
+      <button class="btn btn-danger btn-block mt-4" (click)="deleteBorne(borne._id)">Suppression de la
+        Borne
+      </button>
+    </ng-container>
 
 
   </div>
+
+
+</div>
 </div>

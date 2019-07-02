@@ -3,12 +3,14 @@ import { Client } from '../../../shared/models/client-model';
 import { ClientService } from '../../../core/http/client.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs/operators';
+import { first, timestamp } from 'rxjs/operators';
 import { ProfileService } from '../../../core/http/profile.service';
 import { User } from '../../../shared/models/user';
 import { OffersService } from '../../../core/http/offers.service';
 import { Offer } from '../../../shared/models/offres.models';
 import { FormBuilder } from '@angular/forms';
+import { BorneService } from '../../../core/http/borne.service';
+import { Borne } from '../../../shared/models/borne';
 @Component({
   selector: 'app-detail-client',
   templateUrl: './detail-client.component.html',
@@ -19,6 +21,7 @@ export class DetailClientComponent implements OnInit {
   public client: Client;
   public user: User;
   public offer: Offer[];
+  public borne: Borne;
   public id: string;
   public plastiqueData = [50];
   public plastiqueLabels = ['Plastique'];
@@ -45,7 +48,8 @@ export class DetailClientComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     private router: Router,
-    private profileService: ProfileService) { }
+    private profileService: ProfileService,
+    private borneService: BorneService) { }
 
   assoOfferForm = this.fb.group({
     offer: [''],
@@ -80,7 +84,15 @@ export class DetailClientComponent implements OnInit {
       this.router.navigateByUrl(`clients`);
     }
   }
+  deleteBorne(id) {
+    const r = confirm('Etes VOUS sur');
+    if (r) {
+      this.borneService.deleteBorne(id).subscribe();
+      this.toastr.error('Suppression', 'borne detroy');
+      this.router.navigateByUrl(`bornes`);
 
+    }
+  }
   onSubmit() {
     this.clientService.associateOffer(this.client._id, this.assoOfferForm.value.offer).subscribe(
       () => {
@@ -92,6 +104,19 @@ export class DetailClientComponent implements OnInit {
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
       });
+  }
+  desasoBorne() {
+    this.clientService.desacosierBorne(this.client._id, this.borne._id).subscribe(
+      () => {
+        this.toastr.clear();
+        this.toastr.success('success', 'Borne desassocier');
+        // this.router.navigateByUrl('bornes');
+      },
+      (error) => {
+        this.toastr.clear();
+        this.toastr.error(`Error ${error}`);
+      }
+    )
   }
 
 }
