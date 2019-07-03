@@ -39,7 +39,7 @@
                       <td>{{client.coupon.imprimer}}</td>
                       <td>{{client.coupon.restant}}</td>
                       <td><button class="btn btn-info" [routerLink]="['/borne', client._id]">Detail</button></td>
-                      <td><button class="btn btn-danger" (click)="desasoBorne()">desasocier borne
+                      <td><button class="btn btn-danger" (click)="desasoBorne(client._id)">desasocier borne
                         </button></td>
                     </tr>
                   </ng-container>

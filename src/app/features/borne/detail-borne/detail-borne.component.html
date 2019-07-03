@@ -21,26 +21,7 @@
       </div>
     </form>
   </div>
-  <div class="row">
-      <div class="col-xl-12 col-lg-12">
-        <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
-          data-toggle="collapse" data-target="#collapseForm1" aria-expanded="false" aria-controls="collapseForm1">
-          DesAssocier un client
-        </button>
-      </div>
-  
-    </div>
-  <div class="collapse mt-3" id="collapseForm1">
-      <form (ngSubmit)="desasoBorne()" [formGroup]="desaBorneClient">
-        <div class="form-group">
-          <select formControlName="client" class="form-control">
-            <option *ngFor="let client of client" name="client" value="{{client._id}}">{{client.name}}</option>
-          </select>
-          <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Desassocier
-          </button>
-        </div>
-      </form>
-    </div>
+
 
   <h1 class="text-center">Borne {{borne.numeroSerie}}</h1>
 

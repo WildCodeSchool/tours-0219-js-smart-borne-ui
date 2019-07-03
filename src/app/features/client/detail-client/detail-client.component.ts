@@ -11,6 +11,7 @@ import { Offer } from '../../../shared/models/offres.models';
 import { FormBuilder } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BorneService } from 'src/app/core/http/borne.service';
+import {Borne} from '../../../shared/models/borne';
 
 @Component({
   selector: 'app-detail-client',
@@ -141,8 +142,8 @@ export class DetailClientComponent implements OnInit {
     }
     return  `with: ${reason}`;
   }
-  desasoBorne() {
-    this.clientService.desacosierBorne(this.client._id, this.borne._id).subscribe(
+  desasoBorne(id) {
+    this.clientService.desacosierBorne(this.client._id,id).subscribe(
       () => {
         this.toastr.clear();
         this.toastr.success('success', 'Borne desassocier');

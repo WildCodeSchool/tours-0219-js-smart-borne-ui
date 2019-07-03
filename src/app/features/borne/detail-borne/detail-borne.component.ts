@@ -68,9 +68,6 @@ export class DetailBorneComponent implements OnInit {
   assoOfferForm = this.fb.group({
     offer: [''],
   });
-  desaBorneClient = this.fb.group({
-    client: ['']
-  })
   FormDelete = this.fb.group({
     borne: [''],
   });
@@ -125,15 +122,15 @@ export class DetailBorneComponent implements OnInit {
         this.toastr.error(`Ce client et deja associer a cette borne`);
       } else {
         this.clientService.associateBorne(this.Form.value.client, this.borne._id).subscribe(
-                () => {
-                  this.toastr.clear();
-                  this.toastr.success('success', 'Borne associer');
-                  this.router.navigateByUrl('bornes');
-                },
-                (error) => {
-                  this.toastr.clear();
-                  this.toastr.error(`Error ${error}`);
-                });
+          () => {
+            this.toastr.clear();
+            this.toastr.success('success', 'Borne associer');
+            this.router.navigateByUrl('bornes');
+          },
+          (error) => {
+            this.toastr.clear();
+            this.toastr.error(`Error ${error}`);
+          });
       }
     });
   }
@@ -159,14 +156,12 @@ export class DetailBorneComponent implements OnInit {
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-    },                                                                                   (reason) => {
+    }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
-  getDismissReason(reason
-                     :
-                     any,
+  getDismissReason(reason: any
   ):
     string {
     if (reason === ModalDismissReasons.ESC) {
@@ -176,19 +171,6 @@ export class DetailBorneComponent implements OnInit {
       return 'by clicking on a backdrop';
     }
     return `with: ${reason}`;
-  }
-  desasoBorne() {
-    this.borneService.desacosierBorne(this.borne._id, this.desaBorneClient.value.client).subscribe(
-      () => {
-        this.toastr.clear();
-        this.toastr.success('success', 'Offre desassocier');
-        // this.router.navigateByUrl('bornes');
-      },
-      (error) => {
-        this.toastr.clear();
-        this.toastr.error(`Error ${error}`);
-      }
-    )
   }
 
 }
