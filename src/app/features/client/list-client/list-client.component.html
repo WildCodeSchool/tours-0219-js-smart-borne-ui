@@ -5,7 +5,7 @@
     <div class="col-12 m-3">
         <div class="alert alert-danger m-4 text-center"
             *ngIf="clients &&(clients | filterClient: filterId:filterName:filterRaisonSocial:filterCoupon).length === 0">
-            <span *ngIf="filterId || filterName || filterRaisonSocial || filterCoupon">Il n y a pas de client</span>
+            <span *ngIf="filterId || filterName || filterRaisonSocial || filterCoupon">Il n y a pas de clients</span>
         </div>
     </div>
     <div class="col-12">
@@ -24,7 +24,6 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Nom</th>
                                     <th scope="col">Raison sociale</th>
-                                    <th scope="col">Coupon Imprimés / Total</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -42,10 +41,6 @@
                                         <input class="mb-3 py-2 form-control float-left" type="search"
                                             placeholder="Raison social" [(ngModel)]='filterRaisonSocial'>
                                     </th>
-                                    <th>
-                                        <input class="mb-3 py-2 form-control float-left" type="search"
-                                            placeholder="Coupon Restant" [(ngModel)]='filterCoupon'>
-                                    </th>
                                     <th></th>
                                 </tr>
                                 <ng-container
@@ -54,11 +49,6 @@
                                         <th scope="row">{{client._id}}</th>
                                         <td>{{client.name}}</td>
                                         <td>{{client.raisonSocial}}</td>
-                                        <td>
-                                            <ngb-progressbar type="success" [value]="[calculatePercentage(client.coupon.imprimer, client.coupon.total)]" [striped]="true"
-                                                [animated]="true"><i> {{client.coupon.imprimer}} / {{client.coupon.total}} </i>
-                                            </ngb-progressbar>
-                                        </td>
                                         <td>
                                             <button type="button" class="btn btn-outline-primary"
                                                 [routerLink]="['/client', client._id]">Détails

@@ -27,8 +27,8 @@ export class DetailOfferComponent implements OnInit {
   public offer: Offer;
   public user: User;
   public id: string;
-  public couponsData = [50];
-  public couponsLabels = ['Coupons imprimés'];
+  public couponsData = [];
+  public couponsLabels = ['Coupons imprimés', 'Coupons restants'];
   public couponsType = 'doughnut';
 
   FormDelete = this.fb.group({
@@ -49,6 +49,8 @@ export class DetailOfferComponent implements OnInit {
     this.offerService.getOffer(this.id).subscribe(
       (offer: Offer) => {
         this.offer = offer;
+        this.couponsData.push(this.offer.coupon.imprime);
+        this.couponsData.push(this.offer.coupon.total);
       },
     );
   }

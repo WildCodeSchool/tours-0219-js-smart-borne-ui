@@ -71,5 +71,4 @@ export class EditUserComponent implements OnInit {
         this.toastr.error(`Error ${error}`);
       });
   }
-
 }
