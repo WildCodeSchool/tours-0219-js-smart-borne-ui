@@ -93,7 +93,6 @@ export class CreateBorneComponent implements OnInit {
     this.borneService.postBorne(
       this.borneForm.value).subscribe(
         (borne: Borne) => {
-          this.bornes.push(borne);
           this.borneForm.patchValue(borne);
           this.toastr.clear();
           this.toastr.success('success', 'Borne Created');
