@@ -56,7 +56,8 @@
                 <ng-container *ngFor="let offer of offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin">
 
                   <tr>
-                    <th scope="row">{{ offer._id }}</th>
+                    <th scope="row">
+                      {{ offer._id }}</th>
                     <td>{{ offer.client }}</td>
                     <td>{{ offer.remise }}</td>
                     <td>{{ offer.contrat.debut | date:'d/M/y' }}</td>

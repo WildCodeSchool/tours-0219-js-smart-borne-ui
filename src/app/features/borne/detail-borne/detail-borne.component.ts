@@ -122,18 +122,19 @@ export class DetailBorneComponent implements OnInit {
         this.toastr.error(`Ce client et deja associer a cette borne`);
       } else {
         this.clientService.associateBorne(this.Form.value.client, this.borne._id).subscribe(
-          () => {
-            this.toastr.clear();
-            this.toastr.success('success', 'Borne associer');
-            this.router.navigateByUrl('bornes');
-          },
-          (error) => {
-            this.toastr.clear();
-            this.toastr.error(`Error ${error}`);
-          });
+           () => {
+             this.toastr.clear();
+             this.toastr.success('success', 'Borne associer');
+            // this.router.navigateByUrl('bornes');
+           },
+           (error) => {
+             this.toastr.clear();
+             this.toastr.error(`Error ${error}`);
+           });
       }
     });
   }
+
   assoOffer() {
     const result = this.borne.offers.filter(offers => offers._id === this.assoOfferForm.value.offer);
     if (result[0]) {
@@ -156,7 +157,7 @@ export class DetailBorneComponent implements OnInit {
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
+    },                                                                                   (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
