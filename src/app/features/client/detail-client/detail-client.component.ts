@@ -11,7 +11,7 @@ import { Offer } from '../../../shared/models/offres.models';
 import { FormBuilder } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BorneService } from 'src/app/core/http/borne.service';
-import {Borne} from '../../../shared/models/borne';
+import { Borne } from '../../../shared/models/borne';
 
 @Component({
   selector: 'app-detail-client',
@@ -117,7 +117,7 @@ export class DetailClientComponent implements OnInit {
         () => {
           this.toastr.clear();
           this.toastr.success('success', 'Offer associer');
-          this.router.navigateByUrl('offers');
+          // this.router.navigateByUrl('offers');
         },
         (error) => {
           this.toastr.clear();
@@ -143,10 +143,23 @@ export class DetailClientComponent implements OnInit {
     return  `with: ${reason}`;
   }
   desasoBorne(id) {
-    this.clientService.desacosierBorne(this.client._id,id).subscribe(
+    this.clientService.desacosierBorne(this.client._id, id).subscribe(
       () => {
         this.toastr.clear();
         this.toastr.success('success', 'Borne desassocier');
+        // this.router.navigateByUrl('bornes');
+      },
+      (error) => {
+        this.toastr.clear();
+        this.toastr.error(`Error ${error}`);
+      },
+    );
+  }
+  disoOffer(id) {
+    this.clientService.disocierOffer(this.client._id, id).subscribe(
+      () => {
+        this.toastr.clear();
+        this.toastr.success('success', 'Offre desassocier');
         // this.router.navigateByUrl('bornes');
       },
       (error) => {

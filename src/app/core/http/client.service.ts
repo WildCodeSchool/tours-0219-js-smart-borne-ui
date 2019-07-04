@@ -43,4 +43,7 @@ export class ClientService {
   public desacosierBorne(idClient: string, idBorne: string): Observable<Client> {
     return this.http.delete<Client>(`${this.configUrl}/${idClient}/bornes/${idBorne}`, {});
   }
+  public disocierOffer(idClient: string, idOffer: string): Observable<Client> {
+    return this.http.delete<Client>(`${this.configUrl}/${idClient}/offer/${idOffer}`, {});
+  }
 }

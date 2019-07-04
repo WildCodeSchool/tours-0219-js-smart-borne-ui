@@ -42,11 +42,10 @@ export class RegisterComponent implements OnInit {
     this.toastr.warning('Being create', 'User being Create');
     this.authenticationService.register(
       this.userForm.value).subscribe(
-      (user: User) => {
-        this.userForm.patchValue(user);
+      () => {
         this.toastr.clear();
         this.toastr.success('success', 'User Created');
-        this.router.navigateByUrl('/');
+        // this.router.navigateByUrl('/');
       },
       (error) => {
         this.toastr.clear();

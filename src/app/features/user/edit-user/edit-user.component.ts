@@ -34,7 +34,7 @@ export class EditUserComponent implements OnInit {
     username: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required, Validators.email]],
     role: ['', [Validators.required]],
-    client: [''],
+    client: ['', [Validators.required]],
   });
 
   ngOnInit() {
@@ -60,11 +60,20 @@ export class EditUserComponent implements OnInit {
     this.userService.putUser(
       this.id, this.userForm.value).subscribe(
       (user: User) => {
-        this.clientService.associateUser(this.userForm.value.client, this.user._id).subscribe();
+        this.clientService.associateUser(this.userForm.value.client, this.user._id).subscribe(
+          () => {
+            this.toastr.clear();
+            this.toastr.success('success', 'client associer');
+            // this.router.navigateByUrl('offers');
+          },
+          (error) => {
+            this.toastr.clear();
+            this.toastr.error(`Error ${error}`);
+          });
         this.userForm.patchValue(user);
         this.toastr.clear();
         this.toastr.success('success', 'User Updater');
-        this.router.navigateByUrl('/dashboard/user');
+        // this.router.navigateByUrl('/dashboard/user');
       },
       (error) => {
         this.toastr.clear();
