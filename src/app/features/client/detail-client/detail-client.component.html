@@ -92,6 +92,8 @@
           <div class="coupon-edit">{{offre.coupon.imprime}}</div>
           <div class="cardBtn">
             <button class="btn btn-info" [routerLink]="['/offer', offre._id]">Détails</button>
+            <button class="btn btn-danger" (click)="disoOffer(offre._id)">desasocier Offre
+            </button>
           </div>
           <div class="p"></div>
         </app-card-offer>

@@ -1,102 +1,110 @@
 <div class="container mt-3 mb-4">
 
-    <h1 class="text-center">Administrateur</h1>
+	<h1 class="text-center">Administrateur</h1>
 
-    <div class="row">
-        <div class="offset-2 col-8">
-            <h3 class="text-center">Plastique / Cannettes</h3>
-            <canvas baseChart [data]="data" [labels]="labels" [chartType]="type"></canvas>
-        </div>
-    </div>
-    <div>
-        <div class="col-md-12 col-xl-12 mt-4">
-            <h1 class="text-center mb-3 mt-3">Tableaux</h1>
-            <div style="display: block">
-                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-                    [legend]="barChartLegend" [chartType]="barChartType"></canvas>
-            </div>
-            <div class="row mt-4">
-                <div class="col-6 col-6">
-                    <div class="card">
-                        <h3 class="text-center p-3">Remplissage bac 1 :</h3>
-                        <div class=" ml-3 mr-3 mb-3" *ngIf="topBornesBacUn">
-                            <ng-container *ngFor="let borne of topBornesBacUn; let i=index">
-                                <div *ngIf="i<5">
-                                    <p>
-                                        <a routerLink="/borne/{{borne._id}}"> {{borne._id}} :
-                                            <ngb-progressbar [type]="color(borne.taux.bacUn)" showValue="true"
-                                                [value]="borne.taux.bacUn" [striped]="true" [animated]="true"
-                                                routerLink="/borne/{{borne._id}}">
-                                            </ngb-progressbar>
-                                        </a>
-                                    </p>
-                                </div>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-6">
-                    <div class="card">
-                        <h3 class="text-center p-3">Remplissage bac 2 :</h3>
-                        <div class=" ml-3 mr-3 mb-3" *ngIf="topBornesBacDeux">
-                            <ng-container *ngFor="let borne of topBornesBacDeux; let i=index">
-                                <div *ngIf="i<5">
-                                    <p>
-                                        <a routerLink="/borne/{{borne._id}}"> {{borne._id}} :
-                                            <ngb-progressbar [type]="color(borne.taux.bacDeux)" showValue="true"
-                                                [value]="borne.taux.bacDeux" [striped]="true" [animated]="true"
-                                                routerLink="/borne/{{borne._id}}">
-                                            </ngb-progressbar>
-                                        </a>
-                                    </p>
-                                </div>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-md-6 col-xl-6">
-                    <div class="card">
-                        <h3 class="text-center p-3">Offres proche de l'expiration :</h3>
-                        <div class=" ml-3 mr-3 mb-3" *ngIf="topOffres">
-                            <ng-container *ngFor="let offre of topOffres; let i=index">
-                                <div *ngIf="i<5">
-                                    <p>
-                                        <a routerLink="/offer/{{offre._id}}"> {{offre._id}} :
-                                            <ngb-progressbar
-                                                [type]="color(tauxOffre(offre.coupon.imprime, offre.coupon.total))"
-                                                showValue="true"
-                                                [value]="tauxOffre(offre.coupon.imprime, offre.coupon.total)"
-                                                [striped]="true" [animated]="true" routerLink="/offer/{{offre._id}}">
-                                            </ngb-progressbar>
-                                        </a>
-                                    </p>
-                                </div>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-6">
-                    <div class="card">
-                        <h3 class="text-center p-3">Rouleaux d'impression :</h3>
-                        <div class=" ml-3 mr-3 mb-3" *ngIf="topBornesRouleaux">
-                            <ng-container *ngFor="let borne of topBornesRouleaux; let i=index">
-                                <div *ngIf="i<5">
-                                    <p>
-                                        <a routerLink="/borne/{{borne._id}}"> {{borne._id}} :
-                                            <ngb-progressbar [type]="color(tauxRouleau(borne.coupon.restant))"
-                                                showValue="true" [value]="tauxRouleau(borne.coupon.restant)"
-                                                [striped]="true" [animated]="true" routerLink="/borne/{{borne._id}}">
-                                            </ngb-progressbar>
-                                        </a>
-                                    </p>
-                                </div>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-12 col-sm-6">
+			<h3 class="text-center">Total recyclé :</h3>
+			<canvas baseChart [data]="doughnutData" [labels]="labels" [chartType]="type"></canvas>
+		</div>
+		<div class="col-12 col-sm-6">
+			<div class="button col-6 offset-3">
+				<button class="btn btn-outline-primary mr-1"(click)="toggleDays()">Jours</button>
+				<button class="btn btn-outline-primary"(click)="toggleWeeks()">Semaines</button>
+				<button class="btn btn-outline-primary ml-1" (click)="toggleMonths()">Mois</button>
+			</div>
+			<div style="display: block" *ngIf="days">
+				<canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
+					[legend]="barChartLegend" [chartType]="barChartType"></canvas>
+			</div>
+			<div style="display: block" *ngIf="weeks">
+				<canvas baseChart [datasets]="barChartDataWeeks" [labels]="barChartLabelsWeeks" [options]="barChartOptions"
+					[legend]="barChartLegend" [chartType]="barChartType"></canvas>
+			</div>
+			<div style="display: block" *ngIf="months">
+				<canvas baseChart [datasets]="barChartDataMonths" [labels]="barChartLabelsMonths" [options]="barChartOptions"
+					[legend]="barChartLegend" [chartType]="barChartType"></canvas>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-4">
+		<div class="col-6 col-6">
+			<div class="card">
+				<h3 class="text-center p-3">Remplissage bac plastique :</h3>
+				<div class=" ml-3 mr-3 mb-3" *ngIf="topBornesBacUn">
+					<ng-container *ngFor="let borne of topBornesBacUn; let i=index">
+						<div *ngIf="i<5">
+							<p>
+								<a routerLink="/borne/{{borne._id}}"> {{borne._id}} :
+									<ngb-progressbar [type]="color(borne.taux.bacUn)" showValue="true"
+										[value]="borne.taux.bacUn" [striped]="true" [animated]="true"
+										routerLink="/borne/{{borne._id}}">
+									</ngb-progressbar>
+								</a>
+							</p>
+						</div>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+		<div class="col-6 col-6">
+			<div class="card">
+				<h3 class="text-center p-3">Remplissage bac métal :</h3>
+				<div class=" ml-3 mr-3 mb-3" *ngIf="topBornesBacDeux">
+					<ng-container *ngFor="let borne of topBornesBacDeux; let i=index">
+						<div *ngIf="i<5">
+							<p>
+								<a routerLink="/borne/{{borne._id}}"> {{borne._id}} :
+									<ngb-progressbar [type]="color(borne.taux.bacDeux)" showValue="true"
+										[value]="borne.taux.bacDeux" [striped]="true" [animated]="true"
+										routerLink="/borne/{{borne._id}}">
+									</ngb-progressbar>
+								</a>
+							</p>
+						</div>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-4">
+		<div class="col-md-6 col-xl-6">
+			<div class="card">
+				<h3 class="text-center p-3">Offres proche de l'expiration :</h3>
+				<div class=" ml-3 mr-3 mb-3" *ngIf="topOffres">
+					<ng-container *ngFor="let offre of topOffres; let i=index">
+						<div *ngIf="i<5">
+							<p>
+								<a routerLink="/offer/{{offre._id}}"> {{offre._id}} :
+									<ngb-progressbar [type]="color(tauxOffre(offre.coupon.imprime, offre.coupon.total))"
+										showValue="true" [value]="tauxOffre(offre.coupon.imprime, offre.coupon.total)"
+										[striped]="true" [animated]="true" routerLink="/offer/{{offre._id}}">
+									</ngb-progressbar>
+								</a>
+							</p>
+						</div>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-xl-6">
+			<div class="card">
+				<h3 class="text-center p-3">Rouleaux d'impression :</h3>
+				<div class=" ml-3 mr-3 mb-3" *ngIf="topBornesRouleaux">
+					<ng-container *ngFor="let borne of topBornesRouleaux; let i=index">
+						<div *ngIf="i<5">
+							<p>
+								<a routerLink="/borne/{{borne._id}}"> {{borne._id}} :
+									<ngb-progressbar [type]="color(tauxRouleau(borne.coupon.restant))" showValue="true"
+										[value]="tauxRouleau(borne.coupon.restant)" [striped]="true" [animated]="true"
+										routerLink="/borne/{{borne._id}}">
+									</ngb-progressbar>
+								</a>
+							</p>
+						</div>
+					</ng-container>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
