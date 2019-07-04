@@ -34,7 +34,7 @@ export class EditUserComponent implements OnInit {
     username: ['', [Validators.required, Validators.minLength(4)]],
     email: ['', [Validators.required, Validators.email]],
     role: ['', [Validators.required]],
-    client: [''],
+    client: ['', [Validators.required]],
   });
 
   ngOnInit() {
