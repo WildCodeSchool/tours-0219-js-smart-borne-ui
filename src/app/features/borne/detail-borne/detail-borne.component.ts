@@ -170,5 +170,17 @@ export class DetailBorneComponent implements OnInit {
     }
     return `with: ${reason}`;
   }
-
+  disoOffer(id) {
+    this.borneService.disocierOffer(this.borne._id, id).subscribe(
+      () => {
+        this.toastr.clear();
+        this.toastr.success('success', 'Offre desassocier');
+        // this.router.navigateByUrl('bornes');
+      },
+      (error) => {
+        this.toastr.clear();
+        this.toastr.error(`Error ${error}`);
+      }
+    )
+  }
 }
