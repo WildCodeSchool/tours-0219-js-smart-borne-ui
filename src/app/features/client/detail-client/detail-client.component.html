@@ -22,27 +22,31 @@
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Ville</th>
-                    <th scope="col">Utilisés</th>
-                    <th scope="col">Restants</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Ville</th>
+                  <th scope="col">Utilisés</th>
+                  <th scope="col">Restants</th>
+                  <th></th>
+                  <th></th>
+                </tr>
                 </thead>
                 <tbody>
-                  <ng-container *ngFor="let client of client.bornes">
-                    <tr>
-                      <th scope="row">{{client.numeroSerie}}</th>
-                      <td>{{client.address.ville}}</td>
-                      <td>{{client.coupon.imprimer}}</td>
-                      <td>{{client.coupon.restant}}</td>
-                      <td><button class="btn btn-info" [routerLink]="['/borne', client._id]">Detail</button></td>
-                      <td><button class="btn btn-danger" (click)="desasoBorne(client._id)">desasocier borne
-                        </button></td>
-                    </tr>
-                  </ng-container>
+                <ng-container *ngFor="let client of client.bornes">
+                  <tr>
+                    <th scope="row">{{client.numeroSerie}}</th>
+                    <td>{{client.address.ville}}</td>
+                    <td>{{client.coupon.imprimer}}</td>
+                    <td>{{client.coupon.restant}}</td>
+                    <td>
+                      <button class="btn btn-info" [routerLink]="['/borne', client._id]">Detail</button>
+                    </td>
+                    <td>
+                      <button class="btn btn-danger" (click)="desasoBorne(client._id)">desasocier borne
+                      </button>
+                    </td>
+                  </tr>
+                </ng-container>
                 </tbody>
               </table>
             </div>
@@ -52,13 +56,11 @@
       </div>
 
 
-
-
       <div class="row">
         <div class="col-xl-12 col-lg-12">
           <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
-            data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
-            aria-controls="collapseAssoOfferForm">
+                  data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
+                  aria-controls="collapseAssoOfferForm">
             Associer une offre
           </button>
         </div>
@@ -81,19 +83,24 @@
       <h1 class="text-center mb-3 mt-3">Tableaux</h1>
       <div style="display: block">
         <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-          [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+                [legend]="barChartLegend" [chartType]="barChartType"></canvas>
       </div>
 
       <h1 class="text-center">Offres</h1>
       <div class="row">
         <app-card-offer *ngFor="let offre of client.offer">
           <div class="title">{{offre.client}}</div>
-          <div class="nb-coupon">{{offre.coupon.total}}</div>
-          <div class="coupon-edit">{{offre.coupon.imprime}}</div>
+          <div class="nb-coupon text-center">Coupon total : {{offre.coupon.total}}</div>
+          <div class="coupon-edit text-center">Coupon imprimer: {{offre.coupon.imprime}}</div>
           <div class="cardBtn">
-            <button class="btn btn-info" [routerLink]="['/offer', offre._id]">Détails</button>
-            <button class="btn btn-danger" (click)="disoOffer(offre._id)">desasocier Offre
-            </button>
+            <div class="row">
+              <div class="col-md-12 mt-4">
+                <button class="btn btn-info btn-block" [routerLink]="['/offer', offre._id]">Détails</button>
+              </div>
+              <div class="col-md-12 mt-1">
+                <button class="btn btn-danger btn-block" (click)="disoOffer(offre._id)">desasocier Offre</button>
+              </div>
+            </div>
           </div>
           <div class="p"></div>
         </app-card-offer>
@@ -102,7 +109,7 @@
         <div class="col-md-12 col-xl-12 mt-4">
           <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
             <button class="btn btn-info btn-block mt-4" data-toggle="modal" data-target=".bd-example-modal-lg"
-              [routerLink]="['/client', client._id, 'edit']">Modifier
+                    [routerLink]="['/client', client._id, 'edit']">Modifier
               le client
             </button>
 
@@ -119,10 +126,11 @@
                 <form (ngSubmit)="deleteClientModal(); modal.close()" [formGroup]="FormDelete">
                   <div class="form-group">
                     <div class="input-group">
-                      <input formControlName="client" class="form-control input-danger" placeholder="Id du client" name="client">
+                      <input formControlName="client" class="form-control input-danger" placeholder="Id du client"
+                             name="client">
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-danger btn-block" >Supprimer</button>
+                  <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
                 </form>
               </div>
             </ng-template>
