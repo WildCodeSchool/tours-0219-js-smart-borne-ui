@@ -95,7 +95,7 @@ export class CreateBorneComponent implements OnInit {
         (borne: Borne) => {
           this.borneForm.patchValue(borne);
           this.toastr.clear();
-          this.toastr.success('success', 'Borne Created');
+          this.toastr.success('Succès', 'Borne créée');
           this.router.navigateByUrl('bornes');
         },
         (error) => {

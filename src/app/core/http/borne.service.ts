@@ -38,15 +38,10 @@ export class BorneService {
     return this.http.delete<Borne>(`${this.configUrl}/${id}`);
   }
 
-  // public associateBorne(idClient: string, idBorne: string): Observable<Client> {
-  //   return this.http.put<Client>(`http://localhost:3000/api/client/${idClient}/bornes/${idBorne}`, {});
-  // }
-
   public associateOffer(idBorne: string, idOffer: string): Observable<Borne> {
-
     return this.http.put<Borne>(`${this.configUrl}/${idBorne}/offer/${idOffer}`, {});
   }
-  public disocierOffer(idBorne: string, idOffer: string): Observable<Borne> {
+  public dissocierOffer(idBorne: string, idOffer: string): Observable<Borne> {
     return this.http.delete<Borne>(`${this.configUrl}/${idBorne}/offer/${idOffer}`, {});
   }
 

@@ -7,11 +7,11 @@
 			<h3 class="text-center">Total recyclé :</h3>
 			<canvas baseChart [data]="doughnutData" [labels]="labels" [chartType]="type"></canvas>
 		</div>
-		<div class="col-12 col-sm-6">
-			<div class="button col-6 offset-3">
-				<button class="btn btn-outline-primary mr-1"(click)="toggleDays()">Jours</button>
+		<div class="col-12 col-sm-6 mt-2">
+			<div class="button col-6">
+				<button class="btn btn-outline-primary mr-2"(click)="toggleDays()">Jours</button>
 				<button class="btn btn-outline-primary"(click)="toggleWeeks()">Semaines</button>
-				<button class="btn btn-outline-primary ml-1" (click)="toggleMonths()">Mois</button>
+				<button class="btn btn-outline-primary ml-2" (click)="toggleMonths()">Mois</button>
 			</div>
 			<div style="display: block" *ngIf="days">
 				<canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
@@ -28,16 +28,16 @@
 		</div>
 	</div>
 	<div class="row mt-4">
-		<div class="col-6 col-6">
+		<div class="col-12 col-sm-6">
 			<div class="card">
-				<h3 class="text-center p-3">Remplissage bac plastique :</h3>
-				<div class=" ml-3 mr-3 mb-3" *ngIf="topBornesBacUn">
-					<ng-container *ngFor="let borne of topBornesBacUn; let i=index">
+				<h3 class="text-center p-3">Remplissage bac métal :</h3>
+				<div class=" ml-3 mr-3 mb-3" *ngIf="topBornesMetal">
+					<ng-container *ngFor="let borne of topBornesMetal; let i=index">
 						<div *ngIf="i<5">
 							<p>
 								<a routerLink="/borne/{{borne._id}}"> {{borne._id}} :
-									<ngb-progressbar [type]="color(borne.taux.bacUn)" showValue="true"
-										[value]="borne.taux.bacUn" [striped]="true" [animated]="true"
+									<ngb-progressbar [type]="color(borne.metal.taux)" showValue="true"
+										[value]="borne.metal.taux" [striped]="true" [animated]="true"
 										routerLink="/borne/{{borne._id}}">
 									</ngb-progressbar>
 								</a>
@@ -47,16 +47,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-6 col-6">
+		<div class="col-12 col-sm-6">
 			<div class="card">
-				<h3 class="text-center p-3">Remplissage bac métal :</h3>
-				<div class=" ml-3 mr-3 mb-3" *ngIf="topBornesBacDeux">
-					<ng-container *ngFor="let borne of topBornesBacDeux; let i=index">
+				<h3 class="text-center p-3">Remplissage bac plastique :</h3>
+				<div class=" ml-3 mr-3 mb-3" *ngIf="topBornesPlastique">
+					<ng-container *ngFor="let borne of topBornesPlastique; let i=index">
 						<div *ngIf="i<5">
 							<p>
 								<a routerLink="/borne/{{borne._id}}"> {{borne._id}} :
-									<ngb-progressbar [type]="color(borne.taux.bacDeux)" showValue="true"
-										[value]="borne.taux.bacDeux" [striped]="true" [animated]="true"
+									<ngb-progressbar [type]="color(borne.plastique.taux)" showValue="true"
+										[value]="borne.plastique.taux" [striped]="true" [animated]="true"
 										routerLink="/borne/{{borne._id}}">
 									</ngb-progressbar>
 								</a>

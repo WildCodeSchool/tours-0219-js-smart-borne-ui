@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
             (profil: User) => {
               this.userService.getUserById(profil._id).subscribe(
                 (user: User) => {
-                  this.toastr.success('Success', 'Connection success');
+                  this.toastr.success('Succès', 'Connexion');
                   if (user.role !== 'ADMINISTRATEUR') {
                     this.router.navigateByUrl(`/client/${user.clients[0]._id}`);
                   } else {

@@ -68,7 +68,7 @@ export class CreateClientComponent implements OnInit {
       (client: Client) => {
         this.clientForm.patchValue(client);
         this.toastr.clear();
-        this.toastr.success('success', 'Client Ajoute');
+        this.toastr.success('Succès', 'Client ajouté');
         this.router.navigateByUrl('/');
       },
 

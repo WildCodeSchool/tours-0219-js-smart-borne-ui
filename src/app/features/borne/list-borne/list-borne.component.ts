@@ -30,8 +30,8 @@ export class ListBorneComponent implements OnInit {
   public user: User;
   public filterNumeroSerie: string;
   public filterVille: string;
-  public filterBac1: string;
-  public filterBac2: string;
+  public filterPlastique: string;
+  public filterMetal: string;
   public filterTotal: string;
   public filterDate: string;
 
@@ -80,10 +80,10 @@ export class ListBorneComponent implements OnInit {
     return result;
   }
 
-  color(a: number) {
-    if (a >= 90) {
+  color(taux: number) {
+    if (taux >= 90) {
       return 'danger';
-    } if (a >= 65) {
+    } if (taux >= 65) {
       return 'warning';
     }
     return 'success';
