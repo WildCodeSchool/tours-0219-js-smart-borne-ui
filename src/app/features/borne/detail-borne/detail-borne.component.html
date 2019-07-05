@@ -27,17 +27,17 @@
     <div class="row">
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Bac plastique :</h3>
-        <canvas baseChart [data]="[borne.plastique.taux, (100 - borne.plastique.taux)]" [labels]="plastiqueLabels"
+        <canvas baseChart [data]="[borne.plastique.taux, (100 - borne.plastique.taux)]" [colors]="plastiqueColor" [labels]="plastiqueLabels"
           [chartType]="plastiqueType"></canvas>
       </div>
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Bac métal :</h3>
-        <canvas baseChart [data]="[borne.metal.taux, (100 - borne.metal.taux)]" [labels]="metalLabels"
+        <canvas baseChart [data]="[borne.metal.taux, (100 - borne.metal.taux)]" [colors]="metalColor" [labels]="metalLabels"
           [chartType]="metalType"></canvas>
       </div>
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Rouleau d'impression :</h3>
-        <canvas baseChart [data]="[borne.coupon.imprimer, borne.coupon.restant]" [labels]="rouleauLabels"
+        <canvas baseChart [data]="[borne.coupon.imprimer, borne.coupon.restant]" [colors]="couponColor" [labels]="rouleauLabels"
           [chartType]="rouleauType"></canvas>
       </div>
     </div>

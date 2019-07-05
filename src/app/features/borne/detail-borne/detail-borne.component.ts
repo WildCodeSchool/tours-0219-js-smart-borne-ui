@@ -132,6 +132,30 @@ export class DetailBorneComponent implements OnInit {
     },
   ];
 
+  public plastiqueColor =
+    [
+      {
+        backgroundColor: ['rgb(65,105,225,0.6)', 'rgb(102, 102, 102, 0.4)'],
+        borderColor: ['rgb(65,105,225,1)', 'transparent'],
+      },
+    ];
+
+  public metalColor =
+    [
+      {
+        backgroundColor: ['rgb(160,82,45,0.6)', 'rgb(102, 102, 102, 0.4)'],
+        borderColor: ['rgba(160,82,45,1)', 'transparent'],
+      },
+    ];
+
+  public couponColor =
+    [
+      {
+        backgroundColor: ['rgb(225, 65, 65, 0.6)', 'rgb(102, 102, 102, 0.4)'],
+        borderColor: ['rgba(225, 65, 65,1)', 'transparent'],
+      },
+    ];
+
   Form = this.fb.group({
     client: [''],
   });
@@ -268,7 +292,7 @@ export class DetailBorneComponent implements OnInit {
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-    },                                                                                   (reason) => {
+    }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }

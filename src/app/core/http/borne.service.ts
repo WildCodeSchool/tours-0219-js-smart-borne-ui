@@ -18,6 +18,10 @@ export class BorneService {
     return this.http.get<Borne[]>(`${this.configUrl}`);
   }
 
+  public getQueryBorne(query: string): Observable<Borne[]> {
+    return this.http.get<Borne[]>(`${this.configUrl}/search/${query}`);
+  }
+
   public getBorneById(id: string): Observable<Borne> {
     return this.http.get<Borne>(`${this.configUrl}/${id}`);
   }

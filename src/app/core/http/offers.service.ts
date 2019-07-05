@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Offer } from '../../shared/models/offres.models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Client } from '../../shared/models/client-model';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,6 +14,10 @@ export class OffersService {
 
   public getListOffers(): Observable<Offer[]> {
     return this.http.get<Offer[]>(`${this.configUrl}`);
+  }
+
+  public getQueryOffer(query: string): Observable<Offer[]> {
+    return this.http.get<Offer[]>(`${this.configUrl}/search/${query}`);
   }
 
   public getOffer(id: string): Observable<Offer> {

@@ -17,6 +17,10 @@ export class ClientService {
     return this.http.get<Client[]>(`${this.configUrl}`);
   }
 
+  public getQueryClient(query: string): Observable<Client[]> {
+    return this.http.get<Client[]>(`${this.configUrl}/search/${query}`);
+  }
+
   public getClientById(id: string): Observable<Client> {
     return this.http.get<Client>(`${this.configUrl}/${id}`);
   }
