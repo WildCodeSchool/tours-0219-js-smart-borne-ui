@@ -89,6 +89,13 @@ export class DashboardComponent implements OnInit {
   public doughnutData = [];
   public labels = ['Métal', 'Plastique'];
   public type = 'doughnut';
+  public doughnutChartColors =
+    [
+      {
+        backgroundColor: ['rgb(160,82,45,0.6)', 'rgb(65,105,225,0.6)'],
+        borderColor: ['rgba(160,82,45,1)', 'rgb(65,105,225,1)'],
+      },
+    ];
 
   public topBornesMetal: Borne[];
   public topBornesPlastique: Borne[];
@@ -111,7 +118,7 @@ export class DashboardComponent implements OnInit {
         this.topBornesMetal = [...bornes.sort((a, b) => b.metal.taux - a.metal.taux)];
         this.topBornesPlastique = [...bornes.sort((a, b) => b.plastique.taux - a.plastique.taux)];
         this.topBornesRouleaux = [...bornes.sort((a, b) => a.coupon.restant - b.coupon.restant)];
-// tslint:disable-next-line: ter-arrow-parens
+        // tslint:disable-next-line: ter-arrow-parens
         bornes.map(a => {
           this.totalMetal += a.metal.total;
           this.totalPlastique += a.plastique.total;
@@ -125,7 +132,7 @@ export class DashboardComponent implements OnInit {
   getDatas() {
     this.dataService.getAllDataByDay().subscribe(
       (dataDays: Data[]) => {
-// tslint:disable-next-line: ter-arrow-parens
+        // tslint:disable-next-line: ter-arrow-parens
         dataDays.map(a => {
           this.barChartDataDays[0].data.push(a.plastique);
           this.barChartDataDays[1].data.push(a.metal);
@@ -134,7 +141,7 @@ export class DashboardComponent implements OnInit {
     );
     this.dataService.getAllDataByWeek().subscribe(
       (dataWeek: Data[]) => {
-// tslint:disable-next-line: ter-arrow-parens
+        // tslint:disable-next-line: ter-arrow-parens
         dataWeek.map(a => {
           this.barChartDataWeeks[0].data.push(a.plastique);
           this.barChartDataWeeks[1].data.push(a.metal);
@@ -143,7 +150,7 @@ export class DashboardComponent implements OnInit {
     );
     this.dataService.getAllDataByMonth().subscribe(
       (dataMonth: Data[]) => {
-// tslint:disable-next-line: ter-arrow-parens
+        // tslint:disable-next-line: ter-arrow-parens
         dataMonth.map(a => {
           this.barChartDataMonths[0].data.push(a.plastique);
           this.barChartDataMonths[1].data.push(a.metal);

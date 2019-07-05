@@ -12,6 +12,8 @@ import { FormBuilder } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BorneService } from 'src/app/core/http/borne.service';
 import { Borne } from '../../../shared/models/borne';
+import { DataService } from 'src/app/core/http/data.service';
+import { Data } from 'src/app/shared/models/data.model';
 
 @Component({
   selector: 'app-detail-client',
@@ -19,6 +21,7 @@ import { Borne } from '../../../shared/models/borne';
   styleUrls: ['./detail-client.component.scss'],
 })
 export class DetailClientComponent implements OnInit {
+
   public closeResult: string;
   public clients: Client[];
   public client: Client;
@@ -26,23 +29,80 @@ export class DetailClientComponent implements OnInit {
   public offer: Offer[];
   public borne: Borne;
   public id: string;
-  public plastiqueData = [50];
-  public plastiqueLabels = ['Plastique'];
-  public plastiqueType = 'doughnut';
-  public cannetteData = [50];
-  public cannetteLabels = ['Canette'];
-  public cannetteType = 'doughnut';
+
+  public doughnutData = [];
+  public labels = ['Métal', 'Plastique'];
+  public type = 'doughnut';
+
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
   };
-  public barChartLabels = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin',
-    'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
   public barChartType = 'bar';
   public barChartLegend = true;
-  public barChartData = [
-    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie A' },
-    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie B' },
+
+  public days = true;
+  public barChartLabelsDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  public barChartDataDays = [
+    {
+      data: [],
+      label: 'Plastique',
+      backgroundColor: 'rgb(65,105,225,0.6)',
+      borderColor: 'rgb(65,105,225)',
+      hoverBackgroundColor: 'rgb(65,105,225)',
+      hoverBorderColor: 'rgb(65,105,225,0.6)',
+    },
+    {
+      data: [],
+      label: 'Métal',
+      backgroundColor: 'rgb(160,82,45,0.6)',
+      borderColor: 'rgb(160,82,45)',
+      hoverBackgroundColor: 'rgb(160,82,45)',
+      hoverBorderColor: 'rgb(160,82,45,0.6)',
+    },
+  ];
+
+  public weeks = false;
+  public barChartLabelsWeeks = ['Semaine 01', 'Semaine 02', 'Semaine 03', 'Semaine 04'];
+  public barChartDataWeeks = [
+    {
+      data: [],
+      label: 'Plastique',
+      backgroundColor: 'rgb(65,105,225,0.6)',
+      borderColor: 'rgb(65,105,225)',
+      hoverBackgroundColor: 'rgb(65,105,225)',
+      hoverBorderColor: 'rgb(65,105,225,0.6)',
+    },
+    {
+      data: [],
+      label: 'Métal',
+      backgroundColor: 'rgb(160,82,45,0.6)',
+      borderColor: 'rgb(160,82,45)',
+      hoverBackgroundColor: 'rgb(160,82,45)',
+      hoverBorderColor: 'rgb(160,82,45,0.6)',
+    },
+  ];
+
+  public months = false;
+  public barChartLabelsMonths = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai',
+    'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+  public barChartDataMonths = [
+    {
+      data: [],
+      label: 'Plastique',
+      backgroundColor: 'rgb(65,105,225,0.6)',
+      borderColor: 'rgb(65,105,225)',
+      hoverBackgroundColor: 'rgb(65,105,225)',
+      hoverBorderColor: 'rgb(65,105,225,0.6)',
+    },
+    {
+      data: [],
+      label: 'Métal',
+      backgroundColor: 'rgb(160,82,45,0.6)',
+      borderColor: 'rgb(160,82,45)',
+      hoverBackgroundColor: 'rgb(160,82,45)',
+      hoverBorderColor: 'rgb(160,82,45,0.6)',
+    },
   ];
   constructor(
     private route: ActivatedRoute,
@@ -53,7 +113,8 @@ export class DetailClientComponent implements OnInit {
     private router: Router,
     private profileService: ProfileService,
     private borneService: BorneService,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    public dataService: DataService) { }
 
   assoOfferForm = this.fb.group({
     offer: [''],
@@ -88,7 +149,7 @@ export class DetailClientComponent implements OnInit {
     if (id === this.id) {
       this.clientService.getClientById(id).subscribe(
         (client: Client) => {
-          if  (client) {
+          if (client) {
             this.clientService.deleteClient(client._id).subscribe();
             this.toastr.error('Suppression', 'Client supprimé');
             this.router.navigateByUrl(`clients`);
@@ -105,9 +166,9 @@ export class DetailClientComponent implements OnInit {
       this.borneService.deleteBorne(id).subscribe();
       this.toastr.error('Suppression', 'Borne supprimée');
       this.router.navigateByUrl(`bornes`);
-
     }
   }
+
   onSubmit() {
     const result = this.client.offer.filter(offers => offers._id === this.assoOfferForm.value.offer);
     if (result[0]) {
@@ -129,7 +190,8 @@ export class DetailClientComponent implements OnInit {
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-    },                                                                                   (reason) => {
+// tslint:disable-next-line: align
+    }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
@@ -137,14 +199,14 @@ export class DetailClientComponent implements OnInit {
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
-    }  if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    } if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     }
-    return  `with: ${reason}`;
+    return `with: ${reason}`;
   }
 
-  desasoBorne(id) {
-    this.clientService.desacosierBorne(this.client._id, id).subscribe(
+  dissoBorne(id) {
+    this.clientService.dissocierBorne(this.client._id, id).subscribe(
       () => {
         this.toastr.clear();
         this.toastr.success('Succès', 'Borne dissociée');
@@ -157,8 +219,8 @@ export class DetailClientComponent implements OnInit {
     );
   }
 
-  disoOffer(id) {
-    this.clientService.disocierOffer(this.client._id, id).subscribe(
+  dissoOffer(id) {
+    this.clientService.dissocierOffer(this.client._id, id).subscribe(
       () => {
         this.toastr.clear();
         this.toastr.success('Succès', 'Offre dissociée');
@@ -169,6 +231,24 @@ export class DetailClientComponent implements OnInit {
         this.toastr.error(`Error ${error}`);
       },
     );
+  }
+
+  toggleDays() {
+    this.days = true;
+    this.weeks = false;
+    this.months = false;
+  }
+
+  toggleWeeks() {
+    this.days = false;
+    this.weeks = true;
+    this.months = false;
+  }
+
+  toggleMonths() {
+    this.days = false;
+    this.weeks = false;
+    this.months = true;
   }
 
 }

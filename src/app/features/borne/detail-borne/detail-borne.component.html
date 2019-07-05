@@ -25,15 +25,20 @@
 
   <div class="col-md-12 col-xl-12 mt-4">
     <div class="row">
-      <div class="col-6">
+      <div class="col-12 col-sm-4">
         <h3 class="text-center">Bac plastique :</h3>
         <canvas baseChart [data]="[borne.plastique.taux, (100 - borne.plastique.taux)]" [labels]="plastiqueLabels"
           [chartType]="plastiqueType"></canvas>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-sm-4">
         <h3 class="text-center">Bac métal :</h3>
         <canvas baseChart [data]="[borne.metal.taux, (100 - borne.metal.taux)]" [labels]="metalLabels"
           [chartType]="metalType"></canvas>
+      </div>
+      <div class="col-12 col-sm-4">
+        <h3 class="text-center">Rouleau d'impression :</h3>
+        <canvas baseChart [data]="[borne.coupon.imprimer, borne.coupon.restant]" [labels]="rouleauLabels"
+          [chartType]="rouleauType"></canvas>
       </div>
     </div>
     <h1 class="text-center mb-3 mt-3">Tableaux</h1>
@@ -56,25 +61,14 @@
           [legend]="barChartLegend" [chartType]="barChartType"></canvas>
       </div>
     </div>
-    <div class="col-12 mt-4">
-      <div class="card">
-        <p class="text-center p-3">Rouleau d'impression :</p>
-        <div class=" ml-3 mr-3 mb-3">
-          <p>
-            <ngb-progressbar [type]="color(tauxRouleau(borne.coupon.restant))"
-              [value]="tauxRouleau(borne.coupon.restant)" [striped]="true" [animated]="true" showValue="true">
-            </ngb-progressbar>
-          </p>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="row">
     <div class="col-md-12 col-xl-12 mt-4">
       <div class="card">
         <div class="card-body text-center">
-          <h2 class="card-title">{{borne.address.numero}} {{borne.address.rue}}, {{borne.address.codePostal}} {{borne.address.ville}}</h2>
+          <h2 class="card-title">{{borne.address.numero}} {{borne.address.rue}}, {{borne.address.codePostal}}
+            {{borne.address.ville}}</h2>
           <h4>Numéro de série : {{borne.numeroSerie}}</h4>
           <h4>Date d'installation : {{borne.dateInstallation| date:'d/M/y'}}</h4>
           <h4>Total de coupons imprimés : {{borne.total.coupons}}</h4>

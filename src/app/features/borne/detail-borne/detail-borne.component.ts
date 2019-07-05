@@ -54,6 +54,8 @@ export class DetailBorneComponent implements OnInit {
   public metalType = 'doughnut';
   public plastiqueLabels = ['Plastique', 'Vide'];
   public plastiqueType = 'doughnut';
+  public rouleauLabels = ['Utilisé', 'Restant'];
+  public rouleauType = 'doughnut';
 
   // Bar chart general options
   public barChartOptions = {
@@ -166,7 +168,7 @@ export class DetailBorneComponent implements OnInit {
   }
 
   getDatas() {
-    this.dataService.getDataByDay(this.id).subscribe(
+    this.dataService.getBorneDataByDay(this.id).subscribe(
       (dataDays: Data[]) => {
         // tslint:disable-next-line: ter-arrow-parens
         dataDays.map(a => {
@@ -175,7 +177,7 @@ export class DetailBorneComponent implements OnInit {
         });
       },
     );
-    this.dataService.getDataByWeek(this.id).subscribe(
+    this.dataService.getBorneDataByWeek(this.id).subscribe(
       (dataWeek: Data[]) => {
         // tslint:disable-next-line: ter-arrow-parens
         dataWeek.map(a => {
@@ -184,7 +186,7 @@ export class DetailBorneComponent implements OnInit {
         });
       },
     );
-    this.dataService.getDataByMonth(this.id).subscribe(
+    this.dataService.getBorneDataByMonth(this.id).subscribe(
       (dataMonth: Data[]) => {
         // tslint:disable-next-line: ter-arrow-parens
         dataMonth.map(a => {

@@ -78,8 +78,8 @@
                                                 </ngb-progressbar>
                                             </td>
                                             <td>
-                                                <ngb-progressbar [type]="color(calculatePercentage(borne.coupon.imprimer, borne.coupon.restant))"
-                                                    [value]="calculatePercentage(borne.coupon.imprimer, borne.coupon.restant)"
+                                                <ngb-progressbar [type]="color(tauxRouleau(borne.coupon.restant))"
+                                                    [value]="tauxRouleau(borne.coupon.restant)"
                                                     [striped]="true" [animated]="true" showValue=true>
                                                 </ngb-progressbar>
                                             </td>
@@ -152,34 +152,29 @@
                                                 <th scope="row">{{borne.numeroSerie}}</th>
                                                 <td>{{borne.address.ville}}</td>
                                                 <td>
-                                                    <ngb-progressbar type="color(borne.metal.taux)"
-                                                        [value]="[borne.metal.taux]"
-                                                        [striped]="true" [animated]="true" showValue=true>
+                                                    <ngb-progressbar [type]="color(borne.metal.taux)" [value]="borne.metal.taux" [striped]="true" [animated]="true"
+                                                        showValue=true>
                                                     </ngb-progressbar>
                                                 </td>
                                                 <td>
-                                                    <ngb-progressbar type="color(borne.plastique.taux)"
-                                                        [value]="borne.plastique.taux"
-                                                        [striped]="true" [animated]="true" showValue=true>
+                                                    <ngb-progressbar [type]="color(borne.plastique.taux)" [value]="[borne.plastique.taux]" [striped]="true"
+                                                        [animated]="true" showValue=true>
                                                     </ngb-progressbar>
                                                 </td>
                                                 <td>
-                                                    <ngb-progressbar type="color(calculatePercentage(borne.coupon.imprimer, borne.coupon.restant))"
-                                                        [value]="calculatePercentage(borne.coupon.imprimer, borne.coupon.restant)"
+                                                    <ngb-progressbar [type]="color(tauxRouleau(borne.coupon.restant))" [value]="tauxRouleau(borne.coupon.restant)"
                                                         [striped]="true" [animated]="true" showValue=true>
                                                     </ngb-progressbar>
                                                 </td>
                                                 <td>
                                                     {{borne.dateInstallation| date:'d/M/y'}}
                                                 </td>
-                                                <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
-                                                        class="fas fa-check colorValidate"></i></td>
+                                                <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i class="fas fa-check colorValidate"></i></td>
                                                 <ng-template #elseBlock>
                                                     <td><i class="fas fa-times colorError"></i></td>
                                                 </ng-template>
                                                 <td>
-                                                    <button type="button" [routerLink]="['/borne', borne._id ]"
-                                                        class="btn btn-outline-primary">Détails
+                                                    <button type="button" [routerLink]="['/borne', borne._id ]" class="btn btn-outline-primary">Détails
                                                     </button>
                                                 </td>
                                             </tr>

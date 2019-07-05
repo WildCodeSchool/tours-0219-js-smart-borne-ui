@@ -23,15 +23,15 @@ export class DataService {
     return this.http.get<Data[]>(`${this.configUrl}/months`);
   }
 
-  public getDataByDay(id: string): Observable<Data[]> {
-    return this.http.get<Data[]>(`${this.configUrl}/${id}/days`);
+  public getBorneDataByDay(id: string): Observable<Data[]> {
+    return this.http.get<Data[]>(`${this.configUrl}/borne/${id}/days`);
   }
 
-  public getDataByWeek(id: string): Observable<Data[]> {
-    return this.http.get<Data[]>(`${this.configUrl}/${id}/weeks`);
+  public getBorneDataByWeek(id: string): Observable<Data[]> {
+    return this.http.get<Data[]>(`${this.configUrl}/borne/${id}/weeks`);
   }
 
-  public getDataByMonth(id: string): Observable<Data[]> {
-    return this.http.get<Data[]>(`${this.configUrl}/${id}/months`);
+  public getBorneDataByMonth(id: string): Observable<Data[]> {
+    return this.http.get<Data[]>(`${this.configUrl}/borne/${id}/months`);
   }
 }

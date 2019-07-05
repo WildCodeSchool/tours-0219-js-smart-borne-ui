@@ -1,4 +1,5 @@
 import { Borne } from '../models/borne';
+import { Offer } from './offres.models';
 export class Client {
   constructor(
     public _id: string,
@@ -31,7 +32,7 @@ export class Client {
     },
     public cannetteTotal: number,
     public plastiqueTotal: number,
-    public offer: any,
+    public offer: Offer[],
     public bornes: Borne[],
   ) {}
 }

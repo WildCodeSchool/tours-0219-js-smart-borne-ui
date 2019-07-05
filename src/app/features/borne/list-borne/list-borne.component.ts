@@ -47,6 +47,10 @@ export class ListBorneComponent implements OnInit {
     );
   }
 
+  tauxRouleau(couponsRestants) {
+    return Math.round((350 - couponsRestants) / 3.5);
+  }
+
   calculatePercentage(a, b) {
     const result = Math.round(a / b * 100) ;
     if (isNaN(result)) {
