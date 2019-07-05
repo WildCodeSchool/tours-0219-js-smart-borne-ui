@@ -6,6 +6,8 @@ import { ClientService } from 'src/app/core/http/client.service';
 import { Client } from '../../../shared/models/client-model';
 import { User } from '../../../shared/models/user';
 import { ProfileService } from '../../../core/http/profile.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-borne',
@@ -13,6 +15,16 @@ import { ProfileService } from '../../../core/http/profile.service';
   styleUrls: ['./list-borne.component.scss'],
 })
 export class ListBorneComponent implements OnInit {
+
+  constructor(
+    private profileService: ProfileService,
+    private route: ActivatedRoute,
+    public borneService: BorneService,
+    public clientService: ClientService,
+    public router: Router,
+    private fb: FormBuilder,
+    ) {
+  }
   public bornes: Borne[];
   public clients: Client[];
   public user: User;
@@ -23,20 +35,28 @@ export class ListBorneComponent implements OnInit {
   public filterTotal: string;
   public filterDate: string;
 
-  constructor(
-    private profileService: ProfileService,
-    public borneService: BorneService,
-    public clientService: ClientService,
-    ) {
-  }
+  queryForm = this.fb.group({
+    query: ['', [Validators.required]],
+  });
+
   ngOnInit() {
-    this.getListBorne();
     this.clientService.getListClient().pipe(first()).subscribe((clients) => {
       this.clients = clients;
     });
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
     });
+
+    this.route.queryParams.subscribe((params) => {
+      if (params.numeroSerie) {
+        this.borneService.getQueryBorne(params.numeroSerie).subscribe((borne) => {
+          this.bornes = borne;
+        });
+      } else {
+        this.getListBorne();
+      }
+    });
+
   }
 
   getListBorne() {
@@ -45,6 +65,11 @@ export class ListBorneComponent implements OnInit {
         this.bornes = bornes;
       },
     );
+  }
+
+  onSubmit() {
+    this.router.navigate(['/bornes'], {
+      queryParams: { numeroSerie:  this.queryForm.value.query } });
   }
 
   calculatePercentage(a, b) {
