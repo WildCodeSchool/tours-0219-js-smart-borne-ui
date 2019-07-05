@@ -125,6 +125,7 @@ export class DashboardComponent implements OnInit {
   getDatas() {
     this.dataService.getAllDataByDay().subscribe(
       (dataDays: Data[]) => {
+// tslint:disable-next-line: ter-arrow-parens
         dataDays.map(a => {
           this.barChartDataDays[0].data.push(a.plastique);
           this.barChartDataDays[1].data.push(a.metal);
@@ -133,6 +134,7 @@ export class DashboardComponent implements OnInit {
     );
     this.dataService.getAllDataByWeek().subscribe(
       (dataWeek: Data[]) => {
+// tslint:disable-next-line: ter-arrow-parens
         dataWeek.map(a => {
           this.barChartDataWeeks[0].data.push(a.plastique);
           this.barChartDataWeeks[1].data.push(a.metal);
@@ -141,6 +143,7 @@ export class DashboardComponent implements OnInit {
     );
     this.dataService.getAllDataByMonth().subscribe(
       (dataMonth: Data[]) => {
+// tslint:disable-next-line: ter-arrow-parens
         dataMonth.map(a => {
           this.barChartDataMonths[0].data.push(a.plastique);
           this.barChartDataMonths[1].data.push(a.metal);
@@ -166,10 +169,10 @@ export class DashboardComponent implements OnInit {
     return Math.round(couponsImprimes / couponsRestants * 100);
   }
 
-  color(a: number) {
-    if (a >= 90) {
+  color(taux: number) {
+    if (taux >= 90) {
       return 'danger';
-    } if (a >= 65) {
+    } if (taux >= 65) {
       return 'warning';
     }
     return 'success';

@@ -68,7 +68,7 @@ export class EditBorneComponent implements OnInit {
           (borne: Borne) => {
             this.borneForm.patchValue(borne);
             this.toastr.clear();
-            this.toastr.success('success', 'Borne modifiè');
+            this.toastr.success('Succès', 'Borne modifiée');
             this.router.navigateByUrl(`borne/${this.id}`);
           },
           (error) => {

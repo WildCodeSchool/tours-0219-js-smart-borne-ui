@@ -49,7 +49,7 @@ export class CreateOfferComponent implements OnInit {
       (offer: Offer) => {
         this.offerForm.patchValue(offer);
         this.toastr.clear();
-        this.toastr.success('success', 'Offer Created');
+        this.toastr.success('Succès', 'Offre créée');
         this.router.navigateByUrl('/dashboard');
       },
       (error) => {

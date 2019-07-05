@@ -62,7 +62,7 @@ export class DetailOfferComponent implements OnInit {
         (offer: Offer) => {
           if  (offer) {
             this.offerService.deleteOffer(offer._id).subscribe();
-            this.toastr.error('Suppression', 'offer detroy');
+            this.toastr.error('Suppression', 'Offre supprimée');
             this.router.navigateByUrl(`offers`);
           }
         },

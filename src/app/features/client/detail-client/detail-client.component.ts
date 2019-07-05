@@ -90,7 +90,7 @@ export class DetailClientComponent implements OnInit {
         (client: Client) => {
           if  (client) {
             this.clientService.deleteClient(client._id).subscribe();
-            this.toastr.error('Suppression', 'client detroy');
+            this.toastr.error('Suppression', 'Client supprimé');
             this.router.navigateByUrl(`clients`);
           }
         },
@@ -100,10 +100,10 @@ export class DetailClientComponent implements OnInit {
     }
   }
   deleteBorne(id) {
-    const r = confirm('Etes VOUS sur');
+    const r = confirm('Êtes-vous sûr ?');
     if (r) {
       this.borneService.deleteBorne(id).subscribe();
-      this.toastr.error('Suppression', 'borne detroy');
+      this.toastr.error('Suppression', 'Borne supprimée');
       this.router.navigateByUrl(`bornes`);
 
     }
@@ -111,12 +111,12 @@ export class DetailClientComponent implements OnInit {
   onSubmit() {
     const result = this.client.offer.filter(offers => offers._id === this.assoOfferForm.value.offer);
     if (result[0]) {
-      this.toastr.error(`Cette offre déja associer`);
+      this.toastr.error(`Cette offre est déjà associée`);
     } else {
       this.clientService.associateOffer(this.client._id, this.assoOfferForm.value.offer).subscribe(
         () => {
           this.toastr.clear();
-          this.toastr.success('success', 'Offer associer');
+          this.toastr.success('success', 'Offre associée');
           // this.router.navigateByUrl('offers');
         },
         (error) => {
@@ -142,11 +142,12 @@ export class DetailClientComponent implements OnInit {
     }
     return  `with: ${reason}`;
   }
+
   desasoBorne(id) {
     this.clientService.desacosierBorne(this.client._id, id).subscribe(
       () => {
         this.toastr.clear();
-        this.toastr.success('success', 'Borne desassocier');
+        this.toastr.success('Succès', 'Borne dissociée');
         // this.router.navigateByUrl('bornes');
       },
       (error) => {
@@ -155,18 +156,19 @@ export class DetailClientComponent implements OnInit {
       },
     );
   }
+
   disoOffer(id) {
     this.clientService.disocierOffer(this.client._id, id).subscribe(
       () => {
         this.toastr.clear();
-        this.toastr.success('success', 'Offre desassocier');
+        this.toastr.success('Succès', 'Offre dissociée');
         // this.router.navigateByUrl('bornes');
       },
       (error) => {
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
-      }
-    )
+      },
+    );
   }
 
 }

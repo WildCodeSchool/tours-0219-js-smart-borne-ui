@@ -54,7 +54,7 @@ export class EditOfferComponent implements OnInit {
       (offer: Offer) => {
         this.offerForm.patchValue(offer);
         this.toastr.clear();
-        this.toastr.success('success', 'Offer updated');
+        this.toastr.success('Succès', 'Offre modifiée');
         this.router.navigateByUrl(`offer/${this.id}`);
       },
       (error) => {

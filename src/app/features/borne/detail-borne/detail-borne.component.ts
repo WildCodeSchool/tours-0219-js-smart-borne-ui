@@ -53,13 +53,71 @@ export class DetailBorneComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true,
   };
-  public barChartLabels = ['janvier', 'fevrier', 'mars', 'avril', 'mai',
-    'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
   public barChartType = 'bar';
   public barChartLegend = true;
-  public barChartData = [
-    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie A' },
-    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie B' },
+
+  public days = true;
+  public barChartLabelsDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  public barChartDataDays = [
+    {
+      data: [],
+      label: 'Plastique',
+      backgroundColor: 'rgb(65,105,225,0.6)',
+      borderColor: 'rgb(65,105,225)',
+      hoverBackgroundColor: 'rgb(65,105,225)',
+      hoverBorderColor: 'rgb(65,105,225,0.6)',
+    },
+    {
+      data: [],
+      label: 'Cannettes',
+      backgroundColor: 'rgb(160,82,45,0.6)',
+      borderColor: 'rgb(160,82,45)',
+      hoverBackgroundColor: 'rgb(160,82,45)',
+      hoverBorderColor: 'rgb(160,82,45,0.6)',
+    },
+  ];
+
+  public weeks = false;
+  public barChartLabelsWeeks = ['Semaine 01', 'Semaine 02', 'Semaine 03', 'Semaine 04'];
+  public barChartDataWeeks = [
+    {
+      data: [],
+      label: 'Plastique',
+      backgroundColor: 'rgb(65,105,225,0.6)',
+      borderColor: 'rgb(65,105,225)',
+      hoverBackgroundColor: 'rgb(65,105,225)',
+      hoverBorderColor: 'rgb(65,105,225,0.6)',
+    },
+    {
+      data: [],
+      label: 'Cannettes',
+      backgroundColor: 'rgb(160,82,45,0.6)',
+      borderColor: 'rgb(160,82,45)',
+      hoverBackgroundColor: 'rgb(160,82,45)',
+      hoverBorderColor: 'rgb(160,82,45,0.6)',
+    },
+  ];
+
+  public months = false;
+  public barChartLabelsMonths = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai',
+    'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+  public barChartDataMonths = [
+    {
+      data: [],
+      label: 'Plastique',
+      backgroundColor: 'rgb(65,105,225,0.6)',
+      borderColor: 'rgb(65,105,225)',
+      hoverBackgroundColor: 'rgb(65,105,225)',
+      hoverBorderColor: 'rgb(65,105,225,0.6)',
+    },
+    {
+      data: [],
+      label: 'Cannettes',
+      backgroundColor: 'rgb(160,82,45,0.6)',
+      borderColor: 'rgb(160,82,45)',
+      hoverBackgroundColor: 'rgb(160,82,45)',
+      hoverBorderColor: 'rgb(160,82,45,0.6)',
+    },
   ];
 
   Form = this.fb.group({
@@ -105,7 +163,7 @@ export class DetailBorneComponent implements OnInit {
         (borne: Borne) => {
           if (borne) {
             this.borneService.deleteBorne(borne._id).subscribe();
-            this.toastr.error('Suppression', 'borne detroy');
+            this.toastr.error('Suppression', 'Borne supprimée');
             this.router.navigateByUrl(`bornes`);
           }
         },
@@ -119,18 +177,18 @@ export class DetailBorneComponent implements OnInit {
     this.clientService.getClientById(this.Form.value.client).pipe(first()).subscribe((client) => {
       const result = client.bornes.filter(bornes => bornes._id === this.id);
       if (result[0]) {
-        this.toastr.error(`Ce client et deja associer a cette borne`);
+        this.toastr.error(`Ce client est déjà associée à cette borne`);
       } else {
         this.clientService.associateBorne(this.Form.value.client, this.borne._id).subscribe(
-           () => {
-             this.toastr.clear();
-             this.toastr.success('success', 'Borne associer');
+          () => {
+            this.toastr.clear();
+            this.toastr.success('Succès', 'Borne associée');
             // this.router.navigateByUrl('bornes');
-           },
-           (error) => {
-             this.toastr.clear();
-             this.toastr.error(`Error ${error}`);
-           });
+          },
+          (error) => {
+            this.toastr.clear();
+            this.toastr.error(`Error ${error}`);
+          });
       }
     });
   }
@@ -138,12 +196,12 @@ export class DetailBorneComponent implements OnInit {
   assoOffer() {
     const result = this.borne.offers.filter(offers => offers._id === this.assoOfferForm.value.offer);
     if (result[0]) {
-      this.toastr.error(`Cette offre déja associer`);
+      this.toastr.error(`Cette offre est déja associée`);
     } else {
       this.borneService.associateOffer(this.borne._id, this.assoOfferForm.value.offer).subscribe(
         () => {
           this.toastr.clear();
-          this.toastr.success('success', 'Offre associer');
+          this.toastr.success('Succès', 'Offre associée');
           // this.router.navigateByUrl('bornes');
         },
         (error) => {
@@ -151,7 +209,6 @@ export class DetailBorneComponent implements OnInit {
           this.toastr.error(`Error ${error}`);
         });
     }
-
   }
 
   open(content) {
@@ -171,17 +228,18 @@ export class DetailBorneComponent implements OnInit {
     }
     return `with: ${reason}`;
   }
+
   disoOffer(id) {
     this.borneService.disocierOffer(this.borne._id, id).subscribe(
       () => {
         this.toastr.clear();
-        this.toastr.success('success', 'Offre desassocier');
+        this.toastr.success('Succès', 'Offre dissociée');
         // this.router.navigateByUrl('bornes');
       },
       (error) => {
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
-      }
-    )
+      },
+    );
   }
 }

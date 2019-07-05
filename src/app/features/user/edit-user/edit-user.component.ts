@@ -56,14 +56,14 @@ export class EditUserComponent implements OnInit {
   }
 
   onSubmit() {
-    this.toastr.warning('Being Updater', 'User being Updater');
+    this.toastr.warning('Demande prise en compte', 'En attente de réponse');
     this.userService.putUser(
       this.id, this.userForm.value).subscribe(
       (user: User) => {
         this.clientService.associateUser(this.userForm.value.client, this.user._id).subscribe(
           () => {
             this.toastr.clear();
-            this.toastr.success('success', 'client associer');
+            this.toastr.success('Succèss', 'Client associé');
             // this.router.navigateByUrl('offers');
           },
           (error) => {
@@ -72,7 +72,7 @@ export class EditUserComponent implements OnInit {
           });
         this.userForm.patchValue(user);
         this.toastr.clear();
-        this.toastr.success('success', 'User Updater');
+        this.toastr.success('Succès', 'Utilisateur modifié');
         // this.router.navigateByUrl('/dashboard/user');
       },
       (error) => {
