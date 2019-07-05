@@ -5,25 +5,25 @@
             <h3 class="sizeTitleHeader">{{profile?.role}}</h3>
         </div>
 
-      <ng-container *ngIf="profile?.role == 'ADMINISTRATEUR'">
-        <ul class="list-unstyled components text-center">
-            <li>
-                <a class="asidebar" [routerLink]="['/dashboard']">Dashboard</a>
-            </li>
-            <li>
-                <a class="asidebar" [routerLink]="['/bornes']">Bornes</a>
-            </li>
-            <li>
-                <a class="asidebar" [routerLink]="['/clients']">Clients</a>
-            </li>
-            <li>
-                <a class="asidebar" [routerLink]="['/offers']">Offres</a>
-            </li>
-            <li>
-                <a class="asidebar" [routerLink]="['/maintenance']">Maintenance</a>
-            </li>
-        </ul>
-      </ng-container>
+        <ng-container *ngIf="profile?.role == 'ADMINISTRATEUR'">
+            <ul class="list-unstyled components text-center">
+                <li>
+                    <a class="asidebar" [routerLink]="['/dashboard']" routerLinkActive="active-link">Dashboard</a>
+                </li>
+                <li>
+                    <a class="asidebar" [routerLink]="['/bornes']" routerLinkActive="active-link">Bornes</a>
+                </li>
+                <li>
+                    <a class="asidebar" [routerLink]="['/clients']" routerLinkActive="active-link">Clients</a>
+                </li>
+                <li>
+                    <a class="asidebar" [routerLink]="['/offers']" routerLinkActive="active-link">Offres</a>
+                </li>
+                <li>
+                    <a class="asidebar" [routerLink]="['/maintenance']" routerLinkActive="active-link">Maintenance</a>
+                </li>
+            </ul>
+        </ng-container>
 
     </nav>
 
@@ -33,7 +33,7 @@
             <div class="container-fluid">
 
                 <button type="button" id="sidebarCollapse" (click)="isCollapsed = !isCollapsed"
-                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSidebar" class="btn btn-info">
+                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSidebar" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
                     <span>Réduire le menu</span>
                 </button>
@@ -60,4 +60,3 @@
 
     </div>
 </div>
-
