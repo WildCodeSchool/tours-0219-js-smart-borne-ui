@@ -66,14 +66,14 @@
                                             <th scope="row">{{borne.numeroSerie}}</th>
                                             <td>{{borne.address.ville}}</td>
                                             <td>
-                                                <ngb-progressbar [type]="color(calculatePercentage(borne.cannette.utilise, borne.cannette.total))"
-                                                    [value]="[calculatePercentage(borne.cannette.utilise, borne.cannette.total)]"
+                                                <ngb-progressbar [type]="color(borne.metal.taux)"
+                                                    [value]="borne.metal.taux"
                                                     [striped]="true" [animated]="true" showValue=true>
                                                 </ngb-progressbar>
                                             </td>
                                             <td>
-                                                <ngb-progressbar [type]="color(calculatePercentage(borne.plastique.utilise, borne.plastique.total))"
-                                                    [value]="[calculatePercentage(borne.plastique.utilise, borne.plastique.total)]"
+                                                <ngb-progressbar [type]="color(borne.plastique.taux)"
+                                                    [value]="[borne.plastique.taux]"
                                                     [striped]="true" [animated]="true" showValue=true>
                                                 </ngb-progressbar>
                                             </td>
@@ -152,14 +152,14 @@
                                                 <th scope="row">{{borne.numeroSerie}}</th>
                                                 <td>{{borne.address.ville}}</td>
                                                 <td>
-                                                    <ngb-progressbar type="color(calculatePercentage(borne.cannette.utilise, borne.cannette.total))"
-                                                        [value]="[calculatePercentage(borne.cannette.utilise, borne.cannette.total)]"
+                                                    <ngb-progressbar type="color(borne.metal.taux)"
+                                                        [value]="[borne.metal.taux]"
                                                         [striped]="true" [animated]="true" showValue=true>
                                                     </ngb-progressbar>
                                                 </td>
                                                 <td>
-                                                    <ngb-progressbar type="color(calculatePercentage(borne.plastique.utilise, borne.plastique.total))"
-                                                        [value]="[calculatePercentage(borne.plastique.utilise, borne.plastique.total)]"
+                                                    <ngb-progressbar type="color(borne.plastique.taux)"
+                                                        [value]="borne.plastique.taux"
                                                         [striped]="true" [animated]="true" showValue=true>
                                                     </ngb-progressbar>
                                                 </td>

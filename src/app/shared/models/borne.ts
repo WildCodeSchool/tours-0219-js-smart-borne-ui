@@ -10,21 +10,17 @@ export class Borne {
       ville: string,
       codePostal: string,
     },
-    public taux: {
-      bacUn: number,
-      bacDeux: number,
-    },
     public dateInstallation: string,
     public coupon: {
       restant: number,
       imprimer: number,
     },
     public plastique: {
-      utilise: number,
+      taux: number,
       total: number,
     },
-    public cannette: {
-      utilise: number,
+    public metal: {
+      taux: number,
       total: number,
     },
     public total: {

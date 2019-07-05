@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       data: [],
-      label: 'Cannettes',
+      label: 'Métal',
       backgroundColor: 'rgb(160,82,45,0.6)',
       borderColor: 'rgb(160,82,45)',
       hoverBackgroundColor: 'rgb(160,82,45)',
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       data: [],
-      label: 'Cannettes',
+      label: 'Métal',
       backgroundColor: 'rgb(160,82,45,0.6)',
       borderColor: 'rgb(160,82,45)',
       hoverBackgroundColor: 'rgb(160,82,45)',
@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       data: [],
-      label: 'Cannettes',
+      label: 'Métal',
       backgroundColor: 'rgb(160,82,45,0.6)',
       borderColor: 'rgb(160,82,45)',
       hoverBackgroundColor: 'rgb(160,82,45)',
@@ -83,15 +83,15 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
-  public totalCannettes = 0;
+  public totalMetal = 0;
   public totalPlastique = 0;
 
   public doughnutData = [];
-  public labels = ['Cannettes', 'Plastique'];
+  public labels = ['Métal', 'Plastique'];
   public type = 'doughnut';
 
-  public topBornesBacUn: Borne[];
-  public topBornesBacDeux: Borne[];
+  public topBornesMetal: Borne[];
+  public topBornesPlastique: Borne[];
   public topBornesRouleaux: Borne[];
   public topOffres: Offer[];
 
@@ -108,15 +108,15 @@ export class DashboardComponent implements OnInit {
   getListBornes() {
     this.borneService.getListBorne().subscribe(
       (bornes: Borne[]) => {
-        this.topBornesBacUn = [...bornes.sort((a, b) => b.taux.bacUn - a.taux.bacUn)];
-        this.topBornesBacDeux = [...bornes.sort((a, b) => b.taux.bacDeux - a.taux.bacDeux)];
+        this.topBornesMetal = [...bornes.sort((a, b) => b.metal.taux - a.metal.taux)];
+        this.topBornesPlastique = [...bornes.sort((a, b) => b.plastique.taux - a.plastique.taux)];
         this.topBornesRouleaux = [...bornes.sort((a, b) => a.coupon.restant - b.coupon.restant)];
 // tslint:disable-next-line: ter-arrow-parens
         bornes.map(a => {
-          this.totalCannettes += a.cannette.total;
+          this.totalMetal += a.metal.total;
           this.totalPlastique += a.plastique.total;
         });
-        this.doughnutData.push(this.totalCannettes);
+        this.doughnutData.push(this.totalMetal);
         this.doughnutData.push(this.totalPlastique);
       },
     );

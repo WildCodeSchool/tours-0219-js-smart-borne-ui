@@ -18,8 +18,8 @@ export class ListBorneComponent implements OnInit {
   public user: User;
   public filterNumeroSerie: string;
   public filterVille: string;
-  public filterBac1: string;
-  public filterBac2: string;
+  public filterPlastique: string;
+  public filterMetal: string;
   public filterTotal: string;
   public filterDate: string;
 

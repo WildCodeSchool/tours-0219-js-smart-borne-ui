@@ -13,6 +13,8 @@ import { FormBuilder } from '@angular/forms';
 import { OffersService } from '../../../core/http/offers.service';
 import { Offer } from '../../../shared/models/offres.models';
 import { UserService } from '../../../core/http/user.service';
+import { DataService } from 'src/app/core/http/data.service';
+import { Data } from 'src/app/shared/models/data.model';
 
 @Component({
   selector: 'app-detail-borne',
@@ -33,6 +35,7 @@ export class DetailBorneComponent implements OnInit {
     private offerService: OffersService,
     private userService: UserService,
     private modalService: NgbModal,
+    public dataService: DataService,
   ) {
     config.justify = 'center';
     config.type = 'pills';
@@ -45,10 +48,14 @@ export class DetailBorneComponent implements OnInit {
   public client: Client[];
   public offers: Offer[];
   public id: string;
-  public cannetteLabels = ['Cannette'];
-  public cannetteType = 'doughnut';
-  public plastiqueLabels = ['Plastique'];
+
+  // Doughnut chart data
+  public metalLabels = ['Métal', 'Vide'];
+  public metalType = 'doughnut';
+  public plastiqueLabels = ['Plastique', 'Vide'];
   public plastiqueType = 'doughnut';
+
+  // Bar chart general options
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
@@ -56,6 +63,7 @@ export class DetailBorneComponent implements OnInit {
   public barChartType = 'bar';
   public barChartLegend = true;
 
+  // Bar chart days data
   public days = true;
   public barChartLabelsDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
   public barChartDataDays = [
@@ -69,7 +77,7 @@ export class DetailBorneComponent implements OnInit {
     },
     {
       data: [],
-      label: 'Cannettes',
+      label: 'Métal',
       backgroundColor: 'rgb(160,82,45,0.6)',
       borderColor: 'rgb(160,82,45)',
       hoverBackgroundColor: 'rgb(160,82,45)',
@@ -77,6 +85,7 @@ export class DetailBorneComponent implements OnInit {
     },
   ];
 
+  // Bar chart week data
   public weeks = false;
   public barChartLabelsWeeks = ['Semaine 01', 'Semaine 02', 'Semaine 03', 'Semaine 04'];
   public barChartDataWeeks = [
@@ -90,7 +99,7 @@ export class DetailBorneComponent implements OnInit {
     },
     {
       data: [],
-      label: 'Cannettes',
+      label: 'Métal',
       backgroundColor: 'rgb(160,82,45,0.6)',
       borderColor: 'rgb(160,82,45)',
       hoverBackgroundColor: 'rgb(160,82,45)',
@@ -98,6 +107,7 @@ export class DetailBorneComponent implements OnInit {
     },
   ];
 
+  // Bar chart months data
   public months = false;
   public barChartLabelsMonths = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai',
     'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -112,7 +122,7 @@ export class DetailBorneComponent implements OnInit {
     },
     {
       data: [],
-      label: 'Cannettes',
+      label: 'Métal',
       backgroundColor: 'rgb(160,82,45,0.6)',
       borderColor: 'rgb(160,82,45)',
       hoverBackgroundColor: 'rgb(160,82,45)',
@@ -146,12 +156,43 @@ export class DetailBorneComponent implements OnInit {
     this.offerService.getListOffers().pipe(first()).subscribe((offer) => {
       this.offers = offer;
     });
+    this.getDatas();
   }
 
   getBorne() {
     this.borneService.getBorneById(this.id).subscribe(
       (borne: Borne) => {
         this.borne = borne;
+      },
+    );
+  }
+
+  getDatas() {
+    this.dataService.getDataByDay(this.id).subscribe(
+      (dataDays: Data[]) => {
+        // tslint:disable-next-line: ter-arrow-parens
+        dataDays.map(a => {
+          this.barChartDataDays[0].data.push(a.plastique);
+          this.barChartDataDays[1].data.push(a.metal);
+        });
+      },
+    );
+    this.dataService.getDataByWeek(this.id).subscribe(
+      (dataWeek: Data[]) => {
+        // tslint:disable-next-line: ter-arrow-parens
+        dataWeek.map(a => {
+          this.barChartDataWeeks[0].data.push(a.plastique);
+          this.barChartDataWeeks[1].data.push(a.metal);
+        });
+      },
+    );
+    this.dataService.getDataByMonth(this.id).subscribe(
+      (dataMonth: Data[]) => {
+        // tslint:disable-next-line: ter-arrow-parens
+        dataMonth.map(a => {
+          this.barChartDataMonths[0].data.push(a.plastique);
+          this.barChartDataMonths[1].data.push(a.metal);
+        });
       },
     );
   }
@@ -173,11 +214,15 @@ export class DetailBorneComponent implements OnInit {
     }
   }
 
+  tauxOffre(couponsImprimes, couponsRestants) {
+    return Math.round(couponsImprimes / couponsRestants * 100);
+  }
+
   onSubmit() {
     this.clientService.getClientById(this.Form.value.client).pipe(first()).subscribe((client) => {
       const result = client.bornes.filter(bornes => bornes._id === this.id);
       if (result[0]) {
-        this.toastr.error(`Ce client est déjà associée à cette borne`);
+        this.toastr.error(`Ce client est déjà associé à cette borne`);
       } else {
         this.clientService.associateBorne(this.Form.value.client, this.borne._id).subscribe(
           () => {
@@ -196,7 +241,7 @@ export class DetailBorneComponent implements OnInit {
   assoOffer() {
     const result = this.borne.offers.filter(offers => offers._id === this.assoOfferForm.value.offer);
     if (result[0]) {
-      this.toastr.error(`Cette offre est déja associée`);
+      this.toastr.error(`Cette offre est déja associée à cette borne`);
     } else {
       this.borneService.associateOffer(this.borne._id, this.assoOfferForm.value.offer).subscribe(
         () => {
@@ -229,8 +274,8 @@ export class DetailBorneComponent implements OnInit {
     return `with: ${reason}`;
   }
 
-  disoOffer(id) {
-    this.borneService.disocierOffer(this.borne._id, id).subscribe(
+  dissoOffer(id) {
+    this.borneService.dissocierOffer(this.borne._id, id).subscribe(
       () => {
         this.toastr.clear();
         this.toastr.success('Succès', 'Offre dissociée');
@@ -241,5 +286,23 @@ export class DetailBorneComponent implements OnInit {
         this.toastr.error(`Error ${error}`);
       },
     );
+  }
+
+  toggleDays() {
+    this.days = true;
+    this.weeks = false;
+    this.months = false;
+  }
+
+  toggleWeeks() {
+    this.days = false;
+    this.weeks = true;
+    this.months = false;
+  }
+
+  toggleMonths() {
+    this.days = false;
+    this.weeks = false;
+    this.months = true;
   }
 }

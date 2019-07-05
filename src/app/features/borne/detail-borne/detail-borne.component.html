@@ -30,20 +30,47 @@
   <div class="col-md-12 col-xl-12 mt-4">
     <div class="row">
       <div class="col-6">
-        <h3 class="text-center">Plastique</h3>
-        <canvas baseChart [data]="[borne.plastique.total, borne.plastique.utilise]" [labels]="plastiqueLabels"
+        <h3 class="text-center">Remplissage bac plastique :</h3>
+        <canvas baseChart [data]="[borne.plastique.taux, (100 - borne.plastique.taux)]" [labels]="plastiqueLabels"
           [chartType]="plastiqueType"></canvas>
       </div>
       <div class="col-6">
-        <h3 class="text-center">Cannette</h3>
-        <canvas baseChart [data]="[borne.cannette.total, borne.cannette.utilise]" [labels]="cannetteLabels"
-          [chartType]="cannetteType"></canvas>
+        <h3 class="text-center">Bac métal</h3>
+        <canvas baseChart [data]="[borne.metal.taux, (100 - borne.metal.taux)]" [labels]="metalLabels"
+          [chartType]="metalType"></canvas>
       </div>
     </div>
     <h1 class="text-center mb-3 mt-3">Tableaux</h1>
-    <div style="display: block">
-      <canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
-        [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+    <div class="col-12">
+      <div class="button col-6">
+        <button class="btn btn-outline-primary mr-2" (click)="toggleDays()">Jours</button>
+        <button class="btn btn-outline-primary" (click)="toggleWeeks()">Semaines</button>
+        <button class="btn btn-outline-primary ml-2" (click)="toggleMonths()">Mois</button>
+      </div>
+      <div style="display: block" *ngIf="days">
+        <canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
+          [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+      </div>
+      <div style="display: block" *ngIf="weeks">
+        <canvas baseChart [datasets]="barChartDataWeeks" [labels]="barChartLabelsWeeks" [options]="barChartOptions"
+          [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+      </div>
+      <div style="display: block" *ngIf="months">
+        <canvas baseChart [datasets]="barChartDataMonths" [labels]="barChartLabelsMonths" [options]="barChartOptions"
+          [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+      </div>
+    </div>
+    <div class="col-12 mt-4">
+      <div class="card">
+        <p class="text-center p-3">Rouleau d'impression</p>
+        <div class=" ml-3 mr-3 mb-3">
+          <p>
+            <ngb-progressbar type="info" [value]="tauxOffre(borne.coupon.imprimer, borne.coupon.restant)" [striped]="true" [animated]="true" showValue="true">
+            </ngb-progressbar>
+          </p>
+        </div>
+      </div>
+    </div>
     </div>
 
     <div class="row">
@@ -98,7 +125,7 @@
           <button class="btn btn-info btn-block" [routerLink]="['/offer', offre._id]">Voir</button>
         </div>
         <div class="col-md-12 mt-1">
-          <button class="btn btn-danger btn-block" (click)="disoOffer(offre._id)"> Desasocier Offre</button>
+          <button class="btn btn-danger btn-block" (click)="dissoOffer(offre._id)"> Desasocier Offre</button>
         </div>
       </div>
     </div>
@@ -125,19 +152,7 @@
       </div>
     </div>
 
-    <div class="col-md-6 col-xl-6">
-      <div class="card">
-        <p class="text-center p-3">Rouleau d'impression</p>
-        <div class=" ml-3 mr-3 mb-3">
-          <p>
-            <ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true">
-              <i>50%</i>
-            </ngb-progressbar>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+    
 
 
   <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
