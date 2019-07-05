@@ -165,8 +165,8 @@ export class DashboardComponent implements OnInit {
     return Math.round((350 - couponsRestants) / 3.5);
   }
 
-  tauxOffre(couponsImprimes, couponsRestants) {
-    return Math.round(couponsImprimes / couponsRestants * 100);
+  tauxOffre(couponsImprimes, couponsTotal) {
+    return Math.round(couponsImprimes / couponsTotal * 100);
   }
 
   color(taux: number) {

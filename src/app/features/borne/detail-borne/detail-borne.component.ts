@@ -140,8 +140,6 @@ export class DetailBorneComponent implements OnInit {
     borne: [''],
   });
 
-  private;
-
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
@@ -214,8 +212,17 @@ export class DetailBorneComponent implements OnInit {
     }
   }
 
-  tauxOffre(couponsImprimes, couponsRestants) {
-    return Math.round(couponsImprimes / couponsRestants * 100);
+  tauxRouleau(couponsRestants) {
+    return Math.round((350 - couponsRestants) / 3.5);
+  }
+
+  color(taux: number) {
+    if (taux >= 90) {
+      return 'danger';
+    } if (taux >= 65) {
+      return 'warning';
+    }
+    return 'success';
   }
 
   onSubmit() {
