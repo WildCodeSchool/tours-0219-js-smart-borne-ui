@@ -35,50 +35,22 @@ export class CreateBorneComponent implements OnInit {
     dateInstallation: ['', [Validators.required]],
     styliseeClient: ['', [Validators.required]],
     details: ['', [Validators.maxLength(300)]],
-    taux: this.fb.group({
-      bacUn: [0],
-      bacDeux: [0],
-    }),
     coupon: this.fb.group({
       restant: [0],
       imprimer: [0],
     }),
     plastique: this.fb.group({
-      utilise: [0],
+      taux: [0],
       total: [0],
     }),
-    cannette: this.fb.group({
-      utilise: [0],
+    metal: this.fb.group({
+      taux: [0],
       total: [0],
     }),
     total: this.fb.group({
       recycle: [0],
       remise: [0],
-      cannettes: [0],
-    }),
-    jour: this.fb.group({
-      cannetteTotal: [0],
-      cannetteUtilise: [0],
-      plastiqueTotal: [0],
-      plastiqueUtilise: [0],
-      couponTotal: [0],
-      couponUtilise: [0],
-    }),
-    semaine: this.fb.group({
-      cannetteTotal: [0],
-      cannetteUtilise: [0],
-      plastiqueTotal: [0],
-      plastiqueUtilise: [0],
-      couponTotal: [0],
-      couponUtilise: [0],
-    }),
-    mois: this.fb.group({
-      cannetteTotal: [0],
-      cannetteUtilise: [0],
-      plastiqueTotal: [0],
-      plastiqueUtilise: [0],
-      couponTotal: [0],
-      couponUtilise: [0],
+      coupons: [0],
     }),
     problemesTechniques: ['0'],
   });

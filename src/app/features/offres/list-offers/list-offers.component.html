@@ -14,7 +14,7 @@
     <form (ngSubmit)="onSubmit()" [formGroup]="queryForm" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search"
              formControlName="query">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+      <button class="btn btn-info my-2 my-sm-0" type="submit">Rechercher</button>
     </form>
 
 
@@ -71,7 +71,7 @@
                     <td>{{ offer.contrat.debut | date:'d/M/y' }}</td>
                     <td>{{ offer.contrat.fin | date:'d/M/y' }}</td>
                     <td>
-                      <button type="button" [routerLink]="['/offer', offer._id]" class="btn btn-outline-primary">
+                      <button type="button" [routerLink]="['/offer', offer._id]" class="btn btn-info">
                         Détails
                       </button>
                     </td>

@@ -30,6 +30,9 @@ export class DetailClientComponent implements OnInit {
   public borne: Borne;
   public id: string;
 
+  public totalPlastique: number;
+  public totalMetal: number;
+
   public doughnutData = [];
   public labels = ['Métal', 'Plastique'];
   public type = 'doughnut';
@@ -104,6 +107,7 @@ export class DetailClientComponent implements OnInit {
       hoverBorderColor: 'rgb(160,82,45,0.6)',
     },
   ];
+  
   constructor(
     private route: ActivatedRoute,
     public clientService: ClientService,
@@ -140,8 +144,15 @@ export class DetailClientComponent implements OnInit {
     this.clientService.getClientById(this.id).subscribe(
       (client: Client) => {
         this.client = client;
+        client.bornes.map(a => {
+          this.totalPlastique += a.plastique.total;
+          this.totalMetal += a.metal.total;
+        });
+        this.doughnutData.push(this.totalPlastique);
+        this.doughnutData.push(this.totalMetal);
       },
     );
+    
   }
 
   deleteClientModal() {
@@ -160,6 +171,7 @@ export class DetailClientComponent implements OnInit {
       this.toastr.error('L \'id ne correspond pas');
     }
   }
+
   deleteBorne(id) {
     const r = confirm('Êtes-vous sûr ?');
     if (r) {

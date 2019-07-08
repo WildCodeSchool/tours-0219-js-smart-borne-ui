@@ -3,15 +3,15 @@
   <h1 class="text-center">Client {{client.name}}</h1>
 
   <div class="row mt-3">
-    <div class="col-12 col-sm-6">
+    <div class="col-12 col-sm-6" *ngIf="totalPlastique">
       <h3 class="text-center">Total recyclé</h3>
       <canvas baseChart [data]="doughnutData" [labels]="labels" [chartType]="type"></canvas>
     </div>
     <div class="col-12 col-sm-6 mt-2">
-      <div class="button col-6">
-        <button class="btn btn-outline-primary mr-2" (click)="toggleDays()">Jours</button>
-        <button class="btn btn-outline-primary" (click)="toggleWeeks()">Semaines</button>
-        <button class="btn btn-outline-primary ml-2" (click)="toggleMonths()">Mois</button>
+      <div class="button col-12">
+        <button class="btn btn-info mr-2" (click)="toggleDays()">Jours</button>
+        <button class="btn btn-info" (click)="toggleWeeks()">Semaines</button>
+        <button class="btn btn-info ml-2" (click)="toggleMonths()">Mois</button>
       </div>
       <div style="display: block" *ngIf="days">
         <canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-  <h2 class="text-center mt-3">Vos bornes</h2>
+  <h2 class="text-center mt-3">Bornes</h2>
   <div class="row">
     <div class="col-md-12 col-xl-12 mt-4">
       <div class="col-xl-12 col-lg-12">
@@ -38,25 +38,31 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Ville</th>
-                    <th scope="col">Utilisés</th>
-                    <th scope="col">Restants</th>
+                    <th scope="col">Total recyclé</th>
+                    <th scope="col">Problèmes techniques</th>
                     <th></th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <ng-container *ngFor="let client of client.bornes">
+                  <ng-container *ngFor="let borne of client.bornes">
                     <tr>
-                      <th scope="row">{{client.numeroSerie}}</th>
-                      <td>{{client.address.ville}}</td>
-                      <td>{{client.coupon.imprimer}}</td>
-                      <td>{{client.coupon.restant}}</td>
-                      <td>
-                        <button class="btn btn-info" [routerLink]="['/borne', client._id]">Détails</button>
+                      <th scope="row">{{borne.numeroSerie}}</th>
+                      <td>{{borne._id}}</td>
+                      <td>{{borne.address.ville}}</td>
+                      <td>{{borne.total.recycle}}</td>
+                      <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
+                          class="fas fa-check colorValidate"></i></td>
+                      <ng-template #elseBlock>
+                        <td><i class="fas fa-times colorError"></i></td>
+                      </ng-template>
+                      <td class="text-right">
+                        <button class="btn btn-info" [routerLink]="['/borne', borne._id]">Détails</button>
                       </td>
-                      <td>
-                        <button class="btn btn-danger" (click)="dissoBorne(client._id)">Dissocier la borne
+                      <td class="text-right">
+                        <button class="btn btn-danger" (click)="dissoBorne(borne._id)">Dissocier la borne
                         </button>
                       </td>
                     </tr>
@@ -68,16 +74,17 @@
         </div>
       </div>
 
+      <h2 class="text-center">Offres</h2>
       <div class="row">
         <div class="col-xl-12 col-lg-12">
-          <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
+          <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-success float-right" type="button"
             data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
             aria-controls="collapseAssoOfferForm">
             Associer une offre
           </button>
         </div>
       </div>
-
+      
       <div class="collapse mt-3" id="collapseAssoOfferForm">
         <form (ngSubmit)="onSubmit()" [formGroup]="assoOfferForm">
           <div class="form-group">
@@ -89,8 +96,6 @@
           </div>
         </form>
       </div>
-
-      <h2 class="text-center">Vos offres</h2>
       <div class="row">
         <app-card-offer *ngFor="let offre of client.offer">
           <div class="title">{{offre.client}}</div>

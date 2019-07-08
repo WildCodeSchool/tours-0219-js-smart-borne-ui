@@ -35,13 +35,14 @@
                 <button type="button" id="sidebarCollapse" (click)="isCollapsed = !isCollapsed"
                     [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSidebar" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
-                    <span>Réduire le menu</span>
+                    <span *ngIf="!isCollapsed"> Réduire le menu</span>
+                    <span *ngIf="isCollapsed"> Ouvrir le menu</span>
                 </button>
 
                 <h4 class="title-center-smartborne">SMART BORNE</h4>
 
                 <div ngbDropdown class="right d-inline-block">
-                    <button class="btn btn-outline-primary" id="dropdown" ngbDropdownToggle>
+                    <button class="btn btn-info" id="dropdown" ngbDropdownToggle>
                         {{profile?.username}}
                     </button>
                     <div ngbDropdownMenu aria-labelledby="dropdown">
@@ -50,7 +51,7 @@
                             <button ngbDropdownItem [routerLink]="['/dashboard/user']">Gérer les utilisateurs</button>
                             <div class="dropdown-divider"></div>
                         </ng-container>
-                        <button ngbDropdownItem [routerLink]="[]" (click)="logout()">Logout</button>
+                        <button ngbDropdownItem [routerLink]="[]" (click)="logout()">Déconnexion</button>
                     </div>
                 </div>
             </div>

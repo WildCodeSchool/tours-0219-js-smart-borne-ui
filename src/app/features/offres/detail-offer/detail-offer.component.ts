@@ -28,8 +28,16 @@ export class DetailOfferComponent implements OnInit {
   public user: User;
   public id: string;
   public couponsData = [];
-  public couponsLabels = ['Coupons imprimés', 'Coupons restants'];
-  public couponsType = 'doughnut';
+  public couponLabels = ['Imprimés', 'Restants'];
+  public couponType = 'doughnut';
+
+  public couponColor =
+    [
+      {
+        backgroundColor: ['rgb(225, 65, 65, 0.6)', 'rgb(102, 102, 102, 0.4)'],
+        borderColor: ['rgba(225, 65, 65,1)', 'transparent'],
+      },
+    ];
 
   FormDelete = this.fb.group({
     offer: [''],

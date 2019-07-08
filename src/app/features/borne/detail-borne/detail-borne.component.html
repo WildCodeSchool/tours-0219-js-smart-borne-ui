@@ -2,7 +2,7 @@
   <h1 class="text-center">Borne {{borne.numeroSerie}}</h1>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
-      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
+      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-success float-right" type="button"
         data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
         Associer un client
       </button>
@@ -26,55 +26,56 @@
   <div class="col-md-12 col-xl-12 mt-4">
     <div class="row">
       <div class="col-12 col-sm-4">
-        <h3 class="text-center">Bac plastique :</h3>
-        <canvas baseChart [data]="[borne.plastique.taux, (100 - borne.plastique.taux)]" [colors]="plastiqueColor" [labels]="plastiqueLabels"
-          [chartType]="plastiqueType"></canvas>
+        <h3 class="text-center">Bac plastique</h3>
+        <canvas baseChart [data]="[borne.plastique.taux, (100 - borne.plastique.taux)]" [colors]="plastiqueColor"
+          [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
       </div>
       <div class="col-12 col-sm-4">
-        <h3 class="text-center">Bac métal :</h3>
-        <canvas baseChart [data]="[borne.metal.taux, (100 - borne.metal.taux)]" [colors]="metalColor" [labels]="metalLabels"
-          [chartType]="metalType"></canvas>
+        <h3 class="text-center">Bac métal</h3>
+        <canvas baseChart [data]="[borne.metal.taux, (100 - borne.metal.taux)]" [colors]="metalColor"
+          [labels]="metalLabels" [chartType]="metalType"></canvas>
       </div>
       <div class="col-12 col-sm-4">
-        <h3 class="text-center">Rouleau d'impression :</h3>
-        <canvas baseChart [data]="[borne.coupon.imprimer, borne.coupon.restant]" [colors]="couponColor" [labels]="rouleauLabels"
-          [chartType]="rouleauType"></canvas>
+        <h3 class="text-center">Rouleau d'impression</h3>
+        <canvas baseChart [data]="[borne.coupon.imprimer, borne.coupon.restant]" [colors]="couponColor"
+          [labels]="rouleauLabels" [chartType]="rouleauType"></canvas>
       </div>
     </div>
-    <h1 class="text-center mb-3 mt-3">Tableaux</h1>
-    <div class="col-12">
-      <div class="button col-6">
-        <button class="btn btn-outline-primary mr-2" (click)="toggleDays()">Jours</button>
-        <button class="btn btn-outline-primary" (click)="toggleWeeks()">Semaines</button>
-        <button class="btn btn-outline-primary ml-2" (click)="toggleMonths()">Mois</button>
+    <div class="row mt-5">
+      <div class="col-12 col-sm-6 mt-4">
+        <div class="mt-3">
+          <div class="card">
+            <div class="card-body text-center">
+              <h2>Borne {{borne._id}}</h2>
+              <h4 class="card-title">{{borne.address.numero}} {{borne.address.rue}}, {{borne.address.codePostal}}
+                {{borne.address.ville}}</h4>
+              <h6>Numéro de série : {{borne.numeroSerie}}</h6>
+              <h6>Date d'installation : {{borne.dateInstallation| date:'d/M/y'}}</h6>
+              <h6>Total de coupons imprimés : {{borne.total.coupons}}</h6>
+              <h6>Total recyclé : {{borne.total.recycle}}</h6>
+              <h6>Total remisé : {{borne.total.remise}}</h6>
+              <h6>Détails supplémentaire : {{borne.details}}</h6>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style="display: block" *ngIf="days">
-        <canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
-          [legend]="barChartLegend" [chartType]="barChartType"></canvas>
-      </div>
-      <div style="display: block" *ngIf="weeks">
-        <canvas baseChart [datasets]="barChartDataWeeks" [labels]="barChartLabelsWeeks" [options]="barChartOptions"
-          [legend]="barChartLegend" [chartType]="barChartType"></canvas>
-      </div>
-      <div style="display: block" *ngIf="months">
-        <canvas baseChart [datasets]="barChartDataMonths" [labels]="barChartLabelsMonths" [options]="barChartOptions"
-          [legend]="barChartLegend" [chartType]="barChartType"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 col-xl-12 mt-4">
-      <div class="card">
-        <div class="card-body text-center">
-          <h2 class="card-title">{{borne.address.numero}} {{borne.address.rue}}, {{borne.address.codePostal}}
-            {{borne.address.ville}}</h2>
-          <h4>Numéro de série : {{borne.numeroSerie}}</h4>
-          <h4>Date d'installation : {{borne.dateInstallation| date:'d/M/y'}}</h4>
-          <h4>Total de coupons imprimés : {{borne.total.coupons}}</h4>
-          <h4>Total recyclé : {{borne.total.recycle}}</h4>
-          <h4>Total remisé : {{borne.total.remise}}</h4>
-          <h4>Détails supplémentaire : {{borne.details}}</h4>
+      <div class="col-12 col-sm-6">
+        <div class="button col-12">
+          <button class="btn btn-info mr-2" (click)="toggleDays()">Jours</button>
+          <button class="btn btn-info" (click)="toggleWeeks()">Semaines</button>
+          <button class="btn btn-info ml-2" (click)="toggleMonths()">Mois</button>
+        </div>
+        <div style="display: block" *ngIf="days">
+          <canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
+            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+        </div>
+        <div style="display: block" *ngIf="weeks">
+          <canvas baseChart [datasets]="barChartDataWeeks" [labels]="barChartLabelsWeeks" [options]="barChartOptions"
+            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+        </div>
+        <div style="display: block" *ngIf="months">
+          <canvas baseChart [datasets]="barChartDataMonths" [labels]="barChartLabelsMonths" [options]="barChartOptions"
+            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
       </div>
     </div>
@@ -82,7 +83,7 @@
   <h1 class="text-center">Offres</h1>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
-      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right mt-4" type="button"
+      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-success float-right mt-4" type="button"
         data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
         aria-controls="collapseAssoOfferForm">
         Associer une offre

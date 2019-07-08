@@ -4,14 +4,14 @@
 
 	<div class="row">
 		<div class="col-12 col-sm-6">
-			<h3 class="text-center">Total recyclé :</h3>
+			<h3 class="text-center">Total recyclé</h3>
 			<canvas baseChart [data]="doughnutData" [colors]="doughnutChartColors" [labels]="labels" [chartType]="type"></canvas>
 		</div>
 		<div class="col-12 col-sm-6 mt-2">
-			<div class="button col-6">
-				<button class="btn btn-outline-primary mr-2"(click)="toggleDays()">Jours</button>
-				<button class="btn btn-outline-primary"(click)="toggleWeeks()">Semaines</button>
-				<button class="btn btn-outline-primary ml-2" (click)="toggleMonths()">Mois</button>
+			<div class="button col-12">
+				<button class="btn btn-info mr-2"(click)="toggleDays()">Jours</button>
+				<button class="btn btn-info"(click)="toggleWeeks()">Semaines</button>
+				<button class="btn btn-info ml-2" (click)="toggleMonths()">Mois</button>
 			</div>
 			<div style="display: block" *ngIf="days">
 				<canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
@@ -30,7 +30,7 @@
 	<div class="row mt-4">
 		<div class="col-12 col-sm-6">
 			<div class="card">
-				<h3 class="text-center p-3">Remplissage bac métal :</h3>
+				<h3 class="text-center p-3">Remplissage bac métal</h3>
 				<div class=" ml-3 mr-3 mb-3" *ngIf="topBornesMetal">
 					<ng-container *ngFor="let borne of topBornesMetal; let i=index">
 						<div *ngIf="i<5">
@@ -49,7 +49,7 @@
 		</div>
 		<div class="col-12 col-sm-6">
 			<div class="card">
-				<h3 class="text-center p-3">Remplissage bac plastique :</h3>
+				<h3 class="text-center p-3">Remplissage bac plastique</h3>
 				<div class=" ml-3 mr-3 mb-3" *ngIf="topBornesPlastique">
 					<ng-container *ngFor="let borne of topBornesPlastique; let i=index">
 						<div *ngIf="i<5">
@@ -70,7 +70,7 @@
 	<div class="row mt-4">
 		<div class="col-md-6 col-xl-6">
 			<div class="card">
-				<h3 class="text-center p-3">Offres proche de l'expiration :</h3>
+				<h3 class="text-center p-3">Offres proche de l'expiration</h3>
 				<div class=" ml-3 mr-3 mb-3" *ngIf="topOffres">
 					<ng-container *ngFor="let offre of topOffres; let i=index">
 						<div *ngIf="i<5">
@@ -89,7 +89,7 @@
 		</div>
 		<div class="col-md-6 col-xl-6">
 			<div class="card">
-				<h3 class="text-center p-3">Rouleaux d'impression :</h3>
+				<h3 class="text-center p-3">Rouleaux d'impression</h3>
 				<div class=" ml-3 mr-3 mb-3" *ngIf="topBornesRouleaux">
 					<ng-container *ngFor="let borne of topBornesRouleaux; let i=index">
 						<div *ngIf="i<5">

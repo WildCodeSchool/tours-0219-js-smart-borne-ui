@@ -173,7 +173,10 @@ export class DashboardComponent implements OnInit {
   }
 
   tauxOffre(couponsImprimes, couponsTotal) {
-    return Math.round(couponsImprimes / couponsTotal * 100);
+    if (couponsImprimes !== 0) {
+      return Math.round((couponsImprimes / couponsTotal) * 100);
+    }
+    return 0;
   }
 
   color(taux: number) {
