@@ -1,7 +1,5 @@
 <div *ngIf="user" class="container-fluid mb-5">
 
-    <app-create-borne></app-create-borne>
-
     <div class="col-12 m-3">
         <div class="alert alert-danger m-4 text-center"
             *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate).length === 0">
@@ -12,7 +10,7 @@
     </div>
     <div class="col-12">
         <h1 class="text-center">Liste des bornes</h1>
-
+        <app-create-borne></app-create-borne>
         <form (ngSubmit)="onSubmit()" [formGroup]="queryForm" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search"
                 formControlName="query">
