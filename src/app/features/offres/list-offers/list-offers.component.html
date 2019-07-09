@@ -1,13 +1,10 @@
 <div class="container-fluid mb-5">
-
-
   <div class="col-12 m-3">
     <div class="alert alert-danger m-4 text-center"
       *ngIf="offers &&(offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin).length === 0">
       <span *ngIf="filterId || filterClient || filterRemise || filterDebut || filterFin">Il n y a pas d'offres</span>
     </div>
   </div>
-
   <div class="col-12">
     <h1 class="text-center">Liste des offres</h1>
     <app-create-offer></app-create-offer>
@@ -16,8 +13,6 @@
         formControlName="query">
       <button class="btn btn-info my-2 my-sm-0" type="submit">Rechercher</button>
     </form>
-
-
     <div class="row">
       <div class="col-xl-12 col-lg-12">
         <div class="mb-4 p-3">
@@ -27,7 +22,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Client</th>
+                    <th scope="col">Nom</th>
                     <th scope="col">Remise</th>
                     <th scope="col">Début de l'offre</th>
                     <th scope="col">Fin de l'offre</th>
@@ -35,14 +30,13 @@
                   </tr>
                 </thead>
                 <tbody>
-
                   <tr>
                     <th>
                       <input class="mb-3 py-2 form-control float-left" type="search" placeholder="ID offre"
                         [(ngModel)]='filterId'>
                     </th>
                     <th>
-                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Client"
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Nom"
                         [(ngModel)]='filterClient'>
                     </th>
                     <th>
@@ -59,10 +53,8 @@
                     </th>
                     <th></th>
                   </tr>
-
                   <ng-container
                     *ngFor="let offer of offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin">
-
                     <tr>
                       <th scope="row">
                         {{ offer._id }}</th>

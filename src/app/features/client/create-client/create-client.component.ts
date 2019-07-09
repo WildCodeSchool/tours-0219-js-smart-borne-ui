@@ -39,7 +39,7 @@ export class CreateClientComponent implements OnInit {
       }),
       contrat: this.fb.group({
         debut: ['', [Validators.required]],
-        fin: ['', [Validators.required]],
+        fin: [''],
       }),
       siege: this.fb.group({
         email: ['', [Validators.required]],
