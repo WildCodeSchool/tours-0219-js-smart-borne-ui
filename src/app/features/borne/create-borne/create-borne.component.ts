@@ -27,13 +27,13 @@ export class CreateBorneComponent implements OnInit {
   borneForm = this.fb.group({
     numeroSerie: ['', [Validators.required]],
     address: this.fb.group({
-      rue: ['', [Validators.required]],
-      codePostal: ['', [Validators.required]],
-      ville: ['', [Validators.required]],
-      numero: ['', [Validators.required]],
+      rue: [''],
+      codePostal: [''],
+      ville: [''],
+      numero: [''],
     }),
     dateInstallation: ['', [Validators.required]],
-    styliseeClient: ['', [Validators.required]],
+    client: [''],
     details: ['', [Validators.maxLength(300)]],
     coupon: this.fb.group({
       restant: [0],
