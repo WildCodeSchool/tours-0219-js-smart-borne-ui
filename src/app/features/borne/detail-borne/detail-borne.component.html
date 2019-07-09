@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right" type="button"
-        data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+              data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
         Associer un client
       </button>
     </div>
@@ -28,17 +28,17 @@
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Bac plastique</h3>
         <canvas baseChart [data]="[borne.plastique.taux, (100 - borne.plastique.taux)]" [colors]="plastiqueColor"
-          [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
+                [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
       </div>
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Bac métal</h3>
         <canvas baseChart [data]="[borne.metal.taux, (100 - borne.metal.taux)]" [colors]="metalColor"
-          [labels]="metalLabels" [chartType]="metalType"></canvas>
+                [labels]="metalLabels" [chartType]="metalType"></canvas>
       </div>
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Rouleau d'impression</h3>
         <canvas baseChart [data]="[borne.coupon.imprimer, borne.coupon.restant]" [colors]="couponColor"
-          [labels]="rouleauLabels" [chartType]="rouleauType"></canvas>
+                [labels]="rouleauLabels" [chartType]="rouleauType"></canvas>
       </div>
     </div>
     <div class="row mt-5">
@@ -67,15 +67,15 @@
         </div>
         <div style="display: block" *ngIf="days">
           <canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
-            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
         <div style="display: block" *ngIf="weeks">
           <canvas baseChart [datasets]="barChartDataWeeks" [labels]="barChartLabelsWeeks" [options]="barChartOptions"
-            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
         <div style="display: block" *ngIf="months">
           <canvas baseChart [datasets]="barChartDataMonths" [labels]="barChartLabelsMonths" [options]="barChartOptions"
-            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
       </div>
     </div>
@@ -84,8 +84,8 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right mt-4" type="button"
-        data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
-        aria-controls="collapseAssoOfferForm">
+              data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
+              aria-controls="collapseAssoOfferForm">
         Associer une offre
       </button>
     </div>
@@ -123,8 +123,8 @@
       </div>
       <div class="p"></div>
     </app-card-offer>
-
   </div>
+
   <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
     <button class="btn btn-info btn-block mt-4" [routerLink]="['/borne', borne._id, 'edit']">Modifier la
       borne
@@ -144,7 +144,7 @@
           <div class="form-group">
             <div class="input-group">
               <input formControlName="borne" class="form-control input-danger" placeholder="Id de la borne"
-                name="borne">
+                     name="borne">
             </div>
           </div>
           <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
@@ -155,3 +155,5 @@
     <button class="btn btn-block btn-danger mt-3" (click)="open(content)">Supprimer la borne</button>
 
   </ng-container>
+
+</div>
