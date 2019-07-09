@@ -1,71 +1,59 @@
 <div *ngIf="offer" class="container mt-3 mb-4">
-
-
-    <h1 class="text-center">Offre {{ offer._id }}</h1>
-    <div class="row">
-        <div class="col-8 offset-2">
-            <canvas baseChart [data]="[offer.coupon.imprime, offer.coupon.total]" [colors]="couponColor" [labels]="couponLabels"
-              [chartType]="couponType"></canvas>
-        </div>
+  <h1 class="text-center">Offre {{ offer._id }}</h1>
+  <div class="row">
+    <div class="col-8 offset-2">
+      <canvas baseChart [data]="[offer.coupon.imprime, offer.coupon.total]" [colors]="couponColor"
+        [labels]="couponLabels" [chartType]="couponType"></canvas>
     </div>
-    <div class="row">
-
-        <div class="col-md-12 col-xl-12 mt-4">
-
-
-
-            <div class="row">
-                <div class="col-md-4 col-xl-4 mt-4">
-                    <div class="card">
-                        <p class="text-center p-3">Début de l'offre : {{offer.debutOffre}}</p>
-                        <p class="text-center p-3">Total remisé : {{ offer.totalRemise }}
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-8 col-xl-8 mt-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title text-center"></h2>
-                            <p>Remise : {{offer.remise}} </p>
-                            <p>Proposée par client : {{offer.client}} </p>
-                            <p>Présente sur les bornes : {{offer.bornes}} </p>
-                            <p>Détails : {{offer.details}}</p>
-                        </div>
-                    </div>
-                </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-xl-12 mt-4">
+      <div class="row">
+        <div class="col-md-4 col-xl-4 mt-4">
+          <div class="card">
+            <p class="text-center p-3">Début de l'offre : {{offer.debutOffre}}</p>
+            <p class="text-center p-3">Total remisé : {{ offer.totalRemise }}
+            </p>
+          </div>
+        </div>
+        <div class="col-md-8 col-xl-8 mt-4">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title text-center"></h2>
+              <p>Remise : {{offer.remise}} </p>
+              <p>Proposée par client : {{offer.client}} </p>
+              <p>Présente sur les bornes : {{offer.bornes}} </p>
+              <p>Détails : {{offer.details}}</p>
             </div>
-
-            <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
-                <button class="btn btn-info btn-block mt-4" [routerLink]="['/offer', offer._id, 'edit']">Modifier
-                    l'offre
-                </button>
-
-              <ng-template #content let-modal>
-                <div class="modal-header">
-                  <h3 class="modal-title" id="modal-basic-title">Supprimer l'offre</h3>
-                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <h6 class="text-danger mt-2 mb-4">{{offer._id}}</h6>
-
-                  <form (ngSubmit)="deleteOfferModal(); modal.close()" [formGroup]="FormDelete">
-                    <div class="form-group">
-                      <div class="input-group">
-                        <input formControlName="offer" class="form-control input-danger" placeholder="Id de l'offre" name="offer">
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-danger btn-block" >Supprimer</button>
-                  </form>
-                </div>
-              </ng-template>
-
-              <button class="btn btn-block btn-danger" (click)="open(content)">Supprimer l'offre</button>
-            </ng-container>
-
+          </div>
         </div>
+      </div>
+      <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
+        <button class="btn btn-info btn-block mt-4" [routerLink]="['/offer', offer._id, 'edit']">Modifier
+          l'offre
+        </button>
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h3 class="modal-title" id="modal-basic-title">Supprimer l'offre</h3>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h6 class="text-danger mt-2 mb-4">{{offer._id}}</h6>
+            <form (ngSubmit)="deleteOfferModal(); modal.close()" [formGroup]="FormDelete">
+              <div class="form-group">
+                <div class="input-group">
+                  <input formControlName="offer" class="form-control input-danger" placeholder="Id de l'offre"
+                    name="offer">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+            </form>
+          </div>
+        </ng-template>
+        <button class="btn btn-block btn-danger mt-3" (click)="open(content)">Supprimer l'offre</button>
+      </ng-container>
     </div>
-
-
+  </div>
 </div>

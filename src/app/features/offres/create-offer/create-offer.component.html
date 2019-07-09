@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-success float-right" type="button"
+      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right" type="button"
               data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
         Ajouter une offre
       </button>
@@ -50,7 +50,7 @@
                      formControlName="total"/>
             </div>
             <button class="btn btn-success btn-block mt-3 mb-1" type="submit" [disabled]="!offerForm.valid">
-              Save
+              Sauvegarder
             </button>
           </form>
         </div>

@@ -9,10 +9,9 @@ export class FilterBornePipe implements PipeTransform {
   transform(items: Array<any>,
             filterNumeroSerie: string,
             filterVille: string,
-            filterBac1: string,
-            filterBac2: string,
-            filterTotal: string,
-            filterDate: string) {
+            filterPlastique: string,
+            filterMetal: string,
+            filterTotal: string) {
     if (items && items.length) {
       return items.filter((item) => {
         if (filterNumeroSerie && item.numeroSerie.toLowerCase().indexOf(filterNumeroSerie.toLowerCase()) === -1) {
@@ -21,16 +20,13 @@ export class FilterBornePipe implements PipeTransform {
         if (filterVille && item.address.ville.toLowerCase().indexOf(filterVille.toLowerCase()) === -1) {
           return false;
         }
-        if (filterBac1 && item.cannette.utilise.toString().indexOf(filterBac1.toString()) === -1) {
+        if (filterPlastique && item.plastique.taux.toString().indexOf(filterPlastique.toString()) === -1) {
           return false;
         }
-        if (filterBac2 && item.plastique.utilise.toString().indexOf(filterBac2.toString()) === -1) {
+        if (filterMetal && item.metal.taux.toString().indexOf(filterMetal.toString()) === -1) {
           return false;
         }
         if (filterTotal && item.coupon.restant.toString().indexOf(filterTotal.toString()) === -1) {
-          return false;
-        }
-        if (filterDate && item.dateInstallation.toLowerCase().indexOf(filterDate.toLowerCase()) === -1) {
           return false;
         }
         return true;

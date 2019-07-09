@@ -14,10 +14,13 @@ img {
   margin-left: 30%;
 }
 
-
 .btn-info {
-  background-color: #236863 !important;
+  background-color: #236863;
   border: 1px solid #236863 !important;
+}
+
+button {
+  box-shadow: 4px 4px 10px black;
 }
 
 input[type=email] {

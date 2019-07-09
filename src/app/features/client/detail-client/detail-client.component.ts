@@ -188,6 +188,9 @@ export class DetailClientComponent implements OnInit {
     } else {
       this.clientService.associateOffer(this.client._id, this.assoOfferForm.value.offer).subscribe(
         () => {
+          this.offerService.getOffer(this.assoOfferForm.value.offer).pipe(first()).subscribe((offer) => {
+            this.client.offer.push(offer);
+          });
           this.toastr.clear();
           this.toastr.success('success', 'Offre associée');
           // this.router.navigateByUrl('offers');
@@ -220,6 +223,8 @@ export class DetailClientComponent implements OnInit {
   dissoBorne(id) {
     this.clientService.dissocierBorne(this.client._id, id).subscribe(
       () => {
+        const index = this.client.bornes.findIndex(borne => borne._id === id);
+        this.client.bornes.splice(index, 1);
         this.toastr.clear();
         this.toastr.success('Succès', 'Borne dissociée');
         // this.router.navigateByUrl('bornes');
@@ -234,6 +239,8 @@ export class DetailClientComponent implements OnInit {
   dissoOffer(id) {
     this.clientService.dissocierOffer(this.client._id, id).subscribe(
       () => {
+        const index = this.client.offer.findIndex(offer => offer._id === id);
+        this.client.offer.splice(index, 1);
         this.toastr.clear();
         this.toastr.success('Succès', 'Offre dissociée');
         // this.router.navigateByUrl('bornes');

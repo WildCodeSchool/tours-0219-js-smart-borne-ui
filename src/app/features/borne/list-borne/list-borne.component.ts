@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BorneService } from '../../../core/http/borne.service';
 import { Borne } from '../../../shared/models/borne';
 import { first } from 'rxjs/operators';
@@ -33,7 +33,6 @@ export class ListBorneComponent implements OnInit {
   public filterPlastique: string;
   public filterMetal: string;
   public filterTotal: string;
-  public filterDate: string;
 
   queryForm = this.fb.group({
     query: ['', [Validators.required]],
@@ -73,7 +72,7 @@ export class ListBorneComponent implements OnInit {
 
   onSubmit() {
     this.router.navigate(['/bornes'], {
-      queryParams: { numeroSerie: this.queryForm.value.query }
+      queryParams: { numeroSerie: this.queryForm.value.query },
     });
   }
 

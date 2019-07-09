@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper fixed">
 
     <nav class="sidebar" [ngbCollapse]="isCollapsed">
         <div class="sidebar-header text-center">
@@ -8,7 +8,7 @@
         <ng-container *ngIf="profile?.role == 'ADMINISTRATEUR'">
             <ul class="list-unstyled components text-center">
                 <li>
-                    <a class="asidebar" [routerLink]="['/dashboard']" routerLinkActive="active-link">Dashboard</a>
+                    <a class="asidebar" [routerLink]="['/dashboard']" routerLinkActive="active-link">Accueil</a>
                 </li>
                 <li>
                     <a class="asidebar" [routerLink]="['/bornes']" routerLinkActive="active-link">Bornes</a>
