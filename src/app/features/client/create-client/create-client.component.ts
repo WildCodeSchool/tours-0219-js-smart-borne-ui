@@ -67,12 +67,14 @@ export class CreateClientComponent implements OnInit {
     this.clientService.postClient(this.clientForm.value).subscribe(
       (client: Client) => {
         this.clientForm.patchValue(client);
+        this.clientForm.reset();
         this.toastr.clear();
         this.toastr.success('Succès', 'Client ajouté');
         this.router.navigateByUrl('/');
       },
 
       (error) => {
+        this.clientForm.reset();
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
       },

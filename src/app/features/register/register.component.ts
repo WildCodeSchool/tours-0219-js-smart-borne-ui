@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../../shared/models/user';
 import { AuthService } from '../../core/authentication/auth.service';
 import { MustMatch } from '../../shared/helper/must-match.validator';
 
@@ -43,11 +42,13 @@ export class RegisterComponent implements OnInit {
     this.authenticationService.register(
       this.userForm.value).subscribe(
       () => {
+        this.userForm.reset();
         this.toastr.clear();
         this.toastr.success('Succès', 'Utilisateur créé');
         // this.router.navigateByUrl('/');
       },
       (error) => {
+        this.userForm.reset();
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
       });

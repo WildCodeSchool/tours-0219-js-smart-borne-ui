@@ -48,11 +48,13 @@ export class CreateOfferComponent implements OnInit {
     this.service.postOffer(this.offerForm.value).subscribe(
       (offer: Offer) => {
         this.offerForm.patchValue(offer);
+        this.offerForm.reset();
         this.toastr.clear();
         this.toastr.success('Succès', 'Offre créée');
         this.router.navigateByUrl('/dashboard');
       },
       (error) => {
+        this.offerForm.reset();
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
       },
