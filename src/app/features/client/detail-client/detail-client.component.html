@@ -97,6 +97,7 @@
         </form>
       </div>
       <div class="row">
+
         <app-card-offer *ngFor="let offre of client.offer">
           <div class="title">{{offre.client}}</div>
           <div class="nb-coupon text-center">Coupon total : {{offre.coupon.total}}</div>

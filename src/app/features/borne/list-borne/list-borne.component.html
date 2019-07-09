@@ -4,8 +4,8 @@
 
     <div class="col-12 m-3">
         <div class="alert alert-danger m-4 text-center"
-            *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate).length === 0">
-            <span *ngIf="filterNumeroSerie || filterVille || filterBac1 || filterBac2 || filterTotal || filterDate">Il
+            *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal).length === 0">
+            <span *ngIf="filterNumeroSerie || filterVille || filterPlastique || filterMetal || filterTotal">Il
                 n'y a pas de
                 bornes</span>
         </div>
@@ -32,7 +32,7 @@
                                         <th scope="col">Ville</th>
                                         <th scope="col">Cannette</th>
                                         <th scope="col">Plastique</th>
-                                        <th scope="col">Coupons imprimés</th>
+                                        <th scope="col">Coupons restant</th>
                                         <th scope="col">Date d'installation</th>
                                         <th scope="col">Problèmes</th>
                                         <th scope="col"></th>
@@ -50,25 +50,22 @@
                                         </th>
                                         <th>
                                             <input class="mb-3 py-2 form-control float-left" type="search"
-                                                placeholder="Cannette" [(ngModel)]='filterBac1'>
+                                                placeholder="Cannette" [(ngModel)]='filterMetal'>
                                         </th>
                                         <th>
                                             <input class="mb-3 py-2 form-control float-left" type="search"
-                                                placeholder="Plastique" [(ngModel)]='filterBac2'>
+                                                placeholder="Plastique" [(ngModel)]='filterPlastique'>
                                         </th>
                                         <th>
                                             <input class="mb-3 py-2 form-control float-left" type="search"
                                                 placeholder="Coupon restant" [(ngModel)]='filterTotal'>
                                         </th>
-                                        <th>
-                                            <input class="mb-3 py-2 form-control float-left" type="search"
-                                                placeholder="Date" [(ngModel)]='filterDate'>
-                                        </th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                     <ng-container
-                                        *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate">
+                                        *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal">
                                         <tr>
                                             <th scope="row">{{borne.numeroSerie}}</th>
                                             <td>{{borne.address.ville}}</td>
@@ -118,7 +115,7 @@
                                             <th scope="col">Ville</th>
                                             <th scope="col">Cannette</th>
                                             <th scope="col">Plastique</th>
-                                            <th scope="col">Coupons imprimés</th>
+                                            <th scope="col">Coupons restant</th>
                                             <th scope="col">Date d'installation</th>
                                             <th scope="col">Problèmes</th>
                                             <th scope="col"></th>
@@ -136,25 +133,22 @@
                                             </th>
                                             <th>
                                                 <input class="mb-3 py-2 form-control float-left" type="search"
-                                                    placeholder="Cannette" [(ngModel)]='filterBac1'>
+                                                    placeholder="Cannette" [(ngModel)]='filterMetal'>
                                             </th>
                                             <th>
                                                 <input class="mb-3 py-2 form-control float-left" type="search"
-                                                    placeholder="Plastique" [(ngModel)]='filterBac2'>
+                                                    placeholder="Plastique" [(ngModel)]='filterPlastique'>
                                             </th>
                                             <th>
                                                 <input class="mb-3 py-2 form-control float-left" type="search"
                                                     placeholder="Coupon restant" [(ngModel)]='filterTotal'>
                                             </th>
-                                            <th>
-                                                <input class="mb-3 py-2 form-control float-left" type="search"
-                                                    placeholder="Date" [(ngModel)]='filterDate'>
-                                            </th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                         <ng-container
-                                            *ngFor="let borne of user.clients.bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate">
+                                            *ngFor="let borne of user.clients.bornes | filterBorne: filterNumeroSerie:filterVille:filterMetal:filterPlastique:filterTotal">
                                             <tr>
                                                 <th scope="row">{{borne.numeroSerie}}</th>
                                                 <td>{{borne.address.ville}}</td>
