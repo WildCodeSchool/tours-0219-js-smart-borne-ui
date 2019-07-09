@@ -279,7 +279,12 @@ export class DetailBorneComponent implements OnInit {
       this.borneService.associateOffer(this.borne._id, this.assoOfferForm.value.offer).subscribe(
         () => {
           this.offerService.getOffer(this.assoOfferForm.value.offer).pipe(first()).subscribe((offer) => {
-            this.borne.offers.push(offer);
+            const offre = this.borne.offers.filter(offers => offers._id === offer._id);
+            if (offre.length >= 1) {
+              this.toastr.error(`Error deja associée`);
+            } else {
+              this.borne.offers.push(offer);
+            }
           });
           this.toastr.clear();
           this.toastr.success('Succès', 'Offre associée');

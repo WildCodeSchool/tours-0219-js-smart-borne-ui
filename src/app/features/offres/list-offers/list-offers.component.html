@@ -22,7 +22,8 @@
       <div class="col-xl-12 col-lg-12">
         <div class="mb-4 p-3">
           <div class="row">
-            <div class="table-responsive">
+
+            <div *ngIf="user?.role == 'ADMINISTRATEUR' else elseBlock" class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -80,6 +81,69 @@
                 </tbody>
               </table>
             </div>
+
+
+            <ng-template #elseBlock>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Remise</th>
+                    <th scope="col">Début de l'offre</th>
+                    <th scope="col">Fin de l'offre</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="ID offre"
+                             [(ngModel)]='filterId'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Client"
+                             [(ngModel)]='filterClient'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Remise"
+                             [(ngModel)]='filterRemise'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Debut offre"
+                             [(ngModel)]='filterDebut'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Fin offre"
+                             [(ngModel)]='filterFin'>
+                    </th>
+                    <th></th>
+                  </tr>
+
+                  <ng-container
+                          *ngFor="let offer of borneByOffer | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin">
+
+                    <tr>
+                      <th scope="row">
+                        {{ offer._id }}</th>
+                      <td>{{ offer.client }}</td>
+                      <td>{{ offer.remise }}</td>
+                      <td>{{ offer.contrat.debut | date:'d/M/y' }}</td>
+                      <td>{{ offer.contrat.fin | date:'d/M/y' }}</td>
+                      <td>
+                        <button type="button" [routerLink]="['/offer', offer._id]" class="btn btn-info">
+                          Détails
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </ng-template>
+
           </div>
         </div>
       </div>

@@ -189,7 +189,12 @@ export class DetailClientComponent implements OnInit {
       this.clientService.associateOffer(this.client._id, this.assoOfferForm.value.offer).subscribe(
         () => {
           this.offerService.getOffer(this.assoOfferForm.value.offer).pipe(first()).subscribe((offer) => {
-            this.client.offer.push(offer);
+            const offre = this.client.offer.filter(offers => offers._id === offer._id);
+            if (offre.length >= 1) {
+              this.toastr.error(`Error deja associée`);
+            } else {
+              this.client.offer.push(offer);
+            }
           });
           this.toastr.clear();
           this.toastr.success('success', 'Offre associée');

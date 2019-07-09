@@ -3,6 +3,13 @@ import { OffersService } from '../../../core/http/offers.service';
 import { Offer } from '../../../shared/models/offres.models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { Client } from '../../../shared/models/client-model';
+import { ProfileService } from '../../../core/http/profile.service';
+import { Borne } from '../../../shared/models/borne';
+import { ClientService } from '../../../core/http/client.service';
+import { User } from '../../../shared/models/user';
+import { BorneService } from '../../../core/http/borne.service';
 
 @Component({
   selector: 'app-list-offers',
@@ -11,6 +18,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class ListOffersComponent implements OnInit {
   public offers: Offer[];
+  public borneByOffer: any;
+  public user: User;
   public filterId: string;
   public filterClient: string;
   public filterRemise: string;
@@ -20,7 +29,9 @@ export class ListOffersComponent implements OnInit {
   constructor(public offersService: OffersService,
               private route: ActivatedRoute,
               public router: Router,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private profileService: ProfileService,
+              public  borneService: BorneService) {
   }
 
   queryForm = this.fb.group({
@@ -37,6 +48,15 @@ export class ListOffersComponent implements OnInit {
         this.getListOffers();
       }
     });
+
+    // this.profileService.getProfile().pipe(first()).subscribe((users) => {
+    //   this.user = users;
+    //   this.borneService.getBorneById(users.clients[0]._id).subscribe(
+    //     (borne: Borne) => {
+    //       this.borneByOffer = borne.offers;
+    //       console.log();
+    //     });
+    // });
   }
 
   getListOffers() {

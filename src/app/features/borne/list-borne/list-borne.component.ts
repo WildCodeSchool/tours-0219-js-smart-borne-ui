@@ -27,6 +27,7 @@ export class ListBorneComponent implements OnInit {
   }
   public bornes: Borne[];
   public clients: Client[];
+  public clientsByBorne: Borne[];
   public user: User;
   public filterNumeroSerie: string;
   public filterVille: string;
@@ -44,6 +45,10 @@ export class ListBorneComponent implements OnInit {
     });
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
+      this.clientService.getClientById(users.clients[0]._id).subscribe(
+        (client: Client) => {
+          this.clientsByBorne = client.bornes;
+        });
     });
 
     this.route.queryParams.subscribe((params) => {

@@ -1,65 +1,68 @@
 <div class="wrapper fixed">
 
-    <nav class="sidebar" [ngbCollapse]="isCollapsed">
-        <div class="sidebar-header text-center">
-            <h3 class="sizeTitleHeader">{{profile?.role}}</h3>
+  <nav class="sidebar" [ngbCollapse]="isCollapsed">
+    <div class="sidebar-header text-center">
+      <h3 class="sizeTitleHeader">{{profile?.role}}</h3>
+    </div>
+
+
+    <ul class="list-unstyled components text-center">
+      <li>
+        <a class="asidebar" [routerLink]="['/dashboard']" routerLinkActive="active-link">Accueil</a>
+      </li>
+      <li>
+        <a class="asidebar" [routerLink]="['/bornes']" routerLinkActive="active-link">Bornes</a>
+      </li>
+      <li>
+        <a class="asidebar" [routerLink]="['/offers']" routerLinkActive="active-link">Offres</a>
+      </li>
+      <ng-container *ngIf="profile?.role == 'ADMINISTRATEUR'">
+        <li>
+          <a class="asidebar" [routerLink]="['/clients']" routerLinkActive="active-link">Clients</a>
+        </li>
+        <li>
+          <a class="asidebar" [routerLink]="['/maintenance']" routerLinkActive="active-link">Maintenance</a>
+        </li>
+      </ng-container>
+    </ul>
+
+
+  </nav>
+
+  <div id="content">
+
+    <nav class="navbar navbar-expand-lg navbar-color">
+      <div class="container-fluid">
+
+        <button type="button" id="sidebarCollapse" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSidebar" class="btn btn-info">
+          <i class="fas fa-align-left"></i>
+          <span *ngIf="!isCollapsed"> Réduire le menu</span>
+          <span *ngIf="isCollapsed"> Ouvrir le menu</span>
+        </button>
+
+        <h4 class="title-center-smartborne">SMART BORNE</h4>
+        <div class="admin">
+
+          <div ngbDropdown class="right d-inline-block">
+            <button class="btn btn-info" id="dropdown" ngbDropdownToggle>
+              {{profile?.username}}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdown">
+              <ng-container *ngIf="profile?.role == 'ADMINISTRATEUR'">
+                <button ngbDropdownItem [routerLink]="['/dashboard/user']">Gérer les
+                  utilisateurs
+                </button>
+                <div class="dropdown-divider"></div>
+              </ng-container>
+              <button ngbDropdownItem [routerLink]="[]" (click)="logout()">Déconnexion</button>
+            </div>
+          </div>
         </div>
-
-        <ng-container *ngIf="profile?.role == 'ADMINISTRATEUR'">
-            <ul class="list-unstyled components text-center">
-                <li>
-                    <a class="asidebar" [routerLink]="['/dashboard']" routerLinkActive="active-link">Accueil</a>
-                </li>
-                <li>
-                    <a class="asidebar" [routerLink]="['/bornes']" routerLinkActive="active-link">Bornes</a>
-                </li>
-                <li>
-                    <a class="asidebar" [routerLink]="['/clients']" routerLinkActive="active-link">Clients</a>
-                </li>
-                <li>
-                    <a class="asidebar" [routerLink]="['/offers']" routerLinkActive="active-link">Offres</a>
-                </li>
-                <li>
-                    <a class="asidebar" [routerLink]="['/maintenance']" routerLinkActive="active-link">Maintenance</a>
-                </li>
-            </ul>
-        </ng-container>
-
+      </div>
     </nav>
 
-    <div id="content">
+    <router-outlet></router-outlet>
 
-        <nav class="navbar navbar-expand-lg navbar-color">
-            <div class="container-fluid">
-
-                <button type="button" id="sidebarCollapse" (click)="isCollapsed = !isCollapsed"
-                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseSidebar" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span *ngIf="!isCollapsed"> Réduire le menu</span>
-                    <span *ngIf="isCollapsed"> Ouvrir le menu</span>
-                </button>
-
-                <h4 class="title-center-smartborne">SMART BORNE</h4>
-                <div class="admin">
-
-                    <div ngbDropdown class="right d-inline-block">
-                        <button class="btn btn-info" id="dropdown" ngbDropdownToggle>
-                            {{profile?.username}}
-                        </button>
-                        <div ngbDropdownMenu aria-labelledby="dropdown">
-                            <ng-container *ngIf="profile?.role == 'ADMINISTRATEUR'">
-                                <button ngbDropdownItem [routerLink]="['/dashboard/user']">Gérer les
-                                    utilisateurs</button>
-                                <div class="dropdown-divider"></div>
-                            </ng-container>
-                            <button ngbDropdownItem [routerLink]="[]" (click)="logout()">Déconnexion</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <router-outlet></router-outlet>
-
-    </div>
+  </div>
 </div>

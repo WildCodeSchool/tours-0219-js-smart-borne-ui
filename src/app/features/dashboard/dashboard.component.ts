@@ -5,6 +5,8 @@ import { OffersService } from '../../core/http/offers.service';
 import { Offer } from '../../shared/models/offres.models';
 import { DataService } from 'src/app/core/http/data.service';
 import { Data } from 'src/app/shared/models/data.model';
+import { ProfileService } from '../../core/http/profile.service';
+import { User } from '../../shared/models/user';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -101,15 +103,27 @@ export class DashboardComponent implements OnInit {
   public topBornesPlastique: Borne[];
   public topBornesRouleaux: Borne[];
   public topOffres: Offer[];
+  public profile: User;
 
   constructor(public borneService: BorneService,
               public offersService: OffersService,
-              public dataService: DataService) { }
+              public dataService: DataService,
+              public profileService: ProfileService) { }
 
   ngOnInit() {
     this.getListBornes();
     this.getListOffers();
     this.getDatas();
+    this.getProfile();
+  }
+
+  getProfile() {
+    this.profileService.getProfile().subscribe(
+      (user: User) => {
+        this.profile = user;
+        console.log(user);
+      },
+    );
   }
 
   getListBornes() {
