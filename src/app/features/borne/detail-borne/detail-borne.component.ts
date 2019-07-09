@@ -278,6 +278,9 @@ export class DetailBorneComponent implements OnInit {
     } else {
       this.borneService.associateOffer(this.borne._id, this.assoOfferForm.value.offer).subscribe(
         () => {
+          this.offerService.getOffer(this.assoOfferForm.value.offer).pipe(first()).subscribe((offer) => {
+            this.borne.offers.push(offer);
+          });
           this.toastr.clear();
           this.toastr.success('Succès', 'Offre associée');
           // this.router.navigateByUrl('bornes');
@@ -292,7 +295,7 @@ export class DetailBorneComponent implements OnInit {
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
+    },                                                                                   (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
@@ -310,6 +313,8 @@ export class DetailBorneComponent implements OnInit {
   dissoOffer(id) {
     this.borneService.dissocierOffer(this.borne._id, id).subscribe(
       () => {
+        const index = this.borne.offers.findIndex(offer => offer._id === id);
+        this.borne.offers.splice(index, 1);
         this.toastr.clear();
         this.toastr.success('Succès', 'Offre dissociée');
         // this.router.navigateByUrl('bornes');
