@@ -107,7 +107,6 @@ export class DetailClientComponent implements OnInit {
       hoverBorderColor: 'rgb(160,82,45,0.6)',
     },
   ];
-  
   constructor(
     private route: ActivatedRoute,
     public clientService: ClientService,
@@ -144,6 +143,7 @@ export class DetailClientComponent implements OnInit {
     this.clientService.getClientById(this.id).subscribe(
       (client: Client) => {
         this.client = client;
+// tslint:disable-next-line: ter-arrow-parens
         client.bornes.map(a => {
           this.totalPlastique += a.plastique.total;
           this.totalMetal += a.metal.total;
@@ -152,7 +152,7 @@ export class DetailClientComponent implements OnInit {
         this.doughnutData.push(this.totalMetal);
       },
     );
-    
+
   }
 
   deleteClientModal() {
