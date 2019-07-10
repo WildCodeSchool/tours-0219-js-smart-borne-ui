@@ -48,21 +48,30 @@ export class ListOffersComponent implements OnInit {
         this.getListOffers();
       }
     });
+    this.profileService.getProfile().pipe(first()).subscribe((users) => {
+      this.user = users;
+      this.borneService.getBorneById(users.clients[0]._id).subscribe(
+        (borne: Borne) => {
+          this.borneByOffer = borne.offers;
+          console.log();
+        });
+    });
+  }
 
-    // this.profileService.getProfile().pipe(first()).subscribe((users) => {
-    //   this.user = users;
-    //   this.borneService.getBorneById(users.clients[0]._id).subscribe(
-    //     (borne: Borne) => {
-    //       this.borneByOffer = borne.offers;
-    //       console.log();
-    //     });
-    // });
+  color(taux: number) {
+    if (taux >= 90) {
+      return 'danger';
+    } if (taux >= 65) {
+      return 'warning';
+    }
+    return 'success';
   }
 
   getListOffers() {
     this.offersService.getListOffers().subscribe((offers: Offer[]) => {
       this.offers = offers;
     });
+    console.log(this.offers);
   }
 
   onSubmit() {

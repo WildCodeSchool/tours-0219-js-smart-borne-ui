@@ -26,7 +26,7 @@ export class DetailClientComponent implements OnInit {
   public clients: Client[];
   public client: Client;
   public user: User;
-  public offer: Offer[];
+  public offers: Offer[];
   public borne: Borne;
   public id: string;
 
@@ -36,6 +36,13 @@ export class DetailClientComponent implements OnInit {
   public doughnutData = [];
   public labels = ['Métal', 'Plastique'];
   public type = 'doughnut';
+  public doughnutChartColors =
+    [
+      {
+        backgroundColor: ['rgb(160,82,45,0.6)', 'rgb(65,105,225,0.6)'],
+        borderColor: ['rgba(160,82,45,1)', 'rgb(65,105,225,1)'],
+      },
+    ];
 
   public barChartOptions = {
     scaleShowVerticalLines: false,
@@ -131,11 +138,11 @@ export class DetailClientComponent implements OnInit {
       this.id = params.get('id');
       this.getClient();
     });
-    this.profileService.getProfile().pipe(first()).subscribe((users) => {
-      this.user = users;
+    this.profileService.getProfile().pipe(first()).subscribe((user) => {
+      this.user = user;
     });
-    this.offerService.getListOffers().pipe(first()).subscribe((offer) => {
-      this.offer = offer;
+    this.offerService.getListOffers().pipe(first()).subscribe((offers) => {
+      this.offers = offers;
     });
   }
 
@@ -152,7 +159,6 @@ export class DetailClientComponent implements OnInit {
         this.doughnutData.push(this.totalMetal);
       },
     );
-
   }
 
   deleteClientModal() {
@@ -191,7 +197,7 @@ export class DetailClientComponent implements OnInit {
           this.offerService.getOffer(this.assoOfferForm.value.offer).pipe(first()).subscribe((offer) => {
             const offre = this.client.offer.filter(offers => offers._id === offer._id);
             if (offre.length >= 1) {
-              this.toastr.error(`Error deja associée`);
+              this.toastr.error(`Error Déjà associée`);
             } else {
               this.client.offer.push(offer);
             }
@@ -255,6 +261,15 @@ export class DetailClientComponent implements OnInit {
         this.toastr.error(`Error ${error}`);
       },
     );
+  }
+
+  color(taux: number) {
+    if (taux >= 90) {
+      return 'danger';
+    } if (taux >= 65) {
+      return 'warning';
+    }
+    return 'success';
   }
 
   toggleDays() {

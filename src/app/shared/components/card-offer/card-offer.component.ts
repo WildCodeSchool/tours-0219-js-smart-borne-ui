@@ -20,4 +20,13 @@ export class CardOfferComponent implements OnInit {
       this.offers = offers;
     });
   }
+
+  color(taux: number) {
+    if (taux >= 90) {
+      return 'danger';
+    } if (taux >= 65) {
+      return 'warning';
+    }
+    return 'success';
+  }
 }

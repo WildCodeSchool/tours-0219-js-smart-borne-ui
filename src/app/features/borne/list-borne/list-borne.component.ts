@@ -71,10 +71,6 @@ export class ListBorneComponent implements OnInit {
     );
   }
 
-  tauxRouleau(couponsRestants) {
-    return Math.round((350 - couponsRestants) / 3.5);
-  }
-
   onSubmit() {
     this.router.navigate(['/bornes'], {
       queryParams: { numeroSerie: this.queryForm.value.query },
@@ -96,7 +92,6 @@ export class ListBorneComponent implements OnInit {
       return 'warning';
     }
     return 'success';
-
   }
 
 }

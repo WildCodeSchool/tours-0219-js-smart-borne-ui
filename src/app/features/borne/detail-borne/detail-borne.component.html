@@ -37,7 +37,7 @@
       </div>
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Rouleau d'impression</h3>
-        <canvas baseChart [data]="[borne.coupon.imprimer, borne.coupon.restant]" [colors]="couponColor"
+        <canvas baseChart [data]="[borne.coupon.imprimer, (100 - borne.coupon.imprimer)]" [colors]="couponColor"
                 [labels]="rouleauLabels" [chartType]="rouleauType"></canvas>
       </div>
     </div>

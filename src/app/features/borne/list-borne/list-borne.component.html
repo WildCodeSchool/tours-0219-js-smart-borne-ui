@@ -2,10 +2,10 @@
 
   <div class="col-12 m-3">
     <div class="alert alert-danger m-4 text-center"
-         *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal).length === 0">
-            <span *ngIf="filterNumeroSerie || filterVille || filterPlastique || filterMetal || filterTotal">Il
-                n'y a pas de
-                bornes</span>
+      *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal).length === 0">
+      <span *ngIf="filterNumeroSerie || filterVille || filterPlastique || filterMetal || filterTotal">Il
+        n'y a pas de
+        bornes</span>
     </div>
   </div>
 
@@ -14,7 +14,7 @@
     <app-create-borne></app-create-borne>
     <form (ngSubmit)="onSubmit()" [formGroup]="queryForm" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search"
-             formControlName="query">
+        formControlName="query">
       <button class="btn btn-info my-2 my-sm-0" type="submit">Rechercher</button>
     </form>
 
@@ -28,81 +28,77 @@
             <div *ngIf="user?.role == 'ADMINISTRATEUR' else elseBlock" class="table-responsive">
               <table class="table table-striped">
                 <thead>
-                <tr class="text-center">
-                  <th scope="col">Numéro de série</th>
-                  <th scope="col">Ville</th>
-                  <th scope="col">Cannette</th>
-                  <th scope="col">Plastique</th>
-                  <th scope="col">Coupons restant</th>
-                  <th scope="col">Date d'installation</th>
-                  <th scope="col">Problèmes</th>
-                  <th scope="col"></th>
-                </tr>
+                  <tr class="text-center">
+                    <th scope="col">Numéro de série</th>
+                    <th scope="col">Ville</th>
+                    <th scope="col">Métal</th>
+                    <th scope="col">Plastique</th>
+                    <th scope="col">Coupons restant</th>
+                    <th scope="col">Date d'installation</th>
+                    <th scope="col">Problèmes</th>
+                    <th scope="col"></th>
+                  </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <th>
-                    <input class="mb-3 py-2 form-control float-left" type="search"
-                           placeholder="Numero serie" [(ngModel)]='filterNumeroSerie'>
-                  </th>
-                  <th>
-                    <input class="mb-3 py-2 form-control float-left" type="search"
-                           placeholder="Ville" [(ngModel)]='filterVille'>
-                  </th>
-                  <th>
-                    <input class="mb-3 py-2 form-control float-left" type="search"
-                           placeholder="Cannette" [(ngModel)]='filterMetal'>
-                  </th>
-                  <th>
-                    <input class="mb-3 py-2 form-control float-left" type="search"
-                           placeholder="Plastique" [(ngModel)]='filterPlastique'>
-                  </th>
-                  <th>
-                    <input class="mb-3 py-2 form-control float-left" type="search"
-                           placeholder="Coupon restant" [(ngModel)]='filterTotal'>
-                  </th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                </tr>
-                <ng-container
-                        *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal">
                   <tr>
-                    <th scope="row">{{borne.numeroSerie}}</th>
-                    <td>{{borne.address.ville}}</td>
-                    <td>
-                      <ngb-progressbar [type]="color(borne.metal.taux)"
-                                       [value]="borne.metal.taux" [striped]="true" [animated]="true"
-                                       showValue=true>
-                      </ngb-progressbar>
-                    </td>
-                    <td>
-                      <ngb-progressbar [type]="color(borne.plastique.taux)"
-                                       [value]="[borne.plastique.taux]" [striped]="true" [animated]="true"
-                                       showValue=true>
-                      </ngb-progressbar>
-                    </td>
-                    <td>
-                      <ngb-progressbar [type]="color(tauxRouleau(borne.coupon.restant))"
-                                       [value]="tauxRouleau(borne.coupon.restant)" [striped]="true"
-                                       [animated]="true" showValue=true>
-                      </ngb-progressbar>
-                    </td>
-                    <td>
-                      {{borne.dateInstallation| date:'d/M/y'}}
-                    </td>
-                    <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
-                            class="fas fa-check colorValidate"></i></td>
-                    <ng-template #elseBlock>
-                      <td><i class="fas fa-times colorError"></i></td>
-                    </ng-template>
-                    <td>
-                      <button type="button" [routerLink]="['/borne', borne._id ]"
-                              class="btn btn-info">Détails
-                      </button>
-                    </td>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Numero serie"
+                        [(ngModel)]='filterNumeroSerie'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Ville"
+                        [(ngModel)]='filterVille'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Métal"
+                        [(ngModel)]='filterMetal'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Plastique"
+                        [(ngModel)]='filterPlastique'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Coupon restant"
+                        [(ngModel)]='filterTotal'>
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                   </tr>
-                </ng-container>
+                  <ng-container
+                    *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal">
+                    <tr>
+                      <th scope="row">{{borne.numeroSerie}}</th>
+                      <td>{{borne.address.ville}}</td>
+                      <td>
+                        <ngb-progressbar [type]="color(borne.metal.taux)" [value]="borne.metal.taux" [striped]="true"
+                          [animated]="true" showValue=true>
+                        </ngb-progressbar>
+                      </td>
+                      <td>
+                        <ngb-progressbar [type]="color(borne.plastique.taux)" [value]="borne.plastique.taux"
+                          [striped]="true" [animated]="true" showValue=true>
+                        </ngb-progressbar>
+                      </td>
+                      <td>
+                        <ngb-progressbar [type]="color(borne.coupon.imprimer)"
+                          [value]="borne.coupon.imprimer" [striped]="true" [animated]="true" showValue=true>
+                        </ngb-progressbar>
+                      </td>
+                      <td>
+                        {{borne.dateInstallation| date:'d/M/y'}}
+                      </td>
+                      <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
+                          class="fas fa-check colorValidate"></i></td>
+                      <ng-template #elseBlock>
+                        <td><i class="fas fa-times colorError"></i></td>
+                      </ng-template>
+                      <td>
+                        <button type="button" [routerLink]="['/borne', borne._id ]" class="btn btn-info">Détails
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
 
                 </tbody>
               </table>
@@ -113,91 +109,85 @@
               <div class="table-responsive">
                 <table class="table table-striped">
                   <thead>
-                  <tr class="text-center">
-                    <th scope="col">Numéro de série</th>
-                    <th scope="col">Ville</th>
-                    <th scope="col">Cannette</th>
-                    <th scope="col">Plastique</th>
-                    <th scope="col">Coupons restant</th>
-                    <th scope="col">Date d'installation</th>
-                    <th scope="col">Problèmes</th>
-                    <th scope="col"></th>
-                  </tr>
+                    <tr class="text-center">
+                      <th scope="col">Numéro de série</th>
+                      <th scope="col">Ville</th>
+                      <th scope="col">Métal</th>
+                      <th scope="col">Plastique</th>
+                      <th scope="col">Coupons restant</th>
+                      <th scope="col">Date d'installation</th>
+                      <th scope="col">Problèmes</th>
+                      <th scope="col"></th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <th>
-                      <input class="mb-3 py-2 form-control float-left" type="search"
-                             placeholder="Numero serie" [(ngModel)]='filterNumeroSerie'>
-                    </th>
-                    <th>
-                      <input class="mb-3 py-2 form-control float-left" type="search"
-                             placeholder="Ville" [(ngModel)]='filterVille'>
-                    </th>
-                    <th>
-                      <input class="mb-3 py-2 form-control float-left" type="search"
-                             placeholder="Cannette" [(ngModel)]='filterMetal'>
-                    </th>
-                    <th>
-                      <input class="mb-3 py-2 form-control float-left" type="search"
-                             placeholder="Plastique" [(ngModel)]='filterPlastique'>
-                    </th>
-                    <th>
-                      <input class="mb-3 py-2 form-control float-left" type="search"
-                             placeholder="Coupon restant" [(ngModel)]='filterTotal'>
-                    </th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                  <ng-container
-                          *ngFor="let borne of clientsByBorne | filterBorne: filterNumeroSerie:filterVille:filterMetal:filterPlastique:filterTotal">
                     <tr>
-                      <th scope="row">{{borne.numeroSerie}}</th>
-                      <td>{{borne.address.ville}}</td>
-                      <td>
-                        <ngb-progressbar [type]="color(borne.metal.taux)"
-                                         [value]="borne.metal.taux" [striped]="true" [animated]="true"
-                                         showValue=true>
-                        </ngb-progressbar>
-                      </td>
-                      <td>
-                        <ngb-progressbar [type]="color(borne.plastique.taux)"
-                                         [value]="[borne.plastique.taux]" [striped]="true"
-                                         [animated]="true" showValue=true>
-                        </ngb-progressbar>
-                      </td>
-                      <td>
-                        <ngb-progressbar [type]="color(tauxRouleau(borne.coupon.restant))"
-                                         [value]="tauxRouleau(borne.coupon.restant)" [striped]="true"
-                                         [animated]="true" showValue=true>
-                        </ngb-progressbar>
-                      </td>
-                      <td>
-                        {{borne.dateInstallation| date:'d/M/y'}}
-                      </td>
-                      <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
-                              class="fas fa-check colorValidate"></i></td>
-                      <ng-template #elseBlock>
-                        <td><i class="fas fa-times colorError"></i></td>
-                      </ng-template>
-                      <td>
-                        <button type="button" [routerLink]="['/borne', borne._id ]"
-                                class="btn btn-outline-primary">Détails
-                        </button>
-                      </td>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Numero serie"
+                          [(ngModel)]='filterNumeroSerie'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Ville"
+                          [(ngModel)]='filterVille'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Métal"
+                          [(ngModel)]='filterMetal'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Plastique"
+                          [(ngModel)]='filterPlastique'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Coupon restant"
+                          [(ngModel)]='filterTotal'>
+                      </th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
                     </tr>
-                  </ng-container>
+                    <ng-container
+                      *ngFor="let borne of clientsByBorne | filterBorne: filterNumeroSerie:filterVille:filterMetal:filterPlastique:filterTotal">
+                      <tr>
+                        <th scope="row">{{borne.numeroSerie}}</th>
+                        <td>{{borne.address.ville}}</td>
+                        <td>
+                          <ngb-progressbar [type]="color(borne.metal.taux)" [value]="borne.metal.taux" [striped]="true"
+                            [animated]="true" showValue=true>
+                          </ngb-progressbar>
+                        </td>
+                        <td>
+                          <ngb-progressbar [type]="color(borne.plastique.taux)" [value]="borne.plastique.taux"
+                            [striped]="true" [animated]="true" showValue=true>
+                          </ngb-progressbar>
+                        </td>
+                        <td>
+                          <ngb-progressbar [type]="color(borne.coupon.imprimer)" [value]="borne.coupon.imprimer"
+                            [striped]="true" [animated]="true" showValue=true>
+                          </ngb-progressbar>
+                        </td>
+                        <td>
+                          {{borne.dateInstallation| date:'d/M/y'}}
+                        </td>
+                        <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
+                            class="fas fa-check colorValidate"></i></td>
+                        <ng-template #elseBlock>
+                          <td><i class="fas fa-times colorError"></i></td>
+                        </ng-template>
+                        <td>
+                          <button type="button" [routerLink]="['/borne', borne._id ]"
+                            class="btn btn-outline-primary">Détails
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-container>
                   </tbody>
                 </table>
               </div>
             </ng-template>
-
           </div>
         </div>
-
       </div>
-
     </div>
   </div>
 </div>
