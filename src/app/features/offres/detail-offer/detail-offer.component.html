@@ -2,7 +2,7 @@
   <h1 class="text-center">Offre {{ offer._id }}</h1>
   <div class="row">
     <div class="col-8 offset-2">
-      <canvas baseChart [data]="[offer.coupon.imprime, offer.coupon.total]" [colors]="couponColor"
+      <canvas baseChart [data]="[offer.coupon.imprime, (100 - offer.coupon.imprime)]" [colors]="couponColor"
         [labels]="couponLabels" [chartType]="couponType"></canvas>
     </div>
   </div>

@@ -70,7 +70,7 @@ export class CreateClientComponent implements OnInit {
         this.clientForm.reset();
         this.toastr.clear();
         this.toastr.success('Succès', 'Client ajouté');
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/clients');
       },
 
       (error) => {
