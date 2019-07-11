@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BorneService } from '../../../core/http/borne.service';
 import { Borne } from '../../../shared/models/borne';
 import { first } from 'rxjs/operators';
@@ -64,6 +64,15 @@ export class ListBorneComponent implements OnInit {
   }
 
   getListBorne() {
+    this.borneService.getListBorne().subscribe(
+      (bornes: Borne[]) => {
+        this.bornes = bornes;
+      },
+    );
+  }
+
+  getCreateBorne(borne) {
+    this.bornes.push(borne);
     this.borneService.getListBorne().subscribe(
       (bornes: Borne[]) => {
         this.bornes = bornes;

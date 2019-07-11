@@ -165,6 +165,9 @@ export class DetailBorneComponent implements OnInit {
   FormDelete = this.fb.group({
     borne: [''],
   });
+  FormDeleteAssociate = this.fb.group({
+    offer: [''],
+  });
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -234,6 +237,7 @@ export class DetailBorneComponent implements OnInit {
         },
       );
     } else {
+      this.FormDelete.reset();
       this.toastr.error('L \'id ne correspond pas');
     }
   }
@@ -269,6 +273,18 @@ export class DetailBorneComponent implements OnInit {
           });
       }
     });
+    this.borneService.getBorneById(this.borne._id).pipe(first()).subscribe((borne) => {
+      this.borneService.associateClient(this.Form.value.client, this.borne._id).subscribe(
+          () => {
+            console.log(this.borne._id)
+            this.toastr.clear();
+            this.toastr.success('Succès', 'Borne associée');
+          },
+          (error) => {
+            this.toastr.clear();
+            this.toastr.error(`Error ${error}`);
+          });
+    })
   }
 
   assoOffer() {
@@ -316,19 +332,26 @@ export class DetailBorneComponent implements OnInit {
   }
 
   dissoOffer(id) {
-    this.borneService.dissocierOffer(this.borne._id, id).subscribe(
-      () => {
-        const index = this.borne.offers.findIndex(offer => offer._id === id);
-        this.borne.offers.splice(index, 1);
-        this.toastr.clear();
-        this.toastr.success('Succès', 'Offre dissociée');
-        // this.router.navigateByUrl('bornes');
-      },
-      (error) => {
-        this.toastr.clear();
-        this.toastr.error(`Error ${error}`);
-      },
-    );
+    const idBorne = this.FormDeleteAssociate.value.offer;
+    if (id === idBorne) {
+      this.borneService.dissocierOffer(this.borne._id, id).subscribe(
+        () => {
+          const index = this.borne.offers.findIndex(offer => offer._id === id);
+          this.borne.offers.splice(index, 1);
+          this.toastr.clear();
+          this.toastr.success('Succès', 'Offre dissociée');
+          this.FormDeleteAssociate.reset();
+          // this.router.navigateByUrl('bornes');
+        },
+        (error) => {
+          this.toastr.clear();
+          this.toastr.error(`Error ${error}`);
+        },
+      );
+    } else {
+      this.FormDeleteAssociate.reset();
+      this.toastr.error('L \'id ne correspond pas');
+    }
   }
 
   toggleDays() {

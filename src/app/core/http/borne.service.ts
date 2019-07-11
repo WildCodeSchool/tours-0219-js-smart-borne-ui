@@ -44,5 +44,8 @@ export class BorneService {
   public dissocierOffer(idBorne: string, idOffer: string): Observable<Borne> {
     return this.http.delete<Borne>(`${this.configUrl}/${idBorne}/offer/${idOffer}`, {});
   }
+  public associateClient(idClient: string, idBorne: string): Observable<Borne> {
+    return this.http.put<Borne>(`${this.configUrl}/${idBorne}/client/${idClient}`, {});
+  }
 
 }

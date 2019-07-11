@@ -46,6 +46,15 @@ export class ListClientComponent implements OnInit {
     );
   }
 
+  getCreateClient(client) {
+    this.clients.push(client);
+    this.clientService.getListClient().subscribe(
+      (clients: Client[]) => {
+        this.clients = clients;
+      },
+    );
+  }
+
   calculatePercentage(a, b) {
     const result = Math.round(a / b * 100) ;
     if (isNaN(result)) {

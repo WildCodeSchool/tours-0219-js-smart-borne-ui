@@ -29,6 +29,7 @@ export class DetailClientComponent implements OnInit {
   public offers: Offer[];
   public borne: Borne;
   public id: string;
+  public bornes: Borne[];
 
   public totalPlastique: number;
   public totalMetal: number;
@@ -138,6 +139,15 @@ export class DetailClientComponent implements OnInit {
   FormDelete = this.fb.group({
     client: [''],
   });
+  Form = this.fb.group({
+    borne: [''],
+  });
+  DeleteAssociateBorne = this.fb.group({
+    borne: [''],
+  });
+  DeleteAssociateOffer = this.fb.group({
+    offer: [''],
+  });
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -150,6 +160,10 @@ export class DetailClientComponent implements OnInit {
     this.offerService.getListOffers().pipe(first()).subscribe((offers) => {
       this.offers = offers;
     });
+    this.borneService.getListBorne().pipe(first()).subscribe((borne) => {
+      this.bornes = borne;
+    });
+
   }
 
   getClient() {
@@ -187,6 +201,7 @@ export class DetailClientComponent implements OnInit {
         },
       );
     } else {
+      this.FormDelete.reset();
       this.toastr.error('L \'id ne correspond pas');
     }
   }
@@ -231,6 +246,37 @@ export class DetailClientComponent implements OnInit {
       this.toastr.error('Suppression', 'Borne supprimée');
       this.router.navigateByUrl(`bornes`);
     }
+  }
+
+  assoClient() {
+    this.borneService.getBorneById(this.Form.value.borne).pipe(first()).subscribe((borne) => {
+      this.borneService.associateClient(this.client._id, this.Form.value.borne).subscribe(
+          () => {
+            this.toastr.clear();
+            this.toastr.success('Succès', 'Borne associée');
+          },
+          (error) => {
+            this.toastr.clear();
+            this.toastr.error(`Error ${error}`);
+          });
+    })
+    this.clientService.getClientById(this.client._id).pipe(first()).subscribe((client) => {
+      const result = client.bornes.filter(bornes => bornes._id === this.id);
+      if (result[0]) {
+        this.toastr.error(`Ce client est déjà associé à cette borne`);
+      } else {
+        this.clientService.associateBorne(this.client._id, this.Form.value.borne).subscribe(
+          () => {
+            this.toastr.clear();
+            this.toastr.success('Succès', 'Borne associée');
+            // this.router.navigateByUrl('bornes');
+          },
+          (error) => {
+            this.toastr.clear();
+            this.toastr.error(`Error ${error}`);
+          });
+      }
+    });
   }
 
   onSubmit() {
@@ -278,35 +324,50 @@ export class DetailClientComponent implements OnInit {
   }
 
   dissoBorne(id) {
-    this.clientService.dissocierBorne(this.client._id, id).subscribe(
-      () => {
-        const index = this.client.bornes.findIndex(borne => borne._id === id);
-        this.client.bornes.splice(index, 1);
-        this.toastr.clear();
-        this.toastr.success('Succès', 'Borne dissociée');
-        // this.router.navigateByUrl('bornes');
-      },
-      (error) => {
-        this.toastr.clear();
-        this.toastr.error(`Error ${error}`);
-      },
-    );
+    const idBorne = this.DeleteAssociateBorne.value.borne;
+    if (id === idBorne) {
+      this.clientService.dissocierBorne(this.client._id, id).subscribe(
+        () => {
+          const index = this.client.bornes.findIndex(borne => borne._id === id);
+          this.client.bornes.splice(index, 1);
+          this.toastr.clear();
+          this.toastr.success('Succès', 'Borne dissociée');
+          this.DeleteAssociateBorne.reset();
+          // this.router.navigateByUrl('bornes');
+        },
+        (error) => {
+          this.toastr.clear();
+          this.toastr.error(`Error ${error}`);
+        },
+      );
+    } else {
+      this.DeleteAssociateBorne.reset();
+      this.toastr.error('L \'id ne correspond pas');
+    }
+
   }
 
   dissoOffer(id) {
-    this.clientService.dissocierOffer(this.client._id, id).subscribe(
-      () => {
-        const index = this.client.offer.findIndex(offer => offer._id === id);
-        this.client.offer.splice(index, 1);
-        this.toastr.clear();
-        this.toastr.success('Succès', 'Offre dissociée');
-        // this.router.navigateByUrl('bornes');
-      },
-      (error) => {
-        this.toastr.clear();
-        this.toastr.error(`Error ${error}`);
-      },
-    );
+    const idOffer = this.DeleteAssociateOffer.value.offer;
+    if (id === idOffer) {
+      this.clientService.dissocierOffer(this.client._id, id).subscribe(
+        () => {
+          const index = this.client.offer.findIndex(offer => offer._id === id);
+          this.client.offer.splice(index, 1);
+          this.toastr.clear();
+          this.toastr.success('Succès', 'Offre dissociée');
+          this.DeleteAssociateOffer.reset();
+          // this.router.navigateByUrl('bornes');
+        },
+        (error) => {
+          this.toastr.clear();
+          this.toastr.error(`Error ${error}`);
+        },
+      );
+    } else {
+      this.DeleteAssociateOffer.reset();
+      this.toastr.error('L \'id ne correspond pas');
+    }
   }
 
   color(taux: number) {
