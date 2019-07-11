@@ -29,6 +29,7 @@ export class DetailClientComponent implements OnInit {
   public offer: Offer[];
   public borne: Borne;
   public id: string;
+  public bornes: Borne[];
 
   public totalPlastique: number;
   public totalMetal: number;
@@ -125,7 +126,9 @@ export class DetailClientComponent implements OnInit {
   FormDelete = this.fb.group({
     client: [''],
   });
-
+  Form = this.fb.group({
+    borne: [''],
+  });
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
@@ -137,6 +140,10 @@ export class DetailClientComponent implements OnInit {
     this.offerService.getListOffers().pipe(first()).subscribe((offer) => {
       this.offer = offer;
     });
+    this.borneService.getListBorne().pipe(first()).subscribe((borne) => {
+      this.bornes = borne;
+    });
+
   }
 
   getClient() {
@@ -179,6 +186,37 @@ export class DetailClientComponent implements OnInit {
       this.toastr.error('Suppression', 'Borne supprimée');
       this.router.navigateByUrl(`bornes`);
     }
+  }
+
+  assoClient() {
+    this.borneService.getBorneById(this.Form.value.borne).pipe(first()).subscribe((borne) => {
+      this.borneService.associateClient(this.client._id, this.Form.value.borne).subscribe(
+          () => {
+            this.toastr.clear();
+            this.toastr.success('Succès', 'Borne associée');
+          },
+          (error) => {
+            this.toastr.clear();
+            this.toastr.error(`Error ${error}`);
+          });
+    })
+    this.clientService.getClientById(this.client._id).pipe(first()).subscribe((client) => {
+      const result = client.bornes.filter(bornes => bornes._id === this.id);
+      if (result[0]) {
+        this.toastr.error(`Ce client est déjà associé à cette borne`);
+      } else {
+        this.clientService.associateBorne(this.client._id, this.Form.value.borne).subscribe(
+          () => {
+            this.toastr.clear();
+            this.toastr.success('Succès', 'Borne associée');
+            // this.router.navigateByUrl('bornes');
+          },
+          (error) => {
+            this.toastr.clear();
+            this.toastr.error(`Error ${error}`);
+          });
+      }
+    });
   }
 
   onSubmit() {
