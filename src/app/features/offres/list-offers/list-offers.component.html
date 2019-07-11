@@ -1,48 +1,44 @@
-<div class="container-fluid mb-5">
-
-
+<div *ngIf="offers" class="container-fluid mb-5">
   <div class="col-12 m-3">
     <div class="alert alert-danger m-4 text-center"
       *ngIf="offers &&(offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin).length === 0">
       <span *ngIf="filterId || filterClient || filterRemise || filterDebut || filterFin">Il n y a pas d'offres</span>
     </div>
   </div>
-
   <div class="col-12">
     <h1 class="text-center">Liste des offres</h1>
-    <app-create-offer></app-create-offer>
+    <app-create-offer (selectOffer)="getCreateOffer($event)"></app-create-offer>
     <form (ngSubmit)="onSubmit()" [formGroup]="queryForm" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search"
         formControlName="query">
       <button class="btn btn-info my-2 my-sm-0" type="submit">Rechercher</button>
     </form>
-
-
     <div class="row">
       <div class="col-xl-12 col-lg-12">
         <div class="mb-4 p-3">
           <div class="row">
-            <div class="table-responsive">
+
+
+            <div *ngIf="user?.role == 'ADMINISTRATEUR' else elseBlock" class="table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Client</th>
+                    <th scope="col">Nom</th>
                     <th scope="col">Remise</th>
                     <th scope="col">Début de l'offre</th>
-                    <th scope="col">Fin de l'offre</th>
+                    <th scope="col">Épuisement de l'offre</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-
                   <tr>
                     <th>
                       <input class="mb-3 py-2 form-control float-left" type="search" placeholder="ID offre"
                         [(ngModel)]='filterId'>
                     </th>
                     <th>
-                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Client"
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Nom"
                         [(ngModel)]='filterClient'>
                     </th>
                     <th>
@@ -59,17 +55,20 @@
                     </th>
                     <th></th>
                   </tr>
-
                   <ng-container
                     *ngFor="let offer of offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin">
-
                     <tr>
                       <th scope="row">
                         {{ offer._id }}</th>
                       <td>{{ offer.client }}</td>
                       <td>{{ offer.remise }}</td>
                       <td>{{ offer.contrat.debut | date:'d/M/y' }}</td>
-                      <td>{{ offer.contrat.fin | date:'d/M/y' }}</td>
+                      <td>
+                        <ngb-progressbar [type]="color((offer.coupon.imprime / offer.coupon.total) * 100)"
+                          [value]="(offer.coupon.imprime / offer.coupon.total) * 100" [striped]="true" [animated]="true"
+                          showValue=true>
+                        </ngb-progressbar>
+                      </td>
                       <td>
                         <button type="button" [routerLink]="['/offer', offer._id]" class="btn btn-info">
                           Détails
@@ -80,6 +79,70 @@
                 </tbody>
               </table>
             </div>
+
+
+            <ng-template #elseBlock>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Client</th>
+                      <th scope="col">Remise</th>
+                      <th scope="col">Début de l'offre</th>
+                      <th scope="col">Épuisement de l'offre</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="ID offre"
+                          [(ngModel)]='filterId'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Client"
+                          [(ngModel)]='filterClient'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Remise"
+                          [(ngModel)]='filterRemise'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Debut offre"
+                          [(ngModel)]='filterDebut'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Fin offre"
+                          [(ngModel)]='filterFin'>
+                      </th>
+                      <th></th>
+                    </tr>
+                    <ng-container
+                      *ngFor="let offer of borneByOffer | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin">
+                      <tr>
+                        <th scope="row">
+                          {{ offer._id }}</th>
+                        <td>{{ offer.client }}</td>
+                        <td>{{ offer.remise }}</td>
+                        <td>{{ offer.contrat.debut | date:'d/M/y' }}</td>
+                        <td>
+                          <ngb-progressbar [type]="color((offer.coupon.imprime / offer.coupon.total) * 100)"
+                            [value]="(offer.coupon.imprime / offer.coupon.total) * 100" [striped]="true"
+                            [animated]="true" showValue=true>
+                          </ngb-progressbar>
+                        </td>
+                        <td>
+                          <button type="button" [routerLink]="['/offer', offer._id]" class="btn btn-info">
+                            Détails
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>

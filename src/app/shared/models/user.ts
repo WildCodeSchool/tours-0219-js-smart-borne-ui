@@ -9,6 +9,5 @@ export class User {
     public clients: {
       _id: string,
     },
-  ) {
-  }
+  ) { }
 }

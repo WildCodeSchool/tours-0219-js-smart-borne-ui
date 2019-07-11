@@ -5,6 +5,11 @@ import { OffersService } from '../../core/http/offers.service';
 import { Offer } from '../../shared/models/offres.models';
 import { DataService } from 'src/app/core/http/data.service';
 import { Data } from 'src/app/shared/models/data.model';
+import { ProfileService } from '../../core/http/profile.service';
+import { User } from '../../shared/models/user';
+import { Client } from 'src/app/shared/models/client-model';
+import { ClientService } from 'src/app/core/http/client.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -101,15 +106,29 @@ export class DashboardComponent implements OnInit {
   public topBornesPlastique: Borne[];
   public topBornesRouleaux: Borne[];
   public topOffres: Offer[];
+  public profile: User;
+  public client: Client;
+  public id: string;
 
   constructor(public borneService: BorneService,
               public offersService: OffersService,
-              public dataService: DataService) { }
+              public dataService: DataService,
+              public profileService: ProfileService,
+              public clientService: ClientService) { }
 
   ngOnInit() {
+    this.getProfile();
     this.getListBornes();
     this.getListOffers();
     this.getDatas();
+  }
+
+  getProfile() {
+    this.profileService.getProfile().subscribe(
+      (user: User) => {
+        this.profile = user;
+      },
+    );
   }
 
   getListBornes() {
@@ -117,7 +136,7 @@ export class DashboardComponent implements OnInit {
       (bornes: Borne[]) => {
         this.topBornesMetal = [...bornes.sort((a, b) => b.metal.taux - a.metal.taux)];
         this.topBornesPlastique = [...bornes.sort((a, b) => b.plastique.taux - a.plastique.taux)];
-        this.topBornesRouleaux = [...bornes.sort((a, b) => a.coupon.restant - b.coupon.restant)];
+        this.topBornesRouleaux = [...bornes.sort((a, b) => b.coupon.imprimer - a.coupon.imprimer)];
         // tslint:disable-next-line: ter-arrow-parens
         bornes.map(a => {
           this.totalMetal += a.metal.total;
@@ -125,6 +144,21 @@ export class DashboardComponent implements OnInit {
         });
         this.doughnutData.push(this.totalMetal);
         this.doughnutData.push(this.totalPlastique);
+      },
+    );
+  }
+
+  getClient() {
+    this.clientService.getClientById(this.id).subscribe(
+      (client: Client) => {
+        this.client = client;
+        // tslint:disable-next-line: ter-arrow-parens
+        client.bornes.map(borne => {
+          this.totalPlastique += borne.plastique.total;
+          this.totalMetal += borne.metal.total;
+        });
+        this.doughnutData.push(this.totalPlastique);
+        this.doughnutData.push(this.totalMetal);
       },
     );
   }

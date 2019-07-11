@@ -7,7 +7,7 @@
   </div>
   <div class="col-12">
     <h1 class="text-center">Liste des clients</h1>
-    <app-create-client></app-create-client>
+    <app-create-client (selectClient)="getCreateClient($event)"></app-create-client>
     <form (ngSubmit)="onSubmit()" [formGroup]="queryForm" class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search"
         formControlName="query">

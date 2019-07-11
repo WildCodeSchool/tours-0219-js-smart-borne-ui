@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { OffersService } from '../../../core/http/offers.service';
 import { Offer } from '../../../shared/models/offres.models';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/shared/models/user';
 import { ProfileService } from 'src/app/core/http/profile.service';
 import { first } from 'rxjs/operators';
+
 @Component({
   selector: 'app-create-offer',
   templateUrl: './create-offer.component.html',
@@ -16,6 +17,8 @@ export class CreateOfferComponent implements OnInit {
   public id;
   public offer;
   public user: User;
+  @Output() selectOffer = new EventEmitter<Offer>();
+
   constructor(
     public service: OffersService,
     private fb: FormBuilder,
@@ -25,17 +28,18 @@ export class CreateOfferComponent implements OnInit {
   ) { }
 
   offerForm = this.fb.group({
-    surnom: ['', [Validators.required]],
+    surnom: [''],
     client: ['', [Validators.required]],
     remise: ['', [Validators.required]],
     contrat: this.fb.group({
       debut: ['', [Validators.required]],
-      fin: ['', [Validators.required]],
+      fin: [''],
     }),
     coupon: this.fb.group({
       total: ['', [Validators.required]],
       imprime: [0],
     }),
+    details: ['', [Validators.maxLength(300)]],
   });
 
   ngOnInit() {
@@ -47,11 +51,9 @@ export class CreateOfferComponent implements OnInit {
   onSubmit() {
     this.service.postOffer(this.offerForm.value).subscribe(
       (offer: Offer) => {
-        this.offerForm.patchValue(offer);
-        this.offerForm.reset();
+        this.selectOffer.emit(offer);
         this.toastr.clear();
         this.toastr.success('Succès', 'Offre créée');
-        this.router.navigateByUrl('/dashboard');
       },
       (error) => {
         this.offerForm.reset();

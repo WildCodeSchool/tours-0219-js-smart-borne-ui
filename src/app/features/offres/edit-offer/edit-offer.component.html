@@ -3,47 +3,55 @@
     <div class="col-12">
     </div>
     <div class="col-12">
-        <div class="mb-3 card-body">
-          <form (ngSubmit)="onSubmit()" [formGroup]="offerForm">
+      <div class="mb-3 card-body">
+        <form (ngSubmit)="onSubmit()" [formGroup]="offerForm">
+          <div class="form-row">
+            <div class="form-group col-6">
+              <input [ngClass]="offerForm.get('client').errors ? 'is-invalid' : 'is-valid'
+                " class="form-control" placeholder="Nom du client" name="client" type="text"
+                formControlName="client" />
+            </div>
+            <div class="form-group col-6">
+              <input [ngClass]="offerForm.get('remise').errors ? 'is-invalid' : 'is-valid'
+                " class="form-control" placeholder="Prix remisé" name="remise" type="text" formControlName="remise" />
+            </div>
+          </div>
+          <div formGroupName="contrat">
             <div class="form-row">
               <div class="form-group col-6">
-                <input [ngClass]="offerForm.get('client').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control" placeholder="Nom du client" name="client" type="text"
-                  formControlName="client" />
-              </div>
-              <div class="form-group col-6">
-                <input [ngClass]="offerForm.get('remise').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control" placeholder="Prix remisé" name="remise" type="text" formControlName="remise" />
-              </div>
-            </div>
-            <div formGroupName="contrat">
-              <div class="form-row">
-                <div class="form-group col-6">
-                  <input [ngClass]="
+                <input [ngClass]="
                   offerForm.get('contrat').get('debut').errors ? 'is-invalid' : 'is-valid'
                 " class="form-control" placeholder="Début de l'offre" name="debut" type="date"
-                    formControlName="debut" />
-                </div>
-                <div class="form-group col-6">
-                  <input [ngClass]="
+                  formControlName="debut" />
+              </div>
+              <div class="form-group col-6">
+                <input [ngClass]="
                   offerForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'
                 " class="form-control" placeholder="Fin de l'offre" name="fin" type="date" formControlName="fin" />
-                </div>
               </div>
             </div>
-            <div formGroupName="coupon">
-              <input [ngClass]="
+          </div>
+          <div formGroupName="coupon">
+            <input [ngClass]="
                   offerForm.get('coupon').get('total').errors
                     ? 'is-invalid'
                     : 'is-valid'
                 " class="form-control" placeholder="Total disponible" name="total" type="number"
-                formControlName="total" />
+              formControlName="total" />
+          </div>
+          <div class="row col-12 mt-3">
+            <div class="form-group">
+              <textarea [ngClass]="offerForm.get('details').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                placeholder="Détails supplémentaires" maxlength="300" name="details" type="text"
+                formControlName="details"></textarea>
+              <small class="float-right">300 caractères maximum</small>
             </div>
-            <button class="btn btn-success btn-block mt-3 mb-1" type="submit" [disabled]="!offerForm.valid">
-              Save
-            </button>
-          </form>
-        </div>
+          </div>
+          <button class="btn btn-success btn-block mt-3 mb-1" type="submit" [disabled]="!offerForm.valid">
+            Sauvegarder
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

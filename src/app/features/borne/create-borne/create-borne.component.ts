@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BorneService } from '../../../core/http/borne.service';
 import { Borne } from '../../../shared/models/borne';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -17,6 +17,8 @@ export class CreateBorneComponent implements OnInit {
   public user: User;
   public bornes: Borne[];
 
+  @Output() selectBorne = new EventEmitter<Borne>();
+
   constructor(public borneService: BorneService,
               private fb: FormBuilder,
               private router: Router,
@@ -27,13 +29,13 @@ export class CreateBorneComponent implements OnInit {
   borneForm = this.fb.group({
     numeroSerie: ['', [Validators.required]],
     address: this.fb.group({
-      rue: ['', [Validators.required]],
-      codePostal: ['', [Validators.required]],
-      ville: ['', [Validators.required]],
-      numero: ['', [Validators.required]],
+      rue: [''],
+      codePostal: [''],
+      ville: [''],
+      numero: [''],
     }),
     dateInstallation: ['', [Validators.required]],
-    styliseeClient: ['', [Validators.required]],
+    client: [''],
     details: ['', [Validators.maxLength(300)]],
     coupon: this.fb.group({
       restant: [0],
@@ -65,11 +67,9 @@ export class CreateBorneComponent implements OnInit {
     this.borneService.postBorne(
       this.borneForm.value).subscribe(
         (borne: Borne) => {
-          this.borneForm.patchValue(borne);
-          this.borneForm.reset();
+          this.selectBorne.emit(borne);
           this.toastr.clear();
           this.toastr.success('Succès', 'Borne créée');
-          this.router.navigateByUrl('bornes');
         },
         (error) => {
           this.borneForm.reset();

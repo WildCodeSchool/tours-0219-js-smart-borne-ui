@@ -165,6 +165,9 @@ export class DetailBorneComponent implements OnInit {
   FormDelete = this.fb.group({
     borne: [''],
   });
+  FormDeleteAssociate = this.fb.group({
+    offer: [''],
+  });
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -234,6 +237,7 @@ export class DetailBorneComponent implements OnInit {
         },
       );
     } else {
+      this.FormDelete.reset();
       this.toastr.error('L \'id ne correspond pas');
     }
   }
@@ -291,7 +295,12 @@ export class DetailBorneComponent implements OnInit {
       this.borneService.associateOffer(this.borne._id, this.assoOfferForm.value.offer).subscribe(
         () => {
           this.offerService.getOffer(this.assoOfferForm.value.offer).pipe(first()).subscribe((offer) => {
-            this.borne.offers.push(offer);
+            const offre = this.borne.offers.filter(offers => offers._id === offer._id);
+            if (offre.length >= 1) {
+              this.toastr.error(`Error deja associée`);
+            } else {
+              this.borne.offers.push(offer);
+            }
           });
           this.toastr.clear();
           this.toastr.success('Succès', 'Offre associée');
@@ -323,19 +332,26 @@ export class DetailBorneComponent implements OnInit {
   }
 
   dissoOffer(id) {
-    this.borneService.dissocierOffer(this.borne._id, id).subscribe(
-      () => {
-        const index = this.borne.offers.findIndex(offer => offer._id === id);
-        this.borne.offers.splice(index, 1);
-        this.toastr.clear();
-        this.toastr.success('Succès', 'Offre dissociée');
-        // this.router.navigateByUrl('bornes');
-      },
-      (error) => {
-        this.toastr.clear();
-        this.toastr.error(`Error ${error}`);
-      },
-    );
+    const idBorne = this.FormDeleteAssociate.value.offer;
+    if (id === idBorne) {
+      this.borneService.dissocierOffer(this.borne._id, id).subscribe(
+        () => {
+          const index = this.borne.offers.findIndex(offer => offer._id === id);
+          this.borne.offers.splice(index, 1);
+          this.toastr.clear();
+          this.toastr.success('Succès', 'Offre dissociée');
+          this.FormDeleteAssociate.reset();
+          // this.router.navigateByUrl('bornes');
+        },
+        (error) => {
+          this.toastr.clear();
+          this.toastr.error(`Error ${error}`);
+        },
+      );
+    } else {
+      this.FormDeleteAssociate.reset();
+      this.toastr.error('L \'id ne correspond pas');
+    }
   }
 
   toggleDays() {

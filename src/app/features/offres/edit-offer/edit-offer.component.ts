@@ -33,6 +33,7 @@ export class EditOfferComponent implements OnInit {
     coupon: this.fb.group({
       total: [''],
     }),
+    details: [''],
   });
 
   ngOnInit() {

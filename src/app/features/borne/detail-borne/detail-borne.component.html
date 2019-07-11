@@ -37,7 +37,7 @@
       </div>
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Rouleau d'impression</h3>
-        <canvas baseChart [data]="[borne.coupon.imprimer, borne.coupon.restant]" [colors]="couponColor"
+        <canvas baseChart [data]="[borne.coupon.imprimer, (100 - borne.coupon.imprimer)]" [colors]="couponColor"
                 [labels]="rouleauLabels" [chartType]="rouleauType"></canvas>
       </div>
     </div>
@@ -117,7 +117,31 @@
             <button class="btn btn-info btn-block" [routerLink]="['/offer', offre._id]">Détails</button>
           </div>
           <div class="col-md-12 mt-1">
-            <button class="btn btn-danger btn-block mt-2" (click)="dissoOffer(offre._id)"> Dissocier l'offre</button>
+
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h3 class="modal-title" id="modal-basic-title-diso">Dissocier l'offre</h3>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h6 class="text-danger mt-2 mb-4">{{offre._id}}</h6>
+
+                <form (ngSubmit)="dissoOffer(offre._id); modal.close()" [formGroup]="FormDeleteAssociate">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input formControlName="offer" class="form-control input-danger" placeholder="Id de l offre"
+                             name="offer">
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+                </form>
+              </div>
+            </ng-template>
+
+            <button *ngIf="user?.role == 'ADMINISTRATEUR'"  class="btn btn-block btn-danger mt-3" (click)="open(content)">Dissocier l'offre</button>
+
           </div>
         </div>
       </div>

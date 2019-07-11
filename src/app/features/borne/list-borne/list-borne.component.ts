@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BorneService } from '../../../core/http/borne.service';
 import { Borne } from '../../../shared/models/borne';
 import { first } from 'rxjs/operators';
@@ -27,6 +27,7 @@ export class ListBorneComponent implements OnInit {
   }
   public bornes: Borne[];
   public clients: Client[];
+  public clientsByBorne: Borne[];
   public user: User;
   public filterNumeroSerie: string;
   public filterVille: string;
@@ -44,6 +45,10 @@ export class ListBorneComponent implements OnInit {
     });
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
+      this.clientService.getClientById(users.clients[0]._id).subscribe(
+        (client: Client) => {
+          this.clientsByBorne = client.bornes;
+        });
     });
 
     this.route.queryParams.subscribe((params) => {
@@ -66,8 +71,13 @@ export class ListBorneComponent implements OnInit {
     );
   }
 
-  tauxRouleau(couponsRestants) {
-    return Math.round((350 - couponsRestants) / 3.5);
+  getCreateBorne(borne) {
+    this.bornes.push(borne);
+    this.borneService.getListBorne().subscribe(
+      (bornes: Borne[]) => {
+        this.bornes = bornes;
+      },
+    );
   }
 
   onSubmit() {
@@ -91,7 +101,6 @@ export class ListBorneComponent implements OnInit {
       return 'warning';
     }
     return 'success';
-
   }
 
 }

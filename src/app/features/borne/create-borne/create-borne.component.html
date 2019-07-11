@@ -1,5 +1,6 @@
 <div class="container-fluid mb-5">
 
+
   <div class="row">
 
     <div class="col-xl-12 col-lg-12">
@@ -8,27 +9,20 @@
         Ajouter une borne
       </button>
     </div>
-
     <div class="col-xl-12 col-lg-12">
-
       <div>
         <div class="collapse" id="collapseForm">
           <div class="mb-3 card-body">
             <form (ngSubmit)="onSubmit()" [formGroup]="borneForm">
-
               <div class="row">
-
                 <div class="col-12">
                   <div class="form-group">
                     <input [ngClass]="borneForm.get('numeroSerie').errors ? 'is-invalid' : 'is-valid'"
                       class="form-control" placeholder="Numéro de série" name="numeroSerie" type="text"
                       formControlName="numeroSerie">
-
                   </div>
                 </div>
-
               </div>
-
               <div class="row" formGroupName="address">
                 <div class="form-group col-2">
                   <input [ngClass]="borneForm.get('address').get('numero').errors ? 'is-invalid' : 'is-valid'"
@@ -47,10 +41,8 @@
                   <input [ngClass]="borneForm.get('address').get('ville').errors ? 'is-invalid' : 'is-valid'"
                     class="form-control" placeholder="Ville" name="ville" type="text" formControlName="ville">
                 </div>
-
               </div>
               <div class="row">
-
                 <div class="col">
                   <div class="form-group">
                     <input [ngClass]="borneForm.get('dateInstallation').errors ? 'is-invalid' : 'is-valid'"
@@ -58,20 +50,15 @@
                       formControlName="dateInstallation">
                   </div>
                 </div>
-
                 <div class="col">
                   <div class="form-group">
-                    <input [ngClass]="borneForm.get('styliseeClient').errors ? 'is-invalid' : 'is-valid'"
-                      class="form-control" placeholder="Stylisée par client" name="styliseeClient" type="text"
-                      formControlName="styliseeClient">
+                    <input [ngClass]="borneForm.get('client').errors ? 'is-invalid' : 'is-valid'"
+                      class="form-control" placeholder="Détenue par client" name="client" type="text"
+                      formControlName="client">
                   </div>
                 </div>
-
               </div>
-
-
               <div class="row">
-
                 <div class="col">
                   <div class="form-group">
                     <textarea [ngClass]="borneForm.get('details').errors ? 'is-invalid' : 'is-valid'"
@@ -80,20 +67,14 @@
                     <small class="float-right">300 caractères maximum</small>
                   </div>
                 </div>
-
               </div>
-
-
               <button class="btn btn-success btn-block mt-4 mb-1" type="submit"
                 [disabled]="!borneForm.valid">Sauvegarder
               </button>
-
             </form>
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
 </div>
