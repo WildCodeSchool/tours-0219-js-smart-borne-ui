@@ -1,4 +1,4 @@
-<div class="container-fluid mb-5">
+<div *ngIf="offers" class="container-fluid mb-5">
   <div class="col-12 m-3">
     <div class="alert alert-danger m-4 text-center"
       *ngIf="offers &&(offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin).length === 0">

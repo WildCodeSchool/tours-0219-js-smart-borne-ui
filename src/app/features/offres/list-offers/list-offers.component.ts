@@ -4,12 +4,12 @@ import { Offer } from '../../../shared/models/offres.models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { Client } from '../../../shared/models/client-model';
 import { ProfileService } from '../../../core/http/profile.service';
 import { Borne } from '../../../shared/models/borne';
-import { ClientService } from '../../../core/http/client.service';
 import { User } from '../../../shared/models/user';
 import { BorneService } from '../../../core/http/borne.service';
+import { ClientService } from '../../../core/http/client.service';
+import {Client} from "../../../shared/models/client-model";
 
 @Component({
   selector: 'app-list-offers',
@@ -31,7 +31,8 @@ export class ListOffersComponent implements OnInit {
               public router: Router,
               private fb: FormBuilder,
               private profileService: ProfileService,
-              public  borneService: BorneService) {
+              public  borneService: BorneService,
+              public clientService: ClientService) {
   }
 
   queryForm = this.fb.group({
@@ -50,10 +51,9 @@ export class ListOffersComponent implements OnInit {
     });
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
-      this.borneService.getBorneById(users.clients[0]._id).subscribe(
-        (borne: Borne) => {
-          this.borneByOffer = borne.offers;
-          console.log();
+      this.clientService.getClientById(users.clients[0]._id).subscribe(
+        (client: Client) => {
+          this.borneByOffer = client.offer;
         });
     });
   }
@@ -71,7 +71,6 @@ export class ListOffersComponent implements OnInit {
     this.offersService.getListOffers().subscribe((offers: Offer[]) => {
       this.offers = offers;
     });
-    console.log(this.offers);
   }
 
   onSubmit() {

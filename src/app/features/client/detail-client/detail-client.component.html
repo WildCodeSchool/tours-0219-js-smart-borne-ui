@@ -101,8 +101,29 @@
                         <button class="btn btn-info" [routerLink]="['/borne', borne._id]">Détails</button>
                       </td>
                       <td class="text-right">
-                        <button class="btn btn-danger" (click)="dissoBorne(borne._id)">Dissocier la borne
-                        </button>
+
+                        <ng-template #content let-modal>
+                          <div class="modal-header">
+                            <h3 class="modal-title" id="modal-basic-title-Borne">Disocier la borne</h3>
+                            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <h6 class="text-danger mt-2 mb-4">{{borne._id}}</h6>
+                            <form (ngSubmit)="dissoBorne(borne._id); modal.close()" [formGroup]="DeleteAssociateBorne">
+                              <div class="form-group">
+                                <div class="input-group">
+                                  <input formControlName="borne" class="form-control input-danger" placeholder="ID de la la borne"
+                                         name="borne">
+                                </div>
+                              </div>
+                              <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+                            </form>
+                          </div>
+                        </ng-template>
+                        <button class="btn btn-block btn-danger" (click)="open(content)">Disocier la borne</button>
+
                       </td>
                     </tr>
                   </ng-container>
@@ -151,7 +172,29 @@
                 <button class="btn btn-info btn-block" [routerLink]="['/offer', offre._id]">Détails</button>
               </div>
               <div class="col-md-12 mt-1">
-                <button class="btn btn-danger btn-block mt-2" (click)="dissoOffer(offre._id)">Dissocier l'offre</button>
+
+                <ng-template #content let-modal>
+                  <div class="modal-header">
+                    <h3 class="modal-title" id="modal-basic-title-Offer">Disocier une offre</h3>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h6 class="text-danger mt-2 mb-4">{{offre._id}}</h6>
+                    <form (ngSubmit)="dissoOffer(offre._id); modal.close()" [formGroup]="DeleteAssociateOffer">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input formControlName="offer" class="form-control input-danger" placeholder="ID de l offre"
+                                 name="offer">
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+                    </form>
+                  </div>
+                </ng-template>
+                <button class="btn btn-block btn-danger mt-3" (click)="open(content)">Disocier l'offre</button>
+
               </div>
             </div>
           </div>
