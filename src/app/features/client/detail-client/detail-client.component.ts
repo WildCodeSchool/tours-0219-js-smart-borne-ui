@@ -33,7 +33,7 @@ export class DetailClientComponent implements OnInit {
   public totalPlastique: number;
   public totalMetal: number;
 
-  public doughnutData = [];
+  public doughnutData = [0, 0];
   public labels = ['Métal', 'Plastique'];
   public type = 'doughnut';
   public doughnutChartColors =
@@ -55,7 +55,7 @@ export class DetailClientComponent implements OnInit {
   public barChartLabelsDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
   public barChartDataDays = [
     {
-      data: [],
+      data: [0, 0, 0, 0, 0, 0, 0],
       label: 'Plastique',
       backgroundColor: 'rgb(65,105,225,0.6)',
       borderColor: 'rgb(65,105,225)',
@@ -63,7 +63,7 @@ export class DetailClientComponent implements OnInit {
       hoverBorderColor: 'rgb(65,105,225,0.6)',
     },
     {
-      data: [],
+      data: [0, 0, 0, 0, 0, 0, 0],
       label: 'Métal',
       backgroundColor: 'rgb(160,82,45,0.6)',
       borderColor: 'rgb(160,82,45)',
@@ -76,7 +76,7 @@ export class DetailClientComponent implements OnInit {
   public barChartLabelsWeeks = ['Semaine 01', 'Semaine 02', 'Semaine 03', 'Semaine 04'];
   public barChartDataWeeks = [
     {
-      data: [],
+      data: [0, 0, 0, 0],
       label: 'Plastique',
       backgroundColor: 'rgb(65,105,225,0.6)',
       borderColor: 'rgb(65,105,225)',
@@ -84,7 +84,7 @@ export class DetailClientComponent implements OnInit {
       hoverBorderColor: 'rgb(65,105,225,0.6)',
     },
     {
-      data: [],
+      data: [0, 0, 0, 0],
       label: 'Métal',
       backgroundColor: 'rgb(160,82,45,0.6)',
       borderColor: 'rgb(160,82,45)',
@@ -98,7 +98,7 @@ export class DetailClientComponent implements OnInit {
     'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
   public barChartDataMonths = [
     {
-      data: [],
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       label: 'Plastique',
       backgroundColor: 'rgb(65,105,225,0.6)',
       borderColor: 'rgb(65,105,225)',
@@ -106,7 +106,7 @@ export class DetailClientComponent implements OnInit {
       hoverBorderColor: 'rgb(65,105,225,0.6)',
     },
     {
-      data: [],
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       label: 'Métal',
       backgroundColor: 'rgb(160,82,45,0.6)',
       borderColor: 'rgb(160,82,45)',
@@ -114,6 +114,12 @@ export class DetailClientComponent implements OnInit {
       hoverBorderColor: 'rgb(160,82,45,0.6)',
     },
   ];
+
+  public topBornesMetal: Borne[];
+  public topBornesPlastique: Borne[];
+  public topBornesRouleaux: Borne[];
+  public topOffres: Offer[];
+
   constructor(
     private route: ActivatedRoute,
     public clientService: ClientService,
@@ -150,15 +156,22 @@ export class DetailClientComponent implements OnInit {
     this.clientService.getClientById(this.id).subscribe(
       (client: Client) => {
         this.client = client;
-// tslint:disable-next-line: ter-arrow-parens
-        client.bornes.map(a => {
-          this.totalPlastique += a.plastique.total;
-          this.totalMetal += a.metal.total;
+        // tslint:disable-next-line: ter-arrow-parens
+        this.topBornesMetal = [...client.bornes.sort((a, b) => b.metal.taux - a.metal.taux)];
+        this.topBornesPlastique = [...client.bornes.sort((a, b) => b.plastique.taux - a.plastique.taux)];
+        this.topBornesRouleaux = [...client.bornes.sort((a, b) => b.coupon.imprimer - a.coupon.imprimer)];
+        this.topOffres = [...client.offer.sort((a, b) =>
+          (Math.round(b.coupon.imprime / b.coupon.total * 100)) - (Math.round(a.coupon.imprime / a.coupon.total * 100)))];
+        // tslint:disable-next-line: ter-arrow-parens
+        this.client.bornes.map(borne => {
+          this.totalPlastique += borne.plastique.total;
+          this.totalMetal += borne.metal.total;
         });
-        this.doughnutData.push(this.totalPlastique);
-        this.doughnutData.push(this.totalMetal);
+        this.doughnutData[0] = this.totalPlastique;
+        this.doughnutData[1] = this.totalMetal;
       },
     );
+    this.getData();
   }
 
   deleteClientModal() {
@@ -176,6 +189,39 @@ export class DetailClientComponent implements OnInit {
     } else {
       this.toastr.error('L \'id ne correspond pas');
     }
+  }
+
+  getData() {
+    // tslint:disable-next-line: ter-arrow-parens
+    this.client.bornes.map(borne => {
+      this.dataService.getBorneDataByDay(borne._id).subscribe(
+        (dataDays: Data[]) => {
+          // tslint:disable-next-line: no-increment-decrement
+          for (let i = 0; i < dataDays.length; i++) {
+            this.barChartDataDays[0].data[i] += dataDays[i].plastique;
+            this.barChartDataDays[1].data[i] += dataDays[i].metal;
+          }
+        },
+      );
+      this.dataService.getBorneDataByWeek(borne._id).subscribe(
+        (dataWeeks: Data[]) => {
+          // tslint:disable-next-line: no-increment-decrement
+          for (let i = 0; i < dataWeeks.length; i++) {
+            this.barChartDataWeeks[0].data[i] += dataWeeks[i].plastique;
+            this.barChartDataWeeks[1].data[i] += dataWeeks[i].metal;
+          }
+        },
+      );
+      this.dataService.getBorneDataByMonth(borne._id).subscribe(
+        (dataMonths: Data[]) => {
+          // tslint:disable-next-line: no-increment-decrement
+          for (let i = 0; i < dataMonths.length; i++) {
+            this.barChartDataMonths[0].data[i] += dataMonths[i].plastique;
+            this.barChartDataMonths[1].data[i] += dataMonths[i].metal;
+          }
+        },
+      );
+    });
   }
 
   deleteBorne(id) {
@@ -216,7 +262,7 @@ export class DetailClientComponent implements OnInit {
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-// tslint:disable-next-line: align
+      // tslint:disable-next-line: align
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });

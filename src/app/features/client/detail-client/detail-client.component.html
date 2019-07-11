@@ -1,6 +1,6 @@
 <div *ngIf="client" class="container mt-3 mb-4">
   <h1 class="text-center">Client {{client.name}}</h1>
-  
+
   <div class="row">
     <div class="col-12 col-sm-6">
       <h3 class="text-center">Total recyclé</h3>
@@ -56,6 +56,46 @@
                 <a routerLink="/borne/{{borne._id}}"> {{borne._id}} :
                   <ngb-progressbar [type]="color(borne.plastique.taux)" showValue="true" [value]="borne.plastique.taux"
                     [striped]="true" [animated]="true" routerLink="/borne/{{borne._id}}">
+                  </ngb-progressbar>
+                </a>
+              </p>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-6 col-xl-6">
+      <div class="card">
+        <h3 class="text-center p-3">Offres proche de l'expiration</h3>
+        <div class=" ml-3 mr-3 mb-3" *ngIf="topOffres">
+          <ng-container *ngFor="let offre of topOffres; let i=index">
+            <div *ngIf="i<5">
+              <p>
+                <a routerLink="/offer/{{offre._id}}"> {{offre._id}} :
+                  <ngb-progressbar [type]="color(offre.coupon.imprime)" showValue="true"
+                    [value]="offre.coupon.imprime" [striped]="true" [animated]="true"
+                    routerLink="/offer/{{offre._id}}">
+                  </ngb-progressbar>
+                </a>
+              </p>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-6">
+      <div class="card">
+        <h3 class="text-center p-3">Rouleaux d'impression</h3>
+        <div class=" ml-3 mr-3 mb-3" *ngIf="topBornesRouleaux">
+          <ng-container *ngFor="let borne of topBornesRouleaux; let i=index">
+            <div *ngIf="i<5">
+              <p>
+                <a routerLink="/borne/{{borne._id}}"> {{borne._id}} :
+                  <ngb-progressbar [type]="color(borne.coupon.imprimer)" showValue="true"
+                    [value]="borne.coupon.imprimer" [striped]="true" [animated]="true"
+                    routerLink="/borne/{{borne._id}}">
                   </ngb-progressbar>
                 </a>
               </p>
@@ -130,7 +170,7 @@
             <select formControlName="offer" class="form-control">
               <option *ngFor="let offer of offer" name="offer" value="{{offer._id}}">{{offer.client}}</option>
             </select>
-            <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer le client
+            <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer le client
             </button>
           </div>
         </form>
@@ -141,8 +181,8 @@
           <div class="title">{{offre.client}}</div>
           <div class="progressLabel text-center mb-3">Offre consommée à</div>
           <div class="progress">
-            <ngb-progressbar [type]="color(offre.coupon.imprime)" [value]="offre.coupon.imprime" [striped]="true"
-              [animated]="true" showValue="true">
+            <ngb-progressbar [type]="color((offre.coupon.imprime / offre.coupon.total) * 100)"
+              [value]="(offre.coupon.imprime / offre.coupon.total) * 100" [striped]="true" [animated]="true" showValue=true>
             </ngb-progressbar>
           </div>
           <div class="cardBtn">

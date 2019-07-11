@@ -1,77 +1,69 @@
 <div class="container-fluid mb-5">
-
-  <div class="row">
-
+    <div class="row">
         <div class="col-xl-12 col-lg-12">
-            <button [routerLink]="['/register']" class="btn btn-outline-success float-right" type="button">
+            <button [routerLink]="['/register']" class="btn btn-info float-right" type="button">
                 Créer un utilisateur
             </button>
         </div>
-
-
         <div class="col-12 m-3">
             <div class="alert alert-danger m-4 text-center"
-                 *ngIf="users &&(users | filterUser: filterId:filterLastname:filterEmail:filterRole).length === 0">
+                *ngIf="users &&(users | filterUser: filterId:filterLastname:filterEmail:filterRole).length === 0">
                 <span *ngIf="filterId || filterLastname || filterEmail || filterRole">Il n y a pas d'utilisateurs</span>
             </div>
         </div>
-
-
         <div class="col-xl-12 col-lg-12">
             <div class="mb-4 p-3">
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">E-mail</th>
-                                <th scope="col">Rôle</th>
-                                <th scope="col"></th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">E-mail</th>
+                                    <th scope="col">Rôle</th>
+                                    <th scope="col"></th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Id"
-                                           [(ngModel)]='filterId'>
-                                </th>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Nom"
-                                           [(ngModel)]='filterLastname'>
-                                </th>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Email"
-                                           [(ngModel)]='filterEmail'>
-                                </th>
-                                <th>
-                                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Role"
-                                           [(ngModel)]='filterRole'>
-                                </th>
-                                <th></th>
-                            </tr>
-                            <ng-container *ngFor="let user of users| filterUser: filterId:filterLastname:filterEmail:filterRole">
                                 <tr>
-                                    <th scope="row">{{user._id}}</th>
-                                    <td>{{user.username}}</td>
-                                    <td>{{user.email}}</td>
-                                    <td>{{user.role}}</td>
-                                    <td>
-                                        <button type="button" [routerLink]="['/dashboard/user', user._id , 'edit' ]"
-                                                class="btn btn-outline-primary">Editer
-                                        </button>
-                                    </td>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Id"
+                                            [(ngModel)]='filterId'>
+                                    </th>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Nom"
+                                            [(ngModel)]='filterLastname'>
+                                    </th>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search"
+                                            placeholder="Email" [(ngModel)]='filterEmail'>
+                                    </th>
+                                    <th>
+                                        <input class="mb-3 py-2 form-control float-left" type="search"
+                                            placeholder="Role" [(ngModel)]='filterRole'>
+                                    </th>
+                                    <th></th>
                                 </tr>
-                            </ng-container>
+                                <ng-container
+                                    *ngFor="let user of users| filterUser: filterId:filterLastname:filterEmail:filterRole">
+                                    <tr>
+                                        <th scope="row">{{user._id}}</th>
+                                        <td>{{user.username}}</td>
+                                        <td>{{user.email}}</td>
+                                        <td>{{user.role}}</td>
+                                        <td>
+                                            <button type="button" [routerLink]="['/dashboard/user', user._id , 'edit' ]"
+                                                class="btn btn-outline-primary">Editer
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </ng-container>
                             </tbody>
                         </table>
                     </div>
-
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
-  </div>
-
 </div>
