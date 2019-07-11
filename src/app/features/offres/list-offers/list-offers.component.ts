@@ -5,11 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { ProfileService } from '../../../core/http/profile.service';
-import { Borne } from '../../../shared/models/borne';
 import { User } from '../../../shared/models/user';
 import { BorneService } from '../../../core/http/borne.service';
 import { ClientService } from '../../../core/http/client.service';
-import {Client} from "../../../shared/models/client-model";
+import { Client } from '../../../shared/models/client-model';
 
 @Component({
   selector: 'app-list-offers',
@@ -71,6 +70,15 @@ export class ListOffersComponent implements OnInit {
     this.offersService.getListOffers().subscribe((offers: Offer[]) => {
       this.offers = offers;
     });
+  }
+
+  getCreateOffer(offer) {
+    this.offers.push(offer);
+    this.offersService.getListOffers().subscribe(
+      (offers: Offer[]) => {
+        this.offers = offers;
+      },
+    );
   }
 
   onSubmit() {
