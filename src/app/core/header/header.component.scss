@@ -26,10 +26,14 @@
   
 }
 
+.btn-info {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 .navbar-btn {
-  box-shadow: none;
   outline: none !important;
-  border: none;
 }
 
 
@@ -60,18 +64,12 @@
   letter-spacing: 2px;
 }
 
-.sidebar ul.components {
-  padding: 20px 0;
-}
-
 .sidebar ul p {
   color: #fff;
-  padding: 10px;
 }
 
 .sidebar ul li a {
-  padding: 10px;
-  font-size: 1.1em;
+  font-size: 1.2em;
   display: block;
 }
 
@@ -115,10 +113,6 @@ ul ul a {
   width: 100%;
   min-height: 100vh;
   transition: all 0.3s;
-}
-.btn-info {
-  background-color: transparent !important;
-  border: 1px solid transparent !important;
 }
 
 

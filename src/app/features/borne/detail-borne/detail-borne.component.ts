@@ -273,6 +273,18 @@ export class DetailBorneComponent implements OnInit {
           });
       }
     });
+    this.borneService.getBorneById(this.borne._id).pipe(first()).subscribe((borne) => {
+      this.borneService.associateClient(this.Form.value.client, this.borne._id).subscribe(
+          () => {
+            console.log(this.borne._id)
+            this.toastr.clear();
+            this.toastr.success('Succès', 'Borne associée');
+          },
+          (error) => {
+            this.toastr.clear();
+            this.toastr.error(`Error ${error}`);
+          });
+    })
   }
 
   assoOffer() {
