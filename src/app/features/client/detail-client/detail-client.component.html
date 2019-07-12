@@ -1,28 +1,24 @@
-<div *ngIf="client" class="container mt-3 mb-4">
+<div class="container mt-3 mb-4" *ngIf="client">
   <h1 class="text-center">Client {{client.name}}</h1>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right" type="button"
-              data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+        data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
         Associer une borne
       </button>
     </div>
-
   </div>
-
   <div class="collapse mt-3" id="collapseForm">
     <form (ngSubmit)="assoClient()" [formGroup]="Form">
       <div class="form-group">
         <select formControlName="borne" class="form-control">
           <option *ngFor="let borne of bornes" name="borne" value="{{borne._id}}">{{borne.numeroSerie}}</option>
         </select>
-        <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer une borne
-        </button>
-
+        <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer une borne</button>
       </div>
     </form>
-  
-  <div class="row">
+  </div>
+  <div class="row" *ngIf="client.bornes">
     <div class="col-12 col-sm-6">
       <h3 class="text-center">Total recyclé</h3>
       <canvas baseChart [data]="doughnutData" [colors]="doughnutChartColors" [labels]="labels"
@@ -95,9 +91,8 @@
             <div *ngIf="i<5">
               <p>
                 <a routerLink="/offer/{{offre._id}}"> {{offre._id}} :
-                  <ngb-progressbar [type]="color(offre.coupon.imprime)" showValue="true"
-                    [value]="offre.coupon.imprime" [striped]="true" [animated]="true"
-                    routerLink="/offer/{{offre._id}}">
+                  <ngb-progressbar [type]="color(offre.coupon.imprime)" showValue="true" [value]="offre.coupon.imprime"
+                    [striped]="true" [animated]="true" routerLink="/offer/{{offre._id}}">
                   </ngb-progressbar>
                 </a>
               </p>
@@ -127,9 +122,8 @@
     </div>
   </div>
   <h2 class="text-center mt-3">Bornes</h2>
-  <div class="row">
+  <div class="row" *ngIf="bornes">
     <div class="col-md-12 col-xl-12 mt-4">
-
       <div class="col-xl-12 col-lg-12">
         <div class="mb-4 p-3">
           <div class="row">
@@ -162,11 +156,11 @@
                         <button class="btn btn-info" [routerLink]="['/borne', borne._id]">Détails</button>
                       </td>
                       <td class="text-right">
-
                         <ng-template #content let-modal>
                           <div class="modal-header">
                             <h3 class="modal-title" id="modal-basic-title-Borne">Disocier la borne</h3>
-                            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                            <button type="button" class="close" aria-label="Close"
+                              (click)="modal.dismiss('Cross click')">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
@@ -175,16 +169,15 @@
                             <form (ngSubmit)="dissoBorne(borne._id); modal.close()" [formGroup]="DeleteAssociateBorne">
                               <div class="form-group">
                                 <div class="input-group">
-                                  <input formControlName="borne" class="form-control input-danger" placeholder="ID de la la borne"
-                                         name="borne">
+                                  <input formControlName="borne" class="form-control input-danger"
+                                    placeholder="ID de la la borne" name="borne">
                                 </div>
                               </div>
                               <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
                             </form>
                           </div>
                         </ng-template>
-                        <button class="btn btn-block btn-danger" (click)="open(content)">Disocier la borne</button>
-
+                        <button class="btn btn-block btn-danger" (click)="open(content)">Dissocier la borne</button>
                       </td>
                     </tr>
                   </ng-container>
@@ -194,7 +187,6 @@
           </div>
         </div>
       </div>
-
       <h2 class="text-center">Offres</h2>
       <div class="row">
         <div class="col-xl-12 col-lg-12">
@@ -205,7 +197,6 @@
           </button>
         </div>
       </div>
-
       <div class="collapse mt-3" id="collapseAssoOfferForm">
         <form (ngSubmit)="onSubmit()" [formGroup]="assoOfferForm">
           <div class="form-group">
@@ -218,13 +209,13 @@
         </form>
       </div>
       <div class="row">
-
         <app-card-offer *ngFor="let offre of client.offer">
           <div class="title">{{offre.client}}</div>
-          <div class="progressLabel text-center mb-3">Offre consommée à</div>
+          <div class="progressLabel text-center mb-3">Consommation de l'offre</div>
           <div class="progress">
             <ngb-progressbar [type]="color((offre.coupon.imprime / offre.coupon.total) * 100)"
-              [value]="(offre.coupon.imprime / offre.coupon.total) * 100" [striped]="true" [animated]="true" showValue=true>
+              [value]="(offre.coupon.imprime / offre.coupon.total) * 100" [striped]="true" [animated]="true"
+              showValue=true>
             </ngb-progressbar>
           </div>
           <div class="cardBtn">
@@ -233,10 +224,9 @@
                 <button class="btn btn-info btn-block" [routerLink]="['/offer', offre._id]">Détails</button>
               </div>
               <div class="col-md-12 mt-1">
-
                 <ng-template #content let-modal>
                   <div class="modal-header">
-                    <h3 class="modal-title" id="modal-basic-title-Offer">Disocier une offre</h3>
+                    <h3 class="modal-title" id="modal-basic-title-Offer">Dissocier une offre</h3>
                     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -247,20 +237,18 @@
                       <div class="form-group">
                         <div class="input-group">
                           <input formControlName="offer" class="form-control input-danger" placeholder="ID de l offre"
-                                 name="offer">
+                            name="offer">
                         </div>
                       </div>
                       <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
                     </form>
                   </div>
                 </ng-template>
-                <button class="btn btn-block btn-danger mt-3" (click)="open(content)">Disocier l'offre</button>
-
+                <button class="btn btn-block btn-danger mt-3" (click)="open(content)">Dissocier l'offre</button>
               </div>
             </div>
           </div>
         </app-card-offer>
-
         <div class="col-md-12 col-xl-12 mt-4">
           <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
             <button class="btn btn-info btn-block mt-4" data-toggle="modal" data-target=".bd-example-modal-lg"
