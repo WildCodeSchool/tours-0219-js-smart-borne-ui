@@ -22,20 +22,8 @@ export class ListClientComponent implements OnInit {
               private fb: FormBuilder) {
   }
 
-  queryForm = this.fb.group({
-    query: ['', [Validators.required]],
-  });
-
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      if (params.name) {
-        this.clientService.getQueryClient(params.name).subscribe((client) => {
-          this.clients = client;
-        });
-      } else {
-        this.getListClient();
-      }
-    });
+    this.getListClient();
   }
 
   getListClient() {
@@ -61,11 +49,6 @@ export class ListClientComponent implements OnInit {
       return 0;
     }
     return result;
-  }
-
-  onSubmit() {
-    this.router.navigate(['/clients'], {
-      queryParams: { name:  this.queryForm.value.query } });
   }
 
   color(a: number) {

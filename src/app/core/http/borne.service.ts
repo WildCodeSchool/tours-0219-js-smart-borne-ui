@@ -3,8 +3,6 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Borne } from '../../shared/models/borne';
 import { environment } from '../../../environments/environment';
-import { Client } from '../../shared/models/client-model';
-import { Offer } from '../../shared/models/offres.models';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +14,6 @@ export class BorneService {
 
   public getListBorne(): Observable<Borne[]> {
     return this.http.get<Borne[]>(`${this.configUrl}`);
-  }
-
-  public getQueryBorne(query: string): Observable<Borne[]> {
-    return this.http.get<Borne[]>(`${this.configUrl}/search/${query}`);
   }
 
   public getBorneById(id: string): Observable<Borne> {

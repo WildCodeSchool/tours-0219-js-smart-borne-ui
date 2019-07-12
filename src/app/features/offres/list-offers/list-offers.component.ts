@@ -34,20 +34,8 @@ export class ListOffersComponent implements OnInit {
               public clientService: ClientService) {
   }
 
-  queryForm = this.fb.group({
-    query: ['', [Validators.required]],
-  });
-
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      if (params.client) {
-        this.offersService.getQueryOffer(params.client).subscribe((client) => {
-          this.offers = client;
-        });
-      } else {
-        this.getListOffers();
-      }
-    });
+    this.getListOffers();
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
       this.clientService.getClientById(users.clients[0]._id).subscribe(
@@ -81,8 +69,4 @@ export class ListOffersComponent implements OnInit {
     );
   }
 
-  onSubmit() {
-    this.router.navigate(['/offers'], {
-      queryParams: { client:  this.queryForm.value.query } });
-  }
 }
