@@ -35,11 +35,8 @@ export class ListBorneComponent implements OnInit {
   public filterMetal: string;
   public filterTotal: string;
 
-  queryForm = this.fb.group({
-    query: ['', [Validators.required]],
-  });
-
   ngOnInit() {
+    this.getListBorne();
     this.clientService.getListClient().pipe(first()).subscribe((clients) => {
       this.clients = clients;
     });
@@ -50,17 +47,6 @@ export class ListBorneComponent implements OnInit {
           this.clientsByBorne = client.bornes;
         });
     });
-
-    this.route.queryParams.subscribe((params) => {
-      if (params.numeroSerie) {
-        this.borneService.getQueryBorne(params.numeroSerie).subscribe((borne) => {
-          this.bornes = borne;
-        });
-      } else {
-        this.getListBorne();
-      }
-    });
-
   }
 
   getListBorne() {
@@ -78,12 +64,6 @@ export class ListBorneComponent implements OnInit {
         this.bornes = bornes;
       },
     );
-  }
-
-  onSubmit() {
-    this.router.navigate(['/bornes'], {
-      queryParams: { numeroSerie: this.queryForm.value.query },
-    });
   }
 
   calculatePercentage(a, b) {

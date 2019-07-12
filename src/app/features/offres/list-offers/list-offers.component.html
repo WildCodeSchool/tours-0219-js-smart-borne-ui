@@ -8,11 +8,7 @@
   <div class="col-12">
     <h1 class="text-center">Liste des offres</h1>
     <app-create-offer (selectOffer)="getCreateOffer($event)"></app-create-offer>
-    <form (ngSubmit)="onSubmit()" [formGroup]="queryForm" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search"
-        formControlName="query">
-      <button class="btn btn-info my-2 my-sm-0" type="submit">Rechercher</button>
-    </form>
+
     <div class="row">
       <div class="col-xl-12 col-lg-12">
         <div class="mb-4 p-3">
