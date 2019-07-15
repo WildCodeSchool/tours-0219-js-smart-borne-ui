@@ -20,27 +20,22 @@ table {
     cursor: pointer !important;
 }
 .btn-danger {
-    background-color: rgba(167, 56, 61, 0.9) !important;
+    background-color: rgba(237, 55, 54, 0.9) !important;
     border: 1px solid black !important;
 }
 
 .btn-danger:hover {
-    background-color: rgba(167, 56, 61, 1) !important;
-    border: 1px solid black !important;
-}
-
-.btn-danger.active {
-    background-color: rgba(167, 56, 61, 1) !important;
+    background-color: rgba(237, 55, 54, 1) !important;
     border: 1px solid black !important;
 }
 
 .btn-info {
-    background-color: rgba(65, 105, 225, 0.9) !important;
+    background-color: rgba(0, 132, 255, 0.9) !important;
     border: 1px solid black !important;
 }
 
 .btn-info:hover {
-    background-color: rgba(65, 105, 225, 1) !important;
+    background-color: rgba(0, 132, 255, 1) !important;
     border: 1px solid black !important;
 }
 
