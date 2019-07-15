@@ -31,10 +31,10 @@ export class DetailClientComponent implements OnInit {
   public id: string;
   public bornes: Borne[];
 
-  public totalPlastique: number;
-  public totalMetal: number;
+  public totalPlastique: number = 0;
+  public totalMetal: number = 0;
 
-  public doughnutData = [0, 0];
+  public doughnutData = [];
   public labels = ['Métal', 'Plastique'];
   public type = 'doughnut';
   public doughnutChartColors =
@@ -180,8 +180,8 @@ export class DetailClientComponent implements OnInit {
           this.totalPlastique += borne.plastique.total;
           this.totalMetal += borne.metal.total;
         });
-        this.doughnutData[0] = this.totalPlastique;
-        this.doughnutData[1] = this.totalMetal;
+        this.doughnutData.push(this.totalMetal);
+        this.doughnutData.push(this.totalPlastique);
         this.getData();
       },
     );

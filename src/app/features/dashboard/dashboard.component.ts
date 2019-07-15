@@ -138,9 +138,9 @@ export class DashboardComponent implements OnInit {
         this.topBornesPlastique = [...bornes.sort((a, b) => b.plastique.taux - a.plastique.taux)];
         this.topBornesRouleaux = [...bornes.sort((a, b) => b.coupon.imprimer - a.coupon.imprimer)];
         // tslint:disable-next-line: ter-arrow-parens
-        bornes.map(a => {
-          this.totalMetal += a.metal.total;
-          this.totalPlastique += a.plastique.total;
+        bornes.map(borne => {
+          this.totalMetal += borne.metal.total;
+          this.totalPlastique += borne.plastique.total;
         });
         this.doughnutData.push(this.totalMetal);
         this.doughnutData.push(this.totalPlastique);

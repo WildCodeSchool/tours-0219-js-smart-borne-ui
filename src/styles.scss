@@ -7,6 +7,11 @@
     font-family: 'Aileron';
 }
 
+.container {
+  max-width: 94% !important;
+  margin-right: 3% !important;
+  margin-left: 3% !important;
+}
 table {
     text-align: center;
 }
@@ -15,7 +20,7 @@ table {
     cursor: pointer !important;
 }
 .btn-danger {
-    background-color: rgba(167, 56, 61, 0.8) !important;
+    background-color: rgba(167, 56, 61, 0.9) !important;
     border: 1px solid black !important;
 }
 
@@ -30,7 +35,7 @@ table {
 }
 
 .btn-info {
-    background-color: rgba(65, 105, 225, 0.8) !important;
+    background-color: rgba(65, 105, 225, 0.9) !important;
     border: 1px solid black !important;
 }
 
@@ -40,7 +45,7 @@ table {
 }
 
 .btn-success {
-    background-color: rgba(91, 129, 88, 0.8) !important;
+    background-color: rgba(91, 129, 88, 0.9) !important;
     border: 1px solid black !important;
 }
 
