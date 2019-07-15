@@ -5,13 +5,18 @@
     </div>
     <ul class="list-unstyled components text-center mt-5">
       <li>
-        <a class="asidebar pt-4 pb-4" [routerLink]="['/dashboard']" routerLinkActive="active-link">Accueil</a>
+        <a class="asidebar pt-4 pb-4" [routerLink]="profile?.role == 'ADMINISTRATEUR' ? ['/dashboard'] : ['/client/' + profile.clients[0]._id]" routerLinkActive="active-link">Accueil</a>
       </li>
       <li>
-        <a class="asidebar pt-4 pb-4" [routerLink]="['/bornes']" routerLinkActive="active-link">Bornes</a>
+        <a class="asidebar pt-4 pb-4" [routerLink]="['/bornes']" routerLinkActive="active-link">
+          <span *ngIf="profile?.role == 'ADMINISTRATEUR'">Bornes</span>
+          <span *ngIf="profile?.role == 'CLIENT'">Mes bornes</span>
+        </a>
       </li>
       <li>
-        <a class="asidebar pt-4 pb-4" [routerLink]="['/offers']" routerLinkActive="active-link">Offres</a>
+        <a class="asidebar pt-4 pb-4" [routerLink]="['/offers']" routerLinkActive="active-link">
+        <span *ngIf="profile?.role == 'ADMINISTRATEUR'">Offres</span>
+        <span *ngIf="profile?.role == 'CLIENT'">Mes offres</span></a>
       </li>
       <ng-container *ngIf="profile?.role == 'ADMINISTRATEUR'">
         <li>
