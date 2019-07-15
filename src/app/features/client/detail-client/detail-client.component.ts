@@ -30,6 +30,7 @@ export class DetailClientComponent implements OnInit {
   public borne: Borne;
   public id: string;
   public bornes: Borne[];
+  public idHidden: boolean;
 
   public totalPlastique: number;
   public totalMetal: number;
@@ -163,6 +164,10 @@ export class DetailClientComponent implements OnInit {
     this.borneService.getListBorne().pipe(first()).subscribe((borne) => {
       this.bornes = borne;
     });
+  }
+
+  hiddenButton() {
+    this.idHidden = ! this.idHidden;
   }
 
   getClient() {
