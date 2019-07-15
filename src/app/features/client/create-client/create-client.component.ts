@@ -76,7 +76,6 @@ export class CreateClientComponent implements OnInit {
       },
 
       (error) => {
-        this.clientForm.reset();
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
       },

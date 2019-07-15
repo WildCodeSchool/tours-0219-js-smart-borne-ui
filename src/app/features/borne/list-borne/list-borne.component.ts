@@ -42,10 +42,12 @@ export class ListBorneComponent implements OnInit {
     });
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
-      this.clientService.getClientById(users.clients[0]._id).subscribe(
-        (client: Client) => {
-          this.clientsByBorne = client.bornes;
-        });
+      if (users.clients[0]) {
+        this.clientService.getClientById(users.clients[0]._id).subscribe(
+          (client: Client) => {
+            this.clientsByBorne = client.bornes;
+          });
+      }
     });
   }
 
