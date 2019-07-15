@@ -31,7 +31,6 @@ export class EditBorneComponent implements OnInit {
       numero: [''],
     }),
     dateInstallation: ['', [Validators.required]],
-    client: [''],
     details: ['', [Validators.maxLength(300)]],
   });
 

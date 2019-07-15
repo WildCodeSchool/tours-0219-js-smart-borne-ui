@@ -72,7 +72,6 @@ export class CreateBorneComponent implements OnInit {
           this.toastr.success('Succès', 'Borne créée');
         },
         (error) => {
-          this.borneForm.reset();
           this.toastr.clear();
           this.toastr.error(`Error ${error}`);
         });
