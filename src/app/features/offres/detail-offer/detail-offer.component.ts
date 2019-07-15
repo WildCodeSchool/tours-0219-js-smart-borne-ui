@@ -27,6 +27,7 @@ export class DetailOfferComponent implements OnInit {
   public offer: Offer;
   public user: User;
   public id: string;
+  public idHidden: boolean;
   public couponsData = [];
   public couponLabels = ['Imprimés', 'Restants'];
   public couponType = 'doughnut';
@@ -51,6 +52,10 @@ export class DetailOfferComponent implements OnInit {
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
     });
+  }
+
+  hiddenButton() {
+    this.idHidden = ! this.idHidden;
   }
 
   getOffer() {

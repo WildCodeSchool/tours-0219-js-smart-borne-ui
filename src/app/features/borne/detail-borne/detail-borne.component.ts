@@ -48,6 +48,7 @@ export class DetailBorneComponent implements OnInit {
   public client: Client[];
   public offers: Offer[];
   public id: string;
+  public idHidden: boolean;
 
   // Doughnut chart data
   public metalLabels = ['Métal', 'Vide'];
@@ -184,6 +185,10 @@ export class DetailBorneComponent implements OnInit {
       this.offers = offer;
     });
     this.getDatas();
+  }
+
+  hiddenButton() {
+    this.idHidden = ! this.idHidden;
   }
 
   getBorne() {
