@@ -56,7 +56,6 @@ export class CreateOfferComponent implements OnInit {
         this.toastr.success('Succès', 'Offre créée');
       },
       (error) => {
-        this.offerForm.reset();
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
       },

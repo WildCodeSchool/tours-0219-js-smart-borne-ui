@@ -48,6 +48,7 @@ export class DetailBorneComponent implements OnInit {
   public client: Client[];
   public offers: Offer[];
   public id: string;
+  public idHidden: boolean;
 
   // Doughnut chart data
   public metalLabels = ['Métal', 'Vide'];
@@ -186,6 +187,10 @@ export class DetailBorneComponent implements OnInit {
     this.getDatas();
   }
 
+  hiddenButton() {
+    this.idHidden = ! this.idHidden;
+  }
+
   getBorne() {
     this.borneService.getBorneById(this.id).subscribe(
       (borne: Borne) => {
@@ -275,16 +280,15 @@ export class DetailBorneComponent implements OnInit {
     // });
     this.borneService.getBorneById(this.borne._id).pipe(first()).subscribe((borne) => {
       this.borneService.associateClient(this.Form.value.client, this.borne._id).subscribe(
-          () => {
-            console.log(this.borne._id)
-            this.toastr.clear();
-            this.toastr.success('Succès', 'Borne associée');
-          },
-          (error) => {
-            this.toastr.clear();
-            this.toastr.error(`Error ${error}`);
-          });
-    })
+         () => {
+           this.toastr.clear();
+           this.toastr.success('Succès', 'Borne associée');
+         },
+         (error) => {
+           this.toastr.clear();
+           this.toastr.error(`Error ${error}`);
+         });
+    });
   }
 
   assoOffer() {

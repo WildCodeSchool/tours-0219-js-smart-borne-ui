@@ -1,4 +1,4 @@
-<div class="container mt-3 mb-4" *ngIf="profile?.role == 'ADMINISTRATEUR'; else elseBlockClient">
+<div class="container mt-3 mb-4">
 	<h1 class="text-center">Administrateur</h1>
 	<div class="row">
 		<div class="col-12 col-sm-6">
@@ -107,39 +107,3 @@
 		</div>
 	</div>
 </div>
-
-
-<ng-template #elseBlockClient>
-
-  <div class="container mt-3 mb-4">
-
-    <h1 class="text-center">Client</h1>
-
-    <div class="row">
-      <div class="col-12 col-sm-6">
-        <h3 class="text-center">Total recyclé</h3>
-        <canvas baseChart [data]="doughnutData" [colors]="doughnutChartColors" [labels]="labels" [chartType]="type"></canvas>
-      </div>
-      <div class="col-12 col-sm-6 mt-2">
-        <div class="button col-12 text-center mb-3">
-          <button class="btn btn-info mr-2"(click)="toggleDays()">Jours</button>
-          <button class="btn btn-info"(click)="toggleWeeks()">Semaines</button>
-          <button class="btn btn-info ml-2" (click)="toggleMonths()">Mois</button>
-        </div>
-        <div style="display: block" *ngIf="days">
-          <canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
-                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
-        </div>
-        <div style="display: block" *ngIf="weeks">
-          <canvas baseChart [datasets]="barChartDataWeeks" [labels]="barChartLabelsWeeks" [options]="barChartOptions"
-                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
-        </div>
-        <div style="display: block" *ngIf="months">
-          <canvas baseChart [datasets]="barChartDataMonths" [labels]="barChartLabelsMonths" [options]="barChartOptions"
-                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</ng-template>

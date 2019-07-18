@@ -1,4 +1,4 @@
-<div *ngIf="borne" class="container mt-3 mb-4">
+<div *ngIf="borne" class="container mt-3 mb-4" xmlns="http://www.w3.org/1999/html">
   <h1 class="text-center">Borne {{borne.numeroSerie}}</h1>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
@@ -113,7 +113,7 @@
 
       <div class="cardBtn">
         <div class="row">
-          <div class="col-md-12 mt-4">
+          <div class="col-12 mt-4">
             <button class="btn btn-info btn-block" [routerLink]="['/offer', offre._id]">Détails</button>
           </div>
           <div class="col-md-12 mt-1">
@@ -126,7 +126,16 @@
                 </button>
               </div>
               <div class="modal-body">
-                <h6 class="text-danger mt-2 mb-4">{{offre._id}}</h6>
+
+                <div class="row">
+                  <div class="col-md-6 ">
+                    <h6 class="text-danger mt-2 mb-4" *ngIf="idHidden ; else elseBlock">{{offre._id}}</h6>
+                    <ng-template #elseBlock>**********************</ng-template>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="btn btn-info btn-block mb-3" (click)="hiddenButton()" type="button">Afficher / Masquer Id</button>
+                  </div>
+                </div>
 
                 <form (ngSubmit)="dissoOffer(offre._id); modal.close()" [formGroup]="FormDeleteAssociate">
                   <div class="form-group">
@@ -162,7 +171,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <h6 class="text-danger mt-2 mb-4">{{borne._id}}</h6>
+
+        <div class="row">
+          <div class="col-md-6 ">
+            <h6 class="text-danger mt-2 mb-4" *ngIf="idHidden ; else elseBlock">{{borne._id}}</h6>
+            <ng-template #elseBlock>**********************</ng-template>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-info btn-block mb-3" (click)="hiddenButton()" type="button">Afficher / Masquer Id</button>
+          </div>
+        </div>
 
         <form (ngSubmit)="deleteBorneModal(); modal.close()" [formGroup]="FormDelete">
           <div class="form-group">

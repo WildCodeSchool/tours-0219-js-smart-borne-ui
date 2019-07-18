@@ -13,7 +13,7 @@
             <div class="collapse" id="collapseForm">
                 <div class="mb-3 card-body">
                     <form (ngSubmit)="onSubmit()" [formGroup]="clientForm">
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-6">
                                 <input [ngClass]="clientForm.get('siret').errors ? 'is-invalid' : 'is-valid'"
                                     class="form-control" placeholder="Numéro siret" name="siret" type="text"
@@ -25,12 +25,12 @@
                                     formControlName="raisonSocial">
                             </div>
                         </div>
-                        <div class="col-8 offset-2">
+                        <div class="col-8 offset-2 mt-3">
                             <input [ngClass]="clientForm.get('name').errors ? 'is-invalid' : 'is-valid'"
                                 class="form-control" placeholder="Nom" name="name" type="text" formControlName="name">
                         </div>
                         <div formGroupName="address">
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="col-2">
                                     <input
                                         [ngClass]="clientForm.get('address').get('numero').errors ? 'is-invalid' : 'is-valid'"
@@ -58,23 +58,25 @@
                             </div>
                         </div>
                         <div formGroupName="contrat">
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="col-6">
+                                    <label for="debut" class="text-center">Début du contrat :</label>
                                     <input
                                         [ngClass]="clientForm.get('contrat').get('debut').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="Début du contrat" name="debut" type="text"
+                                        class="form-control" placeholder="Début du contrat" name="debut" type="date"
                                         formControlName="debut">
                                 </div>
                                 <div class="col-6">
+                                    <label for="fin" class="text-center">Fin du contrat :</label>
                                     <input
                                         [ngClass]="clientForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="Fin du contrat" name="fin" type="text"
+                                        class="form-control" placeholder="Fin du contrat" name="fin" type="date"
                                         formControlName="fin">
                                 </div>
                             </div>
                         </div>
                         <div formGroupName="siege">
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="col-6">
                                     <input
                                         [ngClass]="clientForm.get('siege').get('email').errors ? 'is-invalid' : 'is-valid'"
@@ -90,7 +92,7 @@
                             </div>
                         </div>
                         <div formGroupName="gerant">
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="col-4">
                                     <input
                                         [ngClass]="clientForm.get('gerant').get('name').errors ? 'is-invalid' : 'is-valid'"
