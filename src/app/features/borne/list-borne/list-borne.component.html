@@ -61,6 +61,7 @@
                     <th></th>
                     <th></th>
                   </tr>
+
                   <ng-container
                     *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal">
                     <tr>
@@ -77,8 +78,8 @@
                         </ngb-progressbar>
                       </td>
                       <td>
-                        <ngb-progressbar [type]="color(borne.coupon.imprimer)"
-                          [value]="borne.coupon.imprimer" [striped]="true" [animated]="true" showValue=true>
+                        <ngb-progressbar [type]="color(borne.coupon.imprimer)" [value]="borne.coupon.imprimer"
+                          [striped]="true" [animated]="true" showValue=true>
                         </ngb-progressbar>
                       </td>
                       <td>

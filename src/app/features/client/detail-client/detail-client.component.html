@@ -12,7 +12,7 @@
     <form (ngSubmit)="assoClient()" [formGroup]="Form">
       <div class="form-group">
         <select formControlName="borne" class="form-control">
-          <option *ngFor="let borne of bornes" name="borne" value="{{borne._id}}">{{borne.numeroSerie}}</option>
+          <option *ngFor="let borne of bornes" name="borne" value="{{borne._id}}">{{borne.address.ville}}</option>
         </select>
         <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer une borne</button>
       </div>
@@ -201,7 +201,7 @@
         <form (ngSubmit)="onSubmit()" [formGroup]="assoOfferForm">
           <div class="form-group">
             <select formControlName="offer" class="form-control">
-              <option *ngFor="let offer of offer" name="offer" value="{{offer._id}}">{{offer.client}}</option>
+              <option *ngFor="let offer of offers" name="offer" value="{{offer._id}}">{{offer.client}}</option>
             </select>
             <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer le client
             </button>

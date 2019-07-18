@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Borne } from '../../shared/models/borne';
 import { environment } from '../../../environments/environment';
+import { LoadingService } from './loading.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +12,12 @@ import { environment } from '../../../environments/environment';
 export class BorneService {
   configUrl = `${environment.apiUrl}/bornes`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loading: LoadingService) { }
 
   public getListBorne(): Observable<Borne[]> {
-    return this.http.get<Borne[]>(`${this.configUrl}`);
+    this.loading.isloading$.next(true);
+    return this.http.get<Borne[]>(`${this.configUrl}`).pipe(
+      tap(() => this.loading.isloading$.next(false)))
   }
 
   public getBorneById(id: string): Observable<Borne> {
