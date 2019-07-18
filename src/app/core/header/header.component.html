@@ -5,7 +5,7 @@
     </div>
     <ul class="list-unstyled components text-center mt-5">
       <li>
-        <a class="asidebar pt-4 pb-4" [routerLink]="profile?.role == 'ADMINISTRATEUR' ? ['/dashboard'] : ['/client/' + profile.clients[0]._id]" routerLinkActive="active-link">Accueil</a>
+        <a class="asidebar pt-4 pb-4" [routerLink]="profile?.role == 'ADMINISTRATEUR' ? ['/dashboard'] : ['/client/' + profile?.clients[0]._id]" routerLinkActive="active-link">Accueil</a>
       </li>
       <li>
         <a class="asidebar pt-4 pb-4" [routerLink]="['/bornes']" routerLinkActive="active-link">

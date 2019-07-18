@@ -1,8 +1,7 @@
 <div *ngIf="offers" class="container-fluid mb-5">
-  <div class="col-12 m-3">
-    <div class="alert alert-danger m-4 text-center"
-      *ngIf="offers &&(offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin).length === 0">
-      <span *ngIf="filterId || filterClient || filterRemise || filterDebut || filterFin">Il n y a pas d'offres</span>
+  <div class="col-12 m-3" *ngIf="offers &&(offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin).length === 0">
+    <div class="alert alert-danger m-4 text-center" *ngIf="filterId || filterClient || filterRemise || filterDebut || filterFin">
+      <span>Il n y a pas d'offres</span>
     </div>
   </div>
   <div class="col-12">
