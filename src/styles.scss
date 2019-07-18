@@ -7,11 +7,16 @@
     font-family: 'Aileron';
 }
 
+::placeholder {
+    text-align: center;
+}
+
 .container {
   max-width: 94% !important;
   margin-right: 3% !important;
   margin-left: 3% !important;
 }
+
 table {
     text-align: center;
 }
@@ -19,6 +24,7 @@ table {
 .btn, button {
     cursor: pointer !important;
 }
+
 .btn-danger {
     background-color: rgba(237, 55, 54, 0.9) !important;
     border: 1px solid black !important;

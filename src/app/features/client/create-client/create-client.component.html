@@ -25,9 +25,12 @@
                                     formControlName="raisonSocial">
                             </div>
                         </div>
-                        <div class="col-8 offset-2 mt-3">
-                            <input [ngClass]="clientForm.get('name').errors ? 'is-invalid' : 'is-valid'"
-                                class="form-control" placeholder="Nom" name="name" type="text" formControlName="name">
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <input [ngClass]="clientForm.get('name').errors ? 'is-invalid' : 'is-valid'"
+                                    class="form-control" placeholder="Nom" name="name" type="text"
+                                    formControlName="name">
+                            </div>
                         </div>
                         <div formGroupName="address">
                             <div class="row mt-3">
@@ -60,18 +63,17 @@
                         <div formGroupName="contrat">
                             <div class="row mt-3">
                                 <div class="col-6">
-                                    <label for="debut" class="text-center">Début du contrat :</label>
                                     <input
                                         [ngClass]="clientForm.get('contrat').get('debut').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="Début du contrat" name="debut" type="date"
-                                        formControlName="debut">
+                                        class="form-control" placeholder="Début du contrat" name="debut" type="text"
+                                        formControlName="debut" onfocus="(this.type='date')"
+                                        onblur="(this.type='text')">
                                 </div>
                                 <div class="col-6">
-                                    <label for="fin" class="text-center">Fin du contrat :</label>
                                     <input
                                         [ngClass]="clientForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'"
-                                        class="form-control" placeholder="Fin du contrat" name="fin" type="date"
-                                        formControlName="fin">
+                                        class="form-control" placeholder="Fin du contrat" name="fin" type="text"
+                                        formControlName="fin" onfocus="(this.type='date')" onblur="(this.type='text')">
                                 </div>
                             </div>
                         </div>

@@ -12,11 +12,18 @@
           <div class="mb-3 card-body">
             <form (ngSubmit)="onSubmit()" [formGroup]="borneForm">
               <div class="row">
-                <div class="col-12">
+                <div class="col-6">
                   <div class="form-group">
                     <input [ngClass]="borneForm.get('numeroSerie').errors ? 'is-invalid' : 'is-valid'"
                       class="form-control" placeholder="Numéro de série" name="numeroSerie" type="text"
                       formControlName="numeroSerie">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <input [ngClass]="borneForm.get('pseudo').errors ? 'is-invalid' : 'is-valid'"
+                      class="form-control" placeholder="Pseudo" name="pseudo" type="text"
+                      formControlName="pseudo">
                   </div>
                 </div>
               </div>
@@ -43,15 +50,14 @@
                 <div class="col">
                   <div class="form-group">
                     <input [ngClass]="borneForm.get('dateInstallation').errors ? 'is-invalid' : 'is-valid'"
-                      class="form-control" placeholder="Date d'installation" name="dateInstallation" type="date"
-                      formControlName="dateInstallation">
+                      class="form-control" placeholder="Date d'installation" name="dateInstallation" type="text"
+                      formControlName="dateInstallation" onfocus="(this.type='date')" onblur="(this.type='text')">
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
-                    <input [ngClass]="borneForm.get('client').errors ? 'is-invalid' : 'is-valid'"
-                      class="form-control" placeholder="Détenue par client" name="client" type="text"
-                      formControlName="client">
+                    <input [ngClass]="borneForm.get('client').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                      placeholder="Louée par" name="client" type="text" formControlName="client">
                   </div>
                 </div>
               </div>
@@ -65,8 +71,7 @@
                   </div>
                 </div>
               </div>
-              <button class="btn btn-info btn-block mt-4 mb-1" type="submit"
-                [disabled]="!borneForm.valid">Sauvegarder
+              <button class="btn btn-info btn-block mt-4 mb-1" type="submit" [disabled]="!borneForm.valid">Sauvegarder
               </button>
             </form>
           </div>

@@ -4,6 +4,7 @@ export class Borne {
   constructor(
       // tslint:disable-next-line:variable-name
     public _id: string,
+    public pseudo: string,
     public numeroSerie: string,
     public address: {
       numero: string,

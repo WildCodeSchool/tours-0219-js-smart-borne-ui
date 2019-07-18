@@ -12,7 +12,6 @@ import { Client } from '../../../shared/models/client-model';
 import { FormBuilder } from '@angular/forms';
 import { OffersService } from '../../../core/http/offers.service';
 import { Offer } from '../../../shared/models/offres.models';
-import { UserService } from '../../../core/http/user.service';
 import { DataService } from 'src/app/core/http/data.service';
 import { Data } from 'src/app/shared/models/data.model';
 
@@ -33,7 +32,6 @@ export class DetailBorneComponent implements OnInit {
     private fb: FormBuilder,
     private profileService: ProfileService,
     private offerService: OffersService,
-    private userService: UserService,
     private modalService: NgbModal,
     public dataService: DataService,
   ) {
@@ -68,7 +66,7 @@ export class DetailBorneComponent implements OnInit {
 
   // Bar chart days data
   public days = true;
-  public barChartLabelsDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  public barChartLabelsDays = [];
   public barChartDataDays = [
     {
       data: [],
@@ -90,7 +88,7 @@ export class DetailBorneComponent implements OnInit {
 
   // Bar chart week data
   public weeks = false;
-  public barChartLabelsWeeks = ['Semaine 01', 'Semaine 02', 'Semaine 03', 'Semaine 04'];
+  public barChartLabelsWeeks = [];
   public barChartDataWeeks = [
     {
       data: [],
@@ -112,8 +110,7 @@ export class DetailBorneComponent implements OnInit {
 
   // Bar chart months data
   public months = false;
-  public barChartLabelsMonths = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai',
-    'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+  public barChartLabelsMonths = [];
   public barChartDataMonths = [
     {
       data: [],
@@ -188,7 +185,7 @@ export class DetailBorneComponent implements OnInit {
   }
 
   hiddenButton() {
-    this.idHidden = ! this.idHidden;
+    this.idHidden = !this.idHidden;
   }
 
   getBorne() {
@@ -201,29 +198,47 @@ export class DetailBorneComponent implements OnInit {
 
   getDatas() {
     this.dataService.getBorneDataByDay(this.id).subscribe(
-      (dataDays: Data[]) => {
+      (dataDay: Data[]) => {
+        dataDay.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return dateA.getTime() - dateB.getTime();
+        });
         // tslint:disable-next-line: ter-arrow-parens
-        dataDays.map(a => {
-          this.barChartDataDays[0].data.push(a.plastique);
-          this.barChartDataDays[1].data.push(a.metal);
+        dataDay.map(data => {
+          this.barChartDataDays[0].data.push(data.plastique);
+          this.barChartDataDays[1].data.push(data.metal);
+          this.barChartLabelsDays.push(new Date(data.date).toDateString());
         });
       },
     );
     this.dataService.getBorneDataByWeek(this.id).subscribe(
       (dataWeek: Data[]) => {
+        dataWeek.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return dateA.getTime() - dateB.getTime();
+        });
         // tslint:disable-next-line: ter-arrow-parens
-        dataWeek.map(a => {
-          this.barChartDataWeeks[0].data.push(a.plastique);
-          this.barChartDataWeeks[1].data.push(a.metal);
+        dataWeek.map(data => {
+          this.barChartDataWeeks[0].data.push(data.plastique);
+          this.barChartDataWeeks[1].data.push(data.metal);
+          this.barChartLabelsWeeks.push(new Date(data.date).toDateString());
         });
       },
     );
     this.dataService.getBorneDataByMonth(this.id).subscribe(
       (dataMonth: Data[]) => {
+        dataMonth.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return dateA.getTime() - dateB.getTime();
+        });
         // tslint:disable-next-line: ter-arrow-parens
-        dataMonth.map(a => {
-          this.barChartDataMonths[0].data.push(a.plastique);
-          this.barChartDataMonths[1].data.push(a.metal);
+        dataMonth.map(data => {
+          this.barChartDataMonths[0].data.push(data.plastique);
+          this.barChartDataMonths[1].data.push(data.metal);
+          this.barChartLabelsMonths.push(new Date(data.date).toDateString());
         });
       },
     );
@@ -270,7 +285,6 @@ export class DetailBorneComponent implements OnInit {
           () => {
             this.toastr.clear();
             this.toastr.success('Succès', 'Borne associée');
-            // this.router.navigateByUrl('bornes');
           },
           (error) => {
             this.toastr.clear();
@@ -280,14 +294,14 @@ export class DetailBorneComponent implements OnInit {
     });
     this.borneService.getBorneById(this.borne._id).pipe(first()).subscribe((borne) => {
       this.borneService.associateClient(this.Form.value.client, this.borne._id).subscribe(
-         () => {
-           this.toastr.clear();
-           this.toastr.success('Succès', 'Borne associée');
-         },
-         (error) => {
-           this.toastr.clear();
-           this.toastr.error(`Error ${error}`);
-         });
+        () => {
+          this.toastr.clear();
+          this.toastr.success('Succès', 'Borne associée');
+        },
+        (error) => {
+          this.toastr.clear();
+          this.toastr.error(`Error ${error}`);
+        });
     });
   }
 
@@ -308,7 +322,6 @@ export class DetailBorneComponent implements OnInit {
           });
           this.toastr.clear();
           this.toastr.success('Succès', 'Offre associée');
-          // this.router.navigateByUrl('bornes');
         },
         (error) => {
           this.toastr.clear();
@@ -320,7 +333,7 @@ export class DetailBorneComponent implements OnInit {
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-    },                                                                                   (reason) => {
+    }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
@@ -345,7 +358,6 @@ export class DetailBorneComponent implements OnInit {
           this.toastr.clear();
           this.toastr.success('Succès', 'Offre dissociée');
           this.FormDeleteAssociate.reset();
-          // this.router.navigateByUrl('bornes');
         },
         (error) => {
           this.toastr.clear();

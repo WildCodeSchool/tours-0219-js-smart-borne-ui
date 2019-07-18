@@ -2,7 +2,7 @@ export class Offer {
   constructor(
     // tslint:disable-next-line:variable-name
     public _id: string,
-    public surnom: string,
+    public pseudo: string,
     public client: string,
     public remise: string,
     public contrat: {

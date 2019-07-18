@@ -28,7 +28,7 @@ export class CreateOfferComponent implements OnInit {
   ) { }
 
   offerForm = this.fb.group({
-    surnom: [''],
+    pseudo: [''],
     client: ['', [Validators.required]],
     remise: ['', [Validators.required]],
     contrat: this.fb.group({

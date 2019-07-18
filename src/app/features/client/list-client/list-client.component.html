@@ -1,10 +1,5 @@
 <div class="container-fluid mb-5">
-  <div class="col-12 m-3">
-    <div class="alert alert-danger m-4 text-center"
-      *ngIf="clients &&(clients | filterClient: filterId:filterName:filterRaisonSocial:filterCoupon).length === 0">
-      <span *ngIf="filterId || filterName || filterRaisonSocial || filterCoupon">Il n y a pas de clients</span>
-    </div>
-  </div>
+  
   <div class="col-12">
     <h1 class="text-center">Liste des clients</h1>
     <app-create-client (selectClient)="getCreateClient($event)"></app-create-client>
@@ -12,6 +7,12 @@
     <div class="row">
       <div class="col-xl-12 col-lg-12">
         <div class="mb-4 p-3">
+          <div class="col-12 mt-3">
+            <div class="alert alert-danger mt-4 text-center"
+              *ngIf="clients &&(clients | filterClient: filterId:filterName:filterRaisonSocial:filterCoupon).length === 0">
+              <span *ngIf="filterId || filterName || filterRaisonSocial || filterCoupon">Il n y a pas de clients</span>
+            </div>
+          </div>
           <div class="row">
             <div class="table-responsive">
               <table class="table table-striped">
