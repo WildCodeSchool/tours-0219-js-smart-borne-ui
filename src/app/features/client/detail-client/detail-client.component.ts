@@ -257,6 +257,7 @@ export class DetailClientComponent implements OnInit {
     this.borneService.getBorneById(this.Form.value.borne).pipe(first()).subscribe((borne) => {
       this.borneService.associateClient(this.client._id, this.Form.value.borne).subscribe(
         () => {
+          this.client.bornes.push(borne);
           this.toastr.clear();
           this.toastr.success('Succès', 'Borne associée');
         },
@@ -264,24 +265,7 @@ export class DetailClientComponent implements OnInit {
           this.toastr.clear();
           this.toastr.error(`Error ${error}`);
         });
-    })
-    // this.clientService.getClientById(this.client._id).pipe(first()).subscribe((client) => {
-    //   const result = client.bornes.filter(bornes => bornes._id === this.id);
-    //   if (result[0]) {
-    //     this.toastr.error(`Ce client est déjà associé à cette borne`);
-    //   } else {
-    //     this.clientService.associateBorne(this.client._id, this.Form.value.borne).subscribe(
-    //       () => {
-    //         this.toastr.clear();
-    //         this.toastr.success('Succès', 'Borne associée');
-    //         // this.router.navigateByUrl('bornes');
-    //       },
-    //       (error) => {
-    //         this.toastr.clear();
-    //         this.toastr.error(`Error ${error}`);
-    //       });
-    //   }
-    // });
+    });
   }
 
   onSubmit() {

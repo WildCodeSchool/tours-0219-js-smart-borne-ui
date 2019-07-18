@@ -276,23 +276,6 @@ export class DetailBorneComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.clientService.getClientById(this.Form.value.client).pipe(first()).subscribe((client) => {
-    //   const result = client.bornes.filter(bornes => bornes._id === this.id);
-    //   if (result[0]) {
-    //     this.toastr.error(`Ce client est déjà associé à cette borne`);
-    //   } else {
-    //     this.clientService.associateBorne(this.Form.value.client, this.borne._id).subscribe(
-    //       () => {
-    //         this.toastr.clear();
-    //         this.toastr.success('Succès', 'Borne associée');
-    //         // this.router.navigateByUrl('bornes');
-    //       },
-    //       (error) => {
-    //         this.toastr.clear();
-    //         this.toastr.error(`Error ${error}`);
-    //       });
-    //   }
-    // });
     this.borneService.getBorneById(this.borne._id).pipe(first()).subscribe((borne) => {
       this.borneService.associateClient(this.Form.value.client, this.borne._id).subscribe(
         () => {
