@@ -32,6 +32,7 @@ export class EditOfferComponent implements OnInit {
     }),
     coupon: this.fb.group({
       total: [''],
+      imprime: [''],
     }),
     details: [''],
   });

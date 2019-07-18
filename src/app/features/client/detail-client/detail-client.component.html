@@ -12,7 +12,7 @@
     <form (ngSubmit)="assoClient()" [formGroup]="Form">
       <div class="form-group">
         <select formControlName="borne" class="form-control">
-          <option *ngFor="let borne of bornes" name="borne" value="{{borne._id}}">{{borne.address.ville}}</option>
+          <option *ngFor="let borne of bornes" name="borne" value="{{borne._id}}">{{borne._id}}</option>
         </select>
         <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer une borne</button>
       </div>
@@ -187,7 +187,7 @@
                             </form>
                           </div>
                         </ng-template>
-                        <button class="btn btn-block btn-danger" (click)="open(content)">Dissocier la borne</button>
+                        <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-block btn-danger" (click)="open(content)">Dissocier la borne</button>
                       </td>
                     </tr>
                   </ng-container>
@@ -264,7 +264,7 @@
                     </form>
                   </div>
                 </ng-template>
-                <button class="btn btn-block btn-danger mt-3" (click)="open(content)">Dissocier l'offre</button>
+                <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-block btn-danger mt-3" (click)="open(content)">Dissocier l'offre</button>
               </div>
             </div>
           </div>
