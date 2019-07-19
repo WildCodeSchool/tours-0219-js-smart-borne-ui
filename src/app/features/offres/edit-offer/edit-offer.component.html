@@ -5,15 +5,24 @@
     <div class="col-12">
       <div class="mb-3 card-body">
         <form (ngSubmit)="onSubmit()" [formGroup]="offerForm">
+
+          <div class="form-row">
+            <div class="form-group col-12">
+              <input [ngClass]="offerForm.get('pseudo').errors ? 'is-invalid' : 'is-valid'
+                " class="form-control" placeholder="Pseudo" name="pseudo" type="text"
+                     formControlName="pseudo"/>
+            </div>
+          </div>
+
           <div class="form-row">
             <div class="form-group col-6">
               <input [ngClass]="offerForm.get('client').errors ? 'is-invalid' : 'is-valid'
                 " class="form-control" placeholder="Nom du client" name="client" type="text"
-                formControlName="client" />
+                     formControlName="client"/>
             </div>
             <div class="form-group col-6">
               <input [ngClass]="offerForm.get('remise').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control" placeholder="Prix remisé" name="remise" type="text" formControlName="remise" />
+                " class="form-control" placeholder="Prix remisé" name="remise" type="text" formControlName="remise"/>
             </div>
           </div>
           <div formGroupName="contrat">
@@ -22,12 +31,12 @@
                 <input [ngClass]="
                   offerForm.get('contrat').get('debut').errors ? 'is-invalid' : 'is-valid'
                 " class="form-control" placeholder="Début de l'offre" name="debut" type="date"
-                  formControlName="debut" />
+                       formControlName="debut"/>
               </div>
               <div class="form-group col-6">
                 <input [ngClass]="
                   offerForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control" placeholder="Fin de l'offre" name="fin" type="date" formControlName="fin" />
+                " class="form-control" placeholder="Fin de l'offre" name="fin" type="date" formControlName="fin"/>
               </div>
             </div>
           </div>
@@ -37,16 +46,16 @@
                     ? 'is-invalid'
                     : 'is-valid'
                 " class="form-control" placeholder="Total disponible" name="total" type="number"
-              formControlName="total" />
+                   formControlName="total"/>
 
             <input class="form-control mt-3" [attr.disabled]="true" name="imprime" type="number"
-                   formControlName="imprime" />
+                   formControlName="imprime"/>
           </div>
           <div class="row">
             <div class="form-group col-12 mt-3">
               <textarea [ngClass]="offerForm.get('details').errors ? 'is-invalid' : 'is-valid'" class="form-control"
-                placeholder="Détails supplémentaires" maxlength="300" name="details" type="text"
-                formControlName="details"></textarea>
+                        placeholder="Détails supplémentaires" maxlength="300" name="details" type="text"
+                        formControlName="details"></textarea>
               <small class="float-right">300 caractères maximum</small>
             </div>
           </div>

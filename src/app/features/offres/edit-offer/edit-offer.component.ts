@@ -25,6 +25,7 @@ export class EditOfferComponent implements OnInit {
 
   offerForm = this.fb.group({
     client: ['', [Validators.required]],
+    pseudo: ['', [Validators.required]],
     remise: ['', [Validators.required]],
     contrat: this.fb.group({
       debut: [''],
