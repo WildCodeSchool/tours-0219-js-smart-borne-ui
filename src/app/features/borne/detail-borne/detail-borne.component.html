@@ -92,7 +92,7 @@
     <form (ngSubmit)="assoOffer()" [formGroup]="assoOfferForm">
       <div class="form-group">
         <select formControlName="offer" class="form-control">
-          <option *ngFor="let offer of offers" name="offer" value="{{offer._id}}">{{offer.client}}
+          <option *ngFor="let offer of offers" name="offer" value="{{offer._id}}">{{offer.pseudo}}
           </option>
         </select>
         <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer
@@ -102,10 +102,13 @@
   </div>
   <div class="row">
     <app-card-offer *ngFor="let offre of borne.offers">
-      <div class="title">{{offre.client}}
-      </div>
-      <p class="nb-coupon text-center">Coupons total : {{offre.coupon.total}}</p>
-      <p class="coupon-edit text-center">Coupons imprimés : {{offre.coupon.imprime}}</p>
+      <div class="title">{{offre.pseudo}}</div>
+      <div class="progressLabel text-center mb-3">Consommation de l'offre</div>
+      <ngb-progressbar class="progresse" [type]="color((offre.coupon.imprime / offre.coupon.total) * 100)"
+                       [value]="(offre.coupon.imprime / offre.coupon.total) * 100" [striped]="true"
+                       [animated]="true"
+                       showValue=true>
+      </ngb-progressbar>
       <div class="cardBtn">
         <div class="row">
           <div class="col-12 mt-4">
