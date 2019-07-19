@@ -1,8 +1,5 @@
 <div class="container-fluid mb-5">
-
     <div class="row">
-
-
         <div class="col-xl-12 col-lg-12">
                 <div class="mb-3 card-body">
                     <form (ngSubmit)="onSubmit()" [formGroup]="clientForm">
@@ -104,7 +101,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-success btn-block mt-3 mb-1" type="submit"
+                        <button class="btn btn-info btn-block mt-3 mb-1" type="submit"
                             [disabled]="!clientForm.valid">Sauvegarder
                         </button>
                     </form>

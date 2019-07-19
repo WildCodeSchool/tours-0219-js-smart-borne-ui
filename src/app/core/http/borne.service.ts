@@ -3,8 +3,8 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Borne } from '../../shared/models/borne';
 import { environment } from '../../../environments/environment';
-import { Client } from '../../shared/models/client-model';
-import { Offer } from '../../shared/models/offres.models';
+import { LoadingService } from './loading.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -12,14 +12,12 @@ import { Offer } from '../../shared/models/offres.models';
 export class BorneService {
   configUrl = `${environment.apiUrl}/bornes`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private loading: LoadingService) { }
 
   public getListBorne(): Observable<Borne[]> {
-    return this.http.get<Borne[]>(`${this.configUrl}`);
-  }
-
-  public getQueryBorne(query: string): Observable<Borne[]> {
-    return this.http.get<Borne[]>(`${this.configUrl}/search/${query}`);
+    this.loading.isloading$.next(true);
+    return this.http.get<Borne[]>(`${this.configUrl}`).pipe(
+      tap(() => this.loading.isloading$.next(false)))
   }
 
   public getBorneById(id: string): Observable<Borne> {
@@ -43,6 +41,9 @@ export class BorneService {
   }
   public dissocierOffer(idBorne: string, idOffer: string): Observable<Borne> {
     return this.http.delete<Borne>(`${this.configUrl}/${idBorne}/offer/${idOffer}`, {});
+  }
+  public associateClient(idClient: string, idBorne: string): Observable<Borne> {
+    return this.http.put<Borne>(`${this.configUrl}/${idBorne}/client/${idClient}`, {});
   }
 
 }

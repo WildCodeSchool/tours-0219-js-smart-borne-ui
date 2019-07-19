@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../core/authentication/auth.service';
-import { ProfileService } from '../../core/http/profile.service';
-import { User } from '../../shared/models/user';
-import { UserService } from '../../core/http/user.service';
+import { ProfileService } from 'src/app/core/http/profile.service';
+import { UserService } from 'src/app/core/http/user.service';
+import { User } from 'src/app/shared/models/user';
 
 @Component({
   selector: 'app-login',
@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               public authenticationService: AuthService,
-              public profileService: ProfileService,
-              public userService: UserService,
               private router: Router,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private profileService: ProfileService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
             (profil: User) => {
               this.userService.getUserById(profil._id).subscribe(
                 (user: User) => {
-                  this.toastr.success('Succès', 'Connexion');
+                  this.toastr.success('Success', 'Connection success');
                   if (user.role !== 'ADMINISTRATEUR') {
                     this.router.navigateByUrl(`/client/${user.clients[0]._id}`);
                   } else {

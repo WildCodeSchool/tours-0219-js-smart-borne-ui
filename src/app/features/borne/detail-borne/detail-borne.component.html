@@ -1,5 +1,8 @@
-<div *ngIf="borne" class="container mt-3 mb-4">
-  <h1 class="text-center">Borne {{borne.numeroSerie}}</h1>
+<div *ngIf="borne" class="container mt-3 mb-4" xmlns="http://www.w3.org/1999/html">
+  <h1 class="text-center">
+    <span>Borne {{borne.pseudo}}</span>
+    <p class="" *ngIf="borne.client">Détenu par {{borne.client.name}}</p>
+  </h1>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right" type="button"
@@ -7,9 +10,7 @@
         Associer un client
       </button>
     </div>
-
   </div>
-
   <div class="collapse mt-3" id="collapseForm">
     <form (ngSubmit)="onSubmit()" [formGroup]="Form">
       <div class="form-group">
@@ -18,11 +19,9 @@
         </select>
         <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer un client
         </button>
-
       </div>
     </form>
   </div>
-
   <div class="col-md-12 col-xl-12 mt-4">
     <div class="row">
       <div class="col-12 col-sm-4">
@@ -37,25 +36,23 @@
       </div>
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Rouleau d'impression</h3>
-        <canvas baseChart [data]="[borne.coupon.imprimer, borne.coupon.restant]" [colors]="couponColor"
+        <canvas baseChart [data]="[borne.coupon.imprimer, (100 - borne.coupon.imprimer)]" [colors]="couponColor"
                 [labels]="rouleauLabels" [chartType]="rouleauType"></canvas>
       </div>
     </div>
     <div class="row mt-5">
-      <div class="col-12 col-sm-4 mt-5">
-        <div class="mt-5">
-          <div class="card mt-5">
-            <div class="card-body text-center">
-              <h3>Borne {{borne._id}}</h3>
-              <h4 class="card-title">{{borne.address.numero}} {{borne.address.rue}}, {{borne.address.codePostal}}
-                {{borne.address.ville}}</h4>
-              <h6>Numéro de série : {{borne.numeroSerie}}</h6>
-              <h6>Date d'installation : {{borne.dateInstallation| date:'d/M/y'}}</h6>
-              <h6>Total de coupons imprimés : {{borne.total.coupons}}</h6>
-              <h6>Total recyclé : {{borne.total.recycle}}</h6>
-              <h6>Total remisé : {{borne.total.remise}}</h6>
-              <h6>Détails supplémentaires : {{borne.details}}</h6>
-            </div>
+      <div class="col-12 col-sm-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5>Borne {{borne._id}}</h5>
+            <h6 class="card-title">{{borne.address.numero}} {{borne.address.rue}}, {{borne.address.codePostal}}
+              {{borne.address.ville}}</h6>
+            <h6>Numéro de série : {{borne.numeroSerie}}</h6>
+            <h6>Pseudo : {{borne.pseudo}}</h6>
+            <h6>Date d'installation : {{borne.dateInstallation| date:'d/M/y'}}</h6>
+            <h6>Total de coupons imprimés : {{borne.total.coupons}}</h6>
+            <h6>Total recyclé : {{borne.total.recycle}}</h6>
+            <h6>Total remisé : {{borne.total.remise}}</h6>
           </div>
         </div>
       </div>
@@ -80,7 +77,8 @@
       </div>
     </div>
   </div>
-  <h1 class="text-center">Offres</h1>
+  <hr>
+  <h1 class="text-center mt-4">Offres</h1>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right mt-4" type="button"
@@ -90,12 +88,11 @@
       </button>
     </div>
   </div>
-
   <div class="collapse mt-3" id="collapseAssoOfferForm">
     <form (ngSubmit)="assoOffer()" [formGroup]="assoOfferForm">
       <div class="form-group">
         <select formControlName="offer" class="form-control">
-          <option *ngFor="let offer of offers" name="offer" value="{{offer._id}}">{{offer.client}}
+          <option *ngFor="let offer of offers" name="offer" value="{{offer._id}}">{{offer.pseudo}}
           </option>
         </select>
         <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer
@@ -105,31 +102,62 @@
   </div>
   <div class="row">
     <app-card-offer *ngFor="let offre of borne.offers">
-      <div class="title">{{offre.client}}
-      </div>
-
-      <p class="nb-coupon text-center">Coupons total : {{offre.coupon.total}}</p>
-      <p class="coupon-edit text-center">Coupons imprimés : {{offre.coupon.imprime}}</p>
-
+      <div class="title">{{offre.pseudo}}</div>
+      <div class="progressLabel text-center mb-3">Consommation de l'offre</div>
+      <ngb-progressbar class="progresse" [type]="color((offre.coupon.imprime / offre.coupon.total) * 100)"
+                       [value]="(offre.coupon.imprime / offre.coupon.total) * 100" [striped]="true"
+                       [animated]="true"
+                       showValue=true>
+      </ngb-progressbar>
       <div class="cardBtn">
         <div class="row">
-          <div class="col-md-12 mt-4">
+          <div class="col-12 mt-4">
             <button class="btn btn-info btn-block" [routerLink]="['/offer', offre._id]">Détails</button>
           </div>
           <div class="col-md-12 mt-1">
-            <button class="btn btn-danger btn-block mt-2" (click)="dissoOffer(offre._id)"> Dissocier l'offre</button>
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h3 class="modal-title" id="modal-basic-title-diso">Dissocier l'offre</h3>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6 ">
+                    <h6 class="text-danger mt-2 mb-4" *ngIf="idHidden ; else elseBlock">{{offre._id}}</h6>
+                    <ng-template #elseBlock>**********************</ng-template>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="btn btn-primary btn-block mb-3" (click)="hiddenButton()" type="button">Afficher /
+                      Masquer Id
+                    </button>
+                  </div>
+                </div>
+                <form (ngSubmit)="dissoOffer(offre._id); modal.close()" [formGroup]="FormDeleteAssociate">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input formControlName="offer" class="form-control input-danger" placeholder="Id de l offre"
+                             name="offer">
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+                </form>
+              </div>
+            </ng-template>
+            <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-block btn-danger mt-3"
+                    (click)="open(content)">Dissocier l'offre
+            </button>
           </div>
         </div>
       </div>
       <div class="p"></div>
     </app-card-offer>
   </div>
-
   <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
     <button class="btn btn-info btn-block mt-4" [routerLink]="['/borne', borne._id, 'edit']">Modifier la
       borne
     </button>
-
     <ng-template #content let-modal>
       <div class="modal-header">
         <h3 class="modal-title" id="modal-basic-title">Supprimer la borne</h3>
@@ -138,8 +166,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <h6 class="text-danger mt-2 mb-4">{{borne._id}}</h6>
-
+        <div class="row">
+          <div class="col-md-6 ">
+            <h6 class="text-danger mt-2 mb-4" *ngIf="idHidden ; else elseBlock">{{borne._id}}</h6>
+            <ng-template #elseBlock>**********************</ng-template>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-info btn-block mb-3" (click)="hiddenButton()" type="button">Afficher / Masquer Id
+            </button>
+          </div>
+        </div>
         <form (ngSubmit)="deleteBorneModal(); modal.close()" [formGroup]="FormDelete">
           <div class="form-group">
             <div class="input-group">
@@ -151,9 +187,6 @@
         </form>
       </div>
     </ng-template>
-
     <button class="btn btn-block btn-danger mt-3" (click)="open(content)">Supprimer la borne</button>
-
   </ng-container>
-
 </div>

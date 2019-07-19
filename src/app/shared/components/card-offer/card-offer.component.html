@@ -5,16 +5,10 @@
         <h5 class="card-title text-center">
           <ng-content select=".title"></ng-content>
         </h5>
-
-        <div class="row">
-        <div class="col-md-6">
-          <ng-content select=".nb-coupon"></ng-content>
+        <div class="progress-label">
+          <ng-content select=".progressLabel"></ng-content>
         </div>
-        <div class="col-md-6">
-          <ng-content select=".coupon-edit"></ng-content>
-        </div>
-        </div>
-
+          <ng-content select=".progresse"></ng-content>
         <div class="card-btn float-right">
           <ng-content select=".cardBtn"></ng-content>
         </div>

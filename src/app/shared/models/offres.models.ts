@@ -2,6 +2,7 @@ export class Offer {
   constructor(
     // tslint:disable-next-line:variable-name
     public _id: string,
+    public pseudo: string,
     public client: string,
     public remise: string,
     public contrat: {
@@ -12,8 +13,6 @@ export class Offer {
       imprime: number,
       total: number,
     },
-    public offers: {
-      client: string,
-    },
+    public details: string,
   ) { }
 }

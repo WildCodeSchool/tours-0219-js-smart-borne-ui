@@ -26,7 +26,7 @@ export class RoleGuard implements CanActivate {
       tokenPayload.role !== expectedRole
     ) {
 
-      this.toastr.error(`Error pas d'autorisation`);
+      this.toastr.error(`Vous n'avez pas l'autorisation`);
       this.router.navigate(['dashboard']);
       return false;
     }

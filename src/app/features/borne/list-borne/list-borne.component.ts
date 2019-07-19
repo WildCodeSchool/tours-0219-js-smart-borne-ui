@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BorneService } from '../../../core/http/borne.service';
 import { Borne } from '../../../shared/models/borne';
 import { first } from 'rxjs/operators';
@@ -27,35 +27,29 @@ export class ListBorneComponent implements OnInit {
   }
   public bornes: Borne[];
   public clients: Client[];
+  public clientsByBorne: Borne[];
   public user: User;
   public filterNumeroSerie: string;
+  public filterPseudo: string;
   public filterVille: string;
   public filterPlastique: string;
   public filterMetal: string;
   public filterTotal: string;
 
-  queryForm = this.fb.group({
-    query: ['', [Validators.required]],
-  });
-
   ngOnInit() {
+    this.getListBorne();
     this.clientService.getListClient().pipe(first()).subscribe((clients) => {
       this.clients = clients;
     });
     this.profileService.getProfile().pipe(first()).subscribe((users) => {
       this.user = users;
-    });
-
-    this.route.queryParams.subscribe((params) => {
-      if (params.numeroSerie) {
-        this.borneService.getQueryBorne(params.numeroSerie).subscribe((borne) => {
-          this.bornes = borne;
-        });
-      } else {
-        this.getListBorne();
+      if (users.clients[0]) {
+        this.clientService.getClientById(users.clients[0]._id).subscribe(
+          (client: Client) => {
+            this.clientsByBorne = client.bornes;
+          });
       }
     });
-
   }
 
   getListBorne() {
@@ -66,14 +60,13 @@ export class ListBorneComponent implements OnInit {
     );
   }
 
-  tauxRouleau(couponsRestants) {
-    return Math.round((350 - couponsRestants) / 3.5);
-  }
-
-  onSubmit() {
-    this.router.navigate(['/bornes'], {
-      queryParams: { numeroSerie: this.queryForm.value.query },
-    });
+  getCreateBorne(borne) {
+    this.bornes.push(borne);
+    this.borneService.getListBorne().subscribe(
+      (bornes: Borne[]) => {
+        this.bornes = bornes;
+      },
+    );
   }
 
   calculatePercentage(a, b) {
@@ -91,7 +84,6 @@ export class ListBorneComponent implements OnInit {
       return 'warning';
     }
     return 'success';
-
   }
 
 }

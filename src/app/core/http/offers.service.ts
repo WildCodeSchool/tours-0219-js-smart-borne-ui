@@ -16,10 +16,6 @@ export class OffersService {
     return this.http.get<Offer[]>(`${this.configUrl}`);
   }
 
-  public getQueryOffer(query: string): Observable<Offer[]> {
-    return this.http.get<Offer[]>(`${this.configUrl}/search/${query}`);
-  }
-
   public getOffer(id: string): Observable<Offer> {
     return this.http.get<Offer>(`${this.configUrl}/${id}`);
   }

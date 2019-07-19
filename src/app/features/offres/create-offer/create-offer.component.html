@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right" type="button"
-              data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+        data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
         Ajouter une offre
       </button>
     </div>
@@ -12,18 +12,19 @@
           <form (ngSubmit)="onSubmit()" [formGroup]="offerForm">
             <div class="form-row">
               <div class="form-group col-12">
-                <input [ngClass]="offerForm.get('surnom').errors ? 'is-invalid' : 'is-valid'
-               " class="form-control" placeholder="Surnom" name="surnom" type="text" formControlName="surnom"/>
+                <input [ngClass]="offerForm.get('pseudo').errors ? 'is-invalid' : 'is-valid'
+               " class="form-control" placeholder="Pseudo" name="pseudo" type="text" formControlName="pseudo" />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-6">
                 <input [ngClass]="offerForm.get('client').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control" placeholder="Nom du client" name="client" type="text" formControlName="client"/>
+                " class="form-control" placeholder="Nom du client" name="client" type="text"
+                  formControlName="client" />
               </div>
               <div class="form-group col-6">
                 <input [ngClass]="offerForm.get('remise').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control" placeholder="Prix remisé" name="remise" type="text" formControlName="remise"/>
+                " class="form-control" placeholder="Prix remisé" name="remise" type="text" formControlName="remise" />
               </div>
             </div>
             <div formGroupName="contrat">
@@ -31,13 +32,14 @@
                 <div class="form-group col-6">
                   <input [ngClass]="
                   offerForm.get('contrat').get('debut').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control" placeholder="Début de l'offre" name="debut" type="date"
-                         formControlName="debut"/>
+                " class="form-control" placeholder="Début de l'offre" name="debut" type="text" formControlName="debut"
+                    onfocus="(this.type='date')" onblur="(this.type='text')" />
                 </div>
                 <div class="form-group col-6">
                   <input [ngClass]="
                   offerForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'
-                " class="form-control" placeholder="Fin de l'offre" name="fin" type="date" formControlName="fin"/>
+                " class="form-control" placeholder="Fin de l'offre" name="fin" type="text" formControlName="fin"
+                    onfocus="(this.type='date')" onblur="(this.type='text')" />
                 </div>
               </div>
             </div>
@@ -47,9 +49,19 @@
                     ? 'is-invalid'
                     : 'is-valid'
                 " class="form-control" placeholder="Total disponible" name="total" type="number"
-                     formControlName="total"/>
+                formControlName="total" />
             </div>
-            <button class="btn btn-success btn-block mt-3 mb-1" type="submit" [disabled]="!offerForm.valid">
+            <div class="row mt-3">
+              <div class="col">
+                <div class="form-group">
+                  <textarea [ngClass]="offerForm.get('details').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                    placeholder="Détails supplémentaires" maxlength="300" name="details" type="text"
+                    formControlName="details"></textarea>
+                  <small class="float-right">300 caractères maximum</small>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-info btn-block mt-3 mb-1" type="submit" [disabled]="!offerForm.valid">
               Sauvegarder
             </button>
           </form>
