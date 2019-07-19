@@ -12,6 +12,14 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <input class="form-control"
+                       placeholder="Pseudo" name="pseudo" type="text" formControlName="pseudo">
+              </div>
+            </div>
+          </div>
           <div class="row" formGroupName="address">
             <div class="form-group col-2">
               <input [ngClass]="borneForm.get('address').get('numero').errors ? 'is-invalid' : 'is-valid'"

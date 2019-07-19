@@ -1,9 +1,12 @@
 <div *ngIf="borne" class="container mt-3 mb-4" xmlns="http://www.w3.org/1999/html">
-  <h1 class="text-center">Borne {{borne.numeroSerie}}</h1>
+  <h1 class="text-center">
+    <span>Borne {{borne.pseudo}}</span>
+    <p class="" *ngIf="borne.client">Detenu par {{borne.client.name}}</p>
+  </h1>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right" type="button"
-        data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+              data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
         Associer un client
       </button>
     </div>
@@ -24,34 +27,33 @@
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Bac plastique</h3>
         <canvas baseChart [data]="[borne.plastique.taux, (100 - borne.plastique.taux)]" [colors]="plastiqueColor"
-          [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
+                [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
       </div>
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Bac métal</h3>
         <canvas baseChart [data]="[borne.metal.taux, (100 - borne.metal.taux)]" [colors]="metalColor"
-          [labels]="metalLabels" [chartType]="metalType"></canvas>
+                [labels]="metalLabels" [chartType]="metalType"></canvas>
       </div>
       <div class="col-12 col-sm-4">
         <h3 class="text-center">Rouleau d'impression</h3>
         <canvas baseChart [data]="[borne.coupon.imprimer, (100 - borne.coupon.imprimer)]" [colors]="couponColor"
-          [labels]="rouleauLabels" [chartType]="rouleauType"></canvas>
+                [labels]="rouleauLabels" [chartType]="rouleauType"></canvas>
       </div>
     </div>
     <div class="row mt-5">
-      <div class="col-12 col-sm-4 mt-5">
-        <div class="mt-5">
-          <div class="card mt-5">
-            <div class="card-body text-center">
-              <h3>Borne {{borne._id}}</h3>
-              <h4 class="card-title">{{borne.address.numero}} {{borne.address.rue}}, {{borne.address.codePostal}}
-                {{borne.address.ville}}</h4>
-              <h6>Numéro de série : {{borne.numeroSerie}}</h6>
-              <h6>Date d'installation : {{borne.dateInstallation| date:'d/M/y'}}</h6>
-              <h6>Total de coupons imprimés : {{borne.total.coupons}}</h6>
-              <h6>Total recyclé : {{borne.total.recycle}}</h6>
-              <h6>Total remisé : {{borne.total.remise}}</h6>
-              <h6>Détails supplémentaires : {{borne.details}}</h6>
-            </div>
+      <div class="col-12 col-sm-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5>Borne {{borne._id}}</h5>
+            <h6 class="card-title">{{borne.address.numero}} {{borne.address.rue}}, {{borne.address.codePostal}}
+              {{borne.address.ville}}</h6>
+            <h6>Numéro de série : {{borne.numeroSerie}}</h6>
+            <h6>Pseudo : {{borne.pseudo}}</h6>
+            <h6>Date d'installation : {{borne.dateInstallation| date:'d/M/y'}}</h6>
+            <h6>Total de coupons imprimés : {{borne.total.coupons}}</h6>
+            <h6>Total recyclé : {{borne.total.recycle}}</h6>
+            <h6>Total remisé : {{borne.total.remise}}</h6>
+            <h6>Détails supplémentaires : {{borne.details}}</h6>
           </div>
         </div>
       </div>
@@ -63,15 +65,15 @@
         </div>
         <div style="display: block" *ngIf="days">
           <canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
-            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
         <div style="display: block" *ngIf="weeks">
           <canvas baseChart [datasets]="barChartDataWeeks" [labels]="barChartLabelsWeeks" [options]="barChartOptions"
-            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
         <div style="display: block" *ngIf="months">
           <canvas baseChart [datasets]="barChartDataMonths" [labels]="barChartLabelsMonths" [options]="barChartOptions"
-            [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
       </div>
     </div>
@@ -80,8 +82,8 @@
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right mt-4" type="button"
-        data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
-        aria-controls="collapseAssoOfferForm">
+              data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
+              aria-controls="collapseAssoOfferForm">
         Associer une offre
       </button>
     </div>
@@ -125,14 +127,15 @@
                   </div>
                   <div class="col-md-6">
                     <button class="btn btn-primary btn-block mb-3" (click)="hiddenButton()" type="button">Afficher /
-                      Masquer Id</button>
+                      Masquer Id
+                    </button>
                   </div>
                 </div>
                 <form (ngSubmit)="dissoOffer(offre._id); modal.close()" [formGroup]="FormDeleteAssociate">
                   <div class="form-group">
                     <div class="input-group">
                       <input formControlName="offer" class="form-control input-danger" placeholder="Id de l offre"
-                        name="offer">
+                             name="offer">
                     </div>
                   </div>
                   <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
@@ -140,7 +143,8 @@
               </div>
             </ng-template>
             <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-block btn-danger mt-3"
-              (click)="open(content)">Dissocier l'offre</button>
+                    (click)="open(content)">Dissocier l'offre
+            </button>
           </div>
         </div>
       </div>
@@ -165,14 +169,15 @@
             <ng-template #elseBlock>**********************</ng-template>
           </div>
           <div class="col-md-6">
-            <button class="btn btn-info btn-block mb-3" (click)="hiddenButton()" type="button">Afficher / Masquer Id</button>
+            <button class="btn btn-info btn-block mb-3" (click)="hiddenButton()" type="button">Afficher / Masquer Id
+            </button>
           </div>
         </div>
         <form (ngSubmit)="deleteBorneModal(); modal.close()" [formGroup]="FormDelete">
           <div class="form-group">
             <div class="input-group">
               <input formControlName="borne" class="form-control input-danger" placeholder="Id de la borne"
-                name="borne">
+                     name="borne">
             </div>
           </div>
           <button type="submit" class="btn btn-danger btn-block">Supprimer</button>

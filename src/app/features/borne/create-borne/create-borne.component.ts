@@ -28,7 +28,7 @@ export class CreateBorneComponent implements OnInit {
 
   borneForm = this.fb.group({
     numeroSerie: ['', [Validators.required]],
-    pseudo: [''],
+    pseudo: ['', [Validators.required]],
     address: this.fb.group({
       rue: [''],
       codePostal: [''],

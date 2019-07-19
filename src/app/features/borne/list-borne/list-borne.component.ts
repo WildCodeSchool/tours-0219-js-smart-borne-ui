@@ -30,6 +30,7 @@ export class ListBorneComponent implements OnInit {
   public clientsByBorne: Borne[];
   public user: User;
   public filterNumeroSerie: string;
+  public filterPseudo: string;
   public filterVille: string;
   public filterPlastique: string;
   public filterMetal: string;
