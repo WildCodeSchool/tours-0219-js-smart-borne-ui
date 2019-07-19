@@ -33,21 +33,6 @@ export class EditBorneComponent implements OnInit {
     dateInstallation: ['', [Validators.required]],
     styliseeClient: ['', [Validators.required]],
     details: ['', [Validators.maxLength(300)]],
-    taux: this.fb.group({
-      bacUn: [0],
-      bacDeux: [0],
-    }),
-    coupons: this.fb.group({
-      restant: [0],
-      imprimer: [0],
-    }),
-    total: this.fb.group({
-      recycle: [0],
-      remise: [0],
-      cannettes: [0],
-      plastique: [0],
-    }),
-    problemesTechniques: ['0'],
   });
 
   ngOnInit() {
@@ -68,7 +53,7 @@ export class EditBorneComponent implements OnInit {
           (borne: Borne) => {
             this.borneForm.patchValue(borne);
             this.toastr.clear();
-            this.toastr.success('success', 'Borne modifiè');
+            this.toastr.success('Succès', 'Borne modifiée');
             this.router.navigateByUrl(`borne/${this.id}`);
           },
           (error) => {

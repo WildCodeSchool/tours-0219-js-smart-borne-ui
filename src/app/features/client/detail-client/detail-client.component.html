@@ -1,30 +1,8 @@
 <div *ngIf="client" class="container mt-3 mb-4">
 
-  <h1 class="text-center">Client</h1>
+  <h1 class="text-center">Client {{client.name}}</h1>
 
-  <div class="collapse mt-3" id="collapseAssoOfferForm">
-    <form (ngSubmit)="onSubmit()" [formGroup]="assoOfferForm">
-      <div class="form-group">
-        <select formControlName="offer" class="form-control">
-          <option *ngFor="let offer of offer" name="offer" value="{{offer._id}}">{{offer.client}}</option>
-        </select>
-        <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
-        </button>
-      </div>
-    </form>
-  </div>
-  <div class="row">
-    <div class="col-6">
-      <h3 class="text-center">Plastique</h3>
-      <canvas baseChart [data]="plastiqueData" [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
-    </div>
-    <div class="col-6">
-      <h3 class="text-center">Cannette</h3>
-      <canvas baseChart [data]="cannetteData" [labels]="cannetteLabels" [chartType]="cannetteType"></canvas>
-    </div>
-  </div>
-
-
+  <h2 class="text-center mt-3">Bornes</h2>
   <div class="row">
     <div class="col-md-12 col-xl-12 mt-4">
       <div class="col-xl-12 col-lg-12">
@@ -35,82 +13,115 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th scope="col">ID</th>
                     <th scope="col">Ville</th>
-                    <th scope="col">Utilisés</th>
-                    <th scope="col">Restants</th>
+                    <th scope="col">Total recyclé</th>
+                    <th scope="col">Problèmes techniques</th>
+                    <th></th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <ng-container *ngFor="let client of client.bornes">
+                  <ng-container *ngFor="let borne of client.bornes">
                     <tr>
-                      <th scope="row">{{client.numeroSerie}}</th>
-                      <td>{{client.address.ville}}</td>
-                      <td>{{client.coupon.imprimer}}</td>
-                      <td>{{client.coupon.restant}}</td>
-                      <td><button class="btn btn-info" [routerLink]="['/borne', client._id]">Detail</button></td>
+                      <th scope="row">{{borne.numeroSerie}}</th>
+                      <td>{{borne._id}}</td>
+                      <td>{{borne.address.ville}}</td>
+                      <td>{{borne.total.recycle}}</td>
+                      <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
+                          class="fas fa-check colorValidate"></i></td>
+                      <ng-template #elseBlock>
+                        <td><i class="fas fa-times colorError"></i></td>
+                      </ng-template>
+                      <td class="text-right">
+                        <button class="btn btn-info" [routerLink]="['/borne', borne._id]">Détails</button>
+                      </td>
+                      <td class="text-right">
+                        <button class="btn btn-danger" (click)="dissoBorne(borne._id)">Dissocier la borne
+                        </button>
+                      </td>
                     </tr>
                   </ng-container>
                 </tbody>
               </table>
             </div>
-
           </div>
         </div>
       </div>
 
-
-
-
+      <h2 class="text-center">Offres</h2>
       <div class="row">
         <div class="col-xl-12 col-lg-12">
-          <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
+          <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right" type="button"
             data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
             aria-controls="collapseAssoOfferForm">
             Associer une offre
           </button>
         </div>
       </div>
-      <h1 class="text-center mb-3 mt-3">Tableaux</h1>
-      <div style="display: block">
-        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-          [legend]="barChartLegend" [chartType]="barChartType"></canvas>
-      </div>
 
-      <h1 class="text-center">Offre</h1>
+      <div class="collapse mt-3" id="collapseAssoOfferForm">
+        <form (ngSubmit)="onSubmit()" [formGroup]="assoOfferForm">
+          <div class="form-group">
+            <select formControlName="offer" class="form-control">
+              <option *ngFor="let offer of offer" name="offer" value="{{offer._id}}">{{offer.client}}</option>
+            </select>
+            <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer le client
+            </button>
+          </div>
+        </form>
+      </div>
       <div class="row">
+
         <app-card-offer *ngFor="let offre of client.offer">
           <div class="title">{{offre.client}}</div>
-          <div class="nb-coupon">{{offre.coupon.total}}</div>
-          <div class="coupon-edit">{{offre.coupon.imprime}}</div>
+          <div class="nb-coupon text-center">Coupon total : {{offre.coupon.total}}</div>
+          <div class="coupon-edit text-center">Coupon imprimés : {{offre.coupon.imprime}}</div>
           <div class="cardBtn">
-            <button class="btn btn-info" [routerLink]="['/offer', offre._id]">Detail</button>
+            <div class="row">
+              <div class="col-md-12 mt-4">
+                <button class="btn btn-info btn-block" [routerLink]="['/offer', offre._id]">Détails</button>
+              </div>
+              <div class="col-md-12 mt-1">
+                <button class="btn btn-danger btn-block mt-2" (click)="dissoOffer(offre._id)">Dissocier l'offre</button>
+              </div>
+            </div>
           </div>
           <div class="p"></div>
         </app-card-offer>
-
 
         <div class="col-md-12 col-xl-12 mt-4">
           <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
             <button class="btn btn-info btn-block mt-4" data-toggle="modal" data-target=".bd-example-modal-lg"
               [routerLink]="['/client', client._id, 'edit']">Modifier
-              le client</button>
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  ...
-                </div>
-              </div>
-            </div>
-            <button class="btn btn-danger btn-block mt-4" (click)="deleteClient(client._id)">Suppression du
-              client
+              le client
             </button>
+
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h3 class="modal-title" id="modal-basic-title">Supprimer le client</h3>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h6 class="text-danger mt-2 mb-4">{{client._id}}</h6>
+
+                <form (ngSubmit)="deleteClientModal(); modal.close()" [formGroup]="FormDelete">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input formControlName="client" class="form-control input-danger" placeholder="Id du client"
+                        name="client">
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+                </form>
+              </div>
+            </ng-template>
+            <button class="btn btn-block btn-danger mt-3" (click)="open(content)">Supprimer le client</button>
           </ng-container>
         </div>
-
       </div>
     </div>
   </div>
-
 </div>

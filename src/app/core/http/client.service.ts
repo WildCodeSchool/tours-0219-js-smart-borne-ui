@@ -17,6 +17,10 @@ export class ClientService {
     return this.http.get<Client[]>(`${this.configUrl}`);
   }
 
+  public getQueryClient(query: string): Observable<Client[]> {
+    return this.http.get<Client[]>(`${this.configUrl}/search/${query}`);
+  }
+
   public getClientById(id: string): Observable<Client> {
     return this.http.get<Client>(`${this.configUrl}/${id}`);
   }
@@ -39,5 +43,11 @@ export class ClientService {
   }
   public associateUser(idClient: string, idUser: string): Observable<Client> {
     return this.http.put<Client>(`http://localhost:3000/api/users/${idClient}/user/${idUser}`, {});
+  }
+  public dissocierBorne(idClient: string, idBorne: string): Observable<Client> {
+    return this.http.delete<Client>(`${this.configUrl}/${idClient}/bornes/${idBorne}`, {});
+  }
+  public dissocierOffer(idClient: string, idOffer: string): Observable<Client> {
+    return this.http.delete<Client>(`${this.configUrl}/${idClient}/offer/${idOffer}`, {});
   }
 }

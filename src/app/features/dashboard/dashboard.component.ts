@@ -3,6 +3,8 @@ import { BorneService } from 'src/app/core/http/borne.service';
 import { Borne } from '../../shared/models/borne';
 import { OffersService } from '../../core/http/offers.service';
 import { Offer } from '../../shared/models/offres.models';
+import { DataService } from 'src/app/core/http/data.service';
+import { Data } from 'src/app/shared/models/data.model';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,72 +12,198 @@ import { Offer } from '../../shared/models/offres.models';
 })
 export class DashboardComponent implements OnInit {
 
-  public topBornesBacUn: Borne[];
-  public topBornesBacDeux: Borne[];
-  public topBornesRouleaux: Borne[];
-  public topOffres: Offer[];
-
-  public rouleauxTauxUn = 0;
-  public rouleauxTauxDeux = 0;
-  public rouleauxTauxTrois = 0;
-
-  public firstOffreTaux = 0;
-  public secondOffreTaux = 0;
-  public thirdOffreTaux = 0;
-
-  public plastiqueData = [50];
-  public plastiqueLabels = ['Plastique'];
-  public plastiqueType = 'doughnut';
-
-  public cannetteData = [50];
-  public cannetteLabels = ['Cannette'];
-  public cannetteType = 'doughnut';
-
-  constructor(public borneService: BorneService,
-              public offersService: OffersService) { }
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
   };
-  public barChartLabels = ['janvier', 'fevrier', 'mars', 'avril', 'mai',
-    'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
   public barChartType = 'bar';
   public barChartLegend = true;
-  public barChartData = [
-    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie A' },
-    { data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], labels: 'Serie B' },
+
+  public days = true;
+  public barChartLabelsDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  public barChartDataDays = [
+    {
+      data: [],
+      label: 'Plastique',
+      backgroundColor: 'rgb(65,105,225,0.6)',
+      borderColor: 'rgb(65,105,225)',
+      hoverBackgroundColor: 'rgb(65,105,225)',
+      hoverBorderColor: 'rgb(65,105,225,0.6)',
+    },
+    {
+      data: [],
+      label: 'Métal',
+      backgroundColor: 'rgb(160,82,45,0.6)',
+      borderColor: 'rgb(160,82,45)',
+      hoverBackgroundColor: 'rgb(160,82,45)',
+      hoverBorderColor: 'rgb(160,82,45,0.6)',
+    },
   ];
+
+  public weeks = false;
+  public barChartLabelsWeeks = ['Semaine 01', 'Semaine 02', 'Semaine 03', 'Semaine 04'];
+  public barChartDataWeeks = [
+    {
+      data: [],
+      label: 'Plastique',
+      backgroundColor: 'rgb(65,105,225,0.6)',
+      borderColor: 'rgb(65,105,225)',
+      hoverBackgroundColor: 'rgb(65,105,225)',
+      hoverBorderColor: 'rgb(65,105,225,0.6)',
+    },
+    {
+      data: [],
+      label: 'Métal',
+      backgroundColor: 'rgb(160,82,45,0.6)',
+      borderColor: 'rgb(160,82,45)',
+      hoverBackgroundColor: 'rgb(160,82,45)',
+      hoverBorderColor: 'rgb(160,82,45,0.6)',
+    },
+  ];
+
+  public months = false;
+  public barChartLabelsMonths = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai',
+    'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+  public barChartDataMonths = [
+    {
+      data: [],
+      label: 'Plastique',
+      backgroundColor: 'rgb(65,105,225,0.6)',
+      borderColor: 'rgb(65,105,225)',
+      hoverBackgroundColor: 'rgb(65,105,225)',
+      hoverBorderColor: 'rgb(65,105,225,0.6)',
+    },
+    {
+      data: [],
+      label: 'Métal',
+      backgroundColor: 'rgb(160,82,45,0.6)',
+      borderColor: 'rgb(160,82,45)',
+      hoverBackgroundColor: 'rgb(160,82,45)',
+      hoverBorderColor: 'rgb(160,82,45,0.6)',
+    },
+  ];
+
+  public totalMetal = 0;
+  public totalPlastique = 0;
+
+  public doughnutData = [];
+  public labels = ['Métal', 'Plastique'];
+  public type = 'doughnut';
+  public doughnutChartColors =
+    [
+      {
+        backgroundColor: ['rgb(160,82,45,0.6)', 'rgb(65,105,225,0.6)'],
+        borderColor: ['rgba(160,82,45,1)', 'rgb(65,105,225,1)'],
+      },
+    ];
+
+  public topBornesMetal: Borne[];
+  public topBornesPlastique: Borne[];
+  public topBornesRouleaux: Borne[];
+  public topOffres: Offer[];
+
+  constructor(public borneService: BorneService,
+              public offersService: OffersService,
+              public dataService: DataService) { }
 
   ngOnInit() {
     this.getListBornes();
     this.getListOffers();
+    this.getDatas();
   }
 
   getListBornes() {
     this.borneService.getListBorne().subscribe(
-            (bornes: Borne[]) => {
-              this.topBornesBacUn = [...bornes.sort((a, b) => b.taux.bacUn - a.taux.bacUn)];
-              this.topBornesBacDeux = [...bornes.sort((a, b) => b.taux.bacDeux - a.taux.bacDeux)];
-              this.topBornesRouleaux = [...bornes.sort((a, b) => a.coupon.restant - b.coupon.restant)];
+      (bornes: Borne[]) => {
+        this.topBornesMetal = [...bornes.sort((a, b) => b.metal.taux - a.metal.taux)];
+        this.topBornesPlastique = [...bornes.sort((a, b) => b.plastique.taux - a.plastique.taux)];
+        this.topBornesRouleaux = [...bornes.sort((a, b) => a.coupon.restant - b.coupon.restant)];
+        // tslint:disable-next-line: ter-arrow-parens
+        bornes.map(a => {
+          this.totalMetal += a.metal.total;
+          this.totalPlastique += a.plastique.total;
+        });
+        this.doughnutData.push(this.totalMetal);
+        this.doughnutData.push(this.totalPlastique);
+      },
+    );
+  }
 
-              this.rouleauxTauxUn = Math.round((350 - this.topBornesRouleaux[0].coupon.restant) / 3.5);
-              this.rouleauxTauxDeux = Math.round((350 - this.topBornesRouleaux[1].coupon.restant) / 3.5);
-              this.rouleauxTauxTrois = Math.round((350 - this.topBornesRouleaux[2].coupon.restant) / 3.5);
-              console.log(this.rouleauxTauxDeux);
-            },
-        );
+  getDatas() {
+    this.dataService.getAllDataByDay().subscribe(
+      (dataDays: Data[]) => {
+        // tslint:disable-next-line: ter-arrow-parens
+        dataDays.map(a => {
+          this.barChartDataDays[0].data.push(a.plastique);
+          this.barChartDataDays[1].data.push(a.metal);
+        });
+      },
+    );
+    this.dataService.getAllDataByWeek().subscribe(
+      (dataWeek: Data[]) => {
+        // tslint:disable-next-line: ter-arrow-parens
+        dataWeek.map(a => {
+          this.barChartDataWeeks[0].data.push(a.plastique);
+          this.barChartDataWeeks[1].data.push(a.metal);
+        });
+      },
+    );
+    this.dataService.getAllDataByMonth().subscribe(
+      (dataMonth: Data[]) => {
+        // tslint:disable-next-line: ter-arrow-parens
+        dataMonth.map(a => {
+          this.barChartDataMonths[0].data.push(a.plastique);
+          this.barChartDataMonths[1].data.push(a.metal);
+        });
+      },
+    );
   }
 
   getListOffers() {
     this.offersService.getListOffers().subscribe(
-            (offers: Offer[]) => {
-              this.topOffres = [...offers.sort((a, b) => b.coupon.imprime - a.coupon.imprime)];
+      (offers: Offer[]) => {
+        this.topOffres = [...offers.sort((a, b) =>
+          (Math.round(b.coupon.imprime / b.coupon.total * 100)) - (Math.round(a.coupon.imprime / a.coupon.total * 100)))];
+      },
+    );
+  }
 
-              this.firstOffreTaux = Math.round(this.topOffres[0].coupon.imprime / this.topOffres[0].coupon.total * 100);
-              this.secondOffreTaux = Math.round(this.topOffres[1].coupon.imprime / this.topOffres[1].coupon.total * 100);
-              this.thirdOffreTaux = Math.round(this.topOffres[2].coupon.imprime / this.topOffres[2].coupon.total * 100);
-            },
-        );
+  tauxRouleau(couponsRestants) {
+    return Math.round((350 - couponsRestants) / 3.5);
+  }
+
+  tauxOffre(couponsImprimes, couponsTotal) {
+    if (couponsImprimes !== 0) {
+      return Math.round((couponsImprimes / couponsTotal) * 100);
+    }
+    return 0;
+  }
+
+  color(taux: number) {
+    if (taux >= 90) {
+      return 'danger';
+    } if (taux >= 65) {
+      return 'warning';
+    }
+    return 'success';
+  }
+
+  toggleDays() {
+    this.days = true;
+    this.weeks = false;
+    this.months = false;
+  }
+
+  toggleWeeks() {
+    this.days = false;
+    this.weeks = true;
+    this.months = false;
+  }
+
+  toggleMonths() {
+    this.days = false;
+    this.weeks = false;
+    this.months = true;
   }
 
 }

@@ -1,19 +1,23 @@
-<div *ngIf="user"class="container-fluid mb-5">
-
-    <app-create-borne></app-create-borne>
+<div *ngIf="user" class="container-fluid mb-5">
 
     <div class="col-12 m-3">
         <div class="alert alert-danger m-4 text-center"
-            *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate).length === 0">
-            <span *ngIf="filterNumeroSerie || filterVille || filterBac1 || filterBac2 || filterTotal || filterDate">Il n
-                y a pas de
-                Borne</span>
+            *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal).length === 0">
+            <span *ngIf="filterNumeroSerie || filterVille || filterPlastique || filterMetal || filterTotal">Il
+                n'y a pas de
+                bornes</span>
         </div>
     </div>
     <div class="col-12">
-        <h1 class="text-center">Listes de Bornes</h1>
+        <h1 class="text-center">Liste des bornes</h1>
+        <app-create-borne></app-create-borne>
+        <form (ngSubmit)="onSubmit()" [formGroup]="queryForm" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search"
+                formControlName="query">
+            <button class="btn btn-info my-2 my-sm-0" type="submit">Rechercher</button>
+        </form>
 
-        <div class="row" >
+        <div class="row">
 
             <div class="col-xl-12 col-lg-12">
                 <div class="mb-4 p-3">
@@ -26,7 +30,7 @@
                                         <th scope="col">Ville</th>
                                         <th scope="col">Cannette</th>
                                         <th scope="col">Plastique</th>
-                                        <th scope="col">Coupons restants</th>
+                                        <th scope="col">Coupons restant</th>
                                         <th scope="col">Date d'installation</th>
                                         <th scope="col">Problèmes</th>
                                         <th scope="col"></th>
@@ -44,49 +48,41 @@
                                         </th>
                                         <th>
                                             <input class="mb-3 py-2 form-control float-left" type="search"
-                                                placeholder="Cannette" [(ngModel)]='filterBac1'>
+                                                placeholder="Cannette" [(ngModel)]='filterMetal'>
                                         </th>
                                         <th>
                                             <input class="mb-3 py-2 form-control float-left" type="search"
-                                                placeholder="Plastique" [(ngModel)]='filterBac2'>
+                                                placeholder="Plastique" [(ngModel)]='filterPlastique'>
                                         </th>
                                         <th>
                                             <input class="mb-3 py-2 form-control float-left" type="search"
                                                 placeholder="Coupon restant" [(ngModel)]='filterTotal'>
                                         </th>
-                                        <th>
-                                            <input class="mb-3 py-2 form-control float-left" type="search"
-                                                placeholder="Date" [(ngModel)]='filterDate'>
-                                        </th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                     <ng-container
-                                        *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate">
+                                        *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal">
                                         <tr>
                                             <th scope="row">{{borne.numeroSerie}}</th>
                                             <td>{{borne.address.ville}}</td>
                                             <td>
-                                                <ngb-progressbar type="success"
-                                                    [value]="[calculatePercentage(borne.cannette.utilise, borne.cannette.total)]"
-                                                    [striped]="true" [animated]="true"><i>
-                                                        {{calculatePercentage(borne.cannette.utilise, borne.cannette.total)}}
-                                                        % </i>
+                                                <ngb-progressbar [type]="color(borne.metal.taux)"
+                                                    [value]="borne.metal.taux" [striped]="true" [animated]="true"
+                                                    showValue=true>
                                                 </ngb-progressbar>
                                             </td>
                                             <td>
-                                                <ngb-progressbar type="success"
-                                                    [value]="[calculatePercentage(borne.plastique.utilise, borne.plastique.total)]"
-                                                    [striped]="true" [animated]="true"><i>
-                                                        {{calculatePercentage(borne.plastique.utilise, borne.plastique.total)}}
-                                                        %</i>
+                                                <ngb-progressbar [type]="color(borne.plastique.taux)"
+                                                    [value]="[borne.plastique.taux]" [striped]="true" [animated]="true"
+                                                    showValue=true>
                                                 </ngb-progressbar>
                                             </td>
                                             <td>
-                                                <ngb-progressbar type="success"
-                                                    [value]="calculatePercentage(borne.coupon.imprimer, borne.coupon.restant)"
-                                                    [striped]="true" [animated]="true"><i> {{borne.coupon.imprimer}} /
-                                                        {{borne.coupon.restant}}</i>
+                                                <ngb-progressbar [type]="color(tauxRouleau(borne.coupon.restant))"
+                                                    [value]="tauxRouleau(borne.coupon.restant)" [striped]="true"
+                                                    [animated]="true" showValue=true>
                                                 </ngb-progressbar>
                                             </td>
                                             <td>
@@ -99,7 +95,7 @@
                                             </ng-template>
                                             <td>
                                                 <button type="button" [routerLink]="['/borne', borne._id ]"
-                                                    class="btn btn-outline-primary">Details
+                                                    class="btn btn-info">Détails
                                                 </button>
                                             </td>
                                         </tr>
@@ -109,15 +105,15 @@
                             </table>
                         </div>
                         <div class="row">
-                            <div class="table-responsive" *ngIf="user?.role == 'CLIENT'">
-                                <table class="table table-striped">
+                            <div class="table-bordered" *ngIf="user?.role == 'CLIENT'">
+                                <table class="table table-bordered">
                                     <thead>
                                         <tr class="text-center">
                                             <th scope="col">Numéro de série</th>
                                             <th scope="col">Ville</th>
                                             <th scope="col">Cannette</th>
                                             <th scope="col">Plastique</th>
-                                            <th scope="col">Coupons restants</th>
+                                            <th scope="col">Coupons restant</th>
                                             <th scope="col">Date d'installation</th>
                                             <th scope="col">Problèmes</th>
                                             <th scope="col"></th>
@@ -135,50 +131,41 @@
                                             </th>
                                             <th>
                                                 <input class="mb-3 py-2 form-control float-left" type="search"
-                                                    placeholder="Cannette" [(ngModel)]='filterBac1'>
+                                                    placeholder="Cannette" [(ngModel)]='filterMetal'>
                                             </th>
                                             <th>
                                                 <input class="mb-3 py-2 form-control float-left" type="search"
-                                                    placeholder="Plastique" [(ngModel)]='filterBac2'>
+                                                    placeholder="Plastique" [(ngModel)]='filterPlastique'>
                                             </th>
                                             <th>
                                                 <input class="mb-3 py-2 form-control float-left" type="search"
                                                     placeholder="Coupon restant" [(ngModel)]='filterTotal'>
                                             </th>
-                                            <th>
-                                                <input class="mb-3 py-2 form-control float-left" type="search"
-                                                    placeholder="Date" [(ngModel)]='filterDate'>
-                                            </th>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                         <ng-container
-                                            *ngFor="let borne of user.clients.bornes | filterBorne: filterNumeroSerie:filterVille:filterBac1:filterBac2:filterTotal:filterDate">
+                                            *ngFor="let borne of user.clients.bornes | filterBorne: filterNumeroSerie:filterVille:filterMetal:filterPlastique:filterTotal">
                                             <tr>
                                                 <th scope="row">{{borne.numeroSerie}}</th>
                                                 <td>{{borne.address.ville}}</td>
                                                 <td>
-                                                    <ngb-progressbar type="success"
-                                                        [value]="[calculatePercentage(borne.cannette.utilise, borne.cannette.total)]"
-                                                        [striped]="true" [animated]="true"><i>
-                                                            {{calculatePercentage(borne.cannette.utilise, borne.cannette.total)}}
-                                                            % </i>
+                                                    <ngb-progressbar [type]="color(borne.metal.taux)"
+                                                        [value]="borne.metal.taux" [striped]="true" [animated]="true"
+                                                        showValue=true>
                                                     </ngb-progressbar>
                                                 </td>
                                                 <td>
-                                                    <ngb-progressbar type="success"
-                                                        [value]="[calculatePercentage(borne.plastique.utilise, borne.plastique.total)]"
-                                                        [striped]="true" [animated]="true"><i>
-                                                            {{calculatePercentage(borne.plastique.utilise, borne.plastique.total)}}
-                                                            %</i>
+                                                    <ngb-progressbar [type]="color(borne.plastique.taux)"
+                                                        [value]="[borne.plastique.taux]" [striped]="true"
+                                                        [animated]="true" showValue=true>
                                                     </ngb-progressbar>
                                                 </td>
                                                 <td>
-                                                    <ngb-progressbar type="success"
-                                                        [value]="calculatePercentage(borne.coupon.imprimer, borne.coupon.restant)"
-                                                        [striped]="true" [animated]="true"><i> {{borne.coupon.imprimer}}
-                                                            /
-                                                            {{borne.coupon.restant}}</i>
+                                                    <ngb-progressbar [type]="color(tauxRouleau(borne.coupon.restant))"
+                                                        [value]="tauxRouleau(borne.coupon.restant)" [striped]="true"
+                                                        [animated]="true" showValue=true>
                                                     </ngb-progressbar>
                                                 </td>
                                                 <td>
@@ -191,7 +178,7 @@
                                                 </ng-template>
                                                 <td>
                                                     <button type="button" [routerLink]="['/borne', borne._id ]"
-                                                        class="btn btn-outline-primary">Details
+                                                        class="btn btn-outline-primary">Détails
                                                     </button>
                                                 </td>
                                             </tr>

@@ -3,7 +3,7 @@
   <div class="row">
 
     <div class="col-xl-12 col-lg-12">
-      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
+      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right" type="button"
         data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
         Ajouter une borne
       </button>
@@ -54,7 +54,7 @@
                 <div class="col">
                   <div class="form-group">
                     <input [ngClass]="borneForm.get('dateInstallation').errors ? 'is-invalid' : 'is-valid'"
-                      class="form-control" placeholder="Date installation" name="dateInstallation" type="date"
+                      class="form-control" placeholder="Date d'installation" name="dateInstallation" type="date"
                       formControlName="dateInstallation">
                   </div>
                 </div>
@@ -77,7 +77,7 @@
                     <textarea [ngClass]="borneForm.get('details').errors ? 'is-invalid' : 'is-valid'"
                       class="form-control" placeholder="Détails supplémentaires" maxlength="300" name="details"
                       type="text" formControlName="details"></textarea>
-                    <small class="float-right">300 caractères maximun</small>
+                    <small class="float-right">300 caractères maximum</small>
                   </div>
                 </div>
 

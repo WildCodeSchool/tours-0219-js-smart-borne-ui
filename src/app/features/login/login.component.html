@@ -3,7 +3,7 @@
 
         <div class="col-lg-8 col-md-8 offset-md-2 login-box mb-5">
 
-            <img src="assets/smartborne.png" class="mt-4" style="width: 34%" >
+            <img src="assets/smartborne.png" class="mt-4" style="width: 34%">
 
 
             <div class="col-lg-12 login-form">
@@ -12,23 +12,23 @@
                         <label class="form-control-label text-center" for="email">Email :</label>
                         <div class="form-group">
                             <input [ngClass]="loginForm.get('email').errors ? 'is-invalid' : 'is-valid'"
-                                   class="form-control" placeholder="" id="email"
-                                   name="email" type="email" formControlName="email">
+                                class="form-control" id="email" name="email" type="email" formControlName="email">
                         </div>
                         <label class="form-control-label" for="password">Mot de passe :</label>
                         <div class="form-group">
                             <input [ngClass]="loginForm.get('password').errors ? 'is-invalid' : 'is-valid'"
-                                   class="form-control" placeholder="" id="password" autocomplete=""
-                                   name="password" type="password" formControlName="password">
+                                class="form-control" id="password" autocomplete="" name="password" type="password"
+                                formControlName="password">
                         </div>
 
                         <div class="col-lg-12 loginbttm">
                             <div class="col-lg-12 login-btm login-text">
-                                <button *ngIf="error" class="alert alert-danger m-3 btn-block"><i class="fas fa-exclamation-triangle mr-3"></i> Identifiant incorrect</button>
+                                <button *ngIf="error" class="alert alert-danger m-3 btn-block"><i
+                                        class="fas fa-exclamation-triangle mr-3"></i> Identifiants incorrects</button>
                             </div>
                             <div class="col-lg-12 login-btm login-button">
                                 <button class="btn btn-info btn-block mt-4 mb-1 btn-block" type="submit"
-                                        [disabled]="!loginForm.valid">Se connecter
+                                    [disabled]="!loginForm.valid">Se connecter
                                 </button>
                             </div>
                         </div>

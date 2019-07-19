@@ -1,8 +1,8 @@
 <div *ngIf="borne" class="container mt-3 mb-4">
-
+  <h1 class="text-center">Borne {{borne.numeroSerie}}</h1>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
-      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right" type="button"
+      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right" type="button"
               data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
         Associer un client
       </button>
@@ -14,133 +14,146 @@
     <form (ngSubmit)="onSubmit()" [formGroup]="Form">
       <div class="form-group">
         <select formControlName="client" class="form-control">
-          <option *ngFor="let client of client" name="client"
-                  value="{{client._id}}">{{client.name}}</option>
+          <option *ngFor="let client of client" name="client" value="{{client._id}}">{{client.name}}</option>
         </select>
-        <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
+        <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer un client
         </button>
+
       </div>
     </form>
   </div>
 
-  <h1 class="text-center">Borne {{borne.numeroSerie}}</h1>
-
-
   <div class="col-md-12 col-xl-12 mt-4">
     <div class="row">
-      <div class="col-6">
-        <h3 class="text-center">Plastique</h3>
-        <canvas baseChart [data]="[borne.plastique.total, borne.plastique.utilise]" [labels]="plastiqueLabels"
-                [chartType]="plastiqueType"></canvas>
+      <div class="col-12 col-sm-4">
+        <h3 class="text-center">Bac plastique</h3>
+        <canvas baseChart [data]="[borne.plastique.taux, (100 - borne.plastique.taux)]" [colors]="plastiqueColor"
+                [labels]="plastiqueLabels" [chartType]="plastiqueType"></canvas>
       </div>
-      <div class="col-6">
-        <h3 class="text-center">Cannette</h3>
-        <canvas baseChart [data]="[borne.cannette.total, borne.cannette.utilise]" [labels]="cannetteLabels"
-                [chartType]="cannetteType"></canvas>
+      <div class="col-12 col-sm-4">
+        <h3 class="text-center">Bac métal</h3>
+        <canvas baseChart [data]="[borne.metal.taux, (100 - borne.metal.taux)]" [colors]="metalColor"
+                [labels]="metalLabels" [chartType]="metalType"></canvas>
+      </div>
+      <div class="col-12 col-sm-4">
+        <h3 class="text-center">Rouleau d'impression</h3>
+        <canvas baseChart [data]="[borne.coupon.imprimer, borne.coupon.restant]" [colors]="couponColor"
+                [labels]="rouleauLabels" [chartType]="rouleauType"></canvas>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-md-12 col-xl-12 mt-4">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="card-title text-center">{{borne.address.ville}}</h2>
-            <p>{{borne.dateInstallation| date:'d/M/y'}}</p>
+    <div class="row mt-5">
+      <div class="col-12 col-sm-4 mt-5">
+        <div class="mt-5">
+          <div class="card mt-5">
+            <div class="card-body text-center">
+              <h3>Borne {{borne._id}}</h3>
+              <h4 class="card-title">{{borne.address.numero}} {{borne.address.rue}}, {{borne.address.codePostal}}
+                {{borne.address.ville}}</h4>
+              <h6>Numéro de série : {{borne.numeroSerie}}</h6>
+              <h6>Date d'installation : {{borne.dateInstallation| date:'d/M/y'}}</h6>
+              <h6>Total de coupons imprimés : {{borne.total.coupons}}</h6>
+              <h6>Total recyclé : {{borne.total.recycle}}</h6>
+              <h6>Total remisé : {{borne.total.remise}}</h6>
+              <h6>Détails supplémentaires : {{borne.details}}</h6>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <h1 class="text-center mb-3 mt-3">Tableaux</h1>
-    <div style="display: block">
-      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-              [legend]="barChartLegend" [chartType]="barChartType"></canvas>
-    </div>
-    <div class="row">
-      <div class="col-xl-12 col-lg-12">
-        <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-outline-success float-right mt-4"
-                type="button" data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
-                aria-controls="collapseAssoOfferForm">
-          Associer une offre
-        </button>
-      </div>
-    </div>
-
-    <div class="collapse mt-3" id="collapseAssoOfferForm">
-      <form (ngSubmit)="assoOffer()" [formGroup]="assoOfferForm">
-        <div class="form-group">
-          <select formControlName="offer" class="form-control">
-            <option *ngFor="let offer of offers" name="offer" value="{{offer._id}}">{{offer.client}}
-            </option>
-          </select>
-          <button class="btn btn-success btn-block mt-4 mb-1" type="submit">Associer
-          </button>
+      <div class="col-12 col-sm-8">
+        <div class="button col-12 mb-3">
+          <button class="btn btn-info mr-4" (click)="toggleDays()">Jours</button>
+          <button class="btn btn-info" (click)="toggleWeeks()">Semaines</button>
+          <button class="btn btn-info ml-4" (click)="toggleMonths()">Mois</button>
         </div>
-      </form>
-    </div>
-    <div *ngFor="let offer of bornes">
-      <p>{{offer.numeroSerie}</p>
-    </div>
-
-    <h1 class="text-center">Offre</h1>
-    <div class="row">
-      <app-card-offer *ngFor="let offre of borne.offers">
-        <div class="title">{{offre.client}}</div>
-        <div class="nb-coupon">{{offre.coupon.total}}</div>
-        <div class="coupon-edit">{{offre.coupon.imprime}}</div>
-        <div class="cardBtn">
-          <button class="btn btn-info" [routerLink]="['/offer', offre._id]">Voir</button>
+        <div style="display: block" *ngIf="days">
+          <canvas baseChart [datasets]="barChartDataDays" [labels]="barChartLabelsDays" [options]="barChartOptions"
+                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
-        <div class="p"></div>
-      </app-card-offer>
-
-    </div>
-    <div class="row mt-4">
-      <div class="col-md-6 col-xl-6">
-        <div class="card">
-          <p class="text-center p-3">Coupons</p>
-          <div class=" ml-3 mr-3 mb-3">
-            <p>
-              <ngb-progressbar type="success" [value]=[borne.coupon.restant] [striped]="true"
-                               [animated]="true">
-                <i> {{borne.coupon.restant}}% </i>
-              </ngb-progressbar>
-            </p>
-            <p>
-              <ngb-progressbar type="success" [value]=[borne.coupon.imprimer] [striped]="true"
-                               [animated]="true">
-                <i> {{borne.coupon.imprimer}} </i>
-              </ngb-progressbar>
-            </p>
-          </div>
+        <div style="display: block" *ngIf="weeks">
+          <canvas baseChart [datasets]="barChartDataWeeks" [labels]="barChartLabelsWeeks" [options]="barChartOptions"
+                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
+        </div>
+        <div style="display: block" *ngIf="months">
+          <canvas baseChart [datasets]="barChartDataMonths" [labels]="barChartLabelsMonths" [options]="barChartOptions"
+                  [legend]="barChartLegend" [chartType]="barChartType"></canvas>
         </div>
       </div>
-
-      <div class="col-md-6 col-xl-6">
-        <div class="card">
-          <p class="text-center p-3">Rouleau</p>
-          <div class=" ml-3 mr-3 mb-3">
-            <p>
-              <ngb-progressbar type="info" [value]="50" [striped]="true" [animated]="true">
-                <i>50%</i>
-              </ngb-progressbar>
-            </p>
-          </div>
-        </div>
-      </div>
-
-
-      <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
-        <button class="btn btn-info btn-block mt-4" [routerLink]="['/borne', borne._id, 'edit']">Modifier la
-          borne
-        </button>
-        <button class="btn btn-danger btn-block mt-4" (click)="deleteBorne(borne._id)">Suppression de la
-          Borne
-        </button>
-      </ng-container>
-
-
     </div>
-
-
   </div>
+  <h1 class="text-center">Offres</h1>
+  <div class="row">
+    <div class="col-xl-12 col-lg-12">
+      <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right mt-4" type="button"
+              data-toggle="collapse" data-target="#collapseAssoOfferForm" aria-expanded="false"
+              aria-controls="collapseAssoOfferForm">
+        Associer une offre
+      </button>
+    </div>
+  </div>
+
+  <div class="collapse mt-3" id="collapseAssoOfferForm">
+    <form (ngSubmit)="assoOffer()" [formGroup]="assoOfferForm">
+      <div class="form-group">
+        <select formControlName="offer" class="form-control">
+          <option *ngFor="let offer of offers" name="offer" value="{{offer._id}}">{{offer.client}}
+          </option>
+        </select>
+        <button class="btn btn-info btn-block mt-4 mb-1" type="submit">Associer
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <app-card-offer *ngFor="let offre of borne.offers">
+      <div class="title">{{offre.client}}
+      </div>
+
+      <p class="nb-coupon text-center">Coupons total : {{offre.coupon.total}}</p>
+      <p class="coupon-edit text-center">Coupons imprimés : {{offre.coupon.imprime}}</p>
+
+      <div class="cardBtn">
+        <div class="row">
+          <div class="col-md-12 mt-4">
+            <button class="btn btn-info btn-block" [routerLink]="['/offer', offre._id]">Détails</button>
+          </div>
+          <div class="col-md-12 mt-1">
+            <button class="btn btn-danger btn-block mt-2" (click)="dissoOffer(offre._id)"> Dissocier l'offre</button>
+          </div>
+        </div>
+      </div>
+      <div class="p"></div>
+    </app-card-offer>
+  </div>
+
+  <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
+    <button class="btn btn-info btn-block mt-4" [routerLink]="['/borne', borne._id, 'edit']">Modifier la
+      borne
+    </button>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-basic-title">Supprimer la borne</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-danger mt-2 mb-4">{{borne._id}}</h6>
+
+        <form (ngSubmit)="deleteBorneModal(); modal.close()" [formGroup]="FormDelete">
+          <div class="form-group">
+            <div class="input-group">
+              <input formControlName="borne" class="form-control input-danger" placeholder="Id de la borne"
+                     name="borne">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+        </form>
+      </div>
+    </ng-template>
+
+    <button class="btn btn-block btn-danger mt-3" (click)="open(content)">Supprimer la borne</button>
+
+  </ng-container>
+
 </div>

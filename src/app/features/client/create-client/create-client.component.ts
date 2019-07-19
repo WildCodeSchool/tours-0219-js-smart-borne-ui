@@ -50,7 +50,11 @@ export class CreateClientComponent implements OnInit {
         email: ['', [Validators.required]],
         telephone: ['', [Validators.required]],
       }),
-      coupon: [0],
+      coupon: this.fb.group({
+        total: [0],
+        imprimer: [0],
+        restant: [0],
+      }),
     });
   }
   ngOnInit() {
@@ -63,12 +67,14 @@ export class CreateClientComponent implements OnInit {
     this.clientService.postClient(this.clientForm.value).subscribe(
       (client: Client) => {
         this.clientForm.patchValue(client);
+        this.clientForm.reset();
         this.toastr.clear();
-        this.toastr.success('success', 'Client Ajoute');
+        this.toastr.success('Succès', 'Client ajouté');
         this.router.navigateByUrl('/');
       },
 
       (error) => {
+        this.clientForm.reset();
         this.toastr.clear();
         this.toastr.error(`Error ${error}`);
       },

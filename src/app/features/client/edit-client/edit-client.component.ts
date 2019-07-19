@@ -70,7 +70,7 @@ export class EditClientComponent implements OnInit {
       (client: Client) => {
         this.clientForm.patchValue(client);
         this.toastr.clear();
-        this.toastr.success('success', 'Client modifiè');
+        this.toastr.success('Succès', 'Client modifié');
         this.router.navigateByUrl(`client/${this.id}`);
       },
       (error) => {

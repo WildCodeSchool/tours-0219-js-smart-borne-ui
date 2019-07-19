@@ -2,6 +2,22 @@
     background-color: rgba(0, 0, 0, 0.4);
     color: white;
 }
-input{
-    margin-top: 10px;
+
+table {
+    text-align: center;
+}
+
+
+.btn-danger {
+  background-color: #A7383D !important;
+  border: 1px solid black !important;
+}
+
+.btn-info {
+  background-color: #2b71a0;
+  border: 1px solid black !important;
+}
+
+button {
+  box-shadow: 3px 3px 3px black;
 }

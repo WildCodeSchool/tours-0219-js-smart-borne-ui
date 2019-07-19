@@ -1,75 +1,85 @@
 <div class="container-fluid mb-5">
-  <app-create-offer></app-create-offer>
+
 
   <div class="col-12 m-3">
     <div class="alert alert-danger m-4 text-center"
-         *ngIf="offers &&(offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin).length === 0">
-            <span *ngIf="filterId || filterClient || filterRemise || filterDebut || filterFin">Il n y a pas d'offre</span>
+      *ngIf="offers &&(offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin).length === 0">
+      <span *ngIf="filterId || filterClient || filterRemise || filterDebut || filterFin">Il n y a pas d'offres</span>
     </div>
   </div>
 
   <div class="col-12">
-      <h1 class="text-center">Liste des offres</h1>
-  </div>
-  <div class="row">
-    <div class="col-xl-12 col-lg-12">
-      <div class="mb-4 p-3">
-        <div class="row">
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Client</th>
-                  <th scope="col">Remise</th>
-                  <th scope="col">Début de l'offre</th>
-                  <th scope="col">Fin de l'offre</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
+    <h1 class="text-center">Liste des offres</h1>
+    <app-create-offer></app-create-offer>
+    <form (ngSubmit)="onSubmit()" [formGroup]="queryForm" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search"
+        formControlName="query">
+      <button class="btn btn-info my-2 my-sm-0" type="submit">Rechercher</button>
+    </form>
 
-              <tr>
-                <th>
-                  <input class="mb-3 py-2 form-control float-left" type="search"
-                         placeholder="ID offre" [(ngModel)]='filterId'>
-                </th>
-                <th>
-                  <input class="mb-3 py-2 form-control float-left" type="search"
-                         placeholder="Client" [(ngModel)]='filterClient'>
-                </th>
-                <th>
-                  <input class="mb-3 py-2 form-control float-left" type="search"
-                         placeholder="Remise" [(ngModel)]='filterRemise'>
-                </th>
-                <th>
-                  <input class="mb-3 py-2 form-control float-left" type="search"
-                         placeholder="Debut offre" [(ngModel)]='filterDebut'>
-                </th>
-                <th>
-                  <input class="mb-3 py-2 form-control float-left" type="search"
-                         placeholder="Fin offre" [(ngModel)]='filterFin'>
-                </th>
-                <th></th>
-              </tr>
 
-                <ng-container *ngFor="let offer of offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12">
+        <div class="mb-4 p-3">
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Remise</th>
+                    <th scope="col">Début de l'offre</th>
+                    <th scope="col">Fin de l'offre</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
 
                   <tr>
-                    <th scope="row">{{ offer._id }}</th>
-                    <td>{{ offer.client }}</td>
-                    <td>{{ offer.remise }}</td>
-                    <td>{{ offer.contrat.debut | date:'d/M/y' }}</td>
-                    <td>{{ offer.contrat.fin | date:'d/M/y' }}</td>
-                    <td>
-                      <button type="button" [routerLink]="['/offer', offer._id]" class="btn btn-outline-primary">
-                        Detail
-                      </button>
-                    </td>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="ID offre"
+                        [(ngModel)]='filterId'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Client"
+                        [(ngModel)]='filterClient'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Remise"
+                        [(ngModel)]='filterRemise'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Debut offre"
+                        [(ngModel)]='filterDebut'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Fin offre"
+                        [(ngModel)]='filterFin'>
+                    </th>
+                    <th></th>
                   </tr>
-                </ng-container>
-              </tbody>
-            </table>
+
+                  <ng-container
+                    *ngFor="let offer of offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin">
+
+                    <tr>
+                      <th scope="row">
+                        {{ offer._id }}</th>
+                      <td>{{ offer.client }}</td>
+                      <td>{{ offer.remise }}</td>
+                      <td>{{ offer.contrat.debut | date:'d/M/y' }}</td>
+                      <td>{{ offer.contrat.fin | date:'d/M/y' }}</td>
+                      <td>
+                        <button type="button" [routerLink]="['/offer', offer._id]" class="btn btn-info">
+                          Détails
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
