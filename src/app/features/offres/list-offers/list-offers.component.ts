@@ -20,10 +20,9 @@ export class ListOffersComponent implements OnInit {
   public borneByOffer: any;
   public user: User;
   public filterId: string;
+  public filterPseudo: string;
   public filterClient: string;
   public filterRemise: string;
-  public filterDebut: string;
-  public filterFin: string;
 
   constructor(public offersService: OffersService,
               private route: ActivatedRoute,

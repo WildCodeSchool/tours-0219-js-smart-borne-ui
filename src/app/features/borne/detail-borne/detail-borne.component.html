@@ -1,7 +1,7 @@
 <div *ngIf="borne" class="container mt-3 mb-4" xmlns="http://www.w3.org/1999/html">
   <h1 class="text-center">
     <span>Borne {{borne.pseudo}}</span>
-    <p class="" *ngIf="borne.client">Detenu par {{borne.client.name}}</p>
+    <p class="" *ngIf="borne.client">Détenu par {{borne.client.name}}</p>
   </h1>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
@@ -53,7 +53,6 @@
             <h6>Total de coupons imprimés : {{borne.total.coupons}}</h6>
             <h6>Total recyclé : {{borne.total.recycle}}</h6>
             <h6>Total remisé : {{borne.total.remise}}</h6>
-            <h6>Détails supplémentaires : {{borne.details}}</h6>
           </div>
         </div>
       </div>
@@ -78,7 +77,8 @@
       </div>
     </div>
   </div>
-  <h1 class="text-center">Offres</h1>
+  <hr>
+  <h1 class="text-center mt-4">Offres</h1>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right mt-4" type="button"

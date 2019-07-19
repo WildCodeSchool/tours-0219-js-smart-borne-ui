@@ -6,8 +6,8 @@
     <div class="row">
       <div class="col-xl-12 col-lg-12">
         <div class="mb-4 p-3">
-          <div class="col-12 mt-3"  *ngIf="offers &&(offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin).length === 0">
-            <div class="alert alert-danger mt-4 text-center" *ngIf="filterId || filterClient || filterRemise || filterDebut || filterFin">
+          <div class="col-12 mt-3"  *ngIf="offers &&(offers | filterOffer: filterId:filterPseudo:filterClient:filterRemise).length === 0">
+            <div class="alert alert-danger mt-4 text-center" *ngIf="filterId || filterPseudo || filterClient || filterRemise ">
               <span>Il n y a pas
                 d'offres</span>
             </div>
@@ -18,9 +18,9 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nom</th>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Client</th>
                     <th scope="col">Remise</th>
-                    <th scope="col">Début de l'offre</th>
                     <th scope="col">Consommation de l'offre</th>
                     <th></th>
                   </tr>
@@ -32,6 +32,10 @@
                         [(ngModel)]='filterId'>
                     </th>
                     <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Pseudo"
+                             [(ngModel)]='filterPseudo'>
+                    </th>
+                    <th>
                       <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Nom"
                         [(ngModel)]='filterClient'>
                     </th>
@@ -39,24 +43,17 @@
                       <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Remise"
                         [(ngModel)]='filterRemise'>
                     </th>
-                    <th>
-                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Debut offre"
-                        [(ngModel)]='filterDebut'>
-                    </th>
-                    <th>
-                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Fin offre"
-                        [(ngModel)]='filterFin'>
-                    </th>
+                    <th></th>
                     <th></th>
                   </tr>
                   <ng-container
-                    *ngFor="let offer of offers | filterOffer: filterId:filterClient:filterRemise:filterDebut:filterFin">
+                    *ngFor="let offer of offers | filterOffer: filterId:filterPseudo:filterClient:filterRemise">
                     <tr>
                       <th scope="row">
                         {{ offer._id }}</th>
+                      <td>{{ offer.pseudo }}</td>
                       <td>{{ offer.client }}</td>
                       <td>{{ offer.remise }}</td>
-                      <td>{{ offer.contrat.debut | date:'d/M/y' }}</td>
                       <td>
                         <ngb-progressbar [type]="color((offer.coupon.imprime / offer.coupon.total) * 100)"
                           [value]="(offer.coupon.imprime / offer.coupon.total) * 100" [striped]="true" [animated]="true"
@@ -81,8 +78,9 @@
                   <thead>
                     <tr>
                       <th scope="col">#</th>
+                      <th scope="col">Pseudo</th>
+                      <th scope="col">Client</th>
                       <th scope="col">Remise</th>
-                      <th scope="col">Début de l'offre</th>
                       <th scope="col">Consommation de l'offre</th>
                       <th></th>
                     </tr>
@@ -94,26 +92,28 @@
                           [(ngModel)]='filterId'>
                       </th>
                       <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Pseudo"
+                               [(ngModel)]='filterPseudo'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Client"
+                               [(ngModel)]='filterClient'>
+                      </th>
+                      <th>
                         <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Remise"
                           [(ngModel)]='filterRemise'>
                       </th>
-                      <th>
-                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Debut offre"
-                          [(ngModel)]='filterDebut'>
-                      </th>
-                      <th>
-                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Fin offre"
-                          [(ngModel)]='filterFin'>
-                      </th>
+                      <th></th>
                       <th></th>
                     </tr>
                     <ng-container
-                      *ngFor="let offer of borneByOffer | filterOffer: filterId:filterRemise:filterDebut:filterFin">
+                      *ngFor="let offer of borneByOffer | filterOffer: filterId:filterPseudo:filterClient:filterRemise">
                       <tr>
                         <th scope="row">
                           {{ offer._id }}</th>
                         <td>{{ offer.remise }}</td>
-                        <td>{{ offer.contrat.debut | date:'d/M/y' }}</td>
+                        <td>{{ offer.pseudo }}</td>
+                        <td>{{ offer.client }}</td>
                         <td>
                           <ngb-progressbar [type]="color((offer.coupon.imprime / offer.coupon.total) * 100)"
                             [value]="(offer.coupon.imprime / offer.coupon.total) * 100" [striped]="true"

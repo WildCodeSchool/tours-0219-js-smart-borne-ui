@@ -1,5 +1,5 @@
 <div *ngIf="offer" class="container mt-3 mb-4">
-  <h1 class="text-center">Offre {{ offer._id }}</h1>
+  <h1 class="text-center">Offre {{ offer.pseudo }}</h1>
   <div class="row">
     <div class="col-6 offset-3">
       <canvas baseChart [data]="[offer.coupon.imprime, (100 - offer.coupon.imprime)]" [colors]="couponColor"
@@ -10,11 +10,10 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h3 class="text-center">Proposée par client : {{offer.client}} </h3>
+          <h3 class="text-center">Proposée par le client : {{offer.client}} </h3>
+          <p class="text-center">Id{{offer._id}}</p>
           <p class="text-center">Début de l'offre : {{offer.contrat.debut}}</p>
           <p class="text-center">Remise : {{offer.remise}} </p>
-          <p class="text-center">Présente sur X bornes</p>
-          <p class="text-center">Détails supplémentaires : {{offer.details}}</p>
         </div>
       </div>
       <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
