@@ -11,8 +11,8 @@
             <div *ngIf="user?.role == 'ADMINISTRATEUR' else elseBlock" class="table-responsive">
               <div class="col-12 mt-3">
                 <div class="alert alert-danger mt-4 text-center"
-                     *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterPseudo:filterVille:filterPlastique:filterMetal:filterTotal).length === 0">
-                  <span *ngIf="filterNumeroSerie || filterPseudo || filterVille || filterPlastique || filterMetal || filterTotal">Il
+                     *ngIf="bornes &&(bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal).length === 0">
+                  <span *ngIf="filterNumeroSerie || filterVille || filterPlastique || filterMetal || filterTotal">Il
                     n'y a pas de
                     bornes</span>
                 </div>
@@ -21,11 +21,11 @@
                 <thead>
                 <tr class="text-center">
                   <th scope="col">Numéro de série</th>
-                  <th scope="col">Pseudo</th>
                   <th scope="col">Ville</th>
                   <th scope="col">Métal</th>
                   <th scope="col">Plastique</th>
                   <th scope="col">Coupons restant</th>
+                  <th scope="col">Date d'installation</th>
                   <th scope="col">Problèmes</th>
                   <th scope="col"></th>
                 </tr>
@@ -35,10 +35,6 @@
                   <th>
                     <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Numero serie"
                            [(ngModel)]='filterNumeroSerie'>
-                  </th>
-                  <th>
-                    <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Pseudo"
-                           [(ngModel)]='filterPseudo'>
                   </th>
                   <th>
                     <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Ville"
@@ -58,15 +54,13 @@
                   </th>
                   <th></th>
                   <th></th>
+                  <th></th>
                 </tr>
 
                 <ng-container
-                        *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterPseudo:filterVille:filterPlastique:filterMetal:filterTotal">
+                        *ngFor="let borne of bornes | filterBorne: filterNumeroSerie:filterVille:filterPlastique:filterMetal:filterTotal">
                   <tr>
                     <th scope="row">{{borne.numeroSerie}}</th>
-                    <td>
-                      {{borne.pseudo}}
-                    </td>
                     <td>{{borne.address.ville}}</td>
                     <td>
                       <ngb-progressbar [type]="color(borne.metal.taux)" [value]="borne.metal.taux" [striped]="true"
@@ -82,6 +76,9 @@
                       <ngb-progressbar [type]="color(borne.coupon.imprimer)" [value]="borne.coupon.imprimer"
                                        [striped]="true" [animated]="true" showValue=true>
                       </ngb-progressbar>
+                    </td>
+                    <td>
+                      {{borne.dateInstallation| date:'d/M/y'}}
                     </td>
                     <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
                             class="fas fa-check colorValidate"></i></td>
@@ -105,11 +102,11 @@
                   <thead>
                   <tr class="text-center">
                     <th scope="col">Numéro de série</th>
-                    <th scope="col">Pseudo</th>
                     <th scope="col">Ville</th>
                     <th scope="col">Métal</th>
                     <th scope="col">Plastique</th>
                     <th scope="col">Rouleau d'impression</th>
+                    <th scope="col">Date d'installation</th>
                     <th scope="col">Problèmes</th>
                     <th scope="col"></th>
                   </tr>
@@ -119,10 +116,6 @@
                     <th>
                       <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Numero serie"
                              [(ngModel)]='filterNumeroSerie'>
-                    </th>
-                    <th>
-                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Pseudo"
-                             [(ngModel)]='filterPseudo'>
                     </th>
                     <th>
                       <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Ville"
@@ -145,12 +138,9 @@
                     <th></th>
                   </tr>
                   <ng-container
-                          *ngFor="let borne of clientsByBorne | filterBorne: filterNumeroSerie:filterPseudo:filterVille:filterMetal:filterPlastique:filterTotal">
+                          *ngFor="let borne of clientsByBorne | filterBorne: filterNumeroSerie:filterVille:filterMetal:filterPlastique:filterTotal">
                     <tr>
                       <th scope="row">{{borne.numeroSerie}}</th>
-                      <td>
-                        {{borne.pseudo}}
-                      </td>
                       <td>{{borne.address.ville}}</td>
                       <td>
                         <ngb-progressbar [type]="color(borne.metal.taux)" [value]="borne.metal.taux" [striped]="true"
@@ -166,6 +156,9 @@
                         <ngb-progressbar [type]="color(borne.coupon.imprimer)" [value]="borne.coupon.imprimer"
                                          [striped]="true" [animated]="true" showValue=true>
                         </ngb-progressbar>
+                      </td>
+                      <td>
+                        {{borne.dateInstallation| date:'d/M/y'}}
                       </td>
                       <td *ngIf="borne.problemesTechniques == false; else elseBlock"><i
                               class="fas fa-check colorValidate"></i></td>
