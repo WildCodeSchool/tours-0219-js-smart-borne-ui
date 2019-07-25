@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <ng-container *ngFor="let borne of bornes">
+      <div class="col-md-4 mt-4">
+        <div class="card"
+             [ngClass]="{'alert alert-danger': borne.problemesTechniques == 1, 'alert alert-warning': borne.problemesTechniques == 2, 'alert alert-success': borne.problemesTechniques == 0}">
+          <div class=" card-body">
+            <h5 class="card-title">{{borne._id}}</h5>
+            <p class="card-text">{{borne.dateInstallation}}</p>
+            <button href="#" class="btn btn-info btn-block">Voir la borne</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+

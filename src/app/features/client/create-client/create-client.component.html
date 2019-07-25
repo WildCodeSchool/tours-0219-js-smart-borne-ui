@@ -1,0 +1,126 @@
+<div class="container-fluid mb-5">
+
+    <div class="row">
+
+        <div class="col-xl-12 col-lg-12">
+            <button *ngIf="user?.role == 'ADMINISTRATEUR'" class="btn btn-info float-right" type="button"
+                data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">
+                Ajouter un client
+            </button>
+        </div>
+
+        <div class="col-xl-12 col-lg-12">
+            <div class="collapse" id="collapseForm">
+                <div class="mb-3 card-body">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="clientForm">
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <input [ngClass]="clientForm.get('siret').errors ? 'is-invalid' : 'is-valid'"
+                                    class="form-control" placeholder="Numéro siret" name="siret" type="text"
+                                    formControlName="siret">
+                            </div>
+                            <div class="col-6">
+                                <input [ngClass]="clientForm.get('raisonSocial').errors ? 'is-invalid' : 'is-valid'"
+                                    class="form-control" placeholder="Raison sociale" name="raisonSocial" type="text"
+                                    formControlName="raisonSocial">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <input [ngClass]="clientForm.get('name').errors ? 'is-invalid' : 'is-valid'"
+                                    class="form-control" placeholder="Nom" name="name" type="text"
+                                    formControlName="name">
+                            </div>
+                        </div>
+                        <div formGroupName="address">
+                            <div class="row mt-3">
+                                <div class="col-2">
+                                    <input
+                                        [ngClass]="clientForm.get('address').get('numero').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder="Numéro de rue" name="numero" type="text"
+                                        formControlName="numero">
+                                </div>
+                                <div class="col-4">
+                                    <input
+                                        [ngClass]="clientForm.get('address').get('nomRue').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder="Nom de rue" name="nomRue" type="text"
+                                        formControlName="nomRue">
+                                </div>
+                                <div class="col-2">
+                                    <input
+                                        [ngClass]="clientForm.get('address').get('departement').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder="Code postal" name="departement" type="text"
+                                        formControlName="departement">
+                                </div>
+                                <div class="col-4">
+                                    <input
+                                        [ngClass]="clientForm.get('address').get('ville').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder="Ville" name="ville" type="text"
+                                        formControlName="ville">
+                                </div>
+                            </div>
+                        </div>
+                        <div formGroupName="contrat">
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <input
+                                        [ngClass]="clientForm.get('contrat').get('debut').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder="Début du contrat" name="debut" type="text"
+                                        formControlName="debut" onfocus="(this.type='date')"
+                                        onblur="(this.type='text')">
+                                </div>
+                                <div class="col-6">
+                                    <input
+                                        [ngClass]="clientForm.get('contrat').get('fin').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder="Fin du contrat" name="fin" type="text"
+                                        formControlName="fin" onfocus="(this.type='date')" onblur="(this.type='text')">
+                                </div>
+                            </div>
+                        </div>
+                        <div formGroupName="siege">
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <input
+                                        [ngClass]="clientForm.get('siege').get('email').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder="E-mail de l'entreprise" name="email"
+                                        type="text" formControlName="email">
+                                </div>
+                                <div class="col-6">
+                                    <input
+                                        [ngClass]="clientForm.get('siege').get('telephone').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder="Téléphone de l'entreprise" name="telephone"
+                                        type="text" formControlName="telephone">
+                                </div>
+                            </div>
+                        </div>
+                        <div formGroupName="gerant">
+                            <div class="row mt-3">
+                                <div class="col-4">
+                                    <input
+                                        [ngClass]="clientForm.get('gerant').get('name').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder="Nom du gérant" name="name" type="text"
+                                        formControlName="name">
+                                </div>
+                                <div class="col-4">
+                                    <input
+                                        [ngClass]="clientForm.get('gerant').get('email').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder='E-mail du gérant' name='email' type="email"
+                                        formControlName='email'>
+                                </div>
+                                <div class="col-4">
+                                    <input
+                                        [ngClass]="clientForm.get('gerant').get('telephone').errors ? 'is-invalid' : 'is-valid'"
+                                        class="form-control" placeholder="Téléphone du gérant" name="telephone"
+                                        type="text" formControlName="telephone">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-info btn-block mt-3 mb-1" type="submit"
+                            [disabled]="!clientForm.valid">Sauvegarder
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="container mt-5">
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+
+        <div class="row">
+
+            <div class="col">
+                <div class="form-group">
+                    <input [ngClass]="userForm.get('username').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                        placeholder="Nom d'utilisateur" minlength="4" name="username" type="text" formControlName="username">
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <input [ngClass]="userForm.get('email').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                        placeholder="E-mail" name="email" type="email" formControlName="email">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col">
+                <div class="form-group">
+                    <input [ngClass]="userForm.get('password').errors ? 'is-invalid' : 'is-valid'" class="form-control"
+                        placeholder="Mot de passe" minlength="6" name="password" type="password" autocomplete="off"
+                        formControlName="password">
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <input [ngClass]="userForm.get('confirmPassword').errors ? 'is-invalid' : 'is-valid'"
+                        class="form-control" placeholder="Confirmer le mot de passe" name="confirmPassword" type="password"
+                        autocomplete="off" formControlName="confirmPassword">
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="form-group">
+                    <select [ngClass]="userForm.get('role').errors ? 'is-invalid' : 'is-valid'"
+                        class="form-control custom-select" name="role" id="role" formControlName="role">
+                        <option *ngFor="let userRole of roles">
+                            {{ userRole.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+        </div>
+
+        <button class="btn btn-info btn-block mt-4 mb-5" type="submit" [disabled]="!userForm.valid">Sauvegarder
+
+        </button>
+
+    </form>
+
+</div>

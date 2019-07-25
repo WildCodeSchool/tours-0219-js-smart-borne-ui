@@ -1,0 +1,57 @@
+<div *ngIf="offer" class="container mt-3 mb-4">
+  <h1 class="text-center">Offre {{ offer.pseudo }}</h1>
+  <div class="row">
+    <div class="col-6 offset-3">
+      <canvas baseChart [data]="[offer.coupon.imprime, (100 - offer.coupon.imprime)]" [colors]="couponColor"
+        [labels]="couponLabels" [chartType]="couponType"></canvas>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="text-center">Proposée par le client : {{offer.client}} </h3>
+          <p class="text-center">Id{{offer._id}}</p>
+          <p class="text-center">Début de l'offre : {{offer.contrat.debut}}</p>
+          <p class="text-center">Remise : {{offer.remise}} </p>
+        </div>
+      </div>
+      <ng-container *ngIf="user?.role == 'ADMINISTRATEUR'">
+        <button class="btn btn-info btn-block mt-4" [routerLink]="['/offer', offer._id, 'edit']">Modifier
+          l'offre
+        </button>
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h3 class="modal-title" id="modal-basic-title">Supprimer l'offre</h3>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <div class="row">
+              <div class="col-md-6 ">
+                <h6 class="text-danger mt-2 mb-4" *ngIf="idHidden ; else elseBlock">{{offer._id}}</h6>
+                <ng-template #elseBlock>**********************</ng-template>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-info btn-block mb-3" (click)="hiddenButton()" type="button">Afficher / Masquer Id</button>
+              </div>
+            </div>
+
+            <form (ngSubmit)="deleteOfferModal(); modal.close()" [formGroup]="FormDelete">
+              <div class="form-group">
+                <div class="input-group">
+                  <input formControlName="offer" class="form-control input-danger" placeholder="Id de l'offre"
+                    name="offer">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+            </form>
+          </div>
+        </ng-template>
+        <button class="btn btn-block btn-danger mt-3" (click)="open(content)">Supprimer l'offre</button>
+      </ng-container>
+    </div>
+  </div>
+</div>

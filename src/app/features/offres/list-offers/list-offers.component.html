@@ -1,0 +1,139 @@
+<div *ngIf="offers" class="container-fluid mb-5">
+  <div class="col-12">
+    <h1 class="text-center"><span *ngIf="user?.role == 'ADMINISTRATEUR'">Liste des offres</span><span
+        *ngIf="user?.role == 'CLIENT'">Liste de vos offres</span></h1>
+    <app-create-offer (selectOffer)="getCreateOffer($event)"></app-create-offer>
+    <div class="row">
+      <div class="col-xl-12 col-lg-12">
+        <div class="mb-4 p-3">
+          <div class="col-12 mt-3"  *ngIf="offers &&(offers | filterOffer: filterId:filterPseudo:filterClient:filterRemise).length === 0">
+            <div class="alert alert-danger mt-4 text-center" *ngIf="filterId || filterPseudo || filterClient || filterRemise ">
+              <span>Il n y a pas
+                d'offres</span>
+            </div>
+          </div>
+          <div class="row">
+            <div *ngIf="user?.role == 'ADMINISTRATEUR' else elseBlock" class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Remise</th>
+                    <th scope="col">Consommation de l'offre</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="ID offre"
+                        [(ngModel)]='filterId'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Pseudo"
+                             [(ngModel)]='filterPseudo'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Nom"
+                        [(ngModel)]='filterClient'>
+                    </th>
+                    <th>
+                      <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Remise"
+                        [(ngModel)]='filterRemise'>
+                    </th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                  <ng-container
+                    *ngFor="let offer of offers | filterOffer: filterId:filterPseudo:filterClient:filterRemise">
+                    <tr>
+                      <th scope="row">
+                        {{ offer._id }}</th>
+                      <td>{{ offer.pseudo }}</td>
+                      <td>{{ offer.client }}</td>
+                      <td>{{ offer.remise }}</td>
+                      <td>
+                        <ngb-progressbar [type]="color((offer.coupon.imprime / offer.coupon.total) * 100)"
+                          [value]="(offer.coupon.imprime / offer.coupon.total) * 100" [striped]="true" [animated]="true"
+                          showValue=true>
+                        </ngb-progressbar>
+                      </td>
+                      <td>
+                        <button type="button" [routerLink]="['/offer', offer._id]" class="btn btn-info">
+                          Détails
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+
+            <ng-template #elseBlock>
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Pseudo</th>
+                      <th scope="col">Client</th>
+                      <th scope="col">Remise</th>
+                      <th scope="col">Consommation de l'offre</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="ID offre"
+                          [(ngModel)]='filterId'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Pseudo"
+                               [(ngModel)]='filterPseudo'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Client"
+                               [(ngModel)]='filterClient'>
+                      </th>
+                      <th>
+                        <input class="mb-3 py-2 form-control float-left" type="search" placeholder="Remise"
+                          [(ngModel)]='filterRemise'>
+                      </th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    <ng-container
+                      *ngFor="let offer of borneByOffer | filterOffer: filterId:filterPseudo:filterClient:filterRemise">
+                      <tr>
+                        <th scope="row">
+                          {{ offer._id }}</th>
+                        <td>{{ offer.remise }}</td>
+                        <td>{{ offer.pseudo }}</td>
+                        <td>{{ offer.client }}</td>
+                        <td>
+                          <ngb-progressbar [type]="color((offer.coupon.imprime / offer.coupon.total) * 100)"
+                            [value]="(offer.coupon.imprime / offer.coupon.total) * 100" [striped]="true"
+                            [animated]="true" showValue=true>
+                          </ngb-progressbar>
+                        </td>
+                        <td>
+                          <button type="button" [routerLink]="['/offer', offer._id]" class="btn btn-info">
+                            Détails
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
