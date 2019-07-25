@@ -1,5 +1,6 @@
 <div class="container mt-3 mb-4" *ngIf="client">
-  <h1 class="text-center">Client {{client.name}}</h1>
+
+  <h1 class="text-center mb-5">Client {{client.name}}</h1>
 
   <div class="row" *ngIf="client.bornes">
     <div class="col-12 col-sm-6">
@@ -186,7 +187,7 @@
                     <td class="text-right">
                       <ng-template #content let-modal>
                         <div class="modal-header">
-                          <h3 class="modal-title" id="modal-basic-title-Borne">Disocier la borne</h3>
+                          <h3 class="modal-title" id="modal-basic-title-Borne">Dissocier la borne</h3>
                           <button type="button" class="close" aria-label="Close"
                                   (click)="modal.dismiss('Cross click')">
                             <span aria-hidden="true">&times;</span>
@@ -213,7 +214,7 @@
                                        placeholder="ID de la la borne" name="borne">
                               </div>
                             </div>
-                            <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+                            <button type="submit" class="btn btn-danger btn-block">Dissocier</button>
                           </form>
                         </div>
                       </ng-template>
@@ -293,11 +294,11 @@
                     <form (ngSubmit)="dissoOffer(offre._id); modal.close()" [formGroup]="DeleteAssociateOffer">
                       <div class="form-group">
                         <div class="input-group">
-                          <input formControlName="offer" class="form-control input-danger" placeholder="ID de l offre"
+                          <input formControlName="offer" class="form-control input-danger" placeholder="ID de l'offre"
                                  name="offer">
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+                      <button type="submit" class="btn btn-danger btn-block">Dissocier</button>
                     </form>
                   </div>
                 </ng-template>

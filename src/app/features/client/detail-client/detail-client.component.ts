@@ -32,8 +32,8 @@ export class DetailClientComponent implements OnInit {
   public bornes: Borne[];
   public idHidden: boolean;
 
-  public totalPlastique: number = 0;
-  public totalMetal: number = 0;
+  public totalPlastique = 0;
+  public totalMetal = 0;
 
   public doughnutData = [];
   public labels = ['Métal', 'Plastique'];

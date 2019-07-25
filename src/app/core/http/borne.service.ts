@@ -17,7 +17,7 @@ export class BorneService {
   public getListBorne(): Observable<Borne[]> {
     this.loading.isloading$.next(true);
     return this.http.get<Borne[]>(`${this.configUrl}`).pipe(
-      tap(() => this.loading.isloading$.next(false)))
+      tap(() => this.loading.isloading$.next(false)));
   }
 
   public getBorneById(id: string): Observable<Borne> {

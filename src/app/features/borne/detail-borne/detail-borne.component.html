@@ -1,5 +1,5 @@
 <div *ngIf="borne" class="container mt-3 mb-4" xmlns="http://www.w3.org/1999/html">
-  <h1 class="text-center">
+  <h1 class="text-center mb-5">
     <span>Borne {{borne.pseudo}}</span>
     <p class="" *ngIf="borne.client">Détenu par {{borne.client.name}}</p>
   </h1>
@@ -137,11 +137,11 @@
                 <form (ngSubmit)="dissoOffer(offre._id); modal.close()" [formGroup]="FormDeleteAssociate">
                   <div class="form-group">
                     <div class="input-group">
-                      <input formControlName="offer" class="form-control input-danger" placeholder="Id de l offre"
+                      <input formControlName="offer" class="form-control input-danger" placeholder="Id de l'offre"
                              name="offer">
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-danger btn-block">Supprimer</button>
+                  <button type="submit" class="btn btn-danger btn-block">Dissocier</button>
                 </form>
               </div>
             </ng-template>

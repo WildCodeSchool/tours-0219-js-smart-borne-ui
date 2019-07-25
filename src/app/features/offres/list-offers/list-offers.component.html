@@ -111,9 +111,9 @@
                       <tr>
                         <th scope="row">
                           {{ offer._id }}</th>
-                        <td>{{ offer.remise }}</td>
                         <td>{{ offer.pseudo }}</td>
                         <td>{{ offer.client }}</td>
+                        <td>{{ offer.remise }}</td>
                         <td>
                           <ngb-progressbar [type]="color((offer.coupon.imprime / offer.coupon.total) * 100)"
                             [value]="(offer.coupon.imprime / offer.coupon.total) * 100" [striped]="true"
