@@ -4233,9 +4233,9 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
 
-ng2-charts@2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/ng2-charts/-/ng2-charts-2.2.5.tgz#6375eabc0cb979a41d905339a65b810019390337"
+"ng2-charts@ 2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/ng2-charts/-/ng2-charts-2.2.3.tgz#ca2b9fc1f2bd908b48e826bb6cca2161830afa44"
   dependencies:
     "@types/chart.js" "^2.7.48"
     lodash "^4.17.11"
